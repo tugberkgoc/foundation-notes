@@ -31,7 +31,7 @@ Notice that as an action it refers to [Google's search engine](http://www.google
 
 Right click sample-form.html and select Run. In the terminal window copy the URL and pastes into a new browser tab. Now when you write something into the box and click submit, your text is sent to Google's search engine.
 
-![](.md_images/url.png)
+![](exercises/.images/02_url.png)
 
 Notice how you see parameters passed in a URL. Depending on where you're (i.e. locale), if you're at Helsinki, you'll see something like
 
@@ -254,11 +254,9 @@ For example, a Finnish social security number (similar to UK National Insurance 
 ```html
 <input type="text" pattern="\d{6}\-\d{3}([0-9A-Y])" ...>
 ```
+
 \d means a digit, \\- means the "-", [chars] means a set of characters.
 
 ### Test your understanding
 
 * Open file **form-skel.html**. Validate the user's data in Student id, email address and score by using patterns.
-
-
-

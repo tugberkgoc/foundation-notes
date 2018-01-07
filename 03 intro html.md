@@ -2,7 +2,7 @@
 
 The web technology has revolutionized everything, including itself. HTML5 (Hypertext Markup Language) became official in 2014, following the previous release of version 4.01. There are many big changes introduced in this new release, the most important being HTML is now a ['living standard'](https://html.spec.whatwg.org/multipage/). This means that the standard will update itself, there will never be another version of HTML.
 
-[![](.md_images/eow.png)](http://www.evolutionoftheweb.com/)
+[![](exercises/.images/02_eow.png)](http://www.evolutionoftheweb.com/)
 
 HTML5 is the most fundamental language in web programming. In this lab, you learn the basics of HTML5. In subsequent labs, several new technologies are introduced to facilitate styling and dynamic content, but HTML5 remains the starting point and center point of web programming techniques.
 
@@ -94,13 +94,13 @@ Once the `head` element is ready, add some markup inside the `body` element of t
 
 Open the file in a browser by right-clicking computers80.html in Workspace tool window and then select Preview. The page is displayed using the browser's built-in style settings. We can later change how the page looks using CSS (Cascaded Style Sheets).
 
-![](.md_images/hello.png)
+![](exercises/.images/02_hello.png)
 
 > If you don't want to type yourself to fill the space, instead of copy/paste, you can use [Lorem ipsum](https://en.wikipedia.org/wiki/Lorem_ipsum).
 
 Later, when you amend your code, just hit **Refresh** icon in the built-in browser to show the updated content.
 
-![](.md_images/refresh.png)
+![](exercises/.images/02_refresh.png)
 
 ### Paragraphs and headers
 
@@ -175,11 +175,11 @@ In the Workspace tool window, create a new folder called 'images'. Add an image 
 
 > Don't use `index.html` for pages other than your home page, because browsers detect your home page by looking for a file called index.html by default.
 
-![](.md_images/upload.png)
+![](exercises/.images/02_upload.png)
 
 You can use the image below if you wish.
 
-![](.md_images/computer.png)
+![](exercises/.images/02_computer.png)
 
 Now,  Add the following lines of code in an appropriate place, directly inside the `body` element:
 
@@ -216,7 +216,7 @@ Now, add a link to a Wikipedia article to your web page, in a suitable location 
 
 To test the functionality in the browser, you need to run the Apache server first, and then choose a proper browser (not the default one). This was in lab1 if you cannot remember. The following image was generated using Chrome on Windows. Once you click the link, you'll be directed to the wiki page you specified earlier.
 
-![](.md_images/wiki.png)
+![](exercises/.images/02_wiki.png)
 
 A link, defined by `a` element contains the URL of the linked web page as its `href` attribute. The link above contains an absolute path to a document on the external server. The absolute path begins will full protocol identifier and domain name.
 
@@ -324,7 +324,7 @@ The summary of some key semantic elements to describe the contents of the web pa
 | header  | introductory content                                       | welcome texts            |
 | footer  | "smallprint" content, usually in the end.                  | contact data, disclaimer |
 
-![](http://www.w3schools.com/html/img_sem_elements.gif)
+![Semantic Elements](http://www.w3schools.com/html/img_sem_elements.gif)
 
 There are more semantic elements to clarify the content, such as `thead`, `tbody` and `tfoot` elements inside the tables.
 
