@@ -57,19 +57,19 @@ Verify that all four paragraphs are displayed exactly as intended.
 
 In Google Chrome browser, there are a built-in Developer Tools for viewing the layout of an individual element. It is an important tool for finding and correcting layout problems. Click options menu to the right of the menu bar, then More Tools ==> Developer Tools to view it.
 
-![](.md_images/tools.png)
+![](exercises/.images/03_tools.png)
 
 Alternatively, you can simply right-click on an element and select **Inspect**. Try it for each differently-formatted paragraph on your page.
 
-![](.md_images/ins.png)
+![](exercises/.images/03_ins.png)
 
 ### Test your understanding
 
 The file **box_assignment.png** in the lab's `images` folder contains an image of intended appearance for a webpage. Using CSS box model, construct an HTML page and the associated CSS file that reproduce the appearance of the image.
 
 > In the lab's **images** folder, you also find the public domain image **berries.png** (author Scott Bauer, via http://commons.wikimedia.org) needed in the assignment. 
-    
-![(Alternatively, you see the image embedded if you open this assignment sheet in a separate browser window).](.md_images/box_assignment.png)
+
+![(Alternatively, you see the image embedded if you open this assignment sheet in a separate browser window).](exercises/.images/03_box_assignment.png)
 
 ## Position of elements
 
@@ -105,6 +105,7 @@ The HTML file contains one image tag. First, add an identifier for the figure ho
 ```
 
 Next, open the linked CSS file **floatstyles.css** and add the following rule:
+
 ```css
 figure#floating {
     float: right;
@@ -115,17 +116,15 @@ Reopen the page in the browser. The figure is now positioned to the right, toget
 
 Next, we make a floating fact box that contains multiple elements. Add the following files in the HTML file **floating.html** right after the main heading, before any paragraphs:
 
-
 ```html
-<section id="factbox">    
+<section id="factbox">
 <p>Did you know?</p>
 <ul>
     <li>The latin name for onion plant is <em>Allium Cepa</em>.</li>
     <li>Onions have been used in cooking for thousands of years.</li>
     <li>89% of onion's content is water.</li>
 </ul>
-</section> 
-
+</section>
 ```
 
 This time, the floating entity consists of two elements: a paragraph (`p`) and an unordered list (`ul`). Thus, we need a special container element that contains both the paragraph and the list. 
@@ -169,6 +168,7 @@ Note that the files that the links point to do not exist. We could add them late
 Reload the page and see how the links are positioned by default.
 
 To move the navigation items to the left edge, we use absolute positioning. Add the following rule for the nav element to the CSS file:
+
 ```css
 nav {
     position: absolute;
@@ -227,5 +227,5 @@ You need the aforementioned file `menustyles.css`.
 1. Add a fourth menu with a few menu items to **menu.html**.
 
 2. Use CSS to format the menu bar in the way that is shown in file **menu.png** in the lab's **images** folder.
-    ![(Alternatively, you see the image embedded if you open this assignment sheet in a separate browser window).](.md_images/menu.png)
+    ![(Alternatively, you see the image embedded if you open this assignment sheet in a separate browser window).](exercises/.images/03_menu.png)
 3. Make one of the second-level menu items to contain a third-level menu. Make necessary amendments to the CSS file.

@@ -26,21 +26,21 @@ Now you've (hopefully) learned how to write proper/valid HTML codes, it's the ti
 
 In C9 start a new workspace and name it lab5. Open the auto-generated hello-world.html file and remove all contents. Type in the exclamation mark and immediately hit the tab key. What happened? 
 
-![](.md_images/ex.png).
+![](exercises/.images/03_ex.png).
 
 What you see is that the editor expands the single character into a full HTML template. Behind the scene, it's Emmet that does the job.
 
-![](.md_images/expand.png).
+![](exercises/.images/03_expand.png).
 
 There are quite a few other tricks you can do as well, for example:
 
 * Type `table1` and hit tab immediately, it will expand into full table element.
     
-    ![](.md_images/tb.png).
+    ![](exercises/.images/03_tb.png).
     
 * Type `ul>li*8` and hit tab immediately, it will expand into full list element.
     
-    ![](.md_images/ul.png).
+    ![](exercises/.images/03_ul.png).
 
 Some more example usages can be found [here](https://www.smashingmagazine.com/2013/03/goodbye-zen-coding-hello-emmet/).
 
@@ -290,9 +290,9 @@ If a property of an element would be defined in multiple CSS rules, the rule who
     Find the proper markup for doing this. Include the necessary CSS rule(s) to get a pleasant outcome. Validate your work.
 
 3. Open the file **comparison.html** containing the comparison table of three computers. Create a new CSS file and link it to the HTML file. Generate the contents of the CSS file to make the HTML table resemble the image **comparison.png** in the lab's **images** folder as accurately as possible. Validate.
-    
-    ![(Alternatively, you see the image embedded if you open this assignment sheet in a separate browser window).](.md_images/comparison.png)
-    
+
+    ![(Alternatively, you see the image embedded if you open this assignment sheet in a separate browser window).](exercises/.images/03_comparison.png)
+
     > Some examples of CSS table rules can be found [here](http://www.w3schools.com/css/css_table.asp).
 
 ## Fine-tune the rules
