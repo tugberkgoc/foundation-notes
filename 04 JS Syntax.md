@@ -20,11 +20,11 @@ To help you get acquainted with the syntax used in JavaScript, use a tutorial su
 
 In the Workspace tool window navigate to lab7 ==> workspace, the folder structure is like this:
 
-![](.md_images/lab7.png)
+![](exercises/.images/04_lab7.png)
 
 Double-click to open the file **basic_math.html**, and right-click on the same file to preview.
 
-![](.md_images/preview.png)
+![](exercises/.images/04_preview.png)
 
 In the same manner, open **shopping.js** located in the `js` folder. 
 
@@ -52,7 +52,7 @@ Enter some valid inputs into the form and submit it.
 
 "Nothing" happens. . . Actually, the result is being logged to the console which is a part of the Chrome Developer Tools integrated into the browser.
 
-![](.md_images/inspect.png)
+![](exercises/.images/04_inspect.png)
 
 1. Right click within the preview browser window and select Inspect to open the Developer Tools panel. This can be docked to the right or bottom of the main window (bottom preferable).
 2. Click on the console tab and try submitting the form again (you can ignore errors at this point) to see the output.
@@ -75,7 +75,7 @@ One such linter for JavaScript is called [JSLint](http://www.jslint.com/), and i
 
 Load up **notes.js** in C9 and you'll see immediately there are some highlights in the gutter. If you move your mouse over you'll see some hints on the error.
 
-![](.md_images/error.png)
+![](exercises/.images/04_error.png)
 
 In general, C9 supports three types of identifiers:
 
@@ -87,7 +87,7 @@ In general, C9 supports three types of identifiers:
 
 Preview **notes.html** in C9 and input some texts to prove the code is fully functional. 
 
-![](.md_images/notes.png)
+![](exercises/.images/04_notes.png)
 
 Next, open **notes.js** and make sure you understand how it works.
 
@@ -136,7 +136,7 @@ Let's get familiar with the debugger:
 4. Click on the Step into next function call button (down arrow with dot). This will run line 5 and move execution to line 6. Click this button to execute the code line by line.
 5. Observe the variables changing in the right-hand panel.
 
-![](.md_images/debug.png)
+![](exercises/.images/04_debug.png)
 
 ### Test your understanding
 
