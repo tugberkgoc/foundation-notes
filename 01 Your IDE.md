@@ -1,4 +1,3 @@
-
 # The Codeanywhere IDE
 
 Nowadays everything is on the cloud. This includes your integrated development environment (IDE). In this module, we'll use [Codeanywhere](https://codeanywhere.com) as our platform to learn web development. Compared with traditional IDEs such as [Aptana Studio](http://www.aptana.com/) cloud-based tools such as C9 offers the following advantages, among many others:
@@ -17,15 +16,15 @@ But the drawback is obvious -- you need to be connected. So my advice is KEEP BA
 
 Visit https://codeanywhere.com and create an account if you haven't got one. After signing in you should see something similar to this. The difference will be that you won't already have a project.
 
-![](.md_images/adding_codeanywhere_project.png)
+![](exercises/.images/01_adding_codeanywhere_project.png)
 
 This is called the Dashboard, and it's where different workspaces (projects) are being managed. Click on the plus sign in the big grey square to create a new _project_ and name it `CU`. Now you can click on the **Open Project** link where you will be asked to add a **container**. Scroll down and select the _HTML container running on Ubuntu_ and name it `205CDE` as shown in the screenshot below.
 
-![](.md_images/adding_codeanywhere_container.png)
+![](exercises/.images/01_adding_codeanywhere_container.png)
 
 As soon as this has been completed, the container will open and you will see the IDE. Our first task is to open the **SSH Terminal** by right-clicking on the **205CDE** container and choosing the first option from the context menu. This will allow us to run bash commands directly in Codeanywhere.
 
-![](.md_images/adding_codeanywhere_open_ssh.png)
+![](exercises/.images/01_codeanywhere_open_ssh.png)
 
 ### Cloning the Lab Materials
 
@@ -33,33 +32,35 @@ You will be working on the lab exercises using the Codeanywhere IDE so the next 
 
 Start by logging into https://github.coventry.ac.uk using your University username and password. Once you are logged in, access your profile screen using the menu option shown below.
 
-![](.md_images/changing_profile.png)
+![Changing your profile](exercises/.images/01_changing_profile.png)
 
 On the profile screen, upload a _head and shoulders_ photo of yourself.
 
 Check the exact **name** and **email address** associated with your account, this will come from the University's active directory system. make a note of this for later.
 
-![](.md_images/profile_page.png)
+![](exercises/.images/01_profile_page.png)
 
 Now you will need to switch to the 205CDE organisation as shown.
 
-![](.md_images/github_switch_org.png)
+![](exercises/.images/01_github_switch_org.png)
 
 To see the repositories in the organisation you need to click on the View organisation button in the top-right of the screen as shown.
 
-![](.md_images/viewing_org.png)
+![](exercises/.images/01_viewing_org.png)
 
 As you can see there is a repository called `TEACHING-MATERIALS` which contains all the lab materials you will need in this module. Click on this repository title to see the contents.
 
-![](.md_images/github_clone_lab.png)
+![](exercises/.images/01_github_clone_lab.png)
 
 Click on the green **Clone or Download** button and use the clipboard icon to copy the url into the computer clipboard. Now we can use the SSH Terminal in Codeanywhere to clone these materials into our IDE. Note the period (full-stop) at the end. This clones the repository into the _current directory_ instead of creating a new directory under it.
+
 ```
 $ git clone -o upstream https://github.coventry.ac.uk/205CDE-1617JANMAY/TEACHING-MATERIALS.git .
 ```
+
 After a few minutes the cloning will be complete. You will need to refresh the file tree in Codeanywhere by right-clicking on the `205CDE` container name and choosing _refresh_ from the context menu.
 
-![](.md_images/codeanywhere_ide.png)
+![](exercises/.images/01_codeanywhere_ide.png)
 
 ### Updating the Git Profile
 
@@ -77,15 +78,15 @@ git config user.email
 
 As we work through the lab exercises, making changes to our code we will need to ensure this is backed up. The _TEACHING-MATERIALS_ repository is not writable (for obvious reasons) so we will need to add a new remote. Make sure you are in the 205CDE organisation on GitHub then click on the green **New repository** button.
 
-![](.md_images/adding_github_repo.png)
+![](exercises/.images/01_adding_github_repo.png)
 
 We can now create our own _private_ repository called `worksheets` as shown. Click on the **Create repository** button when done.
 
-![](.md_images/adding_new_repo.png)
+![](exercises/.images/01_adding_new_repo.png)
 
 Let's use the _Quick Setup_ option by clicking on the small clipboard icon to copy our repository URL to the clipboard.
 
-![](.md_images/new_repo_url.png)
+![](exercises/.images/01_new_repo_url.png)
 
 Now we can add this as a second remote called `origin` by entering the following in the SSH Terminal in Codeanywhere, substituting the URL in the clipboard where shown. Once this is completed we can list the remotes we have added and finally push all the commits to our new remote.
 ```
@@ -95,7 +96,7 @@ $ git push origin --all
 ```
 If we refresh the GitHub webpage for our new repository we should see an exact copy of the original one.
 
-![](.md_images/github_new_repo_full.png)
+![](exercises/.images/01_github_new_repo_full.png)
 
 ### Cacheing Git Credentials
 
@@ -108,11 +109,11 @@ git config --global credential.helper 'cache --timeout=3600'
 
 Since the IDE is cloud-based we can use the built-in Apache web server to view our web pages through an online URL. Let's have a go at this. Start by navigating to the Codeanywhere directory, right-clicking on the `index.html` file and choosing **Preview** from the context menu.
 
-![](.md_images/preview_html.png)
+![](exercises/.images/01_preview_html.png)
 
 This will open the web page in a new browser tab. Notice the URL. What happens when you click on the button?
 
-![](.md_images/preview.png)
+![](exercises/.images/01_preview.png)
 
 ## Basic Linux Commands
 
@@ -163,7 +164,7 @@ The `ls` command can have different options in the form `ls -a -l` or `ls -al`. 
 
 ```sh
 $ ls -al
-total 100                                                                
+total 100
 drwxrwxr-x 21 cabox cabox 4096 Jan 15 11:03 .
 drwxr-xr-x 11 cabox cabox 4096 Jan 15 10:38 ..
 -rw-r--r--  1 cabox cabox  350 Jan 15 10:21 .eslintrc
@@ -340,7 +341,7 @@ Follow instructions below to install a web server yourself:
         sudo apt-get install lamp-server^
     ```
     
-    ![](.md_images/vbox.png)
+    ![](exercises/.images/01_vbox.png)
     
     > [The official Ubuntu documentation on installing LAMP](https://help.ubuntu.com/community/ApacheMySQLPHP)
     
@@ -348,7 +349,7 @@ Follow instructions below to install a web server yourself:
     
     * Download your lab1 material and extract within Ubuntu. For example, mine is extracted at `/home/yang/Downloads/workspace`
     
-    ![](.md_images/folder.png)
+    ![](exercises/.images/01_folder.png)
     
     * Open terminal, create a symbolic link to `/var/www/HTML`. A symbolic link basically is a pointer that stays inside `/var/www/HTML` but pointing to the actual location of our lab material.
     
@@ -364,7 +365,7 @@ Follow instructions below to install a web server yourself:
     
     * You can now open a browser and view the file on your local server
     
-    ![](.md_images/running.png)
+    ![](exercises/.images/01_running.png)
 
 4. You have seen previously files installed by in Apache package using `dpkg -L apache2`. Now let's have a little look to understand how to configure Apache. Open the apache2.conf file in C9 or Ubuntu. Have a read through, especially the following block. This refers to the folder we used before. For explanations of these options, refer to the [official Apache documentation](http://httpd.apache.org/docs/2.4/mod/core.html).
     
@@ -377,8 +378,5 @@ Follow instructions below to install a web server yourself:
         Require all granted
     </Directory>
     ```
-    
 
 > There are quite a few LAMPP or WAMP packages available, some are listed here on [WiKi](https://en.wikipedia.org/wiki/List_of_Apache%E2%80%93MySQL%E2%80%93PHP_packages). Among these my favorites are [XAMPP](https://www.apachefriends.org/index.html) on Windows and [MAMP](https://www.mamp.info/en/) on Mac.
-
-

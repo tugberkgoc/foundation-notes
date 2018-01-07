@@ -277,11 +277,11 @@ For a version displaying the short commit codes try:
 
 GitHub is a source code hosting website based on Git. If you haven't got one, create an account and sign in. Click on the plus sign on the top right corner and select 'New repository'. Name it lab2 and click 'Create repository'.
 
-![](.md_images/github.png)
+![](exercises/.images/01_github.png)
 
 Once created, you'll see something similar to below
 
-![](.md_images/url.png)
+![](exercises/.images/01_url.png)
 
 Take a note of the URL of the repository, you'll need it for later. For example, mine is `https://github.com/jianhuayang/lab2.git`
 
@@ -313,7 +313,7 @@ Here the remote is called origin, which is the default name for remotes. Then fi
 
 Enter the GitHub credentials as and when prompted. If you then refresh you GitHub repository you'll see the files are there now
 
-![](.md_images/fill.png)
+![](exercises/.images/01_fill.png)
 
 > You can have more than one remotes, or you can remove/reset remotes. Some examples can be found [here](https://help.github.com/categories/managing-remotes/).
 
@@ -360,25 +360,11 @@ As an alternative to web-based hosting tools, you can use offline software as we
 1. Download and install [SourceTree](https://www.sourcetreeapp.com/) if it's your own computer. On all EC machines, the software has been installed for you.
 2. Select New Repository ==> Clone from URL
 3. Enter you GitHub repository URL details and click Clone.
-    
-    ![](.md_images/source.png)
-    
+
+![](exercises/.images/01_source.png)
+
 4. You should see now the project has been backed up to your local folder. And that you can manage Git through the GUI.
-    
-    ![](.md_images/full.png)
-    
-    In fact this C9 ==> GitHub ==> SourceTre is a better approach to backup your project rather than downloading directly from C9.
 
+![](exercises/.images/01_full.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
+In fact this C9 ==> GitHub ==> SourceTre is a better approach to backup your project rather than downloading directly from C9.
