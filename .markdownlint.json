@@ -1,5 +1,6 @@
 
 {
+  "first-line-h1": false,
   "line-length": false,
   "fenced-code-language": false,
   "commands-show-output": false,
