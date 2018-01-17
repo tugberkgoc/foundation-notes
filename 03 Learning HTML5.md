@@ -33,19 +33,6 @@ As you work, save the html file and refresh the browser, you don't need to resta
 
 ## 2 Lists
 
-Next we will learn how to work with _hypermedia_ to link multiple documents together. Locate the `exercises/03_html/02_hypermedia/` directory. This contains a website that comprises:
-
-- Multiple pages
-    - links between pages
-    - links to anchors on the same web page
-- Images embedded in web pages
-
-Each page in the website needs to be on a different _route_. Open the `index.js` file and examine the code.
-
-1. Notice that there are two routes defined:
-    1. The base URL loads the contents of the `index.html` file.
-    2. The `/paradoxes` route loads the contents of the `paradoxes.html` file which is in the `html/` directory.
-
 - lists
     - unordered
     - ordered
