@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/paradoxes', (req, res) => {
-	res.sendFile(`${__dirname}/index.html`)
+	res.sendFile(`${__dirname}/html/paradoxes.html`)
 })
 
 app.listen(port, () => {
