@@ -8,11 +8,15 @@ app.use(express.static('public'))
 const port = 8080
 
 app.get('/', (req, res) => {
-	res.sendFile(`${__dirname}/index.html`)
+	res.sendFile(`${__dirname}/html/index.html`)
 })
 
 app.get('/paradoxes', (req, res) => {
 	res.sendFile(`${__dirname}/html/paradoxes.html`)
+})
+
+app.get('/commodore', (req, res) => {
+	res.sendFile(`${__dirname}/html/commodore64.html`)
 })
 
 app.get('/date', (req, res) => {

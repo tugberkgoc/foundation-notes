@@ -3,12 +3,15 @@
 
 const express = require('express')
 const app = express()
-app.use(express.static('public'))
 
 const port = 8080
 
 app.get('/', (req, res) => {
-	res.sendFile(`${__dirname}/comparison.html`)
+	res.sendFile(`${__dirname}/computers.html`)
+})
+
+app.get('/commodore', (req, res) => {
+	res.sendFile(`${__dirname}/commodore64.html`)
 })
 
 app.listen(port, () => {
