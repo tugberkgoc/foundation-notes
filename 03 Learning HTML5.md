@@ -84,7 +84,7 @@ Now we will learn how to embed audio in a website. There are a number of resourc
 2. In a similar way, video can also be embedded:
     1. Most browsers require a video file encoded as `.mp4`.
     2. Firefox needs an `.ogg` encoded version.
-3. You can also embed a [YouTube](https://www.youtube.com) video in an iFrame by clicking on the share button then on the **embed** link that is displayed. You copy the html code into your website.
+3. You can also embed a [YouTube](https://www.youtube.com) video in an `<iframe>` or alternatively using the `<object>` element. This is achieved by clicking on the share button then on the **embed** link that is displayed. You copy the html code into your website.
 
 #### 3.4.1 Test Your Knowledge
 
@@ -96,8 +96,10 @@ Now we will learn how to embed audio in a website. There are a number of resourc
     2. Restrict the video window to 320px wide without stretching the image.
     3. Are there any additional attributes you can add to the `<video>` element. Try these out, whay effect do they have?
 3. Find a (short) video clip on YouTube. This can be on any subject you wish.
-    1. Embed this in your web page using the iFrame code provided by Google.
+    1. Embed this in your web page using the _iFrame_ code provided by Google.
     2. Examine the attributes used and try changing their values, noting the effect this has on the embedded video.
+    3. Now embed the same clip using the _Object_ code.
+    4. Examine the attributes used and try changing their values, noting the effect this has on the embedded video.
 
 ## 4 Tables
 
