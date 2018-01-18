@@ -76,18 +76,40 @@ Now you understand the concept of URLs representing resources and how this relat
 
 ### 3.4 Media
 
-- media elements
-    - audio
-    - video
-    - youtube
+Now we will learn how to embed audio in a website. There are a number of resources located in the `public/` directory that we will add to our `index.html` page.
+
+1. You can use the new html `<audio>` tag to embed audio in a web page without needing to use third-party plugins. You will need to encode your audio files in two different formats for this to work in all major browsers:
+    1. Most browsers need files in the `.mp3` format.
+    2. Firefox requires files encoded using the `.ogg` format.
+2. In a similar way, video can also be embedded:
+    1. Most browsers require a video file encoded as `.mp4`.
+    2. Firefox needs an `.ogg` encoded version.
+3. You can also embed a [YouTube](https://www.youtube.com) video in an iFrame by clicking on the share button then on the **embed** link that is displayed. You copy the html code into your website.
+
+#### 3.4.1 Test Your Knowledge
+
+1. Add the `guitar` audio file to the `index.html` web page. The file has been provided in the two required formats.
+    1. Test that the audio plays in both Firefox and Chrome.
+    2. Can you modify the `<audio>` element to make the video auto-play?
+2. Add the `coventry` video clip to the `index.html` file, again the file has been provided in both formats (note that you will need to change one of the extensions from `.mp5` to `.mp4`).
+    1. Test the video using both Firefox and Chrome.
+    2. Restrict the video window to 320px wide without stretching the image.
+    3. Are there any additional attributes you can add to the `<video>` element. Try these out, whay effect do they have?
+3. Find a (short) video clip on YouTube. This can be on any subject you wish.
+    1. Embed this in your web page using the iFrame code provided by Google.
+    2. Examine the attributes used and try changing their values, noting the effect this has on the embedded video.
 
 ## 4 Tables
+
+### 4.1 Test Your Knowledge
 
 - tables
     - tags
 - semantic html elements (header, footer, section, article, aside)
 
 ## 5 Forms
+
+### 5.1 Test Your Knowledge
 
 - forms
     - action
