@@ -1,8 +1,7 @@
-
+#!/usr/bin/env node
+/* eslint no-magic-numbers: 0 */
 
 'use strict'
-
-/* eslint no-magic-numbers: 0 */
 
 const readline = require('readline-sync')
 

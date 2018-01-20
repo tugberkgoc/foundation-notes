@@ -1,7 +1,7 @@
-
+#!/usr/bin/env node
+/* eslint no-magic-numbers: 0 */
 
 'use strict'
-/* eslint no-magic-numbers: 0 */
 
 function largestNumber(a, b) {
 	if (a > b) return a

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 'use strict'
 // we are going to 'break' a lot of linting rules here so lets disable them!
