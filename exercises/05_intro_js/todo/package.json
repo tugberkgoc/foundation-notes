@@ -1,0 +1,19 @@
+{
+  "name": "todo",
+  "version": "0.0.1",
+  "description": "simple todo list",
+  "author": "Mark J Tyers",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hello": "echo HelloWorld!"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0"
+  }
+}

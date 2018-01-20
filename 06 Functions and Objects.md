@@ -12,11 +12,12 @@ There is a slide deck xxx to accompany this worksheet. Make sure you are familia
 This chapter covers the following topics:
 
 1. Object literals *
-2. The function object *
-3. Constructors *
-4. Immediately invoked function expressions
-5. Prototypal inheritance
-6. Classes
+2. The basics of Express templates
+3. The function object *
+4. Constructors *
+5. Immediately invoked function expressions
+6. Prototypal inheritance
+7. Classes
 
 ## 1 Object Literals
 
