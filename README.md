@@ -38,9 +38,10 @@ In this first lab you will learn how to set up your development environment and 
 1. Rendering repeating data
 2. Modular code
 
-## 6 Responsive Web Design
+## 6 Version Control
 
-1. Building adaptive layouts
+1. Phase test
+2. Using Git
 
 ## 7 Asynchronous JavaScript
 
@@ -54,6 +55,8 @@ In this first lab you will learn how to set up your development environment and 
 
 1. Linting
 2. Unit testing
+
+## 10 Responsive Web Design
 
 ## About this Github repository
 
