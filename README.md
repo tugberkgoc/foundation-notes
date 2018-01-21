@@ -40,14 +40,36 @@ In this first lab you will learn how to set up your development environment and 
 
 ## 4 Introduction to JavaScript/NodeJS/ECMA6
 
-1. Express templating engines
+1. Working with NodeJS
+    1. Executing NodeJS files
+    2. Installing packages
+    3. Listing and uninstalling packages
+    4. Useful modules
+2. Variables and Scope
+    1. Variables and Scope
+    2. Strict mode
+    3. Importing a package or module
+    4. Conditionals and loops
+    5. Strings
+    6. Arrays
+3. Data types
+4. Errors and exceptions
 
-## 5 The Express Web Server
+## 5 Functions and Objects
 
-1. Package Manifests
-2. Routing
-3. Templating
-4. Modular code
+1. Functions
+    1. Function syntax
+    2. The spread operator
+    3. The Arguments Object
+    4. The rest parameter
+    5. Default parameters
+    6. Function expressions
+    7. Callbacks
+2. Objects
+    1. Creating object literals
+    2. Retrieving object properties
+    3. Modifying objects
+    4. Undefined values
 
 ## 6 Version Control
 
@@ -55,11 +77,18 @@ In this first lab you will learn how to set up your development environment and 
 2. Using Git locally
 3. Using Git remotes
 
-## 7 Data Persistence
+## 7 The Express Web Server
+
+1. Package Manifests
+2. Routing
+3. Templating
+4. Modular code
+
+## 8 Data Persistence
 
 1. Document databases
 
-## 8 Automated Testing
+## 9 Automated Testing
 
 1. Linting
 2. Unit testing

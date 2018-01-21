@@ -38,12 +38,55 @@ It is assumed that you can already program in a modern language such as Python o
 
 Make sure you have cloned the repository containing the sample code by following the instructions in the previous chapter.
 
-
 One of the most valuable features of NodeJS is its package manager which allows you to install additional functionality in the form of _packages_. There are thousands of these to choose from and, in a later chapter, you will be shown how you can publish your own packages.
 
-In the examples in this chapter we will be using a _node package_ called `readline-sync` to capture user input. The documentation for all published packages can be found on https://www.npmjs.com so open this page and search for the documentation for `readline-sync`.
+In the examples in this chapter we will be using a _node package_ called `readline-sync` to capture user input. The documentation for all published packages can be found on the [NPMJS website](https://www.npmjs.com) so open this page and search for the documentation for `readline-sync`.
 
-### 1.1 Installing Packages
+## 1 Working with NodeJS
+
+Now you have an understanding of the code features used in the script it is time to run it. Unlike client-side JavaScript, you don't run NodeJS scripts in a web browser, instead you need to run them using the **Terminal**.
+
+To run your script you need to run the `node` command and pass it the name of your script. You don't need to pass the file extension, so these commands are equivalent:
+
+```
+node todo
+node todo.js
+```
+
+When the script is running you will be prompted to enter a command. Try adding three items and listing them all. Finally typing exit to return to the shell prompt:
+
+```
+enter command: add bread
+adding "bread"
+enter command: add butter
+adding "butter"
+enter command: add cheese
+adding "cheese"
+list
+0. bread
+1. butter
+3. cheese
+exit
+```
+
+### 1.1 Executing NodeJS Files
+
+There is an alternative way to execute a NodeJS script which works on Linux systems. it works because we have a _shebang_, otherwise known as a **processor directive** as the first line of our script. This tells the operating system where to find the command to run the script.
+
+```
+#!/usr/bin/env node
+```
+
+This tells the operating system to use the node command that appears in the environment path variable. You will also need to set the execute flag on the file.
+
+```
+chmod +x todo.js
+./todo.js
+```
+
+The last line above tells the OS to run the `todo.js` file in the current directory.
+
+### 1.2 Installing Packages
 
 Packages can be installed either locally or globally.
 
@@ -60,7 +103,7 @@ $ npm install readline-sync
 
 This will create a new directory called `node_modules/` which will contains the scripts from the `readline-sync/` package plus any dependencies.
 
-### 1.2 Listing and Uninstalling Packages
+### 1.3 Listing and Uninstalling Packages
 
 There are two ways to see what packages are currently installed. The quickest is to locate the `node_modules/` directory. Alternatively you can use the `npm ls` subcommand which will print this information to the shell.
 
@@ -76,7 +119,7 @@ To uninstall a _local_ package you can use the `npm uninstall` subcommand and pa
 $ npm uninstall readline-sync
 ```
 
-#### 1.3 Useful Modules
+#### 1.4 Useful Modules
 
 Although there are a lot of modules available through the package manager you will only need a few of these to complete the exercises in this book.
 
@@ -134,7 +177,7 @@ This:
 
 For the above reasone
 
-Use the **terminal** to run the script by entering ` node todo.js`. Once running you can use the `add` command to add new items to the list and the `list` command to print out the list items. The final command will terminate the application.
+Use the **terminal** to run the script by entering `node todo.js`. Once running you can use the `add` command to add new items to the list and the `list` command to print out the list items. The final command will terminate the application.
 
 ### 2.3 Importing a Package or Module
 
@@ -156,7 +199,7 @@ JavaScript includes the standard set of conditionals (if, if...else and switch) 
 
 ```javascript
 if (input.indexOf('list') === 0) {
-	// the user has chosen the 'list' command.
+  // the user has chosen the 'list' command.
 }
 ```
 
@@ -165,14 +208,14 @@ Later in this chapter you will be required to implement a `switch` conditional. 
 ```javascript
 const name = String(readline.question('your name: ')).trim()
 switch(name) {
-	case 'John':
-		console.log('your name is John')
-		break
-	case 'Jane':
-		console.log('your name is Jane')
-		break
-	default:
-		console.log('unknown name')
+  case 'John':
+    console.log('your name is John')
+    break
+  case 'Jane':
+    console.log('your name is Jane')
+    break
+  default:
+    console.log('unknown name')
 }
 ```
 
@@ -188,7 +231,7 @@ In the `todo.js` script you can see the run-loop has been implemented using a do
 
 ```javascript
 do {
-	// this is the run loop
+  // this is the run loop
 } while (input !== 'exit')
 ```
 
@@ -196,8 +239,8 @@ It also uses a traditional for loop with loop variable using a syntax similar to
 
 ```javascript
 for (let i=0; i< items.length; i++) {
-	/* Here we reference the array index. */
-	console.log(`${i}. ${items[i]}`)
+  /* Here we reference the array index. */
+  console.log(`${i}. ${items[i]}`)
 }
 ```
 
@@ -220,7 +263,7 @@ Later in the script we use another method `indexOf()` which returns the index of
 
 ```javascript
 if (input.indexOf('add ') === 0) {
-	// the string starts with 'add '
+  // the string starts with 'add '
 }
 ```
 
@@ -270,61 +313,17 @@ Arrays are _objects_ and have a number of built-in methods. Later in the script 
 items.push(item)
 ```
 
-### 2.7 Running a NodeJS Script
-
-Now you have an understanding of the code features used in the script it is time to run it. Unlike client-side JavaScript, you don't run NodeJS scripts in a web browser, instead you need to run them using the **Terminal**.
-
-To run your script you need to run the `node` command and pass it the name of your script. You don't need to pass the file extension, so these commands are equivalent:
-
-```
-node todo
-node todo.js
-```
-
-When the script is running you will be prompted to enter a command. Try adding three items and listing them all. Finally typing exit to return to the shell prompt:
-
-```
-enter command: add bread
-adding "bread"
-enter command: add butter
-adding "butter"
-enter command: add cheese
-adding "cheese"
-list
-0. bread
-1. butter
-3. cheese
-exit
-```
-
-#### 2.7.1 Executing NodeJS Files
-
-There is an alternative way to execute a NodeJS script which works on Linux systems. it works because we have a _shebang_, otherwise known as a **processor directive** as the first line of our script. This tells the operating system where to find the command to run the script.
-
-```
-#!/usr/bin/env node
-```
-
-This tells the operating system to use the node command that appears in the environment path variable. You will also need to set the execute flag on the file.
-
-```
-chmod +x todo.js
-./todo.js
-```
-
-The last line above tells the OS to run the `todo.js` file in the current directory.
-
 ### 2.8 Test Your Knowledge
 
 Now you are familiar with the basics of the ECMA6 language its time to put this to the test. Make sure you successfully complete all six tasks before continuing to the next section.
 
 1. locate the `input` variable declaration (just inside the `do` loop)
-		- define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
-		- modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
-		- substitute a constant by substituting `const` for `let`, what effect does this have?
+    - define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
+    - modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
+    - substitute a constant by substituting `const` for `let`, what effect does this have?
 2. the array at the top of the script is defined using `var`. What happens if you make this immutable (use `const`)?
 3. Items are added to the array using its `push()` method.
-		- substute the [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) method. How does this change the script?
+    - substute the [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) method. How does this change the script?
 4. modify the code to prevent duplicate items being added. You will need to use the [`Array.indexOf()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) method.
 5. create a **remove** option so an item such as *cheese* can be removed using the syntax `remove cheese`. You may need to use the [`Array.splice()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) method.
 6. The current version is case sensitive. Modify the code so that items are converted to lowercase before being added or searched for. You will need to use the [`String.toLowerCase()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) method.
@@ -351,534 +350,27 @@ No matter how good we are at programming, our scripts will contain errors. In Ja
 
 Open the `contact.js` script and study it as you cover the following sections.
 
-### 4.1 Handling Errors
-
 To help catch any errors, JavaScript uses the `try-catch-finally` statement. The syntax is very similar to other modern language and looks like this:
 
 ```javascript
 try {
-	// this line of code might throw an error
+  // this line of code might throw an error
 } catch(err) {
-	// if an error occurs the execution jumps to this block
-	// if no error occurs the block is ignored
+  // if an error occurs the execution jumps to this block
+  // if no error occurs the block is ignored
 } finally {
-	// this line runs whether or not an error was thrown
-	// this block is optional
+  // this line runs whether or not an error was thrown
+  // this block is optional
 }
 ```
 
 1. All code that could throw an exception _must_ be in a `try{}` block.
 2. If an exception is _thrown_ the execution moves to the `catch{}` block.
-		- the error object thrown will be passed as the parameter.
-
-#### 4.2 The Error Object
+    - the error object thrown will be passed as the parameter.
 
 When an error gets thrown it passes an Error object which contains three properties:
 
 - the name of the error
 - the message passed
 - the stack trace.
-	- the _stack trace_ is a list of the method calls that the application was in the middle of when an Exception was thrown and can help identify some of the more insidious errors. You should learn to read and understand what information it contains.
-
-## 5 Passing Parameters on the Command Line
-
-You have probably seen some commands that take startup parameters. Each time you run a script, everything you type at the shell is made available through the process object which contains an `argv` array.
-
-This is useful since it means we can pass extra data to a script when we invoke it from the shell. We will be using this feature to pass in a sentence and measure its sentiment (positive or negative).
-
-Open the script `sentiment.js` and make sure you understand how it works.
-
-Try running the script without any extra parameters.
-
-```
-$ node sentiment
-	[ '/Users/.../bin/node',
-		'/Users/.../sentiment.js' ]
-	missing parameters
-```
-
-Notice that it prints out an array which contains two indexes corresponding to the _node command_ and the script name (sentiment.js). There is also a message that there are missing parameters. Where is this message coming from?
-
-```javascript
-const minParam = 3
-console.log(process.argv)
-if (process.argv.length < minParam) {
-	throw new Error('missing parameters')
-}
-```
-
-In the code above you can see that the array printed to the shell is the contents of `process.argv`. The error was because the script expected an array of at least 3 indexes.
-
-Now let's run the command and pass it a sentence.
-
-```
-node sentiment happy to meet you
-$ node sentiment happy to meet you again
-	[ '/Users/.../bin/node',
-		'/Users/.../sentiment',
-		'happy',
-		'to',
-		'meet',
-		'you',
-		'again' ]
-	happy to meet you again
-	{ score: 3,
-		comparative: 0.6,
-		tokens: [ 'happy', 'to', 'meet', 'you', 'again' ],
-		words: [ 'happy' ],
-		positive: [ 'happy' ],
-		negative: []
-	}
-```
-
-So what's happened here? Well now the `process.argv` array contains the additional words we typed. because there were more than 2 indexes the error is not thrown.
-
-Now we have some words to process we need to combine them into a single string.
-
-```javascript
-const words = process.argv.slice(minParam-1).join(' ')
-console.log(words)
-```
-
-The built-in  `Array.slice()` method returns the section of array between the specified index and the end of the array. The `join()` method converts an array into a string using the parameter as separator. It is standard practice when programming in JavaScript to use _method chaining_ whereby several methods are called on the same data.
-
-The final step is to pass this string to the sentiment tool which returns the sentiment of the sentence.
-
-## 6 Functions
-
-In JavaScript, as in most other languages, code can be divided in to modular blocks called functions. Once defined, these can be called from other code. Data can be passed in the form of parameters and functions can return data back to the calling code.
-
-Open the `maths.js` file. Notice that this contains several functions. Each is called directly under its definition.
-
-### 6.1 Function Syntax
-
-Lets start with a simple example.
-
-```javascript
-function largestNumber(a, b) {
-	if (a > b) return a
-	if (b > a) return b
-	return null
-}
-
-const biggest = largestNumber(5, 8)
-```
-
-1. The function is declared using the `function` keyword and the function is given a name which must be a valid variable name.
-		a. If the name comprises more than one word these should be written using camel casing as shown above.
-2. The function above takes two parameters, `a` and `b`.
-		- These are variables with local scope (they can't ba accessed outside the function)
-		- When the function is called, you need to pass two **values** which get assigned to the two parameters.
-		- If you pass too many values the extra ones get _ignored_.
-		- If you don't pass enough values the remainder are assigned a value of `null`. `Null` is an assignment value (means a value of no value).
-3. The function returns a value.
-	a. If the numbers are not the same it returns the largest.
-	b. If they are the same it returns `null`.
-
-### 6.2 The Spread Operator
-
-If the data you want to pass to a function is stored in an `Array` (this is quite common), you could extract each value and assign to the function like this:
-
-```javascript
-const nums = [5, 8]
-const biggest2 = largestNumber(nums[0], nums[1])
-```
-
-Because this is such a common task, there is a shortcut called the **spread operator**. Using this, the same task can be expressed like this.
-
-```javascript
-const nums = [5, 8]
-const biggest2 = largestNumber(...nums)
-```
-
-Notice the syntax of the _spread operator_.
-
-### 6.3 The Arguments Object
-
-When a function is declared it has a **signature** which defines the number of parameters it is expecting, for example in the `largestNumber()` function, the signature defines two arguments.
-
-```javascript
-function largestNumber(a, b) { // this is the function signature.
-	// function body
-}
-```
-
-What happens if you try to call this with the _wrong_ number of arguments?
-
-- If you supply too few arguments the remaining parameters are assigned a data type and value of `null`.
-- If you supply too many arguments, the remaining ones are not assigned to the parameters, so where are they?
-
-Every JavaScript function has an object called `Arguments` which contains all the parameters passed to that function, even ones no assigned to the formal parameters. This provides a mechanism to access arguments that don't get assigned to parameters. Lets take a look at the `add()` function.
-
-```javascript
-function add() {
-	let total = 0
-	console.log(arguments)
-	console.log(arguments['1'])
-	for(const arg of arguments) {
-		total += arg
-	}
-	return total
-}
-```
-
-As you can see, the function signature defines no parameters, but when we call it we pass 4 arguments. What happens to these and how can we access them?
-
-```javascript
-const addNums = add(1, 2, 3, 4)
-```
-
-Inside the function we can access the `arguments` object. The `add()` function shows three ways to do this (we will be covering objects in detail in the next chapter):
-
-- display all the arguments (see below).
-- access individual arguments by referencing a key.
-- Use a `for...of` loop to iterate through the values.
-
-### 6.4 The Rest Parameter
-
-Whilst the `arguments` object provides a mechanism for accessing the function arguments, it returns an Object (the keys are `Strings`). It would be better if
-
-- the arguments could be accessed in an `Array`.
-- it ignored arguments already assigned to parameters.
-
-ECMA6 introduced a special parameter called a _rest parameter_ which captures all the arguments that have not been assigned to parameters and stores them in an array. Look at the `add2()` function.
-
-```javascript
-function add2(...values) {
-	let total = 0
-	console.log(values)
-	console.log(values[1])
-	for (let i=0; i<values.length; i++) {
-		total += values[i]
-	}
-	return total
-}
-```
-
-The `...values` parameter has a `...` prefix which defines it as a _rest parameter_. In the body of the function it can be seen that this is an `Array` and so each argument has a numerical index. This is the preferred way to handle arguments that are not assigned to parameters.
-
-### 6.5 Default Parameters
-
-As explained above, if you don't supply enough arguments for the parameters in the function signature, all the parameters without arguments are assigned a value of `null`. This means you have to add code within the function to check that there is a value assigned to the parameters before you can safely use them. ECMA6 has introduced **default parameters**. These allow you to assign a default value to a parameter if one is not supplied by when the function is called. Lets examine the `divide()` function.
-
-```javascript
-function divide(dividend, divisor=1) {
-	const quotient = dividend / divisor
-	return quotient
-}
-```
-
-Notice that the divisor has been assigned a value in the function signature. If this parameter is not assigned an argument, it defaults to this value.
-
-### 6.6 Function Expressions
-
-Functions are a data type in JavaScript (they are objects but more on that in the next chapter). As such they can be stored in variables for later execution. Prior to ECMA6 they were declared using the `function` keyword like this:
-
-```javascript
-const remainder = function(dividend, divisor) {
-	const quotient = Math.floor(dividend / divisor)
-	return dividend - quotient
-}
-```
-
-To execute the function you simply reference the variable and append `()`.
-
-```javascript
-const rem = remainder(8, 5)
-```
-
-ECMA6 introduced a better way to handle function expressions, called an **arrow function expression**. This has a much shorter (and cleaner) syntax. Here is the same function expression written using this new syntax, make a careful note of the differences.
-
-```javascript
-const remainder2 = (dividend, divisor) => {
-	const quotient = Math.floor(dividend / divisor)
-	return dividend - quotient
-}
-```
-
-The _arrow function expression_ has a number of important features:
-
-1. It does not have its own function scope which means it does not bind its own `this` object (made clearer later).
-2. In a concise body (one line) it has an implicit return and you don't need to use block braces. This results in very concise code, see the example below).
-3. If there is only a single parameter the parameter brackets can be omitted.
-
-Here is an example that should make points 2 and 3 clearer.
-
-```javascript
-const sqr = num => num * num
-```
-
-### 6.7 Test Your Knowledge
-
-Start by running the `maths.js` script and map the output it generates against the `console.log` statements in the script.
-
-1. Create a new function called `multiply()` that takes two parameters, `a` and `b` and returns the _product_ of the two.
-		- what happens if you call it with only a single parameter?
-2. Modify the function so it uses a default parameter to multiply by 1 if the second parameter is missing.
-		- What happens if you don't supply _any_ parameters?
-		- Add a second default parameter to prevent this.
-3. Write an _arrow function expression_ stored in a constant called `squareRoot` which calculates and returns the square root of the supplied number. You will need to use the `sqrt()` method which is part of the `Math` object.
-
-### 6.8 Test Your Knowledge (Again)
-
-Open the `contact.js` script, implement the `validateEmail()` function and thoroughly test it, you should avoid using regular expressions at this stage:
-
-1. Check that the string is at least 5 character long
-2. Check that there is a `@` character and that it is not at the start of the string (HINT: use the [indexOf](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) String prototype method.
-3. Check that there is a period (.) character after the `@` character but before the end of the string.
-
-### 6.8 Callbacks
-
-Since JavaScript supports _first class functions_, we can use a function in any place where we could use a literal, object or variable. Open the `currency.js` script and look at line 17. As you can see the `request` object has a key called `get` that stores a function (we have already covered this). This takes two parameters:
-
-1. A string representing the url to be accessed.
-2. A function that will be called once the data has been retrived from the url. This was defined earlier in the script and takes 3 parameters.
-
-```javascript
-request.get(url, printRates)
-```
-
-This is a common construct used in JavaScript/NodeJS. The second function parameter is known as a **callback**.
-
-NodeJS is a single-threaded event loop that processes queued events. This means that if you were to execute a long-running task within a single thread then the process would block. To solve this problem, NodeJS  relies on callbacks, which are functions that run after a long-running process has finished. Instead of waiting for the task to finish, the event loop moves on to the next piece of code. When the long-running task has finished, the callback is added to the event loop and run.
-
-Because callbacks are such a fundamental part of NodeJS you need to spend time to make sure you fully understand how they work.
-
-Try running the program and note the output (remember you will need to install the `request` package.
-
-1. The currency code we want to convert to is stored in a constant.
-2. We create a _function expression_ called `printRates()` which has three parameters and prints out data from the response:
-		1. An error, this will be `null` if there is no error.
-		2. An object containing all the data from the HTTP response.
-		3. The string returned in the response body.
-3. Next we use a [template literal](https://goo.gl/3vznuR) to create the URL we will be calling.
-4. Finally we call the function stored in the `get` key in the `request` object and pass the string and function literal we created earlier.
-
-#### 6.8.1 Using Anonymous Functions in Callbacks
-
-Although this code works, you will rarely see callbacks written in this manner. Creating a function literal is a bit clunky and we can clean up the code by simply passing an anonymous function.
-
-```javascript
-request.get( url, (err, res, body) => {
-	// callback code goes here.
-})
-```
-
-Take a few moments to make sure you fully understand the syntax, you will be seeing a lot of this over the next few weeks.
-
-### 6.8.2 Test Your Understanding
-
-Lets improve the currency exchange tool. You will need to refer to the API [documentation](http://fixer.io) as you work through the tasks.
-
-1. Replace the _function expression_ with an _anonymous function_.
-2. Print the entire response body to the terminal window using [json.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
-3. The **base rate** defaults to the € (EUR) however the API allows you to set a different currency as the base rate:
-		1. Add a constant `base` to store your preferred currency.
-		2. Modify the URL using the API documentation to guide you.
-4. Use the [Number.prototype.toFixed()](https://goo.gl/DU4hvd) to truncate the number to 2 decimal places.
-5. Finally, modify your program so that it throws an error if it doesn't recognise either of the currency codes.
-
-## 7 Object Literals
-
-Lets start by creating an manipulating objects using **object literals**. Open the `employee.js` file, read through it and see if you can work out what it does. Now run it to see if you were correct.
-
-### 7.1 Creating Object Literals
-
-The simplest way to create new objects is by creating an _object literal_ which is defining an object and storing it in a variable. You should open the `employee.js` file which contains the code.
-
-```javascript
-const employee = {
-	firstName: 'Colin',
-	'last name': 'Stephen'
-}
-```
-
-As you can see from the simple example above, the data is stored in name-value pairs, referred to as **Properties**. This example is defining an object with **3** properties.
-
-The _name_ part of each property is a JavaScript string which may be enclosed in single quotes. These quotes are optional if the _property name_ is a valid _JavaScript variable_ but they are required if this is not the case.
-
-In the example above, `firstName` is a valid JavaScript variable but `last name` is not because it contains a space which is not allowed in variable names.
-
-It is also possible to create an empty object (we can add properties later). This is done by assigning empty curly braces.
-
-```javascript
-const emptyObject = {}
-```
-
-Here are some valid _property names_. Notice that both `age` and `'age'` are valid.
-
-```
-age
-'first name'
-'age'
-```
-
-The _property names_ below are **not** valid because they are not a valid JavaScript variable names.
-
-```
-first name
-firstName!
-first-name
-```
-
-#### 7.1.1 Test Your Understanding
-
-1. Add a property called `gender` and assign a suitable String value.
-2. Add a new property called `date of birth` that stores the year the person was born and assign a suitable value.
-
-### 7.2 Retrieving Object Properties
-
-Whilst it is possible (and useful) to log an entire object to the console, normally we would want to retrieve the values of specific properties.
-
-```javascript
-const employee = {
-  firstName: 'Colin',
-  'last name': 'Stephen',
-  'department': 'Computing'
-}
-
-console.log(employee)
-const firstName = employee.firstName
-const lastName = employee['last name']
-const grade = employee.grade
-```
-
-Passing the object name to `console.log()` will print out the string representation of the object. To retrieve a specific property value there are two options. If the name is a _legal JS variable name_ the dot `.` notation can be used. This is used to log the `firstName` property in the example above.
-
-If the name is not a valid JavaScript variable name we need to turn it into a string by using quotes `''` and enclose it in square braces `[]`. This is used to log the `last name` property.
-
-The `grade` variable will be `undefined` because `employee.grade` does not exist. If you want to avoid this and assign a default value if the property is missing you can use the **OR** operator `||`.
-
-```javascript
-const grade = employee.grade || 'A'
-```
-
-This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
-
-#### 7.2.1 Getters and Setters
-
-Most object properties are simple values and you can simply assign a value. Sometimes however properties need to be calculated. One solution is to store a function as one of the properties however we would need to call a function to retrieve the value:
-
-```javascript
-const employee = {
-  firstName: 'Colin',
-  'last name': 'Stephen',
-  getName: () => `${this.firstName} ${this['last name']}`
-}
-
-const name = employee.getName()
-```
-
-Whilst this works fine it looks a little clunky. Thankfully in the newer versions of JavaScript you can use a **getter** which makes the code far more intuitive.
-
-```javascript
-const employee = {
-  firstName: 'Colin',
-  'last name': 'Stephen',
-  get name() {
-    return `${this.firstName} ${this['last name']}`
-  }
-}
-
-const name = employee.name
-```
-
-In the same manner, some properties when set may need to change other properties. Here is a solution using a stored function.
-
-```javascript
-const employee = {
-  firstName: 'Colin',
-  'last name': 'Stephen',
-  setName: function(fullname) {
-    const words = fullname.toString().split(' ')
-    this.firstName = words[0] || ''
-    this['last name'] = words[1] || ''
-  }
-}
-
-employee.setName('Micky Mouse')
-```
-
-By using a **setter**, it behaves just like any other property.
-
-```javascript
-const employee = {
-  firstName: 'Colin',
-  'last name': 'Stephen',
-  set name(fullname) {
-    const words = fullname.toString().split(' ')
-    this.firstName = words[0] || ''
-    this['last name'] = words[1] || ''
-  }
-}
-
-employee.name = 'Micky Mouse'
-```
-
-#### 7.2.2 Test Your Understanding
-
-1. Print the person's details in an easy to understand sentence.
-2. Add a getter to return the number of years the employee has been working for the company, you will need to round this down to a whole number. You should make use of one of the static methods of the built-in [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) object.
-
-### 7.3 Modifying Objects
-
-Once an object has been created it can be modified in several ways.
-
-1. More object values can be added
-2. Object names can be deleted
-3. The values can be changed for existing names.
-
-Once an object has been created, additional properties cane be added by setting values by assignment.
-
-```javascript
-const employee = {
-  firstName: 'Colin',
-  'last name': 'Stephen',
-  'department': 'Computing'
-}
-
-employee.grade = 4
-employee['currently employed'] = true
-employee.department = 'Computer Science'
-```
-
-This sets a new value if the name does not already exist. Otherwise, it updates the existing value. Notice that the syntax depends on whether the property name is a valid JavaScript object and matches the syntax used to retrieve a property.
-
-Properties can be removed from an object literal using the `delete` operator. This removes the entire property (name and value).
-
-```javascript
-const employee = {
-  firstName: 'Colin',
-  'last name': 'Stephen',
-  'department': 'Computing'
-}
-
-delete employee.department
-```
-
-### 7.4 Undefined Values
-
-Undefined Objects
-
-If you try to retrieve a value from an object that is undefined, JS throws a TypeError exception:
-
-```javascript
-const nonExistentObject.postCode // throws "TypeError"
-const addressObject = employee.address  // returns undefined
-const postCode = employee.address.postCode // throws "TypeError"
-```
-
-To see what a `typeError` looks like, try uncommenting the three lines at the end of the `employee.js` file. So how can we avoid this?
-
-The **AND** operator `&&` can be used to guard against this problem.
-
-```javascript
-const postCode = employee.address && employee.address.postCode
-console.log(postCode) // returns undefined
-```
-
-#### 7.4.1 Test Your Understanding
-
-1. Modify the code to handle bad data:
-    1. Remove the startYear property.
-    2. Set the startYear property to a String.
+    - the _stack trace_ is a list of the method calls that the application was in the middle of when an Exception was thrown and can help identify some of the more insidious errors. You should learn to read and understand what information it contains.
