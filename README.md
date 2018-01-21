@@ -90,8 +90,9 @@ In this first lab you will learn how to set up your development environment and 
 
 ## 9 Automated Testing
 
-1. Linting
-2. Unit testing
+1. Unit testing
+2. Code coverage
+3. Testing async code
 
 ## 9 Responsive Web Design
 
