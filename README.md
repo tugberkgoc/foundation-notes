@@ -32,10 +32,10 @@ In this first lab you will learn how to set up your development environment and 
 1. Introduction to CSS3
     1. CSS Basics
     2. Classes and identifiers
-    3. Fine-Tuning Your CSS
-2. Using CSS for Page Layout
-    1. CSS Box Model
-    2. Positioning Elements
+    3. Fine-tuning your CSS
+2. Using CSS for page layout
+    1. CSS box model
+    2. Positioning elements
     3. Navigation
 
 ## 4 Introduction to JavaScript/NodeJS/ECMA6
@@ -60,7 +60,7 @@ In this first lab you will learn how to set up your development environment and 
 1. Functions
     1. Function syntax
     2. The spread operator
-    3. The Arguments Object
+    3. The Arguments object
     4. The rest parameter
     5. Default parameters
     6. Function expressions
@@ -79,14 +79,16 @@ In this first lab you will learn how to set up your development environment and 
 
 ## 7 The Express Web Server
 
-1. Package Manifests
+1. Package manifests
 2. Routing
 3. Templating
 4. Modular code
 
 ## 8 Data Persistence
 
-1. Document databases
+1. The Filesystem
+2. Document databases
+3. Relational databases
 
 ## 9 Automated Testing
 
