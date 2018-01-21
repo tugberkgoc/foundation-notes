@@ -156,7 +156,7 @@ JavaScript includes the standard set of conditionals (if, if...else and switch) 
 
 ```javascript
 if (input.indexOf('list') === 0) {
-  // the user has chosen the 'list' command.
+	// the user has chosen the 'list' command.
 }
 ```
 
@@ -165,14 +165,14 @@ Later in this chapter you will be required to implement a `switch` conditional. 
 ```javascript
 const name = String(readline.question('your name: ')).trim()
 switch(name) {
-  case 'John':
-    console.log('your name is John')
-    break
-  case 'Jane':
-    console.log('your name is Jane')
-    break
-  default:
-    console.log('unknown name')
+	case 'John':
+		console.log('your name is John')
+		break
+	case 'Jane':
+		console.log('your name is Jane')
+		break
+	default:
+		console.log('unknown name')
 }
 ```
 
@@ -188,7 +188,7 @@ In the `todo.js` script you can see the run-loop has been implemented using a do
 
 ```javascript
 do {
-  // this is the run loop
+	// this is the run loop
 } while (input !== 'exit')
 ```
 
@@ -196,8 +196,8 @@ It also uses a traditional for loop with loop variable using a syntax similar to
 
 ```javascript
 for (let i=0; i< items.length; i++) {
-  /* Here we reference the array index. */
-  console.log(`${i}. ${items[i]}`)
+	/* Here we reference the array index. */
+	console.log(`${i}. ${items[i]}`)
 }
 ```
 
@@ -220,7 +220,7 @@ Later in the script we use another method `indexOf()` which returns the index of
 
 ```javascript
 if (input.indexOf('add ') === 0) {
-  // the string starts with 'add '
+	// the string starts with 'add '
 }
 ```
 
@@ -319,12 +319,12 @@ The last line above tells the OS to run the `todo.js` file in the current direct
 Now you are familiar with the basics of the ECMA6 language its time to put this to the test. Make sure you successfully complete all six tasks before continuing to the next section.
 
 1. locate the `input` variable declaration (just inside the `do` loop)
-    - define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
-    - modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
-    - substitute a constant by substituting `const` for `let`, what effect does this have?
+		- define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
+		- modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
+		- substitute a constant by substituting `const` for `let`, what effect does this have?
 2. the array at the top of the script is defined using `var`. What happens if you make this immutable (use `const`)?
 3. Items are added to the array using its `push()` method.
-    - substute the [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) method. How does this change the script?
+		- substute the [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) method. How does this change the script?
 4. modify the code to prevent duplicate items being added. You will need to use the [`Array.indexOf()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) method.
 5. create a **remove** option so an item such as *cheese* can be removed using the syntax `remove cheese`. You may need to use the [`Array.splice()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) method.
 6. The current version is case sensitive. Modify the code so that items are converted to lowercase before being added or searched for. You will need to use the [`String.toLowerCase()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) method.
@@ -357,19 +357,19 @@ To help catch any errors, JavaScript uses the `try-catch-finally` statement. The
 
 ```javascript
 try {
-  // this line of code might throw an error
+	// this line of code might throw an error
 } catch(err) {
-  // if an error occurs the execution jumps to this block
-  // if no error occurs the block is ignored
+	// if an error occurs the execution jumps to this block
+	// if no error occurs the block is ignored
 } finally {
-  // this line runs whether or not an error was thrown
-  // this block is optional
+	// this line runs whether or not an error was thrown
+	// this block is optional
 }
 ```
 
 1. All code that could throw an exception _must_ be in a `try{}` block.
 2. If an exception is _thrown_ the execution moves to the `catch{}` block.
-    - the error object thrown will be passed as the parameter.
+		- the error object thrown will be passed as the parameter.
 
 #### 4.2 The Error Object
 
@@ -378,7 +378,7 @@ When an error gets thrown it passes an Error object which contains three propert
 - the name of the error
 - the message passed
 - the stack trace.
-  - the _stack trace_ is a list of the method calls that the application was in the middle of when an Exception was thrown and can help identify some of the more insidious errors. You should learn to read and understand what information it contains.
+	- the _stack trace_ is a list of the method calls that the application was in the middle of when an Exception was thrown and can help identify some of the more insidious errors. You should learn to read and understand what information it contains.
 
 ## 5 Passing Parameters on the Command Line
 
@@ -392,9 +392,9 @@ Try running the script without any extra parameters.
 
 ```
 $ node sentiment
-  [ '/Users/.../bin/node',
-    '/Users/.../sentiment.js' ]
-  missing parameters
+	[ '/Users/.../bin/node',
+		'/Users/.../sentiment.js' ]
+	missing parameters
 ```
 
 Notice that it prints out an array which contains two indexes corresponding to the _node command_ and the script name (sentiment.js). There is also a message that there are missing parameters. Where is this message coming from?
@@ -403,7 +403,7 @@ Notice that it prints out an array which contains two indexes corresponding to t
 const minParam = 3
 console.log(process.argv)
 if (process.argv.length < minParam) {
-  throw new Error('missing parameters')
+	throw new Error('missing parameters')
 }
 ```
 
@@ -414,21 +414,21 @@ Now let's run the command and pass it a sentence.
 ```
 node sentiment happy to meet you
 $ node sentiment happy to meet you again
-  [ '/Users/.../bin/node',
-    '/Users/.../sentiment',
-    'happy',
-    'to',
-    'meet',
-    'you',
-    'again' ]
-  happy to meet you again
-  { score: 3,
-    comparative: 0.6,
-    tokens: [ 'happy', 'to', 'meet', 'you', 'again' ],
-    words: [ 'happy' ],
-    positive: [ 'happy' ],
-    negative: []
-  }
+	[ '/Users/.../bin/node',
+		'/Users/.../sentiment',
+		'happy',
+		'to',
+		'meet',
+		'you',
+		'again' ]
+	happy to meet you again
+	{ score: 3,
+		comparative: 0.6,
+		tokens: [ 'happy', 'to', 'meet', 'you', 'again' ],
+		words: [ 'happy' ],
+		positive: [ 'happy' ],
+		negative: []
+	}
 ```
 
 So what's happened here? Well now the `process.argv` array contains the additional words we typed. because there were more than 2 indexes the error is not thrown.
@@ -456,24 +456,24 @@ Lets start with a simple example.
 
 ```javascript
 function largestNumber(a, b) {
-  if (a > b) return a
-  if (b > a) return b
-  return null
+	if (a > b) return a
+	if (b > a) return b
+	return null
 }
 
 const biggest = largestNumber(5, 8)
 ```
 
 1. The function is declared using the `function` keyword and the function is given a name which must be a valid variable name.
-    a. If the name comprises more than one word these should be written using camel casing as shown above.
+		a. If the name comprises more than one word these should be written using camel casing as shown above.
 2. The function above takes two parameters, `a` and `b`.
-    - These are variables with local scope (they can't ba accessed outside the function)
-    - When the function is called, you need to pass two **values** which get assigned to the two parameters.
-    - If you pass too many values the extra ones get _ignored_.
-    - If you don't pass enough values the remainder are assigned a value of `null`. `Null` is an assignment value (means a value of no value).
+		- These are variables with local scope (they can't ba accessed outside the function)
+		- When the function is called, you need to pass two **values** which get assigned to the two parameters.
+		- If you pass too many values the extra ones get _ignored_.
+		- If you don't pass enough values the remainder are assigned a value of `null`. `Null` is an assignment value (means a value of no value).
 3. The function returns a value.
-  a. If the numbers are not the same it returns the largest.
-  b. If they are the same it returns `null`.
+	a. If the numbers are not the same it returns the largest.
+	b. If they are the same it returns `null`.
 
 ### 6.2 The Spread Operator
 
@@ -499,7 +499,7 @@ When a function is declared it has a **signature** which defines the number of p
 
 ```javascript
 function largestNumber(a, b) { // this is the function signature.
-  // function body
+	// function body
 }
 ```
 
@@ -512,13 +512,13 @@ Every JavaScript function has an object called `Arguments` which contains all th
 
 ```javascript
 function add() {
-  let total = 0
-  console.log(arguments)
-  console.log(arguments['1'])
-  for(const arg of arguments) {
-    total += arg
-  }
-  return total
+	let total = 0
+	console.log(arguments)
+	console.log(arguments['1'])
+	for(const arg of arguments) {
+		total += arg
+	}
+	return total
 }
 ```
 
@@ -545,13 +545,13 @@ ECMA6 introduced a special parameter called a _rest parameter_ which captures al
 
 ```javascript
 function add2(...values) {
-  let total = 0
-  console.log(values)
-  console.log(values[1])
-  for (let i=0; i<values.length; i++) {
-    total += values[i]
-  }
-  return total
+	let total = 0
+	console.log(values)
+	console.log(values[1])
+	for (let i=0; i<values.length; i++) {
+		total += values[i]
+	}
+	return total
 }
 ```
 
@@ -563,8 +563,8 @@ As explained above, if you don't supply enough arguments for the parameters in t
 
 ```javascript
 function divide(dividend, divisor=1) {
-  const quotient = dividend / divisor
-  return quotient
+	const quotient = dividend / divisor
+	return quotient
 }
 ```
 
@@ -576,8 +576,8 @@ Functions are a data type in JavaScript (they are objects but more on that in th
 
 ```javascript
 const remainder = function(dividend, divisor) {
-  const quotient = Math.floor(dividend / divisor)
-  return dividend - quotient
+	const quotient = Math.floor(dividend / divisor)
+	return dividend - quotient
 }
 ```
 
@@ -591,8 +591,8 @@ ECMA6 introduced a better way to handle function expressions, called an **arrow 
 
 ```javascript
 const remainder2 = (dividend, divisor) => {
-  const quotient = Math.floor(dividend / divisor)
-  return dividend - quotient
+	const quotient = Math.floor(dividend / divisor)
+	return dividend - quotient
 }
 ```
 
@@ -613,10 +613,10 @@ const sqr = num => num * num
 Start by running the `maths.js` script and map the output it generates against the `console.log` statements in the script.
 
 1. Create a new function called `multiply()` that takes two parameters, `a` and `b` and returns the _product_ of the two.
-    - what happens if you call it with only a single parameter?
+		- what happens if you call it with only a single parameter?
 2. Modify the function so it uses a default parameter to multiply by 1 if the second parameter is missing.
-    - What happens if you don't supply _any_ parameters?
-    - Add a second default parameter to prevent this.
+		- What happens if you don't supply _any_ parameters?
+		- Add a second default parameter to prevent this.
 3. Write an _arrow function expression_ stored in a constant called `squareRoot` which calculates and returns the square root of the supplied number. You will need to use the `sqrt()` method which is part of the `Math` object.
 
 ### 6.8 Test Your Knowledge (Again)
@@ -648,9 +648,9 @@ Try running the program and note the output (remember you will need to install t
 
 1. The currency code we want to convert to is stored in a constant.
 2. We create a _function expression_ called `printRates()` which has three parameters and prints out data from the response:
-    1. An error, this will be `null` if there is no error.
-    2. An object containing all the data from the HTTP response.
-    3. The string returned in the response body.
+		1. An error, this will be `null` if there is no error.
+		2. An object containing all the data from the HTTP response.
+		3. The string returned in the response body.
 3. Next we use a [template literal](https://goo.gl/3vznuR) to create the URL we will be calling.
 4. Finally we call the function stored in the `get` key in the `request` object and pass the string and function literal we created earlier.
 
@@ -660,7 +660,7 @@ Although this code works, you will rarely see callbacks written in this manner. 
 
 ```javascript
 request.get( url, (err, res, body) => {
-  // callback code goes here.
+	// callback code goes here.
 })
 ```
 
@@ -673,7 +673,212 @@ Lets improve the currency exchange tool. You will need to refer to the API [docu
 1. Replace the _function expression_ with an _anonymous function_.
 2. Print the entire response body to the terminal window using [json.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
 3. The **base rate** defaults to the € (EUR) however the API allows you to set a different currency as the base rate:
-    1. Add a constant `base` to store your preferred currency.
-    2. Modify the URL using the API documentation to guide you.
+		1. Add a constant `base` to store your preferred currency.
+		2. Modify the URL using the API documentation to guide you.
 4. Use the [Number.prototype.toFixed()](https://goo.gl/DU4hvd) to truncate the number to 2 decimal places.
 5. Finally, modify your program so that it throws an error if it doesn't recognise either of the currency codes.
+
+## 7 Object Literals
+
+Lets start by creating an manipulating objects using **object literals**. Open the `employee.js` file, read through it and see if you can work out what it does. Now run it to see if you were correct.
+
+### 7.1 Creating Object Literals
+
+The simplest way to create new objects is by creating an _object literal_ which is defining an object and storing it in a variable. You should open the `employee.js` file which contains the code.
+
+```javascript
+const employee = {
+	firstName: 'Colin',
+	'last name': 'Stephen'
+}
+```
+
+As you can see from the simple example above, the data is stored in name-value pairs, referred to as **Properties**. This example is defining an object with **3** properties.
+
+The _name_ part of each property is a JavaScript string which may be enclosed in single quotes. These quotes are optional if the _property name_ is a valid _JavaScript variable_ but they are required if this is not the case.
+
+In the example above, `firstName` is a valid JavaScript variable but `last name` is not because it contains a space which is not allowed in variable names.
+
+It is also possible to create an empty object (we can add properties later). This is done by assigning empty curly braces.
+
+```javascript
+const emptyObject = {}
+```
+
+Here are some valid _property names_. Notice that both `age` and `'age'` are valid.
+
+```
+age
+'first name'
+'age'
+```
+
+The _property names_ below are **not** valid because they are not a valid JavaScript variable names.
+
+```
+first name
+firstName!
+first-name
+```
+
+#### 7.1.1 Test Your Understanding
+
+1. Add a property called `gender` and assign a suitable String value.
+2. Add a new property called `date of birth` that stores the year the person was born and assign a suitable value.
+
+### 7.2 Retrieving Object Properties
+
+Whilst it is possible (and useful) to log an entire object to the console, normally we would want to retrieve the values of specific properties.
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  'department': 'Computing'
+}
+
+console.log(employee)
+const firstName = employee.firstName
+const lastName = employee['last name']
+const grade = employee.grade
+```
+
+Passing the object name to `console.log()` will print out the string representation of the object. To retrieve a specific property value there are two options. If the name is a _legal JS variable name_ the dot `.` notation can be used. This is used to log the `firstName` property in the example above.
+
+If the name is not a valid JavaScript variable name we need to turn it into a string by using quotes `''` and enclose it in square braces `[]`. This is used to log the `last name` property.
+
+The `grade` variable will be `undefined` because `employee.grade` does not exist. If you want to avoid this and assign a default value if the property is missing you can use the **OR** operator `||`.
+
+```javascript
+const grade = employee.grade || 'A'
+```
+
+This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
+
+#### 7.2.1 Getters and Setters
+
+Most object properties are simple values and you can simply assign a value. Sometimes however properties need to be calculated. One solution is to store a function as one of the properties however we would need to call a function to retrieve the value:
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  getName: () => `${this.firstName} ${this['last name']}`
+}
+
+const name = employee.getName()
+```
+
+Whilst this works fine it looks a little clunky. Thankfully in the newer versions of JavaScript you can use a **getter** which makes the code far more intuitive.
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  get name() {
+    return `${this.firstName} ${this['last name']}`
+  }
+}
+
+const name = employee.name
+```
+
+In the same manner, some properties when set may need to change other properties. Here is a solution using a stored function.
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  setName: function(fullname) {
+    const words = fullname.toString().split(' ')
+    this.firstName = words[0] || ''
+    this['last name'] = words[1] || ''
+  }
+}
+
+employee.setName('Micky Mouse')
+```
+
+By using a **setter**, it behaves just like any other property.
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  set name(fullname) {
+    const words = fullname.toString().split(' ')
+    this.firstName = words[0] || ''
+    this['last name'] = words[1] || ''
+  }
+}
+
+employee.name = 'Micky Mouse'
+```
+
+#### 7.2.2 Test Your Understanding
+
+1. Print the person's details in an easy to understand sentence.
+2. Add a getter to return the number of years the employee has been working for the company, you will need to round this down to a whole number. You should make use of one of the static methods of the built-in [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) object.
+
+### 7.3 Modifying Objects
+
+Once an object has been created it can be modified in several ways.
+
+1. More object values can be added
+2. Object names can be deleted
+3. The values can be changed for existing names.
+
+Once an object has been created, additional properties cane be added by setting values by assignment.
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  'department': 'Computing'
+}
+
+employee.grade = 4
+employee['currently employed'] = true
+employee.department = 'Computer Science'
+```
+
+This sets a new value if the name does not already exist. Otherwise, it updates the existing value. Notice that the syntax depends on whether the property name is a valid JavaScript object and matches the syntax used to retrieve a property.
+
+Properties can be removed from an object literal using the `delete` operator. This removes the entire property (name and value).
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  'department': 'Computing'
+}
+
+delete employee.department
+```
+
+### 7.4 Undefined Values
+
+Undefined Objects
+
+If you try to retrieve a value from an object that is undefined, JS throws a TypeError exception:
+
+```javascript
+const nonExistentObject.postCode // throws "TypeError"
+const addressObject = employee.address  // returns undefined
+const postCode = employee.address.postCode // throws "TypeError"
+```
+
+To see what a `typeError` looks like, try uncommenting the three lines at the end of the `employee.js` file. So how can we avoid this?
+
+The **AND** operator `&&` can be used to guard against this problem.
+
+```javascript
+const postCode = employee.address && employee.address.postCode
+console.log(postCode) // returns undefined
+```
+
+#### 7.4.1 Test Your Understanding
+
+1. Modify the code to handle bad data:
+    1. Remove the startYear property.
+    2. Set the startYear property to a String.
