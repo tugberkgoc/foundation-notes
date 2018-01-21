@@ -1,8 +1,8 @@
 # Introduction
 
-This repository contains lab material used for 205CDE Developing the Modern Web at Coventry University. There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This current document contains the teaching plan for academic year 16-17. For assessment plan please refer to [Moodle](https://cumoodle.coventry.ac.uk/mod/resource/view.php?id=1235452) for detailed requirements and marking rubrics etc. 
+This repository contains lab material used for 205CDE Developing the Modern Web at Coventry University. There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This current document contains the teaching plan for academic year 16-17. For assessment plan please refer to [Moodle](https://cumoodle.coventry.ac.uk/mod/resource/view.php?id=1235452) for detailed requirements and marking rubrics etc.
 
-# Teaching Plan
+## Teaching Plan
 
 The module covers a lot of technical content and this is split over 10 weekly labs. Make sure you complete _all_ lab exercises.
 
@@ -28,6 +28,15 @@ In this first lab you will learn how to set up your development environment and 
 5. Forms
 
 ## 3 Learning CSS3
+
+1. Introduction to CSS3
+    1. CSS Basics
+    2. Classes and identifiers
+    3. Fine-Tuning Your CSS
+2. Using CSS for Page Layout
+    1. CSS Box Model
+    2. Positioning Elements
+    3. Navigation
 
 ## 4 Introduction to JavaScript/NodeJS/ECMA6
 
@@ -59,6 +68,6 @@ In this first lab you will learn how to set up your development environment and 
 
 ## About this Github repository
 
-This Github repository is a collaborative work between Coventry University and Helsinki Metropolia University of Applied Sciences. The repository was initially set up by Mark Tyers who contributed initial drafts of most exercises. During the 1st semester of the 15-16 academic year, this set of material was used by Erja, Vesa and colleagues, who made substantial improvements. 
+This Github repository is a collaborative work between Coventry University and Helsinki Metropolia University of Applied Sciences. The repository was initially set up by Mark Tyers who contributed initial drafts of most exercises. During the 1st semester of the 15-16 academic year, this set of material was used by Erja, Vesa and colleagues, who made substantial improvements.
 
 The current branch C9 was introduced due to the fact that the IDE used in the master branch (Codio) stop offering free licenses. This branch was started and maintained mainly by Jianhua Yang, who is currently the module leader of 205CDE at Coventry.
