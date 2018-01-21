@@ -33,30 +33,29 @@ In this first lab you will learn how to set up your development environment and 
 
 1. Express templating engines
 
-## 5 Functions and Objects
+## 5 The Express Web Server
 
-1. Rendering repeating data
-2. Modular code
+1. Package Manifests
+2. Routing
+3. Templating
+4. Modular code
 
 ## 6 Version Control
 
-1. Phase test
-2. Using Git
+1. **Phase test**
+2. Using Git locally
+3. Using Git remotes
 
-## 7 Asynchronous JavaScript
-
-1. Getting data from public APIs
-
-## 8 Data Persistence
+## 7 Data Persistence
 
 1. Document databases
 
-## 9 Automated Testing
+## 8 Automated Testing
 
 1. Linting
 2. Unit testing
 
-## 10 Responsive Web Design
+## 9 Responsive Web Design
 
 ## About this Github repository
 
