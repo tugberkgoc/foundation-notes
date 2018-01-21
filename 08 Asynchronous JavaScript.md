@@ -58,7 +58,8 @@ Because callbacks are such a fundamental part of NodeJS you need to spend time t
 Lets improve the currency exchange tool. You will need to refer to the API [documentation](http://fixer.io) as you work through the tasks.
 
 Its often helpful to see the complete response body. This allows you to see precisely what data was returned. Add a line to print out the entire JSON object. This needs to be immediately after the body was parsed as a JavaScript object.
-```
+
+```javascript
 console.log(JSON.stringify(json, null, 2))
 ```
 

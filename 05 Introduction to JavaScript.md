@@ -1,13 +1,13 @@
 
-# Learning JavaScript
+# Introduction to JavaScript
 
-In this chapter we will begin learning about programming in JavaScript. Note that we will only be covering the parts of the language that relate directly to building our APIs, there are lots of books that cover the language in more depth.
+In this chapter we will begin learning about programming in JavaScript. Note that we will only be covering the parts of the language that relate directly to building our dynamic website, there are lots of books that cover the language in more depth.
 
 You will sometimes hear different names used for this language:
 
-1. Javascript is the original name when the language was developed by Netscape.
-2. ECMAScript is the name of the language standard developed by ECMA, from the original Javascript implementation.
-3. NodeJS is JavaScript running on a web server using the language intepreter from the Chrome Web Browser.
+1. **JavaScript** is the original name when the language was developed by Netscape.
+2. **ECMAScript** is the name of the language standard developed by ECMA, from the original Javascript implementation.
+3. **NodeJS** is JavaScript running on a web server using the language intepreter from the Chrome Web Browser.
 
 Basically these are all implementations of the _same language_ but in this chapter we will focus on programming using NodeJS since it offers a more consistent interpreter and you will find it the most useful for your websites. In later chapters we will move JavaScript to the web browser.
 
@@ -20,106 +20,71 @@ This chapter covers the following concepts, _all_ of which should be considered 
 5. Passing parameters on the command line
 6. Functions
 
-## Introduction
-
 NodeJS is based on the JavaScript language which is used extensively in the browser to handle such tasks as form validation and animations. The latest version of the language (known as ECMA6) is not fully supported by the different browsers and, as a result, it is not recommended that you use the more up to date features.
 
 NodeJS is built on Chrome's V8 JavaScript engine which powers the latest version of the Chrome web browser and supports the majority of the latest ECMA6 features. It has been modified to allow it to run on a server.
 
 Because our scripts will run on the server on which we have installed a known version of the ECMA6 runtime, we can guarantee that our scripts will run correctly which means we can focus on teaching the absolute latest programming concepts and features.
 
-### Benefits of NodeJS
+## Benefits of NodeJS
 
 There are a lot of languages that can be used to write server-side script ranging from **Perl**, one of the earliest _CGI Script_ languages through **PHP**, one of most popular languages and through to **Java** and **C#**. So why is NodeJS becoming so popular in recent years (and why have I chosen it for this book?
 
 The first, and most obvious answer, is that, as a web developer, you are going to have to learn JavaScript anyway because its the only language that will run natively in a web browser so why not use the same language for both client and server?
 
-The second benefit, and one we will return to in chapter 3, is that, unlike other scripting languages which create a new _process_ for each connected user, NodeJS runs a single process shared between _all_ users. Since processes are expensive in computing resources it means that a NodeJS deployment is far more scalable. In chapter 3 we will learn how it handles concurrency through the use of threads.
+The second benefit, and one we will return to in later chapters, is that, unlike other scripting languages which create a new _process_ for each connected user, NodeJS runs a single process shared between _all_ users. Since processes are expensive in computing resources it means that a NodeJS deployment is far more scalable. In chapter 3 we will learn how it handles concurrency through the use of threads.
 
 It is assumed that you can already program in a modern language such as Python or Java and have had exposure to 'old school' JavaScript. This chapter will therefore expose you to some of key new features of the language and their impact on the way you program.
 
 Make sure you have cloned the repository containing the sample code by following the instructions in the previous chapter.
 
-## 1 Node Applications
 
-A NodeJS Module is the NodeJS equivalent of a _library_, in other words a pre-packaged set of functionality that can be easily installed and used.
+One of the most valuable features of NodeJS is its package manager which allows you to install additional functionality in the form of _packages_. There are thousands of these to choose from and, in a later chapter, you will be shown how you can publish your own packages.
 
-We have already installed the Express module which is a **web framework** that is installed as a **NodeJS Module**. We are now going to explore the NodeJS Modules in more detail.
+In the examples in this chapter we will be using a _node package_ called `readline-sync` to capture user input. The documentation for all published packages can be found on https://www.npmjs.com so open this page and search for the documentation for `readline-sync`.
 
-### 1.1 The Manifest
+### 1.1 Installing Packages
 
-A correctly configure NodeJS application should include a _manifest_ file which contains information about the project. The manifest is called `application.json` and should be in the project's home directory.
+Packages can be installed either locally or globally.
 
-Locate the `exercises/05_intro_js/todo/` directory which includes a manifest file. Open this. The manifest contains a JavaScript object (more on this in the next worksheet) which contains a collection of keys and values.
+- Local packages are installed in a `node_modules/` directory within the directory containing the NodeJS scripts. This is the way we install most of the modules. These are only available within that directory.
+- Global packages on the other hand are installed system-wide and can be accessed by all the scripts. Normally these need to be installed using root privileges. We will be using global packages in a later chapter.
 
-1. At the start there are _name_, _version_ and _description_ fields.
-2. Next the _main_ file is listed, this is the entry point into the application (the script to run first).
-3. Then you will see an array called _script_. These are aliases to avoid having to type complex commands each time. You can add your own shortcuts.
-    1. try `npm start` in the terminal, what happens?
-    2. try `npm test`. What happens and why (refer to the manifest).
-    3. try `npm run hello`. Any alias except the previous two needs to include the `run` subcommand.
-4. Next there is a `dependencies` entry that contains an array of all the packages (and their versions) needed to run the application. This means that instead of running `npm install xxx` for each package you simply run `npm install` which installs the correct versions of all the required packages!
-5. Some packages are used as part of the development process but are not needed on the live server. These are listed under the `devDependencies` key.
-    1. `npm install` installs both the `dependencies` and `devDependencies`.
-    2. `npm install --only=dev` installs the `devDependencies` only.
-    3. `npm install --only=prod` installs the `dependencies` only.
-    4. If you are are familair with _environment variables_, you can set the `NODE_ENV` variable to `production` instead.
+Open the Terminal and navigate to the `nodejs/` directory containing the sample code. If you are using _Visual Studio Code_ you can use `File > Open` to open the `nodejs/` directory then open the **Integrated Terminal**, accessed from the **View** menu, this will automatically open in the project root.
 
-#### 1.1.1 Starting a New Application
+Navigate to the `exercises/05_intro_js/` directory and then install the package.
 
-So far you have been given an existing NodeJS application to modify but how do you create one from scratch?
+```shell
+$ npm install readline-sync
+```
 
-1. Create a new directory in the `exercises/05_intro_js/` directory called `myApp/` and navigate into it using the SSH terminal.
-2. Run the `npm init` command to start the new project wizard and complete.
-3. Install the Express package `npm install --save express`. The `--save` flag inserts the package into the `dependencies` array in `package.json`.
-4. Install the Eslint package which we will use during development using `npm install --save-dev eslint`.
-5. You will see that there is a new directory called `node_modules/` which contains the scripts from all the packages you have installed plus all their dependencies.
-    1. The `eslint` package has also installed a binary executable in the `node_modules/.bin` directory. The `.` means this directory is considered _hidden_.
-    2. Lets run the `eslint` command using `node_modules/.bin/eslint`.
+This will create a new directory called `node_modules/` which will contains the scripts from the `readline-sync/` package plus any dependencies.
 
-## 2 The Express Framework
+### 1.2 Listing and Uninstalling Packages
 
-Now you are familiar with the inner workings of NodeJS its time to take a closer look at the `Express` framework which we will install as a NodeJS Package. Locate the application in the `exercises/05_intro_js/todo/` directory.
+There are two ways to see what packages are currently installed. The quickest is to locate the `node_modules/` directory. Alternatively you can use the `npm ls` subcommand which will print this information to the shell.
 
-1. Install all the package dependencies listed in the manifest (instructions in the previous section).
-2. Start the server using the alias in the manifest.
-3. Open the `index.js` script. We will use this to understand how Express works.
+```shell
+$ npm ls
+/Users/.../01 Introduction to ECMAScript 6
+└── readline-sync@1.4.7
+```
 
-### 2.1 The Running Server
+To uninstall a _local_ package you can use the `npm uninstall` subcommand and pass it the name of the package you want to uninstall, this will uninstall both the named package and any dependencies installed by it.
 
-There are some important features of the `index.js` file:
+```shell
+$ npm uninstall readline-sync
+```
 
-1. On lines 4-5 we import the Express package and define a constant by running the `express()` function.
-2. There are a number of express modules that we also need to add to our `express()` object and this is done using the `use()` function.
-    1. We define the `public/` directory on our server as being a place to serve static files from by passing its name to the `express.static()` function which is then added to the server.
-    2. Now we import the `body-parser` module. This is a built-in module and so we don't need to npm install it. We use this to create a `parser` object which is added to the express server.
-3. The web server will need to be available at a specific port. All ports below 1024 require admin privileges and so we use a much higher port.
-    1. The standard http port is 80 (port 443 for https) so how can we make our server available on this port? This is normally mapped by the server or firewall using iptables.
-4. We define a _global variable_ as an empty array to store our todo items.
-5. Next there are a series of _routes_ which correspond to the URLs. When a URL is received on the specified port the express server runs through these routes in order until it finds a match. The syntax look a little strange! Each function takes two parameters:
-    1. The first parameter is a string that represents the route URL.
-    2. The second parameter is a **function**! You read this right, we pass an (anonymous) function as a parameter of another function! JavaScript has _first order functions_ which means we can use a function in place of a variable. We will cover this in more depth next week, all you need to know is that if the route matches, the function is executed.
-6. Finally, at the end of the script after all the routes have been defined, we start the server. This requires at least one parameter (the second one is optional):
-    1. The first parameter is the port on which to listen for incoming requests (we defined this as a constant earlier remember).
-    2. The second parameter is an _anonymous function_ which runs as soon as the server is running.
+#### 1.3 Useful Modules
 
-### 2.2 Request/Response
+Although there are a lot of modules available through the package manager you will only need a few of these to complete the exercises in this book.
 
-Now its time to dive into a single _route_ to understand how it handles the standard HTTP request/response.
-
-Each route is handled by running either a `get()` function or a `post()` function depending on the method used by the browser. Both functions take two parameters:
-
-1. The first parameter is the route that is matched against the request sent by the browser.
-2. If the route matches, the second parameter is an anonymous function that is run if the route matches that sent by the browser (with a matching `get` or `post`).
-3. The anonymous function pas two parameters:
-    1. `req` contains the entire request including the URL, the request headers and the request body.
-    2. `res` is the object that will be sent back to the client (the web browser). We need to add our data to this object.
-
-Lets start by examining the `request`, that is the information sent to server by the client (the web browser). 
-
-----
-
-OLD MATERIALS BELOW THIS LINE, IGNORE
+- Request: an HTTP client written in JavaScript, for accessing web resources such as APIs
+- Simple-Storage: a wrapper to store data in the filesystem
+- Mongoose: a MongoDB object modeling tool.
+- FS: a module giving direct access to the host file system, for reading and writing files
+- Sentiment: a module that uses the AFINN-165 wordlist and Emoji Sentiment Ranking to perform sentiment analysis on arbitrary blocks of input text.
 
 ## 2 Variables and Scope
 
@@ -135,34 +100,6 @@ Its time to dive into our first example to see the workings of JavaScript in pra
 6. Arrays
 
 Load up the `todo.js` script and reference it as you read through the rest of this section.
-
-res.redirect('/')
-Cannot set headers after they are sent to the client
-
-- arrays
-- loops (for loop, )
-
-```javascript
-for(let i = 0; i< items.length; i++) {
-  console.log(`${i}: ${items[i]}`)
-}
-```
-
-- try switching `let i=0` for `const i=0`, what happens?
-- add defensive code around the array push to check that a value has been entered (string function)
-- use a for-of loop to print the items in an ordered list.
-
-```javascript
-for (const item of items) {
-  console.log(item)
-}
-
-items.forEach( element => {
-  console.log(element)
-})
-```
-
-----
 
 ### 2.1 Variables and Scope
 
@@ -181,7 +118,6 @@ Now we can declare _block-level_ variables using the [let](https://developer.moz
 
 Until ECMA6, you could not declare _immutable variables_ (otherwise known as constants). ECMA introduced the [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) keyword that can be used to declare block-level constants.
 
-
 ### 2.2 Strict Mode
 
 Notice the first line contains a **Directive**. This is a feature from ECMA5 telling the JavaScript runtime to run the script in [strict mode](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode).
@@ -198,7 +134,7 @@ This:
 
 For the above reasone
 
-Use the **terminal** to run the script by entering `node todo.js`. Once running you can use the `add` command to add new items to the list and the `list` command to print out the list items. The final command will terminate the application.
+Use the **terminal** to run the script by entering ` node todo.js`. Once running you can use the `add` command to add new items to the list and the `list` command to print out the list items. The final command will terminate the application.
 
 ### 2.3 Importing a Package or Module
 
@@ -329,6 +265,7 @@ const items = []
 ```
 
 Arrays are _objects_ and have a number of built-in methods. Later in the script we use the built-in `push()` method to add an element to the end of the array. You should take a moment to look through the list of built-in [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) methods and familiarise yourself with them.
+
 ```javascript
 items.push(item)
 ```
@@ -338,11 +275,14 @@ items.push(item)
 Now you have an understanding of the code features used in the script it is time to run it. Unlike client-side JavaScript, you don't run NodeJS scripts in a web browser, instead you need to run them using the **Terminal**.
 
 To run your script you need to run the `node` command and pass it the name of your script. You don't need to pass the file extension, so these commands are equivalent:
+
 ```
 node todo
 node todo.js
 ```
+
 When the script is running you will be prompted to enter a command. Try adding three items and listing them all. Finally typing exit to return to the shell prompt:
+
 ```
 enter command: add bread
 adding "bread"
@@ -360,29 +300,31 @@ exit
 #### 2.7.1 Executing NodeJS Files
 
 There is an alternative way to execute a NodeJS script which works on Linux systems. it works because we have a _shebang_, otherwise known as a **processor directive** as the first line of our script. This tells the operating system where to find the command to run the script.
+
 ```
 #!/usr/bin/env node
 ```
+
 This tells the operating system to use the node command that appears in the environment path variable. You will also need to set the execute flag on the file.
+
 ```
 chmod +x todo.js
 ./todo.js
 ```
-The last line above tells the OS to run the `todo.js` file in the current directory.
 
+The last line above tells the OS to run the `todo.js` file in the current directory.
 
 ### 2.8 Test Your Knowledge
 
 Now you are familiar with the basics of the ECMA6 language its time to put this to the test. Make sure you successfully complete all six tasks before continuing to the next section.
 
 1. locate the `input` variable declaration (just inside the `do` loop)
-  - define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
-  - modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
-  - substitute a constant by substituting `const` for `let`, what effect does this have?
-
+    - define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
+    - modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
+    - substitute a constant by substituting `const` for `let`, what effect does this have?
 2. the array at the top of the script is defined using `var`. What happens if you make this immutable (use `const`)?
 3. Items are added to the array using its `push()` method.
-  - substute the [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) method. How does this change the script?
+    - substute the [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) method. How does this change the script?
 4. modify the code to prevent duplicate items being added. You will need to use the [`Array.indexOf()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) method.
 5. create a **remove** option so an item such as *cheese* can be removed using the syntax `remove cheese`. You may need to use the [`Array.splice()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) method.
 6. The current version is case sensitive. Modify the code so that items are converted to lowercase before being added or searched for. You will need to use the [`String.toLowerCase()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) method.
@@ -407,12 +349,12 @@ When JavaScript executes code errors and exceptions may occur. These may be due 
 
 No matter how good we are at programming, our scripts will contain errors. In JavaScript when an unrecoverable error occurs in your code it throws an **Exception**. If this is not caught and handled by your script it will terminate the execution of the script and print the error to the console. Obviously this is a bad outcome and to prevent it we can _catch_ the error and handle it gracefully without causing the program to crash.
 
-
 Open the `contact.js` script and study it as you cover the following sections.
 
-#### 4.1 Handling Errors
+### 4.1 Handling Errors
 
 To help catch any errors, JavaScript uses the `try-catch-finally` statement. The syntax is very similar to other modern language and looks like this:
+
 ```javascript
 try {
   // this line of code might throw an error
@@ -427,11 +369,12 @@ try {
 
 1. All code that could throw an exception _must_ be in a `try{}` block.
 2. If an exception is _thrown_ the execution moves to the `catch{}` block.
-  - the error object thrown will be passed as the parameter.
+    - the error object thrown will be passed as the parameter.
 
 #### 4.2 The Error Object
 
 When an error gets thrown it passes an Error object which contains three properties:
+
 - the name of the error
 - the message passed
 - the stack trace.
@@ -446,13 +389,16 @@ This is useful since it means we can pass extra data to a script when we invoke 
 Open the script `sentiment.js` and make sure you understand how it works.
 
 Try running the script without any extra parameters.
+
 ```
 $ node sentiment
   [ '/Users/.../bin/node',
     '/Users/.../sentiment.js' ]
   missing parameters
 ```
+
 Notice that it prints out an array which contains two indexes corresponding to the _node command_ and the script name (sentiment.js). There is also a message that there are missing parameters. Where is this message coming from?
+
 ```javascript
 const minParam = 3
 console.log(process.argv)
@@ -460,9 +406,11 @@ if (process.argv.length < minParam) {
   throw new Error('missing parameters')
 }
 ```
+
 In the code above you can see that the array printed to the shell is the contents of `process.argv`. The error was because the script expected an array of at least 3 indexes.
 
 Now let's run the command and pass it a sentence.
+
 ```
 node sentiment happy to meet you
 $ node sentiment happy to meet you again
@@ -482,13 +430,16 @@ $ node sentiment happy to meet you again
     negative: []
   }
 ```
+
 So what's happened here? Well now the `process.argv` array contains the additional words we typed. because there were more than 2 indexes the error is not thrown.
 
 Now we have some words to process we need to combine them into a single string.
+
 ```javascript
 const words = process.argv.slice(minParam-1).join(' ')
 console.log(words)
 ```
+
 The built-in  `Array.slice()` method returns the section of array between the specified index and the end of the array. The `join()` method converts an array into a string using the parameter as separator. It is standard practice when programming in JavaScript to use _method chaining_ whereby several methods are called on the same data.
 
 The final step is to pass this string to the sentiment tool which returns the sentiment of the sentence.
@@ -502,6 +453,7 @@ Open the `maths.js` file. Notice that this contains several functions. Each is c
 ### 6.1 Function Syntax
 
 Lets start with a simple example.
+
 ```javascript
 function largestNumber(a, b) {
   if (a > b) return a
@@ -511,6 +463,7 @@ function largestNumber(a, b) {
 
 const biggest = largestNumber(5, 8)
 ```
+
 1. The function is declared using the `function` keyword and the function is given a name which must be a valid variable name.
     a. If the name comprises more than one word these should be written using camel casing as shown above.
 2. The function above takes two parameters, `a` and `b`.
@@ -525,31 +478,38 @@ const biggest = largestNumber(5, 8)
 ### 6.2 The Spread Operator
 
 If the data you want to pass to a function is stored in an `Array` (this is quite common), you could extract each value and assign to the function like this:
+
 ```javascript
 const nums = [5, 8]
 const biggest2 = largestNumber(nums[0], nums[1])
 ```
+
 Because this is such a common task, there is a shortcut called the **spread operator**. Using this, the same task can be expressed like this.
+
 ```javascript
 const nums = [5, 8]
 const biggest2 = largestNumber(...nums)
 ```
+
 Notice the syntax of the _spread operator_.
 
 ### 6.3 The Arguments Object
 
 When a function is declared it has a **signature** which defines the number of parameters it is expecting, for example in the `largestNumber()` function, the signature defines two arguments.
+
 ```javascript
 function largestNumber(a, b) { // this is the function signature.
   // function body
 }
 ```
+
 What happens if you try to call this with the _wrong_ number of arguments?
 
 - If you supply too few arguments the remaining parameters are assigned a data type and value of `null`.
 - If you supply too many arguments, the remaining ones are not assigned to the parameters, so where are they?
 
 Every JavaScript function has an object called `Arguments` which contains all the parameters passed to that function, even ones no assigned to the formal parameters. This provides a mechanism to access arguments that don't get assigned to parameters. Lets take a look at the `add()` function.
+
 ```javascript
 function add() {
   let total = 0
@@ -561,10 +521,13 @@ function add() {
   return total
 }
 ```
+
 As you can see, the function signature defines no parameters, but when we call it we pass 4 arguments. What happens to these and how can we access them?
+
 ```javascript
 const addNums = add(1, 2, 3, 4)
 ```
+
 Inside the function we can access the `arguments` object. The `add()` function shows three ways to do this (we will be covering objects in detail in the next chapter):
 
 - display all the arguments (see below).
@@ -572,12 +535,14 @@ Inside the function we can access the `arguments` object. The `add()` function s
 - Use a `for...of` loop to iterate through the values.
 
 ### 6.4 The Rest Parameter
+
 Whilst the `arguments` object provides a mechanism for accessing the function arguments, it returns an Object (the keys are `Strings`). It would be better if
 
 - the arguments could be accessed in an `Array`.
 - it ignored arguments already assigned to parameters.
 
 ECMA6 introduced a special parameter called a _rest parameter_ which captures all the arguments that have not been assigned to parameters and stores them in an array. Look at the `add2()` function.
+
 ```javascript
 function add2(...values) {
   let total = 0
@@ -589,40 +554,48 @@ function add2(...values) {
   return total
 }
 ```
+
 The `...values` parameter has a `...` prefix which defines it as a _rest parameter_. In the body of the function it can be seen that this is an `Array` and so each argument has a numerical index. This is the preferred way to handle arguments that are not assigned to parameters.
 
 ### 6.5 Default Parameters
 
 As explained above, if you don't supply enough arguments for the parameters in the function signature, all the parameters without arguments are assigned a value of `null`. This means you have to add code within the function to check that there is a value assigned to the parameters before you can safely use them. ECMA6 has introduced **default parameters**. These allow you to assign a default value to a parameter if one is not supplied by when the function is called. Lets examine the `divide()` function.
+
 ```javascript
 function divide(dividend, divisor=1) {
   const quotient = dividend / divisor
   return quotient
 }
 ```
+
 Notice that the divisor has been assigned a value in the function signature. If this parameter is not assigned an argument, it defaults to this value.
 
 ### 6.6 Function Expressions
 
 Functions are a data type in JavaScript (they are objects but more on that in the next chapter). As such they can be stored in variables for later execution. Prior to ECMA6 they were declared using the `function` keyword like this:
+
 ```javascript
 const remainder = function(dividend, divisor) {
   const quotient = Math.floor(dividend / divisor)
   return dividend - quotient
 }
 ```
+
 To execute the function you simply reference the variable and append `()`.
+
 ```javascript
 const rem = remainder(8, 5)
 ```
 
 ECMA6 introduced a better way to handle function expressions, called an **arrow function expression**. This has a much shorter (and cleaner) syntax. Here is the same function expression written using this new syntax, make a careful note of the differences.
+
 ```javascript
 const remainder2 = (dividend, divisor) => {
   const quotient = Math.floor(dividend / divisor)
   return dividend - quotient
 }
 ```
+
 The _arrow function expression_ has a number of important features:
 
 1. It does not have its own function scope which means it does not bind its own `this` object (made clearer later).
@@ -630,6 +603,7 @@ The _arrow function expression_ has a number of important features:
 3. If there is only a single parameter the parameter brackets can be omitted.
 
 Here is an example that should make points 2 and 3 clearer.
+
 ```javascript
 const sqr = num => num * num
 ```
@@ -653,4 +627,53 @@ Open the `contact.js` script, implement the `validateEmail()` function and thoro
 2. Check that there is a `@` character and that it is not at the start of the string (HINT: use the [indexOf](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) String prototype method.
 3. Check that there is a period (.) character after the `@` character but before the end of the string.
 
-Express templating engines
+### 6.8 Callbacks
+
+Since JavaScript supports _first class functions_, we can use a function in any place where we could use a literal, object or variable. Open the `currency.js` script and look at line 17. As you can see the `request` object has a key called `get` that stores a function (we have already covered this). This takes two parameters:
+
+1. A string representing the url to be accessed.
+2. A function that will be called once the data has been retrived from the url. This was defined earlier in the script and takes 3 parameters.
+
+```javascript
+request.get(url, printRates)
+```
+
+This is a common construct used in JavaScript/NodeJS. The second function parameter is known as a **callback**.
+
+NodeJS is a single-threaded event loop that processes queued events. This means that if you were to execute a long-running task within a single thread then the process would block. To solve this problem, NodeJS  relies on callbacks, which are functions that run after a long-running process has finished. Instead of waiting for the task to finish, the event loop moves on to the next piece of code. When the long-running task has finished, the callback is added to the event loop and run.
+
+Because callbacks are such a fundamental part of NodeJS you need to spend time to make sure you fully understand how they work.
+
+Try running the program and note the output (remember you will need to install the `request` package.
+
+1. The currency code we want to convert to is stored in a constant.
+2. We create a _function expression_ called `printRates()` which has three parameters and prints out data from the response:
+    1. An error, this will be `null` if there is no error.
+    2. An object containing all the data from the HTTP response.
+    3. The string returned in the response body.
+3. Next we use a [template literal](https://goo.gl/3vznuR) to create the URL we will be calling.
+4. Finally we call the function stored in the `get` key in the `request` object and pass the string and function literal we created earlier.
+
+#### 6.8.1 Using Anonymous Functions in Callbacks
+
+Although this code works, you will rarely see callbacks written in this manner. Creating a function literal is a bit clunky and we can clean up the code by simply passing an anonymous function.
+
+```javascript
+request.get( url, (err, res, body) => {
+  // callback code goes here.
+})
+```
+
+Take a few moments to make sure you fully understand the syntax, you will be seeing a lot of this over the next few weeks.
+
+### 6.8.2 Test Your Understanding
+
+Lets improve the currency exchange tool. You will need to refer to the API [documentation](http://fixer.io) as you work through the tasks.
+
+1. Replace the _function expression_ with an _anonymous function_.
+2. Print the entire response body to the terminal window using [json.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
+3. The **base rate** defaults to the € (EUR) however the API allows you to set a different currency as the base rate:
+    1. Add a constant `base` to store your preferred currency.
+    2. Modify the URL using the API documentation to guide you.
+4. Use the [Number.prototype.toFixed()](https://goo.gl/DU4hvd) to truncate the number to 2 decimal places.
+5. Finally, modify your program so that it throws an error if it doesn't recognise either of the currency codes.
