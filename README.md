@@ -98,4 +98,18 @@ In this first lab you will learn how to set up your development environment and 
 
 This Github repository is a collaborative work between Coventry University and Helsinki Metropolia University of Applied Sciences. The repository was initially set up by Mark Tyers who contributed initial drafts of most exercises. During the 1st semester of the 15-16 academic year, this set of material was used by Erja, Vesa and colleagues, who made substantial improvements.
 
-The current branch C9 was introduced due to the fact that the IDE used in the master branch (Codio) stop offering free licenses. This branch was started and maintained mainly by Jianhua Yang, who is currently the module leader of 205CDE at Coventry.
+Additions were made by Jianhua Yang between 2016-17 after which the module was taken over by Mark Tyers for the 2018 delivery.
+
+Tagged releases have been created at the end of each semester of delivery to act as snapshots of the materials. These can be accessed in GitHub under the **Releases** tab.
+
+```shell
+$ git tag -a 1415OCTMAY 582f65c -m '1415OCTMAY'
+$ git push origin 1415OCTMAY
+```
+
+Deleting tags (local then remote).
+
+```shell
+$ git tag --delete 582f65c
+$ git push -delete origin 582f65c
+```
