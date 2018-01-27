@@ -25,7 +25,16 @@ The request consists of three key parts:
 We will be working through some exercises that make use of all of these.
 
 1. Start up the server script in the `exercises/02_http/` directory. Refer the the previous lab if you get stuck at this point.
+
+NB: Before running the script you will have to install the js2xmlparser package. To do this, type the following in ssh terminal;
+    $ npm install js2xmlparser
+
+HINT:  use cd to change to the correct directory path - $cd TEACHING-MATERIALS/exercises/02_http and then run index.js ($node index.js)
+
 2. Using the server URL (see previous lab), access the root url `/`. This is the same activity that you carried out in the first worksheet and you should see the string `hello world`.
+
+HINT: Right-click on labs and select info from the dropdown. Then click on the url remembering to add :8080 to the end of it.
+
 3. Locate the **Network** tab in the Chrome developer tools and in there you should see the resource sent in the HTTP response together with some data dealing with response times.
 4. Click on the file name (as shown) to display the HTTP headers.
 
