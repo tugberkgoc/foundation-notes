@@ -3,6 +3,8 @@
 
 In the lecture you learned about the HTTP protocol which is used to transfer information between web server and the web browser. Without this the World-Wide Web (WWW) would not exist. This lab will allow you to apply this knowledge and learn the details.
 
+You should refer to the [lecture slides](https://goo.gl/H88iFn).
+
 ## Setup
 
 You will need to use the Chrome web browser for these exercises and have installed the [ModHeader](https://goo.gl/YWWK3q) plugin.
