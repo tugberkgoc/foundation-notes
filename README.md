@@ -15,7 +15,7 @@ In this first lab you will learn how to set up your development environment and 
     2. Using the POST method
     3. Metadata
 
-[Link to worksheet](02%20The%20HTTP%20Protocol.md>)
+[Link to worksheet](02%20The%20HTTP%20Protocol.md)
 
 ## 2 Learning HTML5
 
