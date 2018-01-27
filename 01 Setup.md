@@ -33,6 +33,8 @@ Now we need to use the **Terminal** that is built into Codeanywhere. If one is n
 
 ![opening the SSH terminal](exercises/.images/codeanywhere_04.png)
 
+Please note you will have to type the following to clone the repository (CTRL+V/paste does not work).
+
 ```shell
 $ git clone https://.../TEACHING-MATERIALS.git .
   Cloning into '.'...
@@ -56,7 +58,7 @@ The final step before running your first website is to organise the windows of t
 
 Now select the bottom pane then open the SSH Terminal. By selecting the bottom pane first you are telling Codeanywhere that is where the window should open.
 
-If you now open the `exercises/01_setup/index.js` file you will see this also opens in the bottom pane. We want it at the top so drag its tab to the top tab bar.
+If you now open the `TEACHING-MATERIALS/exercises/01_setup/index.js` file you will see this also opens in the bottom pane. We want it at the top so drag its tab to the top tab bar.
 
 Finally you can drag the divider down a bit to make the top pane larger. The final result should look a like this:
 
@@ -68,10 +70,14 @@ You are now ready to start your lab exercises.
 
 Your first task is to check that everything is correctly configured by running a _hello world_ exercise.
 
-Use the SSH Terminal to navigate to the `exercises/01_setup/` directory.
+Use the SSH Terminal to navigate to the `TEACHING-MATERIALS/exercises/01_setup/` directory.
+
+REMEMBER: to change directory use the command:                    $cd
+          to list files in a directory use the command:           $ls
+          to navigate to the previous directory use the command:  $cd ..
 
 ```shell
-$ cd exercises/01_setup/
+$ cd TEACHING-MATERIALS/exercises/01_setup/
 $ ls
 ```
 
@@ -107,4 +113,4 @@ Now open a new browser tab and paste in this URL, adding the correct port number
 
 Lets try changing the displayed message. We need to stop the script. Select the SSH Terminal and press `ctrl+c` which will return you to the shell prompt.
 
-Now edit the message (`index.js`, line 11) so it will display your name. Restart the script and then refresh your browser window.
+Now edit the message (`index.js`, line 11) so it will display your name. REMEMBER to save the changes to index.js. Restart the script ($node index.js) and then refresh your browser window.

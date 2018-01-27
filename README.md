@@ -1,8 +1,4 @@
-# Introduction
-
-This repository contains lab material used for 205CDE Developing the Modern Web at Coventry University. There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This current document contains the teaching plan for academic year 16-17. For assessment plan please refer to [Moodle](https://cumoodle.coventry.ac.uk/mod/resource/view.php?id=1235452) for detailed requirements and marking rubrics etc.
-
-## Teaching Plan
+# Teaching Plan
 
 The module covers a lot of technical content and this is split over 10 weekly labs. Make sure you complete _all_ lab exercises.
 
