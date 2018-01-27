@@ -33,6 +33,8 @@ In this first lab you will learn how to set up your development environment and 
     3. Labelling forms
     4. Form validation
 
+[Link to worksheet](03%20Learning%20HTML5.md)
+
 ## 3 Learning CSS3
 
 1. Introduction to CSS3
@@ -43,6 +45,8 @@ In this first lab you will learn how to set up your development environment and 
     1. CSS box model
     2. Positioning elements
     3. Navigation
+
+[Link to worksheet](04%20Learning%20CSS3.md)
 
 ## 4 Introduction to JavaScript/NodeJS/ECMA6
 
@@ -61,6 +65,8 @@ In this first lab you will learn how to set up your development environment and 
 3. Data types
 4. Errors and exceptions
 
+[Link to worksheet](05%20Introduction%20to%20JavaScript.md)
+
 ## 5 Functions and Objects
 
 1. Functions
@@ -77,11 +83,15 @@ In this first lab you will learn how to set up your development environment and 
     3. Modifying objects
     4. Undefined values
 
+[Link to worksheet](06%20Functions%20and%20Objects.md)
+
 ## 6 Version Control
 
 1. **Phase test**
 2. Using Git locally
 3. Using Git remotes
+
+[Link to worksheet](07%20Version%20Control.md)
 
 ## 7 The Express Web Server
 
@@ -90,17 +100,23 @@ In this first lab you will learn how to set up your development environment and 
 3. Templating
 4. Modular code
 
+[Link to worksheet](08%20Express%20Web%20Server.md)
+
 ## 8 Data Persistence
 
 1. The Filesystem
 2. Document databases
 3. Relational databases
 
+[Link to worksheet](09%20Data%20Persistence.md)
+
 ## 9 Automated Testing
 
 1. Unit testing
 2. Code coverage
 3. Testing async code
+
+[Link to worksheet](10%20Automated%20Testing.md)
 
 ## 9 Deployment
 
@@ -111,6 +127,8 @@ In this first lab you will learn how to set up your development environment and 
     1. File transfer protocol
     2. Directory synchronisation
     3. Git
+
+[Link to worksheet](11%20Deployment.md)
 
 ## 10 Responsive Web Design
 
