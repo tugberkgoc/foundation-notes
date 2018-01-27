@@ -7,7 +7,10 @@ The purpose of HTML is to define the structure and contents of a website. It is 
 
 > CSS is amazingly powerful. As an example, click to visit [CSS Zen Garden](http://www.csszengarden.com). Different CSS files are applied to a single HTML file by clicking on the navigation links to the right of the screen. There's a book for it as well on [Amazon](http://www.amazon.co.uk/ZEN-CSS-Design-Visual-Enlightenment/dp/0321303474).
 
-In this lab, you learn to use CSS3 for defining the visual outlook of a website. This lab focuses on basic representation (colors, fonts, etc.). The layout of the elements on a web page will be covered in the next lab.
+This worksheet is split into two sections:
+
+1. The basics of CSS
+2. The CSS box model and layouts
 
 In the first part of this lab, you do the following tasks, and it takes approximately 2 hours.
 
