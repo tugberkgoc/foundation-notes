@@ -443,11 +443,11 @@ In many user interfaces, you can see how different elements on the screen are gr
 
 What you get is
 
-![Example of a fieldset and legend](.md_images/fieldset.png)
+![Example of a fieldset and legend](exercises/.images/fieldset.png)
 
 In user interfaces it also a common practice to give hints on the kind of data is expected. In HTML, this can be achieved by `value` or `placeholder` attribute on the controls. The `placeholder` attribute's text disappears once the control is clicked in or gains focus and the `value` attribute's text stays in place when a control has focus unless a user manually deletes it.
 
-![Example of a value and placeholder](.md_images/input_hint.png)
+![Example of a value and placeholder](exercises/.images/input_hint.png)
 
 #### 5.3.1 Test Your Understanding
 
@@ -477,7 +477,7 @@ Now return to the very first example in this lab
 
 If we add a `required` attribute to the query input, it will become `<input required name="q">`. In this case, the query field is required. In other words, if we don't type in anything in this field, we'll have an error message when trying to click submit.
 
-![Example of an error message](.md_images/error_html5.png).
+![Example of an error message](exercises/.images/error_html5.png).
 
 Behind the scene, the browser tries to verify user's input. There are some other input attributes that can serve for validation purposes. For example, `min` and `max` attributes for numerical input types such as `number` or `month`; `size` and `maxlength` for limiting the number of characters entered.
 
