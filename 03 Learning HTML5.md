@@ -26,22 +26,11 @@ $ git pull origin master
 
 ## 1 Syntax
 
-1. Start by opening the `exercises/03_html/01_syntax/` directory and locate the `coventry.html` file. If you open it you will notice that, whist the text content is all there it lacks all the html markup.
-2. Open the `index.js` file and take a look at the code structure:
-    1. Lines 3-4 import the express package and create an instance called `app`.
-    2. Next the port number is stored in a constant. You should always handle numbers by assigning to constants to make their purpose clear.
-3. Next, on lines 9-11 we define a _route_. This has two parameters:
-    1. The path to match. In this case, the `/` represents the base url with no additional segments.
-    2. The function to run if this route is accessed. In this case it loads the contents of the `coventry.html` file and sends it back to the web browser.
-4. Finally we tell express to listen on the specified port. There are two parameters:
-    1. The port.
-    2. A function to run as soon as the server is ready to receive requests.
-    3. Now open the SSH Terminal and navigate to the directory, install the `express` package and run the `index.js` file.
-    4. Finally you need to open a browser tab and navigate to the base URL on the correct port. You will see the following:
+Lets take a look at some basic HTML syntax. Start by locating the `exercises/03_html/01_syntax/` directory. Navigate to this using the SSH Terminal, install the `express` package and start the web server. If you navigate to the base route `/` you will see a screen full of text.
 
 ![the unformatted text](exercises/.images/chrome_07.png)
 
-As you can see, all the newlines have been replaced by spaces.
+As you can see, all the newlines have been replaced by spaces. The default behaviour of the web browser is to replace all newlines with spaces and replace multiple spaces with a single one!
 
 Your job is to add html formatting to the text to make it readable. You should first of all add the basic HTML5 tags and then format the text using:
 
