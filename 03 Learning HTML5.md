@@ -16,20 +16,28 @@ In this worksheet you will be learning about the markup language HTML which is c
 
 The worksheet is based on the materials from the HTML lecture and you should refer to the [slide deck](https://goo.gl/DGFkr6) to help your understanding.
 
+Before you start you need to download and new materials. We will be covering git commands in a later worksheet but for now you should execute the following commands:
+
+```shell
+$ git add --all
+$ git commit -m 'completed http worksheet'
+$ git pull origin master
+```
+
 ## 1 Syntax
 
 1. Start by opening the `exercises/03_html/01_syntax/` directory and locate the `coventry.html` file. If you open it you will notice that, whist the text content is all there it lacks all the html markup.
 2. Open the `index.js` file and take a look at the code structure:
-	1. Lines 3-4 import the express package and create an instance called `app`.
-	2. Next the port number is stored in a constant. You should always handle numbers by assigning to constants to make their purpose clear.
-	3. Next, on lines 9-11 we define a _route_. This has two parameters:
-		1. The path to match. In this case, the `/` represents the base url with no additional segments.
-		2. The function to run if this route is accessed. In this case it loads the contents of the `coventry.html` file and sends it back to the web browser.
-	4. Finally we tell express to listen on the specified port. There are two parameters:
-		1. The port.
-		2. A function to run as soon as the server is ready to receive requests.
-3. Now open the SSH Terminal and navigate to the directory, install the `express` package and run the `index.js` file.
-4. Finally you need to open a browser tab and navigate to the base URL on the correct port. You will see the following:
+    1. Lines 3-4 import the express package and create an instance called `app`.
+    2. Next the port number is stored in a constant. You should always handle numbers by assigning to constants to make their purpose clear.
+3. Next, on lines 9-11 we define a _route_. This has two parameters:
+    1. The path to match. In this case, the `/` represents the base url with no additional segments.
+    2. The function to run if this route is accessed. In this case it loads the contents of the `coventry.html` file and sends it back to the web browser.
+4. Finally we tell express to listen on the specified port. There are two parameters:
+    1. The port.
+    2. A function to run as soon as the server is ready to receive requests.
+    3. Now open the SSH Terminal and navigate to the directory, install the `express` package and run the `index.js` file.
+    4. Finally you need to open a browser tab and navigate to the base URL on the correct port. You will see the following:
 
 ![the unformatted text](exercises/.images/chrome_07.png)
 
@@ -74,7 +82,7 @@ Next, try a definition list. Add the following piece of code at the very end of 
 <dl>
   <dt>RAM</dt>
   <dd>Random access memory. The memory usable by programs. The amount was
-  typically in the ballpark of 20 to 64 kilobytes. However, the Basic 
+  typically in the ballpark of 20 to 64 kilobytes. However, the Basic
   interpreter by default consumed a part of this.</dd>
 
   <dt>ROM</dt>
@@ -188,8 +196,7 @@ There are a couple of notable things about the `img` element:
 
 1. It is a void element. A void element doesn't have any content, and can be closed immediately, like this  `<img >`. For convenience, it can also be closed like this `<img />`. The extra `/` character, in the end, is not essential.  However,  `<img >` must **NOT** be closed like this `<img></img>`, which is a syntax error.
 
-> There are other void elements besides `img`. One of the most widely used is `hr` for creating a horizontal rule and written as `<hr>`. Void elements are not to be confused with self-closing tags. For void elements it's **illegal** to write `<img></img>` or `<hr></hr>`, but for self-closing tags such as `<li>` or `<body>` you can safely ignore closing tags `</li>` or `</body>`. 
-
+> There are other void elements besides `img`. One of the most widely used is `hr` for creating a horizontal rule and written as `<hr>`. Void elements are not to be confused with self-closing tags. For void elements it's **illegal** to write `<img></img>` or `<hr></hr>`, but for self-closing tags such as `<li>` or `<body>` you can safely ignore closing tags `</li>` or `</body>`.
 > Click [here](https://www.w3.org/TR/html-markup/syntax.html) for a comprehensive list of void elements, [here](http://stackoverflow.com/questions/3558119/are-self-closing-tags-valid-in-html5) and [here](http://stackoverflow.com/questions/5641997/is-it-necessary-to-write-head-body-and-html-tags) for discussions on StackOverFlow. [To close or not to close tags](http://blog.teamtreehouse.com/to-close-or-not-to-close-tags-in-html5), that is the question.
 
 2. For an image to be displayed, it requires additional information in the form of attribute/value pairs. The attribute/value pairs above, are given within the start tag in the form of `attribute="value"`. Multiple definitions are separated by space. Two of attribute/value pairs are mandatory for images:
@@ -213,11 +220,11 @@ There are a couple of notable things about the `img` element:
 Now we will learn how to embed audio in a website. There are a number of resources located in the `public/` directory that we will add to our `index.html` page.
 
 1. You can use the new html `<audio>` tag to embed audio in a web page without needing to use third-party plugins. You will need to encode your audio files in two different formats for this to work in all major browsers:
-	1. Most browsers need files in the `.mp3` format.
-	2. Firefox requires files encoded using the `.ogg` format.
+    1. Most browsers need files in the `.mp3` format.
+    2. Firefox requires files encoded using the `.ogg` format.
 2. In a similar way, video can also be embedded:
-	1. Most browsers require a video file encoded as `.mp4`.
-	2. Firefox needs an `.ogg` encoded version.
+    1. Most browsers require a video file encoded as `.mp4`.
+    2. Firefox needs an `.ogg` encoded version.
 3. You can also embed a [YouTube](https://www.youtube.com) video in an `<iframe>` or alternatively using the `<object>` element. This is achieved by clicking on the share button then on the **embed** link that is displayed. You copy the html code into your website.
 
 #### 3.4.1 Test Your Knowledge
@@ -265,14 +272,229 @@ In this final part of the worksheet you will be building forms that can send dat
 
 ### 5.1 POST vs GET
 
-### 5.1 Test Your Knowledge
+Lets start by looking at how forms send data to the server. This can be done using the HTTP `GET` method or using the `POST` method. Lets try out both so we can understand the differences.
 
-- forms
-	- action
-	- form tags
-	  - input types
-	  - validation
-		- buttons
-		- layout
-	- labelling
-	- grouping
+#### 5.1.1 Submitting Data Using POST
+
+Make sure the web server is running and access the `/postform` route and open the corresponding html file.
+
+1. Complete the form with your name.
+2. Click on the the **Submit** button.
+3. Examine the URL carefully:
+    1. Notice that it points to the base route `/` with no additional data in the URL.
+4. Open the _Chrome developer tools_ and look at the _http request_:
+    1. Notice that the request uses the `POST` method. This corresponds to the `method` attribute in the `<form>` element.
+    2. The request header includes a `Content-Type` header which contains the value `application/x-www-form-urlencoded`.
+5. There is a _request body_ which contains the form data:
+    1. This uses the `application/x-www-form-urlencoded` encoding.
+    2. Notice that it contains 2 query parameters in a querystring.
+    3. The names of the query parameters correspond to the values in the `name` attributes in the `<input>` elements.
+
+#### 5.1.2 Submitting Data Using GET
+
+Make sure the web server us running and access the `/getform` route and open the corresponding html file.
+
+1. Complete the form with your name.
+2. Click on the the **Submit** button.
+3. Examine the URL carefully:
+    1. Notice that it contains 2 query parameters in a querystring.
+    2. The names of the query parameters correspond to the values in the `name` attributes in the `<input>` elements.
+4. Open the _Chrome developer tools_ and look at the _http request_:
+    1. Notice that the request uses the `GET` method. This corresponds to the `method` attribute in the `<form>` element.
+    2. The URL contains the data (remember there is only a request _body_ when the `POST` method is used.
+
+### 5.2 Form Controls
+
+In the previous section the form used the `<input>` element which displayed simple text boxes where you could enter anything. In this section you are going to learn about how to use a wide range of different controls to capture user input.
+
+#### 5.2.1 Input Elements
+
+HTML defines a number of input types that can be used in forms. The commonly used ones are:
+
+- Plain text: `<input type="text">`
+- Password fields: `<input type="password">`
+- Email addresses: `<input type="email">`
+
+The above are supported by most browsers. There are some new input types also:
+
+- URL addresses: `<input type="url">`
+- Numeric data: `<input type="number">`
+- Date pickers: `<input type="date">`
+
+The main reason for introducing these new input types is for mobile devices with limited screen sizes where special keyboards/input methods can be used.  But note that not every browser supports the new types.
+
+> Input types, not supported by old web browsers, will behave as input type text. See [here](http://www.w3schools.com/html/html_form_input_types.asp).
+
+![android picker](http://developer.android.com/images/ui/pickers.png)
+
+### Hidden parameters
+
+Sometimes we need a way to submit some additional parameter to the server. This can be done by using a `hidden` input parameter.
+A hidden parameter has no onscreen appearance, but it will be sent to the server.
+
+```html
+<form>
+......
+    <input type="hidden" name="org" value="Acme" />
+    ....
+</form>
+```
+
+#### 5.2.2 Lists
+
+The problem with the `<input>` elements is that it forces users to input _free text_ which means the data will require a lot of validation. For example if asked to input a city users might enter `Coventry`, `coventry`, `Cov`, `Coventry City` and any number of variations. Where possible you should require users to choose from a predefined list.
+
+There are two ways to define a list, radio/checkboxes and dropdown lists. Load the `/lists` route in your browser to see these in use. Make sure the web server is running, access the `/lists` route and open the html file that is being displayed.
+
+Whilst not strictly a list, **checkboxes** can be used where the user can pick one or more options from a short list.
+
+```html
+<input type="checkbox" name="foo" value="1">Option 1<br/>
+<input type="checkbox" name="bar" value="2">Option 2<br/>
+```
+
+Notice:
+
+1. It uses the standard `<input>` element.
+2. The `type` attribute has a value of `checkbox`.
+3. Each has a _different_ value for their `name` attribute.
+4. The `value` atribute contains the value that is passed to the server.
+
+Radio buttons are to allow the user to make a selection from a small number of options:
+
+```html
+<input type="radio" name="foobar" value="1">Option 1<br/>
+<input type="radio" name="foobar" value="2">Option 2<br/>
+```
+
+Notice:
+
+1. It uses the standard `<input>` element.
+2. The `type` attribute has a value of `radio`.
+3. All grouped options must have the same value for their `name` attribute.
+4. The `value` atribute is what is passed to the server.
+
+The `select` element defines a drop-down list, and the `option` element is used to define a list item.
+
+```html
+<select name="example">
+  <option value="notknown">Not selected</option>
+  <option value="item1">Item 1</option>
+</select>
+```
+
+Every `option` element should have a unique value, just like in checkboxes and radio buttons.
+
+#### 5.2.3 Test Your Understanding
+
+1. Create a new route in the `index.js` file called `/register`.
+2. Create an html file called `registerform.html`.
+3. Create an html form that `POST`s its data to `/`.
+4. Create a registration form using all of the different form controls you have seen.
+5. Make sure you understand the data displayed when the form is posted.
+6. Change the form so it makes a `GET` request.
+
+### 5.3 Labelling Forms
+
+`<label>` elements are used to connect texts and controls that are used together in forms. For example radio buttons and check boxes often come with preceding texts that describe the choice. However if the user clicks the text nothing happens. That's because the browser doesn't know the connection between the text and the neighboring control. They must be wrapped up with label element.
+
+```html
+<form action="">
+<input type="checkbox" name="bike" value="Bike">I have a bike<br>
+<input type="checkbox" name="car" value="Car">I have a car
+</form>
+```
+
+You have to click on the box. But if you have
+
+```html
+<form action="">
+<label><input type="checkbox" name="bike" value="Bike">I have a bike</label><br>
+<label><input type="checkbox" name="car" value="Car">I have a car </label>
+</form>
+```
+
+It is enough to click on text too.
+
+Note the above can also be written as the following, which is also valid but needs more typing
+
+```html
+<form action="">
+<input type="checkbox" name="bike" id="bike" value="Bike"><label for="bike">I have a bike</label><br>
+<input type="checkbox" name="car" id="car" value="Car"><label for="car">I have a car </label>
+</form>
+```
+
+> Read discussions on [StackOverFlow](http://stackoverflow.com/questions/774054/should-i-put-input-tag-inside-label-tag) for different ways of associating labels and inputs.
+
+### Use grouping and hints
+
+In many user interfaces, you can see how different elements on the screen are grouped together in order to make the input easier for the user. In HTML, you can use `fieldset` element for this.
+
+```html
+<form action="">
+<fieldset>
+<legend>Credit Card</legend>
+<label><input type="radio" name="card" value="Visa">Visa</label><br>
+<label><input type="radio" name="card" value="MCard">MasterCard </label>
+</fieldset>
+</form>
+```
+
+What you get is
+
+![Example of a fieldset and legend](.md_images/fieldset.png)
+
+In user interfaces it also a common practice to give hints on the kind of data is expected. In HTML, this can be achieved by `value` or `placeholder` attribute on the controls. The `placeholder` attribute's text disappears once the control is clicked in or gains focus and the `value` attribute's text stays in place when a control has focus unless a user manually deletes it.
+
+![Example of a value and placeholder](.md_images/input_hint.png)
+
+#### 5.3.1 Test Your Understanding
+
+Make sure the web server is running and access the `/semantic` route. Open the html file containing the form that is being diplayed.
+
+1. At the moment, you have to click exactly the right spot on your checkboxes etc. Change this by using labels.
+2. Rearrange your form with legends and fieldsets in order to make it easier for the user to understand.
+3. Give input hints to the user whenever possible.
+
+### 5.4 Form Validation
+
+Form validation is traditionally done using JavaScript. But HTML5 introduces some new ways of doing it, which makes validation a lot easier.
+
+#### 5.4.1 'required' attribute
+
+Now return to the very first example in this lab
+
+```html
+<form action="http://www.google.com/search">
+  <div>
+    Let's search Google:
+    <input name="q">
+    <input type="submit">
+  </div>
+</form>
+```
+
+If we add a `required` attribute to the query input, it will become `<input required name="q">`. In this case, the query field is required. In other words, if we don't type in anything in this field, we'll have an error message when trying to click submit.
+
+![Example of an error message](.md_images/error_html5.png).
+
+Behind the scene, the browser tries to verify user's input. There are some other input attributes that can serve for validation purposes. For example, `min` and `max` attributes for numerical input types such as `number` or `month`; `size` and `maxlength` for limiting the number of characters entered.
+
+#### 5.4.2 'pattern' attribute based on regular expression
+
+In addition to using different input types, we can also use patterns a.k.a.regular expressions. Using patterns, we can validate user inputs even more precisely.
+
+Pattern is an encoded sequence of characters that define a pattern of text characters. Remember that client-side validation is not reliable as the only means of validation, it is useful to make the user interface more pleasant.
+
+For example, a Finnish social security number (similar to UK National Insurance number) is often 999999-999X (for those who are born in the 20th century). The first 6 digits are the birth date: day, month and year's last two numbers. After "-" there are 3 digits and the last character can be either digit or letter from A to Y. If we want to make a pattern of this, it would be
+
+```html
+<input type="text" pattern="\d{6}\-\d{3}([0-9A-Y])" ...>
+```
+
+\d means a digit, \\- means the "-", [chars] means a set of characters.
+
+### 5.4.3 Test your understanding
+
+Open file **form-skel.html**. Validate the user's data in Student id, email address and score by using patterns.
