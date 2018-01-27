@@ -121,7 +121,7 @@ Validation makes sure that your CSS file complies with the CSS syntax. It may al
 
 Go to the validation page, and validate the file you created. If no errors are found, introduce some on purpose and see how the validator reports them.
 
-### 1.2 Classes and identifiers
+### 1.2 Selectors
 
 So far, the rules in the CSS file have been applied to all elements matching one of the selectors. For example, all paragraphs have automatically had the same looks.
 

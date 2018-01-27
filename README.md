@@ -39,7 +39,7 @@ In this first lab you will learn how to set up your development environment and 
 
 1. Introduction to CSS3
     1. CSS Basics
-    2. Classes and identifiers
+    2. Selector
     3. Fine-tuning your CSS
 2. Using CSS for page layout
     1. CSS box model
