@@ -15,13 +15,23 @@ In this first lab you will learn how to set up your development environment and 
     2. Using the POST method
     3. Metadata
 
+[Link to worksheet](02 The HTTP Protocol.md)
+
 ## 2 Learning HTML5
 
 1. Syntax
 2. Lists
 3. Hypermedia
+    1. Routes
+    2. Hyperlinks
+    3. Images
+    4. Media
 4. Tables
 5. Forms
+    1. POST vs GET
+    2. Form controls
+    3. Labelling forms
+    4. Form validation
 
 ## 3 Learning CSS3
 
@@ -92,7 +102,17 @@ In this first lab you will learn how to set up your development environment and 
 2. Code coverage
 3. Testing async code
 
-## 9 Responsive Web Design
+## 9 Deployment
+
+1. Building a web server
+    1. Raspberry Pi
+    2. Cloud using Heroku
+2. Transferring files
+    1. File transfer protocol
+    2. Directory synchronisation
+    3. Git
+
+## 10 Responsive Web Design
 
 ## About this Github repository
 
