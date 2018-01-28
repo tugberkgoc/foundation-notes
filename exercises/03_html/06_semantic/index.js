@@ -8,7 +8,7 @@ app.use(express.static('public'))
 const port = 8080
 
 app.get('/', (req, res) => {
-	res.sendFile(`${__dirname}/html/reviews.html`)
+	res.sendFile(`${__dirname}/html/review.html`)
 })
 
 app.listen(port, () => {
