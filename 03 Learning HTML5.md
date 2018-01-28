@@ -493,11 +493,13 @@ Open file **form-skel.html**. Validate the user's data in Student id, email addr
 
 In this final exercise we will look at how [MicroData](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata) can be used to add semantic information to a web page. Start by using the SSH Terminal to run the server in the `exercises/03_html/06_semantic/` directory and navigating to the base route `/`. This should display a simple review page.
 
-1. Paste the URL into the [Rich Snippets Tool](http://www.google.com/webmasters/tools/richsnippets) to see what semantic data it contains.
-2. Add [MicroData](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata) to the page. You should include the following vocabularies:
-    1. [person](http://schema.org/Person)
-    2. [organisation](http://schema.org/Organization)
-    3. [review](http://schema.org/Review)
-    4. [imageobject](http://schema.org/ImageObject)
-    5. [movie](http://schema.org/Movie)
-3. As you add the metadata, keep checking your page using the [Rich Snippets Tool](http://www.google.com/webmasters/tools/richsnippets).
+1. Paste the URL into the [Rich Snippets Tool](http://www.google.com/webmasters/tools/richsnippets) to see what semantic data it contains. Notice:
+    1. There are two **items** on in the webpage, a movie and a rating. These are defined using the `itemscope` attribute in the html. Each item has an `itemtype` attribute that points to the appropriate Microdata definition.
+    2. Within each `itemscope`, the information has been tagged using the `itemprop` attribute. The allowed values are defined by the `itemtype` definition available on the [Schema.org website](http://schema.org/docs/full.html).
+    3. The schema definitions define what `itemtype` are allowed and also what items can be nested inside which items.
+2. The [Rich Snippets Tool](http://www.google.com/webmasters/tools/richsnippets) will not only extract the metadata but will also identify any errors in your implementation of the MicroData schema.
+3. Install the [Structured Data Testing Tool Plugin](https://chrome.google.com/webstore/detail/structured-data-testing-t/kfdjeigpgagildmolfanniafmplnplpl/related?hl=en) for your Chrome Browser and use it to see the metadata.
+
+### 6.1 Test Your Understanding
+
+The `/cafe` route displays information about a local cafe. Using the [CafeOrCoffeeShop](http://schema.org/CafeOrCoffeeShop) schema as a starting point, add semantic markup. Feel free to add additional content to practice your skills.
