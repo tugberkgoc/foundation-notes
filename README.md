@@ -119,8 +119,10 @@ In this first lab you will learn how to set up your development environment and 
 ## 8 Data Persistence
 
 1. The Filesystem
-2. Document databases
-3. Relational databases
+2. SQLite
+3. Document databases
+4. Relational databases
+5. Graph databases
 
 [Link to worksheet](09%20Data%20Persistence.md)
 
