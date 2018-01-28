@@ -4,6 +4,9 @@ node_modules/
 package-lock.json
 .node-persist/
 
+# sqlite databases
+*.db
+
 # Mac spotlight files
 .DS_Store
 

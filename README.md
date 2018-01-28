@@ -2,7 +2,21 @@
 
 The module covers a lot of technical content and this is split over 10 weekly labs. Make sure you complete _all_ lab exercises.
 
-## 1 Setup and The HTTP Protocol
+## Assessment
+
+The assessment for this module is split into two parts:
+
+1. A phase test that covers the **foundation** materials (the first 5 lectures and labs).
+2. A report that covers the building and testing of your website. Both the [assignment brief](https://docs.google.com/document/d/1c36DSfrTDayxBp_diN90FvYFb-MnsrMQjON6RB_R-so/edit?usp=sharing) and [grading rubric](https://docs.google.com/document/d/1GWhy_fuVJMa7UASpU3xXL162iqxTHRx-wybJ5cy7930/edit?usp=sharing) can be found on CUMoodle.
+
+The module is split into 10 lectures and labs.
+
+1. The first 5 should be considered foundation and cover the core skills and knowledge. These will be assessed in the phase test which takes place on week 6.
+2. The remainder of the lectures and labs cover the skills needed to build and test a dynamic website and this will be assessed in the practical assessment.
+
+## 2 Module Content
+
+## Setup and The HTTP Protocol
 
 In this first lab you will learn how to set up your development environment and will also learn about the HTTP Protocol that powers the Internet.
 

@@ -11,6 +11,7 @@ In this worksheet you will be learning about the markup language HTML which is c
     ├── 03_hypermedia
     ├── 04_tables
     ├── 05_forms
+    ├── 06_semantic
     └── template.html
 ```
 
@@ -487,3 +488,16 @@ For example, a Finnish social security number (similar to UK National Insurance 
 ### 5.4.3 Test your understanding
 
 Open file **form-skel.html**. Validate the user's data in Student id, email address and score by using patterns.
+
+## 6 Semantic Markup
+
+In this final exercise we will look at how [MicroData](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata) can be used to add semantic information to a web page. Start by using the SSH Terminal to run the server in the `exercises/03_html/06_semantic/` directory and navigating to the base route `/`. This should display a simple review page.
+
+1. Paste the URL into the [Rich Snippets Tool](http://www.google.com/webmasters/tools/richsnippets) to see what semantic data it contains.
+2. Add [MicroData](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata) to the page. You should include the following vocabularies:
+    1. [person](http://schema.org/Person)
+    2. [organisation](http://schema.org/Organization)
+    3. [review](http://schema.org/Review)
+    4. [imageobject](http://schema.org/ImageObject)
+    5. [movie](http://schema.org/Movie)
+3. As you add the metadata, keep checking your page using the [Rich Snippets Tool](http://www.google.com/webmasters/tools/richsnippets).

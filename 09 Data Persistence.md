@@ -27,6 +27,10 @@ exports.addBook = function(isbn, callback) {
 }
 ```
 
+## 2 SQLite Database
+
+http://www.sqlitetutorial.net/sqlite-nodejs/
+
 ## 2 Document Database
 
 Stores JavaScript objects
