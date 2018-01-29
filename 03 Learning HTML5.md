@@ -17,9 +17,17 @@ In this worksheet you will be learning about the markup language HTML which is c
 
 The worksheet is based on the materials from the HTML lecture and you should refer to the [slide deck](https://goo.gl/DGFkr6) to help your understanding.
 
-Before you start you need to download and new materials. We will be covering git commands in a later worksheet but for now you should execute the following commands:
+Before you start you need to download and new materials. We will be covering git commands in a later worksheet but for now you should use the SSH Terminal execute the following commands from the root directory:
 
 ```shell
+$ ls
+  01 Setup.md                       08 Express Web Server.md
+  02 The HTTP Protocol.md           09 Data Persistence.md
+  03 Learning HTML5.md              10 Automated Testing.md
+  04 Learning CSS3.md               11 Deployment.md
+  05 Introduction to JavaScript.md  README.md
+  06 Functions and Objects.md       exercises
+  07 Version Control.md
 $ git add --all
 $ git commit -m 'completed http worksheet'
 $ git pull origin master
