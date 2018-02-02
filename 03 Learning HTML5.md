@@ -1,6 +1,23 @@
 
 # Learning HTML5
 
+The worksheet is based on the materials from the HTML lecture and you should refer to the [slide deck](https://goo.gl/DGFkr6) to help your understanding. It will take approximately **15 hours** to work through all the exercises and you should ensure that you have completed them all before attempting subsequent worksheets.
+
+Before you start you need to download and new materials. To do this you will be carrying out three tasks:
+
+1. You need to use your **SSH Terminal** and navigate to the _root directory_ of your project (the one containing the `exercises/` directory).
+2. There must be no changes in your working directories. These must be stashed using the `git stash` command.
+3. You can then use the `git pull` command to pull any changes from the GitHub repository.
+4. Finally you need to unstash the changes you made.
+
+The full list of commands is:
+
+```shell
+$ git stash
+$ git pull origin master
+$ git stash pop
+```
+
 In this worksheet you will be learning about the markup language HTML which is currently in version 5. The worksheet is split into five parts with the resources for each part in their own subdirectory. The `template.html` file contains a basic HTML5 template you will find useful when creating your own web pages.
 
 ```
@@ -15,23 +32,7 @@ In this worksheet you will be learning about the markup language HTML which is c
     └── template.html
 ```
 
-The worksheet is based on the materials from the HTML lecture and you should refer to the [slide deck](https://goo.gl/DGFkr6) to help your understanding.
-
-Before you start you need to download and new materials. We will be covering git commands in a later worksheet but for now you should use the SSH Terminal execute the following commands from the root directory:
-
-```shell
-$ ls
-  01 Setup.md                       08 Express Web Server.md
-  02 The HTTP Protocol.md           09 Data Persistence.md
-  03 Learning HTML5.md              10 Automated Testing.md
-  04 Learning CSS3.md               11 Deployment.md
-  05 Introduction to JavaScript.md  README.md
-  06 Functions and Objects.md       exercises
-  07 Version Control.md
-$ git add --all
-$ git commit -m 'completed http worksheet'
-$ git pull origin master
-```
+You should get into the habit of doing this each time you sit down to work on your lab exercises as you will then be working on the latest versions of the files (with fewer bugs).
 
 ## 1 Syntax
 
