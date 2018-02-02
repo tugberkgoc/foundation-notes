@@ -512,3 +512,27 @@ In this final exercise we will look at how [MicroData](https://developer.mozilla
 ### 6.1 Test Your Understanding
 
 The `/cafe` route displays information about a local cafe. Using the [CafeOrCoffeeShop](http://schema.org/CafeOrCoffeeShop) schema as a starting point, add semantic markup. Feel free to add additional content to practice your skills.
+
+## 7 Markdown
+
+Hand-coding HTML can be a hassle, especially because you have to remember to add opening and closing tags. There have been several attempts to make life easier but one of the most popular is the use of **Markdown Syntax**. This is a simple way to describe a web page which is then converted into an HTML document on the fly when the page is displayed. It is how the worksheets were written (notice they all have the `.md` file extension).
+
+Start by running the server (note that you need to install an additional package called `marked`).
+
+1. View the root path `/`. Notice that it displays a web page.
+2. Use the **Elements** tab in the Chrome Developer Tools to view the markup, notice that the page contains a `<h1>`,a `<p>` element plus an ordered list and a table.
+3. Now open the `computers.md` file:
+    1. Notice how a single `#` symbol is used to denote a top level `<h1>` element.
+    2. The `<p>` paragraph is denoted by text with no additional markup.
+    3. Numbers at the start of a line denote a list.
+    4. Tables are defined using _pipes_ `|` and _dashes_ `-`.
+4. Explore the [markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). Note it can only be used to define simple structures.
+
+### 7.1 test Your Understanding
+
+1. Add 2 more 80s computers to the list.
+    1. What happens if you repeat a list number?
+2. Add these to the table and include the year of production.
+    1. What happens if the pipe symbols don't align?
+3. Add two second level headings, `hardware` and `software`, putting the list of computers and their specs in the first section.
+4. Find the names of 5 pieces of 80s software and create an _unordered list_.
