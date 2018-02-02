@@ -7,7 +7,7 @@ const app = express()
 const port = 8080
 
 app.get('/', (req, res) => {
-	res.sendFile(`${__dirname}/computers.html`)
+	res.sendFile(`${__dirname}/html/computers80.html`)
 })
 
 app.get('/commodore', (req, res) => {
