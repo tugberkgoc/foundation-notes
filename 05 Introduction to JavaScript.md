@@ -161,6 +161,20 @@ Now we can declare _block-level_ variables using the [let](https://developer.moz
 
 Until ECMA6, you could not declare _immutable variables_ (otherwise known as constants). ECMA introduced the [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) keyword that can be used to declare block-level constants.
 
+#### 2.1.3 Test Your Understanding
+
+Open the `hoisting.js` file:
+
+1. Notice that we try to print the contents of the variable `name` before it is defined using the `var` keyword. Try running the script, what happens?
+    1. The first time we print the variable it prints `undefined`, (so it appears that the variable has already been defined).
+    2. Then we declare the variable.
+    3. Finally the assigned value is printed out.
+2. Now substitute the `let` keyword to declare the variable and run the script again.
+    1. Notice that we now get an error showing the variable has not been defined (the variable is no longer hoisted).
+    2. Delete the first `console.log()` statement to fix this.
+3. Now define the `name` variable using the `const` keyword and run the script again.
+    1. Notice we get an error `TypeError: Assignment to constant variable` because we declared `name` as a constant (it can't be modified).
+
 ### 2.2 Strict Mode
 
 Notice the first line contains a **Directive**. This is a feature from ECMA5 telling the JavaScript runtime to run the script in [strict mode](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode).
@@ -174,10 +188,6 @@ This:
 - Prevents the declaration of global variables.
 - Exceptions are thrown rather than the script fail silently.
 - Prevents duplicate property and parameter names (more on this later).
-
-For the above reasone
-
-Use the **terminal** to run the script by entering `node todo.js`. Once running you can use the `add` command to add new items to the list and the `list` command to print out the list items. The final command will terminate the application.
 
 ### 2.3 Importing a Package or Module
 
