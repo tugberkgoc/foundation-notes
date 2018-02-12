@@ -340,7 +340,7 @@ Now you are familiar with the basics of the ECMA6 language its time to put this 
 7. The code currently uses a `for` loop to print out the contents of the array:
     1. Replace this with the [`for...in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) statement.
     2. Replace this with the [`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) statement. What are its limitations?
-    2. Replace this with the [`Array.forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) method.
+    3. Replace this with the [`Array.forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) method.
 
 ## 3 Data Types
 

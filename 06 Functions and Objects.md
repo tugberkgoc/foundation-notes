@@ -32,7 +32,7 @@ const biggest = largestNumber(5, 8)
     a. If the numbers are not the same it returns the largest.
     b. If they are the same it returns `null`.
 
-### 1.2 The Spread Operator
+### 1.1.1 The Spread Operator
 
 If the data you want to pass to a function is stored in an `Array` (this is quite common), you could extract each value and assign to the function like this:
 
@@ -50,7 +50,7 @@ const biggest2 = largestNumber(...nums)
 
 Notice the syntax of the _spread operator_.
 
-### 1.3 The Arguments Object
+### 1.1.2 The Arguments Object
 
 When a function is declared it has a **signature** which defines the number of parameters it is expecting, for example in the `largestNumber()` function, the signature defines two arguments.
 
@@ -91,7 +91,7 @@ Inside the function we can access the `arguments` object. The `add()` function s
 - access individual arguments by referencing a key.
 - Use a `for...of` loop to iterate through the values.
 
-### 1.4 The Rest Parameter
+### 1.1.3 The Rest Parameter
 
 Whilst the `arguments` object provides a mechanism for accessing the function arguments, it returns an Object (the keys are `Strings`). It would be better if
 
@@ -114,7 +114,7 @@ function add2(...values) {
 
 The `...values` parameter has a `...` prefix which defines it as a _rest parameter_. In the body of the function it can be seen that this is an `Array` and so each argument has a numerical index. This is the preferred way to handle arguments that are not assigned to parameters.
 
-### 1.5 Default Parameters
+### 1.1.4 Default Parameters
 
 As explained above, if you don't supply enough arguments for the parameters in the function signature, all the parameters without arguments are assigned a value of `null`. This means you have to add code within the function to check that there is a value assigned to the parameters before you can safely use them. ECMA6 has introduced **default parameters**. These allow you to assign a default value to a parameter if one is not supplied by when the function is called. Lets examine the `divide()` function.
 
@@ -127,7 +127,24 @@ function divide(dividend, divisor=1) {
 
 Notice that the divisor has been assigned a value in the function signature. If this parameter is not assigned an argument, it defaults to this value.
 
-### 1.6 Function Expressions
+### Test Your Understanding
+
+Start by running the `maths.js` script and map the output it generates against the `console.log` statements in the script.
+
+1. Create a new function called `multiply()` that takes two parameters, `a` and `b` and returns the _product_ of the two.
+    - what happens if you call it with only a single parameter?
+2. Modify the function so it uses a default parameter to multiply by 1 if the second parameter is missing.
+    - What happens if you don't supply _any_ parameters?
+    - Add a second default parameter to prevent this.
+3. Write an _arrow function expression_ stored in a constant called `squareRoot` which calculates and returns the square root of the supplied number. You will need to use the `sqrt()` method which is part of the `Math` object.
+
+Open the `contact.js` script, implement the `validateEmail()` function and thoroughly test it, you should avoid using regular expressions at this stage:
+
+1. Check that the string is at least 5 character long
+2. Check that there is a `@` character and that it is not at the start of the string (HINT: use the [indexOf](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) String prototype method.
+3. Check that there is a period (.) character after the `@` character but before the end of the string.
+
+### 1.2 Function Expressions
 
 Functions are a data type in JavaScript (they are objects but more on that in the next chapter). As such they can be stored in variables for later execution. Prior to ECMA6 they were declared using the `function` keyword like this:
 
@@ -165,26 +182,11 @@ Here is an example that should make points 2 and 3 clearer.
 const sqr = num => num * num
 ```
 
-### 1.7 Test Your Knowledge
+### 1.2.1 Test Your Understanding
 
-Start by running the `maths.js` script and map the output it generates against the `console.log` statements in the script.
+//TODO: add an exercise on function expressions.
 
-1. Create a new function called `multiply()` that takes two parameters, `a` and `b` and returns the _product_ of the two.
-    - what happens if you call it with only a single parameter?
-2. Modify the function so it uses a default parameter to multiply by 1 if the second parameter is missing.
-    - What happens if you don't supply _any_ parameters?
-    - Add a second default parameter to prevent this.
-3. Write an _arrow function expression_ stored in a constant called `squareRoot` which calculates and returns the square root of the supplied number. You will need to use the `sqrt()` method which is part of the `Math` object.
-
-### 1.8 Test Your Knowledge (Again)
-
-Open the `contact.js` script, implement the `validateEmail()` function and thoroughly test it, you should avoid using regular expressions at this stage:
-
-1. Check that the string is at least 5 character long
-2. Check that there is a `@` character and that it is not at the start of the string (HINT: use the [indexOf](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) String prototype method.
-3. Check that there is a period (.) character after the `@` character but before the end of the string.
-
-### 1.9 Callbacks
+### 1.3 Callbacks
 
 Since JavaScript supports _first class functions_, we can use a function in any place where we could use a literal, object or variable. Open the `currency.js` script and look at line 17. As you can see the `request` object has a key called `get` that stores a function (we have already covered this). This takes two parameters:
 
@@ -201,7 +203,7 @@ NodeJS is a single-threaded event loop that processes queued events. This means 
 
 Because callbacks are such a fundamental part of NodeJS you need to spend time to make sure you fully understand how they work.
 
-Try running the program and note the output (remember you will need to install the `request` package.
+Try running the `currency.js` program and note the output (remember you will need to install the `request` package.
 
 1. The currency code we want to convert to is stored in a constant.
 2. We create a _function expression_ called `printRates()` which has three parameters and prints out data from the response:
@@ -211,7 +213,7 @@ Try running the program and note the output (remember you will need to install t
 3. Next we use a [template literal](https://goo.gl/3vznuR) to create the URL we will be calling.
 4. Finally we call the function stored in the `get` key in the `request` object and pass the string and function literal we created earlier.
 
-#### 1.9.1 Using Anonymous Functions in Callbacks
+#### 1.3.1 Using Anonymous Functions in Callbacks
 
 Although this code works, you will rarely see callbacks written in this manner. Creating a function literal is a bit clunky and we can clean up the code by simply passing an anonymous function.
 
@@ -223,7 +225,7 @@ request.get( url, (err, res, body) => {
 
 Take a few moments to make sure you fully understand the syntax, you will be seeing a lot of this over the next few weeks.
 
-### 1.9.2 Test Your Understanding
+#### 1.3.2 Test Your Understanding
 
 Lets improve the currency exchange tool. You will need to refer to the API [documentation](http://fixer.io) as you work through the tasks.
 
@@ -312,7 +314,7 @@ const grade = employee.grade || 'A'
 
 This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
 
-#### 2.2.1 Getters and Setters
+### 2.3 Getters and Setters
 
 Most object properties are simple values and you can simply assign a value. Sometimes however properties need to be calculated. One solution is to store a function as one of the properties however we would need to call a function to retrieve the value:
 
@@ -372,12 +374,12 @@ const employee = {
 employee.name = 'Micky Mouse'
 ```
 
-#### 2.2.2 Test Your Understanding
+#### 2.3.1 Test Your Understanding
 
 1. Print the person's details in an easy to understand sentence.
 2. Add a getter to return the number of years the employee has been working for the company, you will need to round this down to a whole number. You should make use of one of the static methods of the built-in [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) object.
 
-### 2.3 Modifying Objects
+### 2.4 Modifying Objects
 
 Once an object has been created it can be modified in several ways.
 
@@ -413,7 +415,7 @@ const employee = {
 delete employee.department
 ```
 
-### 2.4 Undefined Values
+### 2.5 Undefined Values
 
 Undefined Objects
 
@@ -434,8 +436,183 @@ const postCode = employee.address && employee.address.postCode
 console.log(postCode) // returns undefined
 ```
 
-#### 2.4.1 Test Your Understanding
+#### 2.5.1 Test Your Understanding
 
 1. Modify the code to handle bad data:
     1. Remove the startYear property.
     2. Set the startYear property to a String.
+
+### 2.6 Object Prototypes
+
+All JavaScript object (such as String, Number, Array, etc.) inherit properties and methods from a **prototype**. This also applies to
+
+//TODO: explanation and discussion on object prototypes
+
+#### 2.6.1 Test Your Understanding
+
+//TODO: exercise on object prototypes
+
+## 2.7 Functional Programming
+
+One of the more intriguing features of JavaScript is its support for a paradigm called **functional programming**. In simple terms this includes:
+
+1. The contents of a variable can't change once assigned (constants only).
+2. The elimination of loops and control structures.
+3. The use of higher-order functions.
+
+Whilst this list is far from complete it allows us to experiment with an alternative (and powerful) way to write programs. Open the `functional.js` file to understand how this is achieved. In it we will be manipulating lists of data (arrays) by applying the functional concepts listed above.
+
+### 2.7.1 Map
+
+The `Array.map()` function creates a new Array by calling the provided function on each element.
+
+In this example, we define a function called `makeUpperCase()`. The parameter will be the array index. This is then passed to the `Array.map()` function
+
+```javascript
+const names = ['Mark', 'John', 'Stephen']
+
+function makeUpperCase(name) {
+  return name.toUpperCase()
+}
+
+const upper = names.map(makeUpperCase)
+```
+
+Whilst this works fine we normally avoid creating a named function and pass an anonymous function. The example below has identical functionality to the previous example.
+
+```javascript
+const names = ['Mark', 'John', 'Stephen']
+
+const upper2 = names.map( value => {
+  return value.toUpperCase()
+})
+```
+
+By using the Arrow Function the return statement is inferred if the parenthesis (`{}`) are removed. The example below is logically identical to the example above.
+
+```javascript
+const names = ['Mark', 'John', 'Stephen']
+
+const upper3 = names.map( value => value.toUpperCase() )
+```
+
+#### 2.7.1.1 Test Your Understanding
+
+1. Use the `Array.map()` function to create an array with all the names in lower case only.
+
+### 2.7.2 Filter
+
+The `Array.filter()` method creates an array filled with all array elements that pass a
+test (provided as a function)
+
+```javascript
+const data = ['Coventry', 3.14159, 42]
+
+function getInt(val) {
+  if (Number.isInteger(val)) {
+    return true
+  }
+  return false
+}
+
+const integers = data.filter( val => Number.isInteger(val) )
+```
+
+As before we can use the feature of the arrow function syntax to reduce the above to a single line.
+
+```javascript
+const integers = ['Coventry', 3.14159, 42].filter( val => Number.isInteger(val) )
+```
+
+Here is an example showing the use of the `typeof` statement to return values of type `String`.
+
+```javascript
+function getStr(val) {
+  if (typeof val === 'string') {
+    return true
+  }
+  return false
+}
+
+const strings = ['Coventry', 3.14159, 42].filter(getStr)
+```
+
+As before we can rewrite this as a single line. This is logically identical to the example above.
+
+```javascript
+const strings = ['Coventry', 3.14159, 42].filter( val => typeof val === 'string')
+```
+
+#### 2.7.2.1 Test Your Understanding
+
+1. eturn an array that only contains floating point numbers (non whole numbers). Hint: Since all numbers are the same data type (Number) you will need check both the data type and whether it is a whole number (using modulo division).
+2. Now turn it into a single line function by removing the braces and return statement. */
+3. You should now be able to return an array that only contains integers (whole numbers). */
+
+### 2.7.3 Reduce
+
+The `Array.reduce()` function takes an array and reduces it to a single value using
+an _accumulator variable_ to track the result. Notice that the anonymous function has 2
+parameters, the accumulator (that passes its current value) and the array value.
+The value returned by the function becomes the value of the accumulator.
+
+```javascript
+function getLongest(acc, val) {
+  if (val.length > acc.length) {
+    return val
+  } else {
+    return acc
+  }
+}
+
+const longest = ['Mark', 'John', 'Stephen'].reduce(getLongest)
+```
+
+Again, we can use an anonymous function to avoid having to define the named function.
+
+```javascript
+const longest = ['Mark', 'John', 'Stephen'].reduce( (acc, val) => {
+  if (val.length > acc.length) {
+    return val
+  } else {
+    return acc
+  }
+})
+```
+
+The `Array.reduce()` function takes a second parameter which allows you to specify an initial value for the accumulator (if this is omitted it is assigned a value of `0`). This allows the function to be used in a number of surprising ways. Take a look at the followin example and see if you can figure out what is does and how it works.
+
+```javascript
+function reverse(acc, val) {
+  return val + acc
+}
+
+const rev = 'william'.split('').reduce(reverse, '')
+```
+
+As before, we can use an anonymous function.
+
+```javascript
+const rev = 'william'.split('').reduce( (acc, val) => {
+  acc.unshift(val)
+  return acc
+}, [])
+```
+
+And by taking advantage of the arrow function syntax we have a single line.
+
+```javascript
+const rev = 'william'.split('').reduce( (acc, val) => val + acc, '')
+```
+
+#### 2.7.3.1 Test Your Understanding
+
+1. Write a single-line script to return the longest name in an array. You will need to use the `Conditional Operator`.
+
+### 2.7.4 Chaining
+
+One of the benefits of these array functions is that they are applied to arrays and they each return an array. This means that we can combine them to solve more complex problems.
+
+#### 2.7.4.1 Test Your Understanding
+
+1. Return the largest integer by chaining filter and reduce.
