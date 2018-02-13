@@ -554,6 +554,8 @@ function getInt(val) {
   return false
 }
 
+const integers = data.filter(getInt)
+
 const integers = data.filter( val => Number.isInteger(val) )
 ```
 
