@@ -237,6 +237,29 @@ Lets improve the currency exchange tool. You will need to refer to the API [docu
 4. Use the [Number.prototype.toFixed()](https://goo.gl/DU4hvd) to truncate the number to 2 decimal places.
 5. Finally, modify your program so that it throws an error if it doesn't recognise either of the currency codes.
 
+## 1.4 Nested Callbacks
+
+Because the code to be run after a callback is run needs to be _inside_ the callback code it is very challenging to build a script that contains several long-running tasks you get into a situation where you nest callbacks inside callbacks (inside callbacks) which makes the code very difficult to write, debug and read and means its very difficult to split into separate functions, a situation commonly known as **Callback Hell**.
+
+Open the file `nestedCallbacks.js` which asks for a _base_ currency code then prints out all the exchange rates against other currencies. Notice that there are four functions defined, three of which include a callback. Our script is designed to capture user input using `stdin` (needing a callback), identify whether a currency code is valid (requiring a second callback) and then getting the currency conversion rates for the specified currency (requiring a third callback).
+
+1. Notice that the `checkValidCurrencyCode()` function is called by the callback for the `getInput()` function and the `getData()` function is called by the callback for the `checkValidCurrencyCode()` function.
+2. Each callback takes two parameters as normal. The first contains the error (if any) and this needs to be handled in each callback.
+3. The data from the first callback is needed when calling the third function so needs to be stored in an immutable variable (constant).
+4. The fourth, and final, function does not have a callback.
+
+Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
+
+### 1.4.1 Test Your Knowledge
+
+The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
+
+1. modify the script to ask for the currency to convert to and display only the one conversion rate.
+2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
+3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency.
+
+Even though the script is still simple you are probably already getting in a tangle! Imagine a more complex script with conditions, it would quickly get out of hand and become practically impossible to debug.
+
 ## 2 Objects
 
 Lets start by creating an manipulating objects using **object literals**. Open the `employee.js` file, read through it and see if you can work out what it does. Now run it to see if you were correct.
