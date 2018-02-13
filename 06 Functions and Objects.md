@@ -444,13 +444,29 @@ console.log(postCode) // returns undefined
 
 ### 2.6 Object Prototypes
 
-All JavaScript object (such as String, Number, Array, etc.) inherit properties and methods from a **prototype**. This also applies to
+All JavaScript object (such as String, Number, Array, etc.) inherit properties and methods from a **prototype**. This also applies to any new objects you create. Since JavaScript does not support _traditional_ classes, this becomes the way to add new functionality. Let's look at a simple example.
 
-//TODO: explanation and discussion on object prototypes
+The `String` object does not have a way to convert a string into an array of characters so we will add this. After it is added we can see that _all strings_ have this new behaviour.
+
+```javascript
+String.prototype.toArray = function() {
+  const strArr = this.split('')
+  return strArr
+}
+
+const nameArray = 'John Doe'.toArray()
+console.log(nameArray)
+```
+
+There are a couple of important concepts here.
+
+1. Notice that the function is _not_ defined using the arrow syntax `=>`, this is because we need the function to have its own _context_, this does not happen with arrow functions.
+2. Inside the function we manipulate the `this` object which represents the value of the object.
+    1. Replace the `function() {}` construct with an arrow function. What happens when you run the script?
 
 #### 2.6.1 Test Your Understanding
 
-//TODO: exercise on object prototypes
+1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
 
 ## 2.7 Functional Programming
 
