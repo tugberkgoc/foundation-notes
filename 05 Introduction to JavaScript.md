@@ -1,6 +1,14 @@
 
 # Introduction to JavaScript
 
+Before you start this worksheet make sure you have the latest lab materials:
+
+```shell
+$ git stash
+$ git pull origin master
+$ git stash pop
+```
+
 In this chapter we will begin learning about programming in JavaScript. Note that we will only be covering the parts of the language that relate directly to building our dynamic website, there are lots of books that cover the language in more depth.
 
 You will sometimes hear different names used for this language:
