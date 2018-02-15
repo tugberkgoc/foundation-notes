@@ -14,6 +14,11 @@ $ git pull origin master
 $ git stash pop
 ```
 
+If the VI editor window pops open:
+
+1. press the Esc key.
+2. type `:wq` and press the Enter key.
+
 ## Contents
 
 This chapter covers a wide number of topics associated with running async code that will greatly improve your knowledge of how asyncronous code works and, should you choose to implement these, will lead to much cleaner code.
