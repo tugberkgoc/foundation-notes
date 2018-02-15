@@ -1,6 +1,14 @@
 
 # Data Persistence
 
+Before you start this worksheet make sure you have the latest lab materials:
+
+```shell
+$ git stash
+$ git pull origin master
+$ git stash pop
+```
+
 ## 1 Filesystem
 
 Stores text in file against key
