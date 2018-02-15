@@ -9,6 +9,11 @@ $ git pull origin master
 $ git stash pop
 ```
 
+If the VI editor window pops open:
+
+1. press the Esc key.
+2. type `:wq` and press the Enter key.
+
 ## 1 Introduction to CSS3
 
 The purpose of HTML is to define the structure and contents of a website. It is not intended to contain any representational markups. CSS (Cascaded Style Sheets) is designed for that purpose.
