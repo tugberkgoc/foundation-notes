@@ -4,6 +4,14 @@
 1. Working with Git Locally
 2. Git Remotes
 
+Before you start this worksheet make sure you have the latest lab materials:
+
+```shell
+$ git stash
+$ git pull origin master
+$ git stash pop
+```
+
 ## 1 Working with Git Locally
 
 Even if you are not working as part of a team, Git can offer a number of advantages. In this section you will learn how to use Git to manage your code within your local development environment.
