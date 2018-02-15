@@ -1,6 +1,14 @@
 
 # Learning CSS3
 
+Before you start this worksheet make sure you have the latest lab materials:
+
+```shell
+$ git stash
+$ git pull origin master
+$ git stash pop
+```
+
 ## 1 Introduction to CSS3
 
 The purpose of HTML is to define the structure and contents of a website. It is not intended to contain any representational markups. CSS (Cascaded Style Sheets) is designed for that purpose.
