@@ -9,6 +9,11 @@ $ git pull origin master
 $ git stash pop
 ```
 
+If the VI editor window pops open:
+
+1. press the Esc key.
+2. type `:wq` and press the Enter key.
+
 ## 1 Functions
 
 In JavaScript, as in most other languages, code can be divided in to modular blocks called functions. Once defined, these can be called from other code. Data can be passed in the form of parameters and functions can return data back to the calling code.
