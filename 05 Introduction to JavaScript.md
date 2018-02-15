@@ -9,6 +9,11 @@ $ git pull origin master
 $ git stash pop
 ```
 
+If the VI editor window pops open:
+
+1. press the Esc key.
+2. type `:wq` and press the Enter key.
+
 In this chapter we will begin learning about programming in JavaScript. Note that we will only be covering the parts of the language that relate directly to building our dynamic website, there are lots of books that cover the language in more depth.
 
 You will sometimes hear different names used for this language:
