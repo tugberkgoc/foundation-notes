@@ -6,6 +6,14 @@ This worksheet is **optional** and covers more advanced Asynchronous techniques 
 
 Note that AJAX technically uses XML as the data format, but we will be using JSON which is easier to parse, and becoming the defacto standard for much data on the web. The principles of asynchronous communication and callback functions are effectively identical for XML and JSON though.
 
+Before you start this worksheet make sure you have the latest lab materials:
+
+```shell
+$ git stash
+$ git pull origin master
+$ git stash pop
+```
+
 ## Contents
 
 This chapter covers a wide number of topics associated with running async code that will greatly improve your knowledge of how asyncronous code works and, should you choose to implement these, will lead to much cleaner code.
