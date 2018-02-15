@@ -13,6 +13,14 @@ Contents:
 4. Templating
 5. Modular code
 
+Before you start this worksheet make sure you have the latest lab materials:
+
+```shell
+$ git stash
+$ git pull origin master
+$ git stash pop
+```
+
 ## 1 Package Manifests
 
 A package manifest is an json-formatted file called `package.json` that is created in the root directory of a NodeJS application. I describes the application (name, author, etc), the _entry point_ (the script that needs to be run to launch the application) and identifies the third-party packages (including their specific versions) needed to run the application. It also supports development be defining the packages needed to support the code _development_ and also allows us to define command _aliases) which means we don't need to type in complex commands.
