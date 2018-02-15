@@ -36,7 +36,7 @@ Now we need to use the **Terminal** that is built into Codeanywhere. If one is n
 Please note you will have to type the following to clone the repository (CTRL+V/paste does not work).
 
 ```shell
-$ git clone https://.../TEACHING-MATERIALS.git .
+$ git clone https://.../TEACHING-MATERIALS.git foundation
   Cloning into '.'...
   remote: Counting objects: 1692, done.
   remote: Compressing objects: 100% (102/102), done.
@@ -46,7 +46,7 @@ $ git clone https://.../TEACHING-MATERIALS.git .
   Checking connectivity... done.
 ```
 
-This will have created a clone of the repository in your Codeanywhere container. Right-click on the `labs` container again and choose `refresh` to reload the sidebar and this should display the files.
+This will have created a directory called `foundation/` and cloned all of the files in this repository into it. Right-click on the `labs` container again and choose `refresh` to reload the sidebar and this should display the files.
 
 ![opening the SSH terminal](exercises/.images/codeanywhere_05.png)
 
