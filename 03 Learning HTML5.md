@@ -18,6 +18,11 @@ $ git pull origin master
 $ git stash pop
 ```
 
+If the VI editor window pops open:
+
+1. press the Esc key.
+2. type `:wq` and press the Enter key.
+
 In this worksheet you will be learning about the markup language HTML which is currently in version 5. The worksheet is split into five parts with the resources for each part in their own subdirectory. The `template.html` file contains a basic HTML5 template you will find useful when creating your own web pages.
 
 ```
