@@ -323,7 +323,7 @@ first-name
 
 ### 2.2 Retrieving Object Properties
 
-Whilst it is possible (and useful) to log an entire object to the console, normally we would want to retrieve the values of specific properties.
+Whilst it is possible (and useful) to log an entire object to the console, normally we would want to retrieve the values of specific properties, this is known as **destructuring** an object.
 
 ```javascript
 const employee = {
@@ -349,6 +349,22 @@ const grade = employee.grade || 'A'
 ```
 
 This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
+
+#### 2.3.1 ECMA6 Object Destructuring
+
+In ECMA6 is is possible to extract multiple pieces of data into separate variables by destructuring using an _object pattern_. This is syntactically similar to creating object literals (see the example below).
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  'department': 'Computing'
+}
+
+let {firstName: first, 'last name': last, department: dept} = employee
+console.log(first) // prints 'Colin'
+console.log(dept) // prints 'Computing'
+```
 
 ### 2.3 Getters and Setters
 
