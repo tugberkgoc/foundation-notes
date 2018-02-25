@@ -3,10 +3,17 @@
 
 const fs = require('fs')
 const express = require('express')
+const es6Renderer = require('express-es6-template-engine')
 const bodyParser = require('body-parser')
 const app = express()
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+
+const request = require('request')
+
+app.engine('html', es6Renderer)
+app.set('views', 'html')
+app.set('view engine', 'html')
 
 const port = 8080
 const minLength = 3
@@ -21,9 +28,34 @@ const status = {
 
 const names = []
 
-app.get('/', (req, res) => {
-	res.send('Hello World')
+app.get('/:base', (request, response) => {
+	console.log('/')
+	console.log(request.params)
+	const base = request.params.base.toUpperCase()
+	//console.log(base)
+	const url = `http://api.fixer.io/latest?base=${base}`
+	request.get(url, (err, res, body) => {
+		if (err) console.log(err.message)
+		const json = JSON.parse(body)
+		//console.log(typeof data)
+		//console.log(JSON.stringify(data, null, 2))
+		const rates = json.rates
+		const data = {
+			base: base,
+			rates: rates
+		}
+		console.log(data)
+		res.render('index', {locals: data})
+		res.end()
+	})
 })
+
+/* handling rows of data.
+${features.map(f => `
+    <dt>${f.dt}</dt>
+    <dd>${f.dd}</dd>
+  `).join('')}
+*/
 
 app.get('/hello', (req, res) => {
 	res.sendFile(`${__dirname}/hello.html`)

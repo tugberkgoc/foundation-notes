@@ -16,10 +16,14 @@ const port = 8080
 const items = []
 
 app.get('/', (req, res) => {
-	const search = req.query.search
-	console.log(`you searched for '${search}'`)
+	//const search = req.query.search
+	//console.log(`you searched for '${search}'`)
 	res.header('Content-Type', 'text/html')
-	res.write('<html><body><p><a href="/form">View form</a></p></body></html>')
+	res.write('<html><body><p><a href="/form">View form</a></p><ol>')
+	for(const item of items) {
+		res.write(`<li>${item}</li>`)
+	}
+	res.write('</ol></body></html>')
 	res.end()
 })
 
