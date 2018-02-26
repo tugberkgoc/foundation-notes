@@ -28,25 +28,31 @@ const status = {
 
 const names = []
 
-app.get('/:base', (request, response) => {
-	console.log('/')
-	console.log(request.params)
-	const base = request.params.base.toUpperCase()
-	//console.log(base)
+app.get('/:base', (req, response) => {
+	const base = 'hkd'.toUpperCase()
+	console.log(base)
 	const url = `http://api.fixer.io/latest?base=${base}`
 	request.get(url, (err, res, body) => {
 		if (err) console.log(err.message)
 		const json = JSON.parse(body)
-		//console.log(typeof data)
-		//console.log(JSON.stringify(data, null, 2))
-		const rates = json.rates
+		console.log(JSON.stringify(json, null, 2))
+
+		const rates = []
+		for (var key in json.rates) {
+			if (json.rates.hasOwnProperty(key)) {
+				const data = {curr: key, rate: json.rates[key]}
+				rates.push(data)
+				console.log(`${key}: ${json.rates[key]}`)
+			}
+		}
+
 		const data = {
 			base: base,
 			rates: rates
 		}
 		console.log(data)
-		res.render('index', {locals: data})
-		res.end()
+		response.render('index', {locals: data})
+		//response.end()
 	})
 })
 

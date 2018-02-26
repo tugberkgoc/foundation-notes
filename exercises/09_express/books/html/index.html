@@ -1,0 +1,23 @@
+
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>The HTML5 Template</title>
+		<meta name="description" content="Google Book Search">
+		<meta name="author" content="Mark J Tyers">
+	</head>
+	<body>
+        <h1>Searching for "${query}"</h1>
+        <p>
+            <form method="get" action="/">
+                <input type="text" name="q" value="${query}" autofocus />
+                <input type="submit" value="search" />
+            </form>
+        </p>
+        <ol>
+            ${books.map(b => `<li>${b.title} (${b.isbn}) [${b.id}]</li>`).join('')}
+        </ol>
+	</body>
+</html>

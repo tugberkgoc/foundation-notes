@@ -122,7 +122,48 @@ In this section you will be introduced to a third approach which combines the be
 
 use the template/ example.
 
+### 3.1 Repeating Data
+
+In the previous example you have seen how to insert single values into a web page but how to we display lists of data? A list is stored in an **array** in JavaScript so the first task is to ensure your data is in an array. Once this is done we can send the entire array to the template in the same way we sent single values.
+
+```javascript
+const food = ['bread', 'butter', 'jam']
+const data = {
+			foodStuffs: data
+		}
+```
+
+The magic happens in the template. You can insert any valid JavaScript expression in the template placeholder and whatever is _returned_ will be inserted into the html page.
+
+```html
+<ol>
+${foodStuffs.map(f => `<li>${f}</li>`).join('')}
+</ol>
+```
+
+In the example above, we manipulate each array index by adding `<li>` elements around them. We then take the new array and use `join()` to turn it into a single string. The result is then inserted inside the `<ol>` element.
+
+Open the `currency/` directory and examine both the `index.js` and `index.html` files to see a slightly more complex example.
+
+#### 3.1.1 Mixing Structure and Logic
+
+Can you spot the problem with the templating solution? In our previous examples we have always kept the _layout_ in the html file, the _appearance_ in the css file and all logic in the js file. By putting the `map()` function in the html template file we are starting to mix the concerns and this is not a good thing. Whilst we can't avoid this, there are steps we can take to minimise its impact.
+
+If you think about how we did this you might have spotted an alternative approach: we could have created a string containing the data in the js file and passed this to the template. So why is this a bad thing?
+
+In the `currency/` example we have added a small amount of js code to the template file but the script file contains no html. If we build the string in the js file we start introducing structural elements into the script file which prevents us from changing our minds about how to display the data (we are _baking in_ the structure).
+
+#### 3.1.2 Test Your Understanding
+
+Display a list of data on one of your web pages. You could choose from a ordered or unordered list, a definition list (as in the example) or even a table.
+
 ## 4 Modular Code
+
+Un until now, all your JavaScript/NodeJS code has been in a single file (commonly named `index.js`). Whilst this works for small scripts, as your scripts get longer it becomes increasingly difficult to manage. The solution is to _modularise_ your code by splitting it up into several different files.
+
+### 4.1 Reducing the Size of the Routes File
+
+Your first step should be to remove as much code as possible from your main routes file. The file should handle the http requests and send back the response but nothing else. let's look at an example.
 
 books/ example
 

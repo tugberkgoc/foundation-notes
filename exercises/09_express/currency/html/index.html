@@ -5,10 +5,13 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Converting from ${base}</title>
-		<meta name="description" content="The HTML5 Template">
-		<meta name="author" content="Joe Bloggs">
+		<meta name="description" content="Currency conversion table">
+		<meta name="author" content="Mark Tyers">
 	</head>
 	<body>
-    <h1>Base Currency: ${base}</h1>
+		<h1>Base Currency: ${base}</h1>
+		<dl>
+			${rates.map(f => `<dt>${f.curr}</dt><dd>${f.rate}</dd>`).join('')}
+		</dl>
 	</body>
 </html>
