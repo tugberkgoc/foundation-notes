@@ -1,6 +1,8 @@
 
 'use strict'
 
+/* eslint no-magic-numbers: 0, arrow-body-style: 0 */
+
 // all four of these functions contain the same functionality.
 
 // traditional JavaScript function that takes an ECMA rest param and returns the total
