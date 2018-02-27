@@ -77,23 +77,41 @@ Now we understand the contents of the manifest we will create one from scratch.
 
 ### 2.1 Routes
 
+Every _request_ sent from the client is handled by a route. The server compares the requested HTTP method and route against the strings passed as the first parameter until it finds a match. If there are no routes that match the specific URL the express server will repond with a `404 NOT FOUND` response.
+
+When a match is found, the server runs the _callback_ (anonymous function) that has been supplied as the second parameter. This function takes three parameters:
+
+1. A `request` object that contains all the data passed as part of the HTTP request headers.
+2. A `response` object that will contain the data to be returned the the client as part of the response.
+3. A `body` object that contains the string passed as the _request body_.
+
+
+
+```javascript
+app.get('/test', (req, res, body) {
+    // code goes here
+})
+```
+
 use the todo/ example
 
 ### 2.2 The Request Object
 
-```javascript
-req.query // querystring object
-req.body
-req.hostname
-req.baseUrl
-req.path
-req.ip
-req.params // /xxx/:yyy
+The `request` object that contains all the data passed as part of the HTTP request headers and body. it contains all the information from these headers, in particular, given the request:
+
+```
+http://www.example.com/hello/mark?gender=male
 ```
 
-req.body Contains key-value pairs of data submitted in the request body. By default, it is undefined, and is populated when you use body-parsing middleware such as body-parser
-
-req.query This property is an object containing a property for each query string parameter in the route. If there is no query string, it is the empty object, {}.
+| Object         | Contains              | Example           |
+| -------------- | --------------------- | ----------------- |
+| `req.query`    | The querystring       | `gender=male`     |
+| `req.body`     | The request body      | -                 |
+| `req.hostname` | The server hostname   | `www`             |
+| `req.baseUrl`  | The base URL          | `www.example.com` |
+| `req.path`     | The route             | `/hello/mark`     |
+| `req.ip`       | The server IP address | `192.168.0.1`     |
+| `req.params`   | The parameters        | `/mark`           |
 
 req.accepts(types) Checks if the specified content types are acceptable, based on the request’s Accept HTTP header field. The method returns the best match, or if none of the specified content types is acceptable, returns false (in which case, the application should respond with 406 "Not Acceptable"). req.accepts('html')
 
@@ -101,13 +119,16 @@ req.get(field) Returns the specified HTTP request header field (case-insensitive
 
 ### 2.3 The Response Object
 
-```javascript
-res.write()
-res.send()
-res.setHeader('content-type', 'text/html')
-res.sendFile(`${__dirname}/form.html`)
-res.end()
-```
+The response object contains the data to be returned to the client as the HTTP response. It contains a number of functions.
+
+| Function          | Description                                         | Example                                      |
+| ----------------- | --------------------------------------------------- | -------------------------------------------- |
+| `res.write()`     | adds text to the response body                      | `res.write('hello world')`                   |
+| `res.send()`      | sends text to the response body and sends to client | `res.send('hello world')`                    |
+| `res.setHeader()` | adds a new response header                          | `res.setHeader('content-type', 'text/html')` |
+| `res.sendFile()`  | sends the contents of a file to the client          | `res.sendFile(\`${__dirname}/form.html\`)`   |
+| `res.status()`    | sets the HTTP status                                | `res.status(201)`                            |
+| `res.end()`       | sends the current response body to the client       | `res.end()`                                  |
 
 currency/ example
 
@@ -120,17 +141,68 @@ Up to now you have seen two ways the server can send response data to the client
 
 In this section you will be introduced to a third approach which combines the best features of each the other two approaches. Locate the files in the `exercises/06_express/template/` directory.
 
-use the template/ example.
+There are a number of templating engines that are compatible with Express however in this worksheet we will be using one of the simplest ones, called . This needs to be imported into your script.
 
-### 3.1 Repeating Data
+```javascript
+const es6Renderer = require('express-es6-template-engine')
+const app = express()
+app.engine('html', es6Renderer)
+app.set('views', 'html')
+app.set('view engine', 'html')
+```
+
+Notice that we import the renderer then set it as the default html engine. We then tell the server where to find the html templates and finally set the view engine to html.
+
+Any data we want to be embedded in the template needs to be added to a JavaScript object (`data` in this example). Finally we call the `render()` function of our response object (`res`) and pass it two parameters:
+
+1. The name of the template file (without the file extension).
+2. An object containing a `locals` key. This should contain the data we wish to insert in the template.
+
+```javascript
+const d = new Date()
+const data = {
+  title: 'My First Template',
+  date: `${d.getDay()}/${d.getMonth()+1}/${d.getFullYear()}`
+}
+res.render('index', {locals: data})
+```
+
+The template file needs to have placeholders to indicate where the dataa should be inserted.
+
+```html
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>${title}</title>
+  </head>
+  <body>
+    <h1>${date}</h1>
+  </body>
+</html>
+```
+
+You can see a complete example in the `template/` directory.
+
+### 3.1 Test Your Understanding
+
+1. Create a css file and link it to the html template. Add some rules to improve the appearance of the page.
+2. Display the date in a paragraph tag.
+3. Change the top level heading to display the same information as the page title.
+3. Add a table to display the following with explanations:
+    1. The server hostname
+    2. The IP address of the server
+    3. The base URL
+    4. The route
+
+### 3.2 Repeating Data
 
 In the previous example you have seen how to insert single values into a web page but how to we display lists of data? A list is stored in an **array** in JavaScript so the first task is to ensure your data is in an array. Once this is done we can send the entire array to the template in the same way we sent single values.
 
 ```javascript
 const food = ['bread', 'butter', 'jam']
 const data = {
-			foodStuffs: data
-		}
+  foodStuffs: data
+}
 ```
 
 The magic happens in the template. You can insert any valid JavaScript expression in the template placeholder and whatever is _returned_ will be inserted into the html page.
@@ -190,8 +262,8 @@ Every NodeJS file includes a special `module` object that represents the current
 module.exports.name = 'John Doe'
 
 module.exports.hello = (name, callback) => {
-    // code goes here.
-    return callback(null, `hello ${name}`)
+  // code goes here.
+  return callback(null, `hello ${name}`)
 }
 ```
 In this example, the `name` property is available to any script importing this module. We also have a function expression in the `hello` property.
@@ -204,8 +276,8 @@ const basic = import('./basic')
 console.log(basic.hello)
 
 basic.hello('Mark', (err, data) => {
-    if(err) console.log('an error has occurred)
-    console.log(data)
+  if(err) console.log('an error has occurred')
+  console.log(data)
 })
 ```
 
