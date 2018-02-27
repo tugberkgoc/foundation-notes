@@ -215,9 +215,20 @@ ${foodStuffs.map(f => `<li>${f}</li>`).join('')}
 
 In the example above, we manipulate each array index by adding `<li>` elements around them. We then take the new array and use `join()` to turn it into a single string. The result is then inserted inside the `<ol>` element.
 
+### 3.3 Test Your Understanding
+
 Open the `currency/` directory and examine both the `index.js` and `index.html` files to see a slightly more complex example.
 
-#### 3.1.1 Mixing Structure and Logic
+1. Create a stylesheet linked to the html template.
+    1. Add some rules to improve the appearance of the page.
+2. Modify the template to display the currency and rates in a table.
+3. Without adding any more html, colour every other row of the table in light grey.
+4. Display the conversion rates to 2 decimal places.
+5. Add a second text box to enter the amount of the base currency to convert.
+    1. Display the amount of each currency you would get in a third column.
+    2. Don't forget to include the currency code!
+
+### 3.4 Mixing Structure and Logic
 
 Can you spot the problem with the templating solution? In our previous examples we have always kept the _layout_ in the html file, the _appearance_ in the css file and all logic in the js file. By putting the `map()` function in the html template file we are starting to mix the concerns and this is not a good thing. Whilst we can't avoid this, there are steps we can take to minimise its impact.
 
