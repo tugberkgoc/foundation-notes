@@ -165,7 +165,72 @@ Un until now, all your JavaScript/NodeJS code has been in a single file (commonl
 
 Your first step should be to remove as much code as possible from your main routes file. The file should handle the http requests and send back the response but nothing else. let's look at an example.
 
-books/ example
+Open the `books/index.js` file. This file contains 2 routes, `/bad` and `/good`. Start the server and view the `/bad` route which should display a form which allows you to search for a book. Try searching for books on different topics to see how this works.
 
-1. CommonJS modules
-2. Handling callbacks in modules
+As you search:
+
+1. Examine the URL used and identify any query parameters.
+2. Study the `index.html` template file to understand how the data is rendered.
+3. Study the code in the routes file. Notice there are two nested callbacks.
+
+You have probably noticed that there is a lot of code in the `/bad` route! This code does 2 different tasks:
+
+1. It contains the business logic to make API requests and tidy the data.
+2. It also takes this data and sends it back to the browser as an HTTP response.
+
+This is why the code is hard to read. It therefore makes the code difficult to maintain and new features are likely to introduce bugs. Later on, when we start automating our code testing we would quickly discover this code is very difficult to write tests for. To fix this we need to separate out the business logic from the routing.
+
+#### 4.2 The Exports Object
+
+Every NodeJS file includes a special `module` object that represents the current module. It contains a nested object called `exports`. Anything in this `exports` object will be exposed (public) whenever this module is imported and used.
+
+```javascript
+// basic.js
+
+module.exports.name = 'John Doe'
+
+module.exports.hello = (name, callback) => {
+    // code goes here.
+    return callback(null, `hello ${name}`)
+}
+```
+In this example, the `name` property is available to any script importing this module. We also have a function expression in the `hello` property.
+
+To use this we need to import this `basic.js` module.
+
+```javascript
+const basic = import('./basic')
+
+console.log(basic.hello)
+
+basic.hello('Mark', (err, data) => {
+    if(err) console.log('an error has occurred)
+    console.log(data)
+})
+```
+
+Let's look at a more useful example! Open the `books/books.js` file. Notice that there is a function expression stored in the `module.exports.searchByString` property. This means it is visible outside the module. This takes the data from the request and returns books based on the search query, it does not add this data to the template or return it to the client.
+
+Now look at the `index.js` file and locate the `/good` route. You can see immediately that there is a lot less code. The code here calls the `searchByString()` function expression and then uses the callback to add the data to the template and send the response to the client.
+
+### 4.3 Private Functions
+
+Any function in a module that has not been added to the `module.exports` object is visible only to other code in the module (private scope). locate the `buildString` function. Notice that this is a standard function that is used to build the correct URL. It is used in the `betterSearchString` function literal and replaces a block of inline code.
+
+### 4.4 Test Your Understanding
+
+1. Modify the template to display the data as a 3 column table with the title in the first column, the ISBN in the second and the unique id in the third.
+2. Add a hyperlink to the title to link to the route `/book/XXXXX`, where XXXXX is the unique ID of that book.
+    1. Now remove the third column.
+    2. Clicking on these links will display a message 'page not found'.
+3. Create a new route to handle this, the route will be `/book/:id`. This should initially just display the id of the book on the page.
+    1. You can access the ID value in your script using the `req.params.id` object.
+4. Create and export a new function literal in the `books.js` file, this should retrieve the book title, description and author(s) and display these:
+    1. Use the URL `https://www.googleapis.com/books/v1/volumes/XXXXX` to retrieve the book details (where XXXXX is the book ID).
+    2. Print this to the console to identify the structure.
+    3. Extract the data and print to the console.
+    4. Build a new html template called `book.html` to display the information.
+5. Create a back button to return to the search results.
+    1. How can you ensure the search results are still there when you click on this button?
+6. Can you replace the callbacks with promises/async functions?
+7. Can you split the code logic into multiple functions?

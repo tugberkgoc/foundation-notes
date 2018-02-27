@@ -22,7 +22,7 @@ const minLen = 3
  * @param {String} req the string to search for
  * @param {Function(Error, Object)} callback run on completion
  */
-exports.searchByString = (req, callback) => {
+module.exports.searchByString = (req, callback) => {
 	if(!req.query.q || req.query.q.length <= minLen) return callback(null, [])
 	const query = req.query.q
 
@@ -44,6 +44,42 @@ exports.searchByString = (req, callback) => {
 			}
 			return {title: item.volumeInfo.title, isbn: id, id: item.id}
 		})
-		callback(null, books)
+		return callback(null, books)
 	})
+}
+
+/* ========================================================================== */
+
+module.exports.betterSearchByString = (req, callback) => {
+	if(!req.query.q || req.query.q.length <= minLen) return callback(null, [])
+	const query = req.query.q
+	const records = 40
+	const url = buildString(records, query)
+
+	request.get(url, (err, res, body) => {
+		if (err) return callback(Error('failed to make API call'))
+		const data = JSON.parse(body)
+		const books = data.items.map( item => {
+			let id = ''
+			if (item.volumeInfo.industryIdentifiers) {
+				id = item.volumeInfo.industryIdentifiers[0].identifier
+			}
+			return {title: item.volumeInfo.title, isbn: id, id: item.id}
+		})
+		return callback(null, books)
+	})
+}
+
+/** Builds the url needed by the Google Books API.
+ * @function buildString
+ * @param    {Number} count the number of records to return (max 40)
+ * @param    {String} query the string to search for
+ * @returns  {String} the URL
+ */
+function buildString(count, query) {
+	const base = 'https://www.googleapis.com/books/v1/volumes'
+	const fields = 'items(id,volumeInfo(title,industryIdentifiers))'
+	const url = `${base}?maxResults=${count}&fields=${fields}&q=${query}`
+	console.log(url)
+	return url
 }
