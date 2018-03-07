@@ -262,8 +262,8 @@ You should also add standard JavaScript comments to explain the code itself. The
 ### 3.2 Generating the Documentation
 
 JSDoc is available as a NodeJS plugin. It has already been added as a _Dev Dependency_ in the `package.json` file and so it should already be installed. Lets use it to build the documentation for our modules.
-```
-ode_modules/.bin/jsdoc -d docs/jsdoc/ modules/
+```shell
+$ node_modules/.bin/jsdoc -d docs/jsdoc/ modules/
 ```
 This will create a  `docs/jsdoc/` directory containing the complete documentation as a website.
 ```
