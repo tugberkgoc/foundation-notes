@@ -1,7 +1,7 @@
 
 # The Express Web Server
 
-In the previous worksheet you learned the basics of the JavaScript language. In this worksheet you will be applying these skills to understand how to use the NodeJS Express module to host a dynamic website. It is vitally important that you have completed all the exercises in the previous worksheet before continuing.
+In the previous worksheet you learned the basics of the JavaScript language. In this worksheet you will be applying these skills to understand how to use the NodeJS Express module to host a dynamic website. It is vitally important that you have completed all the exercises in the previous worksheet before continuing. You should refer to the [lecture slides](https://docs.google.com/presentation/d/1FDZEUydMoocMFg5_KA6WUw0MYmDO1GdRZBjqO5K76ao/edit?usp=sharing) when completing the worksheet activities.
 
 By the end of this worksheet you will be able to build simply dynamic websites using Express.
 
