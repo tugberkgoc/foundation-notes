@@ -64,6 +64,8 @@ In this first lab you will learn how to set up your development environment and 
 
 ## 4 Introduction to JavaScript/NodeJS/ECMA6
 
+[Understanding ECMAScript 6](https://github.com/nzakas/understandinges6/tree/master/manuscript)
+
 1. Working with NodeJS
     1. Executing NodeJS files
     2. Installing packages
