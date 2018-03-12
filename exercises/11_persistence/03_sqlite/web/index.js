@@ -19,23 +19,19 @@ app.use(parser)
 
 const sqlite3 = require('sqlite3').verbose()
 
-const db = new sqlite3.Database('./todo.db', (err) => {
+const port = 8080
+const DBName = 'todo'
+
+const db = new sqlite3.Database(`./${DBName}.db`, (err) => {
 	if (err) return console.error(err.message)
-	console.log('Connected to the in-memory SQlite database.')
-	db.run('CREATE TABLE IF NOT EXISTS items(list text, item text)')
+	console.log(`Connected to the "${DBName}" SQlite database.`)
+	const sql = 'CREATE TABLE IF NOT EXISTS items(list text, item text)'
+	console.log(sql)
+	db.run(sql)
 })
 
-// db.close((err) => {
-// 	if (err) return console.error(err.message)
-// 	console.log('Close the database connection.')
-// })
-
-const port = 8080
-
-//TODO: routes for the bookshop
 app.get('/', (req, res) => {
 	const item = req.query.item
-	console.log(item)
 	console.log(`adding "${item}"`)
 	const list = req.query.list ? req.query.list : 'main'
 	const sql = `INSERT INTO items(list, item) VALUES("${list}", "${item}")`
@@ -48,7 +44,7 @@ app.get('/', (req, res) => {
 	const data = {
 		title: 'My First Template'
 	}
-	console.log(req.query.list)
+	console.log(`adding ${item} to the ${req.query.list} list`)
 	if(req.query.list) {
 		data.list = req.query.list
 	} else {
@@ -59,7 +55,7 @@ app.get('/', (req, res) => {
 	db.all(sqlSelect, (err, rows) => {
 		if(err) console.error(err.message)
 		data.items = rows.map( row => `<li>${row.item}</li>`).join('')
-		console.log(data)
+		//console.log(data)
 		res.render('index', {locals: data})
 	})
 })
