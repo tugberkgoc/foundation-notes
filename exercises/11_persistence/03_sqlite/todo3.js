@@ -29,7 +29,7 @@ rl.on('line', input => {
     if (input.indexOf('list') === 0) {
         const sql = `SELECT item FROM items WHERE list = "${list}"`
         console.log(sql)
-		db.each(sql, function(err, row) {
+		db.each(sql, (err, row) => {
             console.log(row.item)
             rl.prompt()
         })
