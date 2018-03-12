@@ -14,29 +14,29 @@ rl.setPrompt('')
 rl.prompt()
 
 rl.on('line', input => {
-    console.log(input)
-    if (input == 'exit') return rl.close()
-    if (input.indexOf('add ') === 0) {
-        const item = input.substring(input.indexOf(' ')).trim()
-        console.log(`adding "${item}"`)
-        const sql = `INSERT INTO items(list, item) VALUES("${list}", "${item}")`
-        console.log(sql)
-        db.run(sql, err => {
-            if(!err) console.log(`added ${item}`)
-            rl.prompt()
-        })
-    }
-    if (input.indexOf('list') === 0) {
-        const sql = `SELECT item FROM items WHERE list = "${list}"`
-        console.log(sql)
+	console.log(input)
+	if (input == 'exit') return rl.close()
+	if (input.indexOf('add ') === 0) {
+		const item = input.substring(input.indexOf(' ')).trim()
+		console.log(`adding "${item}"`)
+		const sql = `INSERT INTO items(list, item) VALUES("${list}", "${item}")`
+		console.log(sql)
+		db.run(sql, err => {
+			if(!err) console.log(`added ${item}`)
+			rl.prompt()
+		})
+	}
+	if (input.indexOf('list') === 0) {
+		const sql = `SELECT item FROM items WHERE list = "${list}"`
+		console.log(sql)
 		db.each(sql, (err, row) => {
-            console.log(row.item)
-            rl.prompt()
-        })
+			console.log(row.item)
+			rl.prompt()
+		})
 	}
 })
 
 rl.on('close', () => {
-    db.close()
-    process.exit(0)
+	db.close()
+	process.exit(0)
 })

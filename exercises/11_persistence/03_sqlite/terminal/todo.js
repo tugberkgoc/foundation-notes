@@ -31,12 +31,12 @@ do {
 	if (input.indexOf('add ') === 0) {
 		const space = input.indexOf(' ')
 		const item = input.substring(space).trim()
-        console.log(`adding "${item}"`)
-        const sql = `INSERT INTO items(list, item) VALUES("${list}", "${item}")`
-        console.log(sql)
-        db.run(sql, err => {
-            console.error('ERROR')
-        })
+		console.log(`adding "${item}"`)
+		const sql = `INSERT INTO items(list, item) VALUES("${list}", "${item}")`
+		console.log(sql)
+		db.run(sql, err => {
+			console.error('ERROR')
+		})
 	}
 	if (input.indexOf('list') === 0) {
 		for (let i=0; i< items.length; i++) {
