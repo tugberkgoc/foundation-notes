@@ -1,17 +1,27 @@
 
-var request = new XMLHttpRequest();
-request.open('GET', 'data/books.json', false);
-request.send(null);
-var data = JSON.parse(request.responseText);
-console.log(data);
+'use strict'
 
-var books = data.books;
+const request = new XMLHttpRequest()
+request.open('GET', 'data/books.json', false)
+request.send(null)
+const data = JSON.parse(request.responseText)
+console.log(data)
 
-var list = document.createElement('ol');
-for (var i=0; i < books.length; i++) {
-	console.log(books[i].title);
-	var item = document.createElement('li');
-	item.innerHTML = books[i].title;
-	list.appendChild(item);
+const books = data.books
+
+const list = document.createElement('ol')
+
+// for (var i=0; i < books.length; i++) {
+// 	console.log(books[i].title)
+// 	const item = document.createElement('li')
+// 	item.innerHTML = books[i].title
+// 	list.appendChild(item)
+// }
+
+for(const book of books) {
+	console.log(book.title)
+	const item = document.createElement('li')
+	item.innerHTML = book.title
+	list.appendChild(item)
 }
-document.body.appendChild(list);
+document.body.appendChild(list)
