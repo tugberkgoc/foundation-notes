@@ -29,7 +29,7 @@ const status = {
 app.get('/', async(req, res) => {
 	try {
 		const db = new sqlite3.Database(`${DBName}.db`)
-		await db.runAsync('CREATE TABLE IF NOT EXISTS items(list text, item text)')
+		await runAsync('CREATE TABLE IF NOT EXISTS items(list text, item text)')
 		const list = req.query.list ? req.query.list : 'main'
 		if(req.query.item) {
 			const item = req.query.item
@@ -51,4 +51,13 @@ app.get('/', async(req, res) => {
 
 app.listen(port, () => {
 	console.log(`app listening on port ${port}`)
+})
+
+const runAsync = sql => new Promise( (resolve, reject) => {
+	const db = new sqlite3.Database(`${DBName}.db`)
+	db.run(sql, err => {
+		if(err) return reject(new Error(err.message))
+		resolve()
+	})
+	db.close()
 })
