@@ -3,6 +3,11 @@
 
 console.log(document)
 
+window.onload = () => {
+	console.log('window onload')
+}
+
+// we can select parts of the DOM by its ID.
 document.getElementById('save').onclick = () => {
 	console.log('save')
 	const name = document.querySelector('#userForm input[type="text"]')
@@ -15,6 +20,7 @@ document.getElementById('save').onclick = () => {
 	paragraphs[1].innerHTML = 'Hello World!'
 }
 
+// we can also use a CSS selector to select a part of the DOM.
 document.querySelector('#userForm input[type="email"]').onkeypress = () => {
 	console.log('updating email')
 	const email = document.querySelector('#userForm input[type="email"]').value
