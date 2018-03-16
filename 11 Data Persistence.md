@@ -134,3 +134,52 @@ sqlite> .exit
 4. Before adding an item to the database, check if the item already exists and if so, simply increment the `quantity` value.
 5. Display the list as a 2 column HTML table with the second column displaying the quantity.
 6. Create a third column with a delete link, this should remove the item from the database.
+
+## 3 Using Promises
+
+As you have probably noticed, working with databases requires the use of callbacks. In a complex website this can result in deeply nested callbacks (sometimes called _'callback hell'_). If you completed the _Async_ lab exercises you will recall that the solution is to use **Promises**. In summary:
+
+1. A series of functions are defined that return promises.
+2. These are then chained together:
+    1. If a promise is resolved the next step in the chain is triggered.
+    2. If a promise rejects, the program flow jumps to the `catch()` block at the end of the chain.
+
+So can we replace the current use of nested callbacks with a promise chain? Well we could start by using the `sqlite3-promise` package which provides a set of replacement functions that all return Promise objects. The problem comes when we try to chain these together:
+
+1. There is an optional step (inserting the new record), this uses a function that returns a promise however it is impossible to build this into the promise chain.
+2. There is a complex step to assemble the data to insert into the page template, this will make the promise chain very messy.
+
+The solution here is to replace the _promise chain_ with an _async function_. This will allow us to express the steps in a simple series of steps and include the conditional. The starting point is to define the callback function as being _async_.
+
+```javascript
+app.get('/', async(req, res) => {
+  // code goes here.
+})
+```
+
+We can then wrap our code in a standard `try-catch` block which will handle any errors in the script.
+
+```javascript
+app.get('/', async(req, res) => {
+  try {
+    // code goes here
+  } catch(err) {
+    res.status(status.serverError)
+    res.send(`ERROR: ${err.message}`)
+  }
+})
+```
+
+Open the `02_sqlite/web_async/index.js` file to see the entire async function, notice that we use the `await` keyword to wait for an `async` promise to either `resolve` or `reject`. If you run this you will see that it contains identical functionality to the example in the `02_sqlite/web/` directory. place these two different `index.js` files side by side and compare. Which contains the cleanest code and is easiest to maintain.
+
+### 3.1 Test Your Understanding
+
+This task will require you to implement the same additional functionality as the previous tasks. As you complete these tasks reflect on whether promises and async functions make the task easier or harder.
+
+1. Modify the HTML form to let the user choose which list they want to add the item to.
+2. Modify the code so that an item is only added if it is not already in the specified list.
+3. Modify the database table so it includes a quantity field (set the data type to _NUMERIC_), you will need to delete the database before doing this.
+    1. Make sure the column defaults to a value of `1` by setting the data type to `INTEGER DEFAULT 1`.
+4. Before adding an item to the database, check if the item already exists and if so, simply increment the `quantity` value.
+5. Display the list as a 2 column HTML table with the second column displaying the quantity.
+6. Create a third column with a delete link, this should remove the item from the database.
