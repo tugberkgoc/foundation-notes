@@ -9,6 +9,8 @@ $ git pull origin master
 $ git stash pop
 ```
 
+You should refer to the [presentation](https://drive.google.com/open?id=1sS2q9MYZL9pftgvTZqwppmpg0Ajq21poOxcCJ93FuzQ) to support you as you work through the worksheet.
+
 ## 1 Filesystem
 
 Since NodeJS can access the filesystem on the server, the simplest possible approach to store data is to encode it as a JSON string and save this to a text file (either with a `.json` or `.txt` extension). This uses the [fs](https://nodejs.org/api/fs.html) module which is installed by default but will still need importing into your project.
