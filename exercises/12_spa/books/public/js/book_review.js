@@ -14,7 +14,7 @@ const xmlStatus = {
 	ready: 4
 }
 
-document.getElementById('bookSearch').onkeypress = searchPrep
+document.getElementById('bookSearch').onkeyup = searchPrep
 
 function searchPrep() {
 	console.log('search')
@@ -38,7 +38,6 @@ function search(text) {
 				for(let i=0; i<books.length; i++) {
 					const row = document.createElement('tr')
 					row.innerHTML = `<td>${books[i].volumeInfo.title}</td>`
-					row.onclick = showDetails(books[i].id)
 					table.appendChild(row)
 				}
 			} else {

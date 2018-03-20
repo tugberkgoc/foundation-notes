@@ -11,15 +11,15 @@ const dataDir = 'data'
 var items = []
 
 if (!fs.existsSync(dataDir)){
-    fs.mkdirSync(dataDir)
+	fs.mkdirSync(dataDir)
 }
 
 const filename = process.argv[2] || 'data'
 
 if(fs.existsSync(`${dataDir}/${filename}.json`)) { // next line returns a Buffer
-    const data = fs.readFileSync(`${dataDir}/${filename}.json`).toString('utf8')
-    //console.log(data)
-    items = JSON.parse(data)
+	const data = fs.readFileSync(`${dataDir}/${filename}.json`).toString('utf8')
+	//console.log(data)
+	items = JSON.parse(data)
 }
 
 do {
@@ -28,9 +28,9 @@ do {
 		const space = input.indexOf(' ')
 		const item = input.substring(space).trim()
 		console.log(`adding "${item}"`)
-        items.push(item)
-        const json = JSON.stringify(items, null, 2)
-        fs.writeFileSync(`${dataDir}/${filename}.json`, json)
+		items.push(item)
+		const json = JSON.stringify(items, null, 2)
+		fs.writeFileSync(`${dataDir}/${filename}.json`, json)
 	}
 	if (input.indexOf('list') === 0) {
 		for (let i=0; i< items.length; i++) {

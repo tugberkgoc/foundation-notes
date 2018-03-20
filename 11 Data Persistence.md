@@ -183,3 +183,5 @@ This task will require you to implement the same additional functionality as the
 4. Before adding an item to the database, check if the item already exists and if so, simply increment the `quantity` value.
 5. Display the list as a 2 column HTML table with the second column displaying the quantity.
 6. Create a third column with a delete link, this should remove the item from the database.
+7. As you can see there is a function defined called `runAsync()` which takes the `db.run()` function (with its callback) and wraps it in a `Promise`.
+    1. Write your own `allAsync()` function as a wrapper for the `db.all()` function and use it in place of the built-in `db.allSync()` function.
