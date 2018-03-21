@@ -21,10 +21,13 @@ The key to interacting with the web page is the `window` object which is a top-l
 Since the JavaScript code is running in the _web browser_, we need to use the Chrome Developer Tools to see what us happening. Open the Chrome Developer Tools and locate the **Console** tab. Open the `dom/public/cs/simple_dom.js` file.
 
 1. In the console you will see two messages:
-    1. The first thing is a message `window onload`.
+    1. The first thing is a message `window 'load' event triggered`.
     2. The second item is the `document` object. This contains the entire html page as a JavaScript object. Use the arrow to expand the object, notice this is the html web page (compare this to the contents of the `dom/html/dom.html` file).
     3. Take a look at the `simple_dom.js` file, can you identify where these messages are coming from?
-    4. The `document.window` object contains a property `onload` which contains a _function literal_ that is triggered once the html document has been fully loaded.
+    4. The `document` object contains the `addEventListener()` function which takes two parameters:
+        1. the _event_ to respond to (supplied as a string literal.
+        2. an anonymous _function callback_  that is triggered by the event.
+    5. There are a large number of events that can be used to trigger your code. Check the [full list](https://developer.mozilla.org/en-US/docs/Web/Events) for more information.
 2. Sections of the DOM can be extracted by passing a _CSS Selector_ to the `querySelector()` property. In the `simple_dom.js` script we extract part of the DOM and store it in the `emailField` variable.
     1. This DOM fragments also have event handlers. In this case we are using the `onkeypress()` function. This is triggered when the user selects the field and presses a key.
     2. Select the _email_ field and enter your email address.
@@ -114,18 +117,46 @@ Start by running the web server in the `12_spa/books/` directory and opening the
 
 ## 4 Creating a Single Page Application
 
+// TODO: complete section
 
+### 4.1 Test Your Understanding
 
 ## 5 Web Storage
 
-Only supports strings. Need to convert objects to json strings.
+Only supports strings. Need to convert objects to json strings. Make sure you have opened the **Application** tab in the Chrome Developer Tools pane. Locate the **Storage** section in the left pane.
 
-Local storage: Stores data with no expiration date. The data will be available even when the browser/ browsing tab is closed or reopened.
+1. Close the browser (completely) and reopen. Is the data still there?
+    1. Local storage: Stores data with no expiration date. The data will be available even when the browser/ browsing tab is closed or reopened.
+2. Change the `localstorage` object for the `sessionstorage` object.
+3. Close the browser (completely) and reopen. Is the data still there?
+    1. Session storage: Stores data for one session. Data persisted will be cleared as soon as the user closes the browser.
 
-Session storage: Stores data for one session. Data persisted will be cleared as soon as the user closes the browser.
+### 5.1 Test Your Understanding
+
+// TODO: complete section
+
+### 6 Online and Offline Status
+
+Handled with network events
+
+```javascript
+// thanks to David Walsh
+// https://davidwalsh.name/detecting-online
+
+window.addEventListener('online',  () => {
+  console.log('you are ONLINE')
+})
+
+window.addEventListener('offline', () => {
+  console.log('you are OFFLINE')
+})
+```
 
 -----
 
-async
+## Advanced Topics
 
-defer
+If you are interested in looking into client-side javascript in more detail, find out about the following:
+
+1. async
+2. defer
