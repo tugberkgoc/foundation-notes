@@ -20,9 +20,12 @@ The key to interacting with the web page is the `window` object which is a top-l
 
 Since the JavaScript code is running in the _web browser_, we need to use the Chrome Developer Tools to see what us happening. Open the Chrome Developer Tools and locate the **Console** tab. Open the `dom/public/cs/simple_dom.js` file.
 
-1. In the console you will see two messages:
+1. In the console you will see three messages:
     1. The first thing is a message `window 'load' event triggered`.
     2. The second item is the `document` object. This contains the entire html page as a JavaScript object. Use the arrow to expand the object, notice this is the html web page (compare this to the contents of the `dom/html/dom.html` file).
+    3. Finally the browser window width is displayed:
+        1. Try resizing the browser window, what is displayed in the browser console?
+        2. How could you use this information to adjust the layout to suit different devices (adaptive layout)?
     3. Take a look at the `simple_dom.js` file, can you identify where these messages are coming from?
     4. The `document` object contains the `addEventListener()` function which takes two parameters:
         1. the _event_ to respond to (supplied as a string literal.
@@ -120,6 +123,8 @@ Start by running the web server in the `12_spa/books/` directory and opening the
 // TODO: complete section
 
 ### 4.1 Test Your Understanding
+
+// TODO: complete section
 
 ## 5 Web Storage
 

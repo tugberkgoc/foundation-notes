@@ -29,6 +29,7 @@ function search(text) {
 	const xhr = new XMLHttpRequest()
 	xhr.open('GET', `https://www.googleapis.com/books/v1/volumes?q=${text}`, true)
 	xhr.onload = () => {
+		console.log('onload')
 		if (xhr.readyState === xmlStatus.ready) {
 			if (xhr.status === status.OK) {
 				const data = JSON.parse(xhr.responseText)

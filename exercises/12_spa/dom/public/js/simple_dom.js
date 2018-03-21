@@ -4,6 +4,11 @@
 window.addEventListener('load', () => {
 	console.log('window \'load\' event triggered')
 	console.log(window.document)
+	console.log(`the browser is ${window.innerWidth}px wide`)
+})
+
+window.addEventListener('resize', () => {
+	console.log(`the browser is ${window.innerWidth}px wide`)
 })
 
 // we can use a CSS selector to select a part of the DOM.
