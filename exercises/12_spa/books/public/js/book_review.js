@@ -21,15 +21,14 @@ function searchPrep() {
 	const text = document.getElementById('bookSearch').value
 	if (text.length > minStrLen) {
 		console.log('start search')
-		search(text)
+		search2(text)
 	}
 }
 
-function search(text) {
+function search2(text) {
 	const xhr = new XMLHttpRequest()
 	xhr.open('GET', `https://www.googleapis.com/books/v1/volumes?q=${text}`, true)
-	xhr.onload = () => {
-		console.log('onload')
+	xhr.onreadystatechange = () => {
 		if (xhr.readyState === xmlStatus.ready) {
 			if (xhr.status === status.OK) {
 				const data = JSON.parse(xhr.responseText)
@@ -45,9 +44,6 @@ function search(text) {
 				console.error(xhr.statusText)
 			}
 		}
-	}
-	xhr.onerror = () => {
-		console.error(xhr.statusText)
 	}
 	xhr.send(null)
 }

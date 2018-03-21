@@ -15,7 +15,7 @@ window.addEventListener('resize', () => {
 const emailField = window.document.querySelector('#userForm input[type="email"]')
 emailField.onkeypress = () => {
 	console.log('updating email')
-	const email = document.querySelector('#userForm input[type="email"]').value
+	const email = window.document.querySelector('#userForm input[type="email"]').value
 	console.log(email)
 	window.document.querySelector('#summary p').innerHTML = email
 }
@@ -32,3 +32,7 @@ window.document.getElementById('save').onclick = () => {
 	console.log(`found ${paragraphs.length} p tags`)
 	paragraphs[1].innerHTML = 'Hello World!'
 }
+
+window.document.getElementById('save').addEventListener('click', () => {
+
+})
