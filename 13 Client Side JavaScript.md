@@ -8,7 +8,7 @@ Up until now all your scripts have run on the server however you can run JavaScr
 
 Unlike in server-side scripting, we need to load the JavaScript file into the web browser. To do this we create a link from the HTML file to the JavaScript file and allow the browser to load this over HTTP. For this to work the JS file needs to be publicly accessible by the browser. This is why it is placed in the Express public directory on the server.
 
-1. Locate the `12_spa/dom/html/dom.html` file.
+1. Locate the `13_client/dom/html/dom.html` file.
 2. Notice the `<script>` element after the closing `<body>` element.
     1. It is important that we run the script after the html body has loaded because we will be attaching events to it and modifying it.
 
@@ -16,7 +16,7 @@ Unlike in server-side scripting, we need to load the JavaScript file into the we
 
 The key to interacting with the web page is the `window` object which is a top-level object in Client Side JavaScript. It represents a window or a frame (within a frameset). The `window` object is a top-level object and contains other objects such as `document`, `history` etc. within it.
 
- The `window.document` object contains the entire web page. Start by opening the `12_spa/dom/index.js` script (after installing the necessary modules) and viewing the website using Google Chrome.
+ The `window.document` object contains the entire web page. Start by opening the `13_client/dom/index.js` script (after installing the necessary modules) and viewing the website using Google Chrome.
 
 Since the JavaScript code is running in the _web browser_, we need to use the Chrome Developer Tools to see what us happening. Open the Chrome Developer Tools and locate the **Console** tab. Open the `dom/public/cs/simple_dom.js` file.
 
@@ -95,7 +95,7 @@ Now we have the data we need to create a DOM object and insert this into the pag
 
 In the previous example we loaded a JSON string from a local file using a _synchronous_ XMLHTTPRequest. Whilst this worked in this case, normally the request retrieves data from a remote server and this can introduce a large latency into the process, potentially freezing the UI until completed. To prevent this you should always make _asynchronous_ HTTP requests which can be handled by non-UI threads. This is what you will be doing in this exercise.
 
-Start by running the web server in the `12_spa/books/` directory and opening the web page. Locate and open the `books/public/js/book_review.js` file.
+Start by running the web server in the `13_client/books/` directory and opening the web page. Locate and open the `books/public/js/book_review.js` file.
 
 1. Try entering a search term in the text field. What happens?
     1. Study the `book_review.js` script to see if you can understand _how_ this happens.
