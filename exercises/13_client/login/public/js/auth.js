@@ -16,12 +16,6 @@ window.document.querySelector('button').addEventListener('click', () => {
 	xhr.setRequestHeader('Authorization', `Basic ${token}`)
 	xhr.send()
 
-	// const user = window.document.querySelector('input[name="username"]').value
-	// const pass = window.document.querySelector('input[name="password"]').value
-	// const jsonData = JSON.stringify({username: user, password: pass})
-	// console.log(jsonData)
-	// xhr.send(jsonData)
-
 	xhr.onreadystatechange = () => {
 		if (xhr.readyState === READY) {
 			console.log(`status: ${xhr.status}`)
