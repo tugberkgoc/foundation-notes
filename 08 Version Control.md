@@ -194,17 +194,42 @@ As you can see, there are now two commits in our repository. If there are too ma
 
 In the previous section you learned how to use Git to track local changes. In this section you will learn how to use remote git services.
 
-You will be shown two ways to configure this depending on whether you already have a local Git repository. The examples will be using [GitHub](www.github.com) but these will work equally with other services such as [GitLab](www.gitlab.com) or [BitBucket](www.bitbucket.com).
-
-TODO
-
-```
-git clone https://github.coventry.ac.uk/304CEM-1718SEPJAN/currency.git
-```
+You will be shown two ways to configure this depending on whether you already have a local Git repository. The examples will be using Coventry University's [GitHub](https://github.coventry.ac.uk) server but these will work equally with other services such as [GitLab](www.gitlab.com) or [BitBucket](www.bitbucket.com).
 
 ### 2.1 Adding a Remotes
 
 If you already have a local Git repository (such as the one in your `local_repo/` directory), you can connect this to a remote.
+
+Log onto the GitHub server using your University credentials. Now locate and view the _organisation_ for your current module:
+
+1. Click on the **Enterprise** link in the top-left corner of the web page.
+2. Locate the drop-down menu just underneath this. It will default to your personal space (matching your username).
+3. From the dropdown list choose the correct module, it will look something line this: `205CDE-1718JANMAY`.
+4. Locate the button labelled **View 205CDE-1718JANMAY**.
+
+Now we can create a new, empty repote repository and connect this to your local repository:
+
+1. Click on the **New** button.
+2. Enter the details for your new repository:
+    1. Enter your username as the repository name.
+    2. Leave the description blank.
+    3. Keep the permissions set to _Private_.
+    4. Click on the **Create repository** button.
+3. You will now see the default empty repository screen:
+    1. Locate the link to the repository, it will look something like: https://github.coventry.ac.uk/205CDE-1718JANMAY/xxxx.git where xxxx is your username.
+    2. Copy this url to the clipboard.
+    3. Make sure the terminal is open in your project directory.
+    4. Add the new empty remote: `git remote add origin xxx` where xxx is the url you copied to the clipboard.
+    5. Check the remote has been added `git remote -v`.
+4. Now we need to [get an access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) from the GitHub server.
+5. Finally we can push the local commits to the GitHub server:
+    1. Check your local commits are there `git status`.
+    2. Push the commits using `git push origin master`.
+        1. You will need to enter your username.
+        2. Use the access token instead of the password.
+    3. Check all commits are pushed:
+        1. `git status`.
+        2. Refresh the GitHub page.
 
 #### 2.1.1 Test Your Knowledge
 
