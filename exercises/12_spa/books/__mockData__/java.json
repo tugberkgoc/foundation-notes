@@ -1,0 +1,36 @@
+{
+	"items": [
+	 {
+		"id": "iWPeqljHNcoC",
+		"volumeInfo": {
+		 "title": "Practical Java",
+		 "industryIdentifiers": [
+			{
+			 "type": "ISBN_10",
+			 "identifier": "0201616467"
+			},
+			{
+			 "type": "ISBN_13",
+			 "identifier": "9780201616460"
+			}
+		 ]
+		}
+	 },
+	 {
+		"id": "87totx4p3ZcC",
+		"volumeInfo": {
+		 "title": "Java in a Time of Revolution",
+		 "industryIdentifiers": [
+			{
+			 "type": "ISBN_13",
+			 "identifier": "9789793780146"
+			},
+			{
+			 "type": "ISBN_10",
+			 "identifier": "9793780142"
+			}
+		 ]
+		}
+	 }
+	]
+ }

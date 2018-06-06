@@ -13,7 +13,7 @@ app.engine('html', es6Renderer)
 app.set('views', 'html')
 app.set('view engine', 'html')
 
-const books = require('./books')
+const books = require('modules/books')
 
 const port = 8080
 
