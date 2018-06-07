@@ -3,7 +3,6 @@
 
 /* eslint-disable no-magic-numbers */
 
-const rest = require('rest')
 const fs = require('fs')
 
 /** Makes a Google Books API query
@@ -12,7 +11,11 @@ const fs = require('fs')
  */
 module.exports.search = async searchString => {
 	console.log('MOCK function searchGoogle')
-	const data = await rest(this.buildString(searchString, 2))
-	console.log(data.entity)
-	return data.entity
+	console.log(__dirname)
+	const file = `./modules/__mocks__/__mockData__/${searchString}.json`
+	console.log(file)
+	const data = fs.readFileSync(file)
+	const json = JSON.parse(data)
+	console.log(json)
+	return JSON.stringify(json, null, 2)
 }

@@ -4,6 +4,7 @@
 /* eslint-disable no-magic-numbers */
 
 const rest = require('rest')
+const utility = require('./utility')
 
 /** Makes a Google Books API query
  *
@@ -11,7 +12,9 @@ const rest = require('rest')
  */
 module.exports.search = async searchString => {
 	console.log('REGULAR function searchGoogle')
-	const data = await rest(this.buildString(searchString, 2))
+	const url = utility.buildString(searchString, 2)
+	console.log(url)
+	const data = await rest(url)
 	console.log(data.entity)
 	return data.entity
 }

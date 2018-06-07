@@ -85,3 +85,36 @@ Open the `subscribe.js` file and study the contents:
 ## 5 Creating a Web Client
 
 https://github.com/jpmens/simple-mqtt-websocket-example
+
+## Websocket
+
+Web Sockets is a bidirectional communication technology which operates over a single socket. It is implemented using a JavaScript object called `WebSocket`. This can be used to send data to a server and receive data through an event handler.
+
+We start by creating a new WebSocket object passing the URL of the server.
+
+```javascript
+const ws = new WebSocket(url)
+```
+
+This object contains a `readyState` property that represents the state of the connection. It contains one of four different values.
+
+| value | meaning                                                     |
+| ----# | ----------------------------------------------------------- |
+| 0     | the connection has not yet been established                 |
+| 1     | the connection is established and communication is possible |
+| 2     | the connection is going through the closing handshake       |
+| 3     | the connection has been closed or could not be opened       |
+
+It has two functions:
+
+1. Data can be sent to the server using `WebSocket.send()`.
+2. The connection can be terminated using `WebSocket.close()`.
+
+There are four events associated with the `WebSocket` object.
+
+| event     | event handler      | description                         |
+| --------- | ------------------ | ----------------------------------- |
+| `open`    | `Socket.onopen`    | socket connection is established    |
+| `message` | `Socket.onmessage` | client receives data from server    |
+| `error`   | `Socket.onerror`   | error in communication              |
+| `close`   | `Socket.onclose`   | connection is closed                |

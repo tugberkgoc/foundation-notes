@@ -10,7 +10,7 @@ console.log(`stored token: ${token}`)
 // if the token is missing we immediately redirect to the login page.
 if(!sessionStorage.token) {
 	console.log('no token found')
-	window.location.replace('/login')
+	//window.location.replace('/login')
 }
 /**
  * We send the current authentication token in the 'Authorization header like this:
@@ -25,7 +25,7 @@ xhr.onreadystatechange = () => {
 		console.log(`status: ${xhr.status}`)
 		if (xhr.status === UNAUTHORIZED) {
 			console.log('unauthorised')
-			window.location.replace('/login')
+			//window.location.replace('/login')
 		}
 	}
 }

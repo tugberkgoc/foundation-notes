@@ -118,15 +118,7 @@ Start by running the web server in the `13_client/books/` directory and opening 
     1. The first parameter should return an error (or `null` if no error).
     2. The second parameter should return a DOM table object that can be inserted into the page DOM.
 
-## 4 Creating a Single Page Application
-
-// TODO: complete section
-
-### 4.1 Test Your Understanding
-
-// TODO: complete section
-
-## 5 Web Storage
+## 4 Web Storage
 
 Only supports strings. Need to convert objects to json strings. Make sure you have opened the **Application** tab in the Chrome Developer Tools pane. Locate the **Storage** section in the left pane.
 
@@ -136,11 +128,46 @@ Only supports strings. Need to convert objects to json strings. Make sure you ha
 3. Close the browser (completely) and reopen. Is the data still there?
     1. Session storage: Stores data for one session. Data persisted will be cleared as soon as the user closes the browser.
 
-### 5.1 Test Your Understanding
+### 4.1 Test Your Understanding
 
 // TODO: complete section
 
-### 6 Online and Offline Status
+## 5 Building a Simple Login
+
+Lets put all this together and build a simple login system. Locate the `13_client/login/` directory, install the dependencies and start the Express server. Open the Chrome browser and open the Chrome Developer tools on the **Network** tab.
+
+1. Open your website's base URL,`/` .
+    1. If you look at the URL you will see that it has changed to `/login`.
+    2. This is caused by the original page _redirecting_ the browser to this page.
+2. In the **Network** tab you will see the files that have been loaded into the browser, this includes the html page and a javascript file.
+    1. Select the `login` file as shown below and select the **Headers** tab. This will show you the page request and response headers.
+    2. Notice that the HTTP Status Code is 304 rather than 200 which indicates it was the target of a _redirect_. This makes sense.
+3. Switch to the **Console** tab, enter a random username and password and click on the button.
+    1. Notice that the browser has created a token string, this is formed by combining the supplied username and password with a `:` separator (such as `myusername:mypassword`) and then Base64 encoding it).
+    2. The client then makes a `GET` request to the `/checkauth` route on your server.
+    3. The token is passed in a special request header called `Authorization`.
+        1. The value passed comprises the string `Basic` followed by a space and then the token.
+        2. This is an example of **Basic Access Authentication**.
+    4. The server responds with a status code of `401 UNAUTHORIZED` which is not surprising given we suppplied random login details!
+    5. Notice all this happened without the page being reloaded, this is because the HTTP request was made by the `XMLHTTPRequest` object, not by the browser itself.
+4. Now enter a valid login, use `jdoe` as the username and `p455w0rd` as the password.
+    1. 
+
+![Viewing HTTP headers in Chrome](exercises/.images/chrome_headers.png)
+
+### 5.1 Test Your Understanding
+
+// TODO:
+
+## 4 Creating a Single Page Application
+
+// TODO: complete section
+
+### 4.1 Test Your Understanding
+
+// TODO: complete section
+
+## 7 Online and Offline Status
 
 Handled with network events
 

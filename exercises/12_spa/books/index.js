@@ -13,19 +13,19 @@ app.engine('html', es6Renderer)
 app.set('views', 'html')
 app.set('view engine', 'html')
 
-const books = require('modules/books')
+const books = require('./modules/books')
 
 const port = 8080
 
-const status = {
-	ok: 200,
-	created: 201,
-	notFound: 404,
-	notAcceptable: 406,
-	conflict: 409
-}
+// const status = {
+// 	ok: 200,
+// 	created: 201,
+// 	notFound: 404,
+// 	notAcceptable: 406,
+// 	conflict: 409
+// }
 
-app.get('/', async (req, res) => {
+app.get('/', async(req, res) => {
 	try {
 		const bookList = await books.search(req)
 		console.log(typeof bookList)

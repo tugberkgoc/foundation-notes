@@ -64,9 +64,12 @@ app.get('/checkauth', (req, res) => {
 	console.log(`decoded: ${decoded}`)
 	const [username, password] = decoded.split(':') // destructuring assignment
 	console.log(`username: ${username}, password: ${password}`)
-	if(username !== 'jdoe' || password !== 'p455w0rd') res.status(status.NOT_AUTHORISED).end()
+	if(username !== 'jdoe' || password !== 'p455w0rd') {
+		console.log(`username ${username} and password ${password} don't match`)
+		res.status(status.NOT_AUTHORISED).end()
+	}
 	console.log('authorised')
-	res.status(status.OK).end('')
+	res.status(status.OK).end()
 })
 
 app.listen(port, () => {
