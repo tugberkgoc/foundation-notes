@@ -1,6 +1,8 @@
 
 'use strict'
 
+/* eslint-disable no-magic-numbers */
+
 const utility = require('../modules/utility')
 
 describe('buildString', () => {

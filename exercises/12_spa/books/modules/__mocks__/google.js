@@ -10,12 +10,12 @@ const fs = require('fs')
  * @param {String} searchString the URL to use for the query
  */
 module.exports.search = async searchString => {
-	console.log('MOCK function searchGoogle')
-	console.log(__dirname)
+	//console.log('MOCK function searchGoogle')
+	//console.log(__dirname)
 	const file = `./modules/__mocks__/__mockData__/${searchString}.json`
-	console.log(file)
+	//console.log(file)
 	const data = fs.readFileSync(file)
 	const json = JSON.parse(data)
-	console.log(json)
+	//console.log(json)
 	return JSON.stringify(json, null, 2)
 }
