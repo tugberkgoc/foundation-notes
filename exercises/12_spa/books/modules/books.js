@@ -39,8 +39,16 @@ module.exports.extractFields = jsonStr => {
 	const json = JSON.parse(jsonStr)
 	if(!Array.isArray(json.items)) throw new Error('no book data found')
 	for(const n of json.items) {
+		let item = {}
 		console.log(n)
-		bookArray.push({title: n.volumeInfo.title})
+		item.title = n.volumeInfo.title
+		for(const m in n.industryIdentifiers) {
+			//console.log(m)
+			if(m.type === 'ISBN_13') {
+				// xxx
+			}
+		}
+		bookArray.push(item)
 	}
 	return bookArray
 }
