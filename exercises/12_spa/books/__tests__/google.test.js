@@ -13,7 +13,7 @@ describe('searchString', () => {
 		expect(typeof data).toBe('string')
 		const json = JSON.parse(data)
 		expect(Array.isArray(json.items)).toBeTruthy()
-		expect(json.items.length).toBe(2)
+		expect(json.items.length).toBe(20)
 	})
 
 })

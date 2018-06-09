@@ -27,10 +27,10 @@ const port = 8080
 
 app.get('/', async(req, res) => {
 	try {
+		console.log(`query ${req.query.q}`)
 		const bookList = await books.search(req)
-		console.log(typeof bookList)
 		console.log(bookList)
-		res.render('index', {locals: {books: books}})
+		res.render('index', {locals: {books: bookList}})
 	} catch(err) {
 		console.log(err.message)
 	}

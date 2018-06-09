@@ -1,0 +1,12 @@
+{
+	"query": {
+		"q": "java"
+	},
+	"params": {},
+	"method": "GET",
+	"url": "/?q=java",
+	"headers": {
+		"host": "xxx",
+		"user-agent": "xxx"
+	}
+}
