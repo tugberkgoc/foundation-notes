@@ -3,22 +3,7 @@
 
 /* eslint-disable no-magic-numbers */
 
-const rest = require('rest')
-
 const google = require('./google')
-
-//const minQueryLen = 3
-
-// module.exports.search = request => new Promise( async resolve => {
-// 	console.log(request.query)
-// 	if(!request.query.q || request.query.q.length <= minQueryLen) {
-// 		console.log('no querystring')
-// 		return resolve({status: 200, data: []})
-// 	}
-// 	const url = this.buildString('java', 2)
-// 	const data = await rest(url)
-// 	//console.log(data)
-// })
 
 module.exports.search = async request => {
 	if(request.query === undefined) {
@@ -69,6 +54,11 @@ module.exports.extractFields = jsonStr => {
 	return bookArray
 }
 
+/** Extracts data from the json
+ *
+ * @param {Array} bookArray an array containing the books found
+ * @returns  {String} a string containing the html table
+ */
 module.exports.buildTable = bookArray => {
 	if(typeof bookArray !== 'object') {
 		throw new Error('invalid parameter data type')
@@ -78,10 +68,17 @@ module.exports.buildTable = bookArray => {
 	}
 	let result = '<table>\n'
 	for(const n of bookArray) {
-		result += `<tr>
-			<td><a href="/details/${n.isbn}">${n.title}</a></td>
-			<td>${n.isbn}</td>
+		if(n.isbn !== undefined) {
+			result += `<tr>
+				<td><a href="/details/${n.isbn}">${n.title}</a></td>
+				<td>${n.isbn}</td>
+				</tr>`
+		} else {
+			result += `<tr>
+			<td>${n.title}</td>
+			<td>no ISBN</td>
 		</tr>`
+		}
 	}
 	result += '</table>'
 	return result

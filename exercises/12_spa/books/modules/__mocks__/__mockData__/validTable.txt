@@ -16,8 +16,8 @@
 		<td>9780764535437</td>
 	</tr>
 	<tr>
-		<td><a href="/details/undefined">The History of Java</a></td>
-		<td>undefined</td>
+		<td>The History of Java</td>
+		<td>no ISBN</td>
 	</tr>
 	<tr>
 		<td><a href="/details/9780226285108">The Religion of Java</a></td>
@@ -68,8 +68,8 @@
 		<td>9781449390884</td>
 	</tr>
 	<tr>
-		<td><a href="/details/undefined">The History of Java</a></td>
-		<td>undefined</td>
+		<td>The History of Java</td>
+		<td>no ISBN</td>
 	</tr>
 	<tr>
 		<td><a href="/details/9780070141698">Programming with Java</a></td>
