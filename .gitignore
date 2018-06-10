@@ -5,6 +5,7 @@ package-lock.json
 .node-persist/
 data/
 coverage/
+docs/
 
 # sqlite databases
 *.db
