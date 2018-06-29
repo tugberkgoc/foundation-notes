@@ -8,7 +8,7 @@ coverage/
 docs/
 
 # sqlite databases
-*.db
+# *.db
 
 # Mac spotlight files
 .DS_Store
