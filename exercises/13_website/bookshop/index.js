@@ -17,9 +17,9 @@ const sqlite3 = require('sqlite3').verbose()
 
 const port = 8080
 
-const db = new sqlite3.Database(`./bookshop.db`, (err) => {
+const db = new sqlite3.Database('./bookshop.db', (err) => {
 	if (err) return console.error(err.message)
-	console.log(`Connected to the "bookshop.db" SQlite database.`)
+	console.log('Connected to the "bookshop.db" SQlite database.')
 })
 
 app.get('/', async(req, res) => {
@@ -31,11 +31,23 @@ app.get('/', async(req, res) => {
 		let list = '<ol>'
 		for(const book of data) {
 			console.log(book.title)
-			list += `<li>${book.title}</li>`	
+			list += `<li><a href="/details/${book.id}">${book.title}</a></li>`
 		}
 		list += '</ol>'
 		console.log(list)
 		res.render('index', {locals: {books: list}})
+	})
+})
+
+app.get('/details/:id', (req, res) => {
+	console.log(req.params.id)
+	const sql = `SELECT * FROM books WHERE id = ${req.params.id};`
+	console.log(sql)
+	db.get(sql, (err, data) => {
+		if(err) console.error(err.message)
+		console.log(data)
+		data.description = data.description.replace('\n', '</p><p>')
+		res.render('details', {locals: data})
 	})
 })
 
