@@ -13,9 +13,9 @@ app.engine('html', es6Renderer)
 app.set('views', 'html')
 app.set('view engine', 'html')
 
-const sqlite3 = require('sqlite3').verbose()
-
 const port = 8080
+
+const sqlite3 = require('sqlite3').verbose()
 
 const db = new sqlite3.Database('./bookshop.db', (err) => {
 	if (err) return console.error(err.message)
@@ -31,13 +31,36 @@ app.get('/', async(req, res) => {
 		let list = '<ol>'
 		for(const book of data) {
 			console.log(book.title)
-			list += `<li><a href="/details/${book.id}">${book.title}</a></li>`
+			list += `<li>${book.title}</li>`
 		}
 		list += '</ol>'
 		console.log(list)
 		res.render('index', {locals: {books: list}})
 	})
 })
+
+/* app.get('/', async(req, res) => {
+	let sql = 'SELECT id, title FROM books;'
+	// --------
+	let q = ''
+	console.log(req.query.q)
+	if(req.query !== undefined && req.query.q !== undefined) {
+		sql = `SELECT id, title FROM books 
+						WHERE upper(title) LIKE upper("%${req.query.q}%") 
+						OR upper(description) LIKE upper("%${req.query.q}%");`
+		q = req.query.q
+	}
+	// --------
+	db.all(sql, (err, data) => {
+		if(err) console.error(err.message)
+		let list = '<ol>'
+		for(const book of data) list += `<li>${book.title}</li>`
+		list += '</ol>'
+		// --------
+		res.render('newindex', {locals: {books: list, query: q}})
+		// --------
+	})
+}) */
 
 app.get('/details/:id', (req, res) => {
 	console.log(req.params.id)
@@ -46,7 +69,6 @@ app.get('/details/:id', (req, res) => {
 	db.get(sql, (err, data) => {
 		if(err) console.error(err.message)
 		console.log(data)
-		data.description = data.description.replace('\n', '</p><p>')
 		res.render('details', {locals: data})
 	})
 })
