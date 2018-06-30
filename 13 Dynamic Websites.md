@@ -220,4 +220,6 @@ There is already a working form. Access the `/form` route in your browser, this 
 
 1. Modify the form to add the additional fields of data you have added to the books table (author, publisher, year).
 2. Modify the `app.post('/add', callback)` to insert this additional data into the database.
-3. Style the table to improve its appearance and usability.
+3. Add a link to the home page to take the user to the new book form.
+4. Add a _Cancel_ link on the form to return the user to the home page.
+5. Style the table to improve its appearance and usability.
