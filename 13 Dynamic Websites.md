@@ -191,3 +191,33 @@ Now we have built the book details page we need to add hyperlinks to each book i
 4. Add a back button to return to the search page.
 	1. What has happened to the search filter when you go back to the previous page?
 	2. You will need to pass this to the details page and pass it back when the back button is clicked.
+
+# 5 Inserting Data
+
+So far we our dynamic website has been working with data from the database but we have not been able to add new records to the database. In this section we will be building a form to let us add data.
+
+To create a working form you need to have two routes:
+
+1. The first (get) displays the form.
+2. The second (post) inserts the data and then redirects back to another page.
+
+There is already a working form. Access the `/form` route in your browser, this will display a simple html form where you can enter a book title, isbn and description. Try adding a book using this (there are some extra examples in the `books.csv` file). Notice that when you click on the add button you end up back at the list of books and the new one has been added to the end. Lets look under the bonnet to see how this has been achieved. Open the `index.js` script.
+
+1. Towards the end of the script there is a `/form` route which sends the contents of the `form.html` file to the browser. This is how we display the form.
+2. In the `form.html` file you will see that we have created a simple html form. Note:
+	1. The `form` element contains a couple of important attributes:
+		1. The `action="/add"` attribute directs the form to send its data to the `/add` route.
+		2. The `method="post"` attribute directs the form to send its data in the message body and not in the URL.
+		3. Taken together it means that the data will be sent using the POST method to the `/add` route.
+	2. Each form element has a `name` attribute which defines the object key each piece of data can be found under.
+3. In the `index.js` script you will see a route `app.post('/add', callback)`, it is this that will be called when the form data has been submitted.
+	1. All the post data can be accessed through the `req.body` object and, on line 81 we print this to the terminal to check all the data is there.
+	2. Next we use this data to build an SQL statement to insert a new record into the database.
+	3. The `db.run()` function executes the SQL statement and the callback runs either on success or if there was an error.
+	4. Finally, as soon as the SQL statement has run we redirect the browser back to the main page which will display all the book records including our new one.
+
+### 5.1 Test Your Understanding
+
+1. Modify the form to add the additional fields of data you have added to the books table (author, publisher, year).
+2. Modify the `app.post('/add', callback)` to insert this additional data into the database.
+3. Style the table to improve its appearance and usability.

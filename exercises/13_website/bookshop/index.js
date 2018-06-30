@@ -73,4 +73,19 @@ app.get('/details/:id', (req, res) => {
 	})
 })
 
+app.get('/form', async(req, res) => {
+	res.sendFile(`${__dirname}/html/form.html`)
+})
+
+app.post('/add', async(req, res) => {
+	console.log(req.body)
+	const sql = `INSERT INTO books(title, isbn, description)
+								VALUES("${req.body.title}", "${req.body.isbn}", "${req.body.description}");`
+	console.log(sql)
+	db.run(sql, err => {
+		if(err) console.error(err.message)
+		res.redirect('/')
+	})
+})
+
 app.listen(port, () => console.log(`app listening on port ${port}`))
