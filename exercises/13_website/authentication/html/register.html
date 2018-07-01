@@ -1,0 +1,22 @@
+
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Create an Account</title>
+		<meta name="description" content="form to add new books">
+		<meta name="author" content="Mark Tyers">
+	</head>
+	<body>
+		<h1>Create an Account</h1>
+		<form action="/register" method="post">
+			<p>Name:<br /><input type="text" name="name" placeholder="your full name" value="" autofocus></p>
+			<p>Username:<br /><input type="text" name="user" placeholder="your preferred username (no spaces)" value=""></p>
+            <p>Email Address:<br /><input type="text" name="email" placeholder="your email address" value=""></p>
+            <p>Password:<br /><input type="password" name="pass" placeholder="your chosen password" value=""></p>
+            <p>Confirm Password:<br /><input type="password" name="confirm" placeholder="enter the same password" value=""></p>
+			<p><input type="submit" value="Create"></p>
+		</form>
+	</body>
+</html>
