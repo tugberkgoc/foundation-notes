@@ -45,9 +45,7 @@ app.get('/', (req, res) => {
 	res.sendFile(`${__dirname}/html/index.html`)
 })
 
-app.get('/register', (req, res) => {
-	res.sendFile(`${__dirname}/html/register.html`)
-})
+app.get('/register', (req, res) => res.sendFile(`${__dirname}/html/register.html`))
 
 app.post('/register', (req, res) => {
 	console.log(req.body)
@@ -65,9 +63,7 @@ app.post('/register', (req, res) => {
 	})
 })
 
-app.get('/login', (req, res) => {
-	res.sendFile(`${__dirname}/html/login.html`)
-})
+app.get('/login', (req, res) => res.sendFile(`${__dirname}/html/login.html`))
 
 app.post('/login', (req, res) => {
 	if(req.body.pass === '') req.body.pass = ' '
@@ -78,10 +74,7 @@ app.post('/login', (req, res) => {
 		const sql2 = `SELECT password FROM users WHERE username = "${req.body.user}";`
 		db.get(sql2, (err, data) => {
 			if(err) console.error(err.message)
-			console.log(req.body.pass)
 			bcrypt.compare(req.body.pass, data.password, (err, data) => {
-				console.log('bcrypt')
-				console.log(data)
 				if(err) console.error(err.message)
 				if(data === true) req.session.authenticated = true
 				return res.redirect('/')
