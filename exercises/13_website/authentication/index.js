@@ -41,7 +41,7 @@ const db = new sqlite3.Database('./auth.db', err => {
 })
 
 app.get('/', (req, res) => {
-	if(!req.session.authenticated) res.redirect('/login')
+	if(!req.session.authenticated) return res.redirect('/login')
 	res.sendFile(`${__dirname}/html/index.html`)
 })
 
@@ -58,7 +58,7 @@ app.post('/register', (req, res) => {
 		console.log(sql)
 		db.run(sql, err => {
 			if(err) console.error(err.message)
-			res.redirect('/')
+			return res.redirect('/')
 		})
 	})
 })
