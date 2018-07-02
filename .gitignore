@@ -6,6 +6,7 @@ package-lock.json
 data/
 coverage/
 docs/
+sessions/
 
 # sqlite databases
 # *.db
