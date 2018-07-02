@@ -56,11 +56,10 @@ app.post('/register', (req, res) => {
 		req.body.pass = hash
 		console.log(req.body)
 		const sql = `INSERT INTO users(name, username, email, password) 
-					VALUES("${req.body.name}", "${req.body.user}", "${req.body.email}", "${req.body.pass}")`
+			VALUES("${req.body.name}", "${req.body.user}", "${req.body.email}", "${req.body.pass}")`
 		console.log(sql)
 		db.run(sql, err => {
 			if(err) console.error(err.message)
-			console.log('new account added')
 			res.redirect('/')
 		})
 	})
@@ -71,14 +70,11 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-	if(req.body.pass === "") req.body.pass = ' '
+	if(req.body.pass === '') req.body.pass = ' '
 	const sql = `SELECT count(id) AS count FROM users WHERE username="${req.body.user}";`
 	db.get(sql, (err, data) => {
 		if(err) console.error(err.message)
-		if(!data.count) {
-			console.log('invalid username')
-			return res.redirect('/login?message=invalid%20username')
-		}
+		if(!data.count) return res.redirect('/login?message=invalid%20username')
 		const sql2 = `SELECT password FROM users WHERE username = "${req.body.user}";`
 		db.get(sql2, (err, data) => {
 			if(err) console.error(err.message)
@@ -87,9 +83,7 @@ app.post('/login', (req, res) => {
 				console.log('bcrypt')
 				console.log(data)
 				if(err) console.error(err.message)
-				if(data === true) {
-					req.session.authenticated = true
-				}
+				if(data === true) req.session.authenticated = true
 				return res.redirect('/')
 			})
 		})
