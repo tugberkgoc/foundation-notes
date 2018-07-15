@@ -4,10 +4,7 @@
 const express = require('express')
 const app = express()
 
-//add handlebars view engine
-const handlebars = require('express3-handlebars')
-	.create({defaultLayout: 'main'}) //default handlebars layout page
-
+const handlebars = require('express3-handlebars').create({defaultLayout: 'main'})
 app.engine('handlebars', handlebars.engine)
 app.set('view engine', 'handlebars')
 
@@ -28,7 +25,12 @@ app.get('/date', (req, res) => {
 })
 
 app.get('/food', (req, res) => {
-	const food = ['bread', 'butter', 'jam']
+	const food = [
+		{name: 'bread', qty: 5},
+		{name: 'butter', qty: 2},
+		{name: 'jam', qty: 1},
+		{name: 'cheese', qty: 4}
+	]
 	res.render('food', {myFood: food})
 })
 

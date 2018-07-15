@@ -6,103 +6,89 @@ Up to now you have seen two ways the server can send response data to the client
 1. Sending the contents of an HTML file. This is great for complex web pages but you can't include dynamic data.
 2. Using the `res.write()`, `res.send()` and `res.end()` functions to send dynamic data. The limitation is that its quite clunky and would be completely inpractical for complex web pages.
 
-In this section you will be introduced to a third approach which combines the best features of each the other two approaches. Locate the files in the `06_templating/date/` directory.
+In this section you will be introduced to a third approach which combines the best features of each the other two approaches, the use of a **templating view engine**.
 
-There are a number of templating engines that are compatible with Express however in this worksheet we will be using one of the simplest ones, called . This needs to be imported into your script.
+There are a number of _templating view engines_ that are compatible with Express however in this worksheet we will be using one of the more popular ones, called [Handlebars](https://www.npmjs.com/package/handlebars). This needs to be imported into your script and set the default _layout page_.
 
-```javascript
-const es6Renderer = require('express-es6-template-engine')
-const app = express()
-app.engine('html', es6Renderer)
-app.set('views', 'html')
-app.set('view engine', 'html')
-```
+Locate the files in the `06_templating/01_date/` directory, install the dependencies and start the server.
 
-Notice that we import the renderer then set it as the default html engine. We then tell the server where to find the html templates and finally set the view engine to html.
+## 1 Basic Templating
 
-Any data we want to be embedded in the template needs to be added to a JavaScript object (`data` in this example). Finally we call the `render()` function of our response object (`res`) and pass it two parameters:
+Access the base route `/`, notice that you are seeing a basic html page. Open the script:
 
-1. The name of the template file (without the file extension).
-2. An object containing a `locals` key. This should contain the data we wish to insert in the template.
+1. We start by importing the Handlebars package and create a default layout called main. This defines the `main.handlebars` page as the one to use as the default website layout.
+	1. Open the `views/layouts/main.handlebars` file.
+	2. This template page will be used by _all_ the pages in the website.
+	3. Notice there is a `{{{body}}}` placeholder, this defines where the different page templates will be inserted.
+2. In the base route `/` we call the `res.render()` function and pass it the name of the template we want to use:
+	1. The parameter is a string, `home`.
+	2. This refers to the template `views/home.handlebars`
+3. The contents of the `home.handebars` template is inserted into the layout file replacing the `{{{body}}}` placeholder.
 
-```javascript
-const d = new Date()
-const data = {
-  title: 'My First Template',
-  date: `${d.getDay()}/${d.getMonth()+1}/${d.getFullYear()}`
-}
-res.render('index', {locals: data})
-```
+### 1.1 Test Your Understanding
 
-The template file needs to have placeholders to indicate where the dataa should be inserted.
+1. Create a `/hello` route that uses a template file called `hello.handlebars` to display a heading with the text `Hello World!`
+2. Use the knowledge from the css lab to add and link an external stylesheet to display the heading in red.
+	1. Define a directory for static files.
+	2. Create a `style.css` file in this directory that sets the heading red.
+	3. Add a link to the _main layout_ file to import this stylesheet.
 
-```html
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>${title}</title>
-  </head>
-  <body>
-    <h1>${date}</h1>
-  </body>
-</html>
-```
+## 2 Inserting Data into a Template
 
-You can see a complete example in the `template/` directory.
+So far we have not done anything particularly useful except separate out the _layout_ from the content. In this section you will learn how to insert data directly into a template before it is rendered to the browser.
+
+In the previous example you have seen how to insert single values into a web page but how to we display lists of data? A list is stored in an **array** in JavaScript so the first task is to ensure your data is in an array. If you recall lab 3 you will remember that the sqlite `db.all()` function returns an `Array`.
+
+Restart the server and access the `/date` route. Notice that it displays the current date in the browser. Open the `index.js` file and locate the route.
+
+1. We start by creating a new `Date` object.
+2. We use its built-in functions to create a string containing the current date.
+3. Next we create a JavaScript object that contains all the data we want to send to the template:
+	1. In this example we have a `title` property containing the string `My First Template`.
+	2. We have a seccond property called `today` that contains the date string we have just built.
+4. Finally we call `res.render()` but this time we pass the data as the second parameter.
+
+To understand what happens to this data we need to understand the _template_. Locate the `views/date.handlebars` template file:
+
+1. Notice that there are two _placeholders_, shown as `{{xxx}}`.
+	1. Each placeholder has a name.
+	2. The names need to match the properties in the data we are sending to the template.
+2. Each placeholder is replaced by the data stored against the object property:
+	1. The `{{title}}` placeholder is replaced by the string `My First Template`.
+	2. The `{{date}}` placeholder is replaced with the date string we built in the script.
+
+### 2.1 Test Your Understanding
+
+1. Use suitable properties of the [`Date` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) to display the date in a variety of different formats in a series of paragraph elements:
+	1. dd/mm/yyyy
+	2. a Unix timestamp (number of seconds since 1st Jan 1970)
+2. Add a table to display some information about the client computer (using the `req.connection` object).
+3. Extend the table to display the header information (using the `req.headers` object).
+
+## 3 Repeating Data
+
+So far we have inserted data from object properties into our templates. This works find for single records however often we will have multiple records to display such as the results of a database query. In this situation we will need to repeat a block of html code such as a list item or table row.
+
+Restart the server and view the `/food` route. Notice that it displays a numbered list showing four food items. Locate the route in your script.
+
+1. We start by creating an array. Each imdex contains an object with two properties, name and qty.
+2. We pass the array to `res.render()` as a JavaScript object using the myFood property.
+
+Open the `food.handlebars` template:
+
+1. Notice that there is an ordered list element.
+2. Inside this there is a special **helper**, `{{#each myFood}}`
+	1. The helper also has a closing block `{{/each}}`
+	2. The `myFood` property is passed to the opening block.
+3. This block loops through the array stored in the `myFood` property.
+4. The `this` object holds the object for the current index.
+	1. So `this.item` returns the `item` property (the name of the food item).
+
+This allows the handlebars template view engine to handle repeated data.
 
 ### 3.1 Test Your Understanding
 
-1. Create a css file and link it to the html template. Add some rules to improve the appearance of the page.
-2. Display the date in a paragraph tag.
-3. Change the top level heading to display the same information as the page title.
-3. Add a table to display the following with explanations:
-    1. The server hostname
-    2. The IP address of the server
-    3. The base URL
-    4. The route
-
-### 3.2 Repeating Data
-
-In the previous example you have seen how to insert single values into a web page but how to we display lists of data? A list is stored in an **array** in JavaScript so the first task is to ensure your data is in an array. Once this is done we can send the entire array to the template in the same way we sent single values.
-
-```javascript
-const food = ['bread', 'butter', 'jam']
-const data = {
-  foodStuffs: data
-}
-```
-
-The magic happens in the template. You can insert any valid JavaScript expression in the template placeholder and whatever is _returned_ will be inserted into the html page.
-
-```html
-<ol>
-${foodStuffs.map(f => `<li>${f}</li>`).join('')}
-</ol>
-```
-
-In the example above, we manipulate each array index by adding `<li>` elements around them. We then take the new array and use `join()` to turn it into a single string. The result is then inserted inside the `<ol>` element.
-
-### 3.3 Test Your Understanding
-
-Open the `currency/` directory and examine both the `index.js` and `index.html` files to see a slightly more complex example.
-
-1. Create a stylesheet linked to the html template.
-    1. Add some rules to improve the appearance of the page.
-2. Modify the template to display the currency and rates in a table.
-3. Without adding any more html, colour every other row of the table in light grey.
-4. Display the conversion rates to 2 decimal places.
-5. Add a second text box to enter the amount of the base currency to convert.
-    1. Display the amount of each currency you would get in a third column.
-    2. Don't forget to include the currency code!
-
-### 3.4 Mixing Structure and Logic
-
-Can you spot the problem with the templating solution? In our previous examples we have always kept the _layout_ in the html file, the _appearance_ in the css file and all logic in the js file. By putting the `map()` function in the html template file we are starting to mix the concerns and this is not a good thing. Whilst we can't avoid this, there are steps we can take to minimise its impact.
-
-If you think about how we did this you might have spotted an alternative approach: we could have created a string containing the data in the js file and passed this to the template. So why is this a bad thing?
-
-In the `currency/` example we have added a small amount of js code to the template file but the script file contains no html. If we build the string in the js file we start introducing structural elements into the script file which prevents us from changing our minds about how to display the data (we are _baking in_ the structure).
-
-#### 3.1.2 Test Your Understanding
-
-Display a list of data on one of your web pages. You could choose from a ordered or unordered list, a definition list (as in the example) or even a table.
+1. Modify the template to display the shopping items in a html table instead of an ordered list.
+2. Add a second column to display the quantities of each item.
+3. Add a table header to display column headings.
+4. Without adding any more html, colour every other row of the table in light grey.
