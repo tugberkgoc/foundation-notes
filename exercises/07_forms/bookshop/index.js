@@ -3,15 +3,15 @@
 'use strict'
 
 const express = require('express')
-const es6Renderer = require('express-es6-template-engine')
+
+const handlebars = require('express3-handlebars').create({defaultLayout: 'main'})
 const bodyParser = require('body-parser')
 const app = express()
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.engine('html', es6Renderer)
-app.set('views', 'html')
-app.set('view engine', 'html')
+app.engine('handlebars', handlebars.engine)
+app.set('view engine', 'handlebars')
 
 const port = 8080
 
@@ -28,14 +28,7 @@ app.get('/', async(req, res) => {
 	db.all(sql, (err, data) => {
 		if(err) console.error(err.message)
 		console.log(data)
-		let list = '<ol>'
-		for(const book of data) {
-			console.log(book.title)
-			list += `<li>${book.title}</li>`
-		}
-		list += '</ol>'
-		console.log(list)
-		res.render('index', {locals: {books: list}})
+		res.render('home', {books: data})
 	})
 })
 
@@ -69,7 +62,7 @@ app.get('/details/:id', (req, res) => {
 	db.get(sql, (err, data) => {
 		if(err) console.error(err.message)
 		console.log(data)
-		res.render('details', {locals: data})
+		res.render('details', data)
 	})
 })
 
