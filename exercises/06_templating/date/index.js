@@ -9,7 +9,7 @@ const handlebars = require('express3-handlebars')
 	.create({defaultLayout: 'main'}) //default handlebars layout page
 
 app.engine('handlebars', handlebars.engine)
-app.set('view engine', 'handlebars');
+app.set('view engine', 'handlebars')
 
 const port = 8080
 
