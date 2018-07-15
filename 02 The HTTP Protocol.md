@@ -1,13 +1,15 @@
 
 # The HTTP Protocol
 
-In the lecture you learned about the HTTP protocol which is used to transfer information between web server and the web browser. Without this the World-Wide Web (WWW) would not exist. This lab will allow you to apply this knowledge and learn the details.
+In the lecture you learned about the HTTP protocol which is used to transfer information between web server and the web browser. Without this the World-Wide Web (WWW) would not exist. This lab will allow you to apply this knowledge and learn the details. In this lab you will be using the [NodeJS](http://nodejs.org) [Express package](https://www.npmjs.com/package/express) to write scripts that make use of this protocol.
 
 You should refer to the [lecture slides](https://goo.gl/H88iFn).
 
 ## Setup
 
 You will need to use the Chrome web browser for these exercises and have installed the [ModHeader](https://goo.gl/YWWK3q) plugin.
+
+You should also ensure that you have the latest version of NodeJS (10.6.0 at the time of writing). You should check this is set up correctly by using the `node -v` command which checks the version of NodeJS that is installed. If you are using MacOS or Windows simply download the **Latest** version (not the LTS) from the website and install. If you are using an Ubuntu-flavoured version of Linux (such as CodeAnywhere) you need to use the [Node Version Manager](https://github.com/creationix/nvm) tool.
 
 Open the **Chrome Developer Tools** as shown below.
 
@@ -19,14 +21,200 @@ The HTTP protocol works on a request-response process, The client (typically the
 
 The request consists of three key parts:
 
-1. The **URL** of the resource being requested.
+1. The **Uniform Resource Locator** (URL) of the resource being requested.
 2. The **HTTP Method** specifying the action to be taken.
 3. A set of **Request Headers** to pass additional information.
 4. Some methods (such as POST) also require a **Request Body**.
 
 We will be working through some exercises that make use of all of these.
 
+### 1.1 The Uniform Resource Locator
+
+1. Start up the server script in the `exercises/02_http/01_url/` directory. Refer the the previous lab if you get stuck at this point.
+	1. Access the root url, notice that the message **Hello World** is displayed in the browser.
+	2. Access the `/hello` url. This should result in the same message being displayed.
+2. Open the `index.js` script and study lines 1-15.
+	1. Line 2 contains the string `'use strict'`. Strict mode preventsa certain 'unsafe' commands from running and enables you to catch a lot of potential coding errors. You should always add this to the top of your scripts.
+	2. Line 4 imports the `express` package and stores it in a constant called `express`.
+	3. Line 5 uses this package to create an `express` object. We store this in the `app` constant and will use this to build the server.
+	4. Line 6 stores the number 8080 in a constant called `port`. We will use this later. We should always create named constants to store key numbers, this makes our script easier to follow.
+
+#### 1.1.1 Callbacks
+
+The NodeJS language that is running on your server only has a single thread in an event loop (see diagram below). It is important to understand how this works and its benefits (and drawbacks).
+
+![NodeJS Event Loop](https://i.stack.imgur.com/BTm1H.png)
+
+Copyright medium.com
+
+All the incoming http requests from all connected users are placed in an event loop which means that they are processed one after another. Once the loop gets to the end of the connections it returns to the first one and continues. The main advantage of this is that the server does not have the overhead of creating new threads for each user however there is one obvious drawback, if one user's request takes time to complete everyone else is left waiting!
+
+To solve this problem, any task that is likely to be time-consuming is passed to an appropriate asynchronous interface (such as that used by a database or the filesystem). At this point a _callback_ is registered (this is normally a function). Once the time-consuming process has completed, the flow is returned to the event loop and the callback function is executed.
+
+Let's see how this works in practice. Take a look at the `index.js` script once more:
+
+1. On line 8 we define a function called `hello`. This takes two parameters, `req` and `res` which are pre-defined objects. This is our _callback function_:
+	1. The `req` object represents the HTTP request sent from the web browser.
+	2. The `res` object represents the HTTP response that will be sent back to the browser.
+	3. The body of the function is enclosed in curly braces `{}`.
+	4. The body contains a single line which calls the `send()` function that is part of the `res` object and passes it a string.
+2. On line 12 and 14 we call the `get()` function that is part of the `app` object. This takes two parameters:
+	1. The first parameter is the _route_ we want to handle (the end of the URL), `/` represents the _root url_.
+	2. The second parameter is the function we want to run when this route is requested by the browser.
+3. When the incoming http request is matched to an appropriate route the _callback function_ is called once the http request has been received.
+4. The function is passed both the request and response objects so it can both access the request data and send a response to the web browser.
+
+#### 1.1.2 Test Your Understanding
+
+1. Create a function called `goodbye` that takes the request and response objects and send the message `goodbye world` to the web browser.
+2. Create a route for `/goodbye` and use the function you created in the previous step as its callback function.
+3. Stop the server (ctrl + c) and restart.
+4. Check it works.
+
+#### 1.1.3 Anonymous Functions
+
+In the previous examples we defined a named JavaScript function (it was assigned a name) and then passed this as a parameter to the `app.get()` function (as a _callback function_. This is a very common technique but going to the trouble to defined a named function and then passing the function by name as a function parameter (two steps) can be simplfied. Look at the two examples below.
+
+Using a named _callback function_:
+
+```javascript
+function hello(req, res) {
+	res.send('Hello World')
+}
+
+app.get('/', hello)
+```
+
+Using an _anonymous callback function_. Notice that we have inserted the entire function as the parameter without having to give it a name. Take a moment to make sense of the strange syntax.
+
+```javascript
+app.get('/', (req, res) => res.send('Hello World'))
+```
+
+And here is another example that is also functionally identical. In this example we have added the curly braces and split the function into multiple lines. In this way we can have more than one line of code in the callback function.
+
+```javascript
+app.get('/', (req, res) => {
+	res.send('Hello ')
+	res.send('World')
+})
+```
+
+From this point onwards you will only be seeing (and using) anonymous callback functions. Take your time to ensure you fully understand the concepts and syntax before continuing.
+
+#### 1.1.4 Test Your Understanding
+
+1. Replace all the named functions you have seen so far with anonymous functions.
+
+### 1.2 URL Parameters
+
+In the HTTP protocol URLs represent resources on the server. Up to this point each URL has matched a different _route_ (defined by an `app.get()` function) but on a real server there might be a database containing many thousands of records that we want to be able to access. For this to work, each record would need a different, unique, URL! Since each record in an SQL database has a unique key (primary key), a simple solution would be to include the primary key in the URL thus creating a different URL for each record.
+
+To do this we need to extract some data from the request object `req` which is the first parameter passed to the _anonymous callback function_. The `req` object is a _JavaScript Object_ and so we need to fully understand how these work.
+
+Start the server and access the `/books/1` route. What is displayed in the web browser?
+
+1. Since we have not yet covered how to connect to a database, on line 20 we have defined a JavaScript array which contains 3 indexes, these are numbered 0-2.
+2. Directly underneath this we have defined a route `/books/:index` which contains two **segments**:
+	1. The first matches the text `/books`, this works like all the routes we have seen previously.
+	2. The second, beginning with the colon (`:`) represents a **URL Parameter**. This represents one or more characters.
+3. In the _anonymous callback function_ we are accessing the `params` property of the `req` object and storing this in a constant called `parameters` which we are then printing to the terminal.
+	1. Check the terminal to see this constant.
+	2. Note that it is itself a JavaScript object and that it contains a single property called `index` which matches the name of the URL segment.
+	3. The value of this property is the string we added to the URL.
+4. This index value is used to look up the title of the book in the array, the book title is stored in a constant.
+5. Finally the book title is send to the web browser.
+
+#### 1.3.1 Core Knowledge
+
+JavaScript objects comprise one or more **property-value pairs**. There is an example below to illustrate this.
+
+1. The **property** can be any string however if this is not a valid JavaScript variable name it must be enclosed in single quotes.
+2. The **value** can be any valid JavaScript data type including another object.
+
+```javascript
+const name = {
+	first: 'John',
+	'last name': 'Doe',
+	dob: {
+		year: 1970,
+		month: 'January'
+	}
+}
+```
+
+Each value in an object can be extracted using one or two different syntaxes:
+
+1. If the property is a valid variable name either the dot or bracket notation may be used.
+2. If the property is _not_ a valid variable name or _the property to find is itself a variable_ you need to use the bracket notation.
+
+```javascript
+const firstName = name.first
+const lastName = name['last']
+const prop = year
+const dobYear = name.dob.[prop]
+```
+
+New properties can be added and removed from an object.
+
+```javascript
+name.dob.day = 15
+delete name.first
+delete name['last name']
+```
+
+#### 1.3.2 Test Your Understanding
+
+In this section you will learn about a number of JavaScript functions. In each case you will be provided with a link to the documentation.
+
+1. Add a fourth book to the array and make sure you can access this by passing its index in the URL.
+2. We are not restricted to only having two URL segments:
+	1. Modify the route to add a second parameter called `index2`.
+	2. Make sure this is triggered by restarting the server and accessing this by passing a second parameter.
+	3. Modify the script to print out both book titles.
+3. Next you need to add some validation to make sure the script does not crash:
+	1. If the index in the URL exceeds to number of books in the array you get an error. Insert an [`if...else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) that sends a suitable message to the browser if the index number in the URL is too high.
+	2. The index must be a number. Use the [`isNaN()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check and send a suitable message to the browser if it is not. if it is, use the [`parseInt()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt) to convert it to a number.
+	3. The number needs to be a whole number (integer). All JavaScript numbers are objects and have a number of useful functions. Use the [`Number.isInteger()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger) to check it is indeed an integer. Send a suitable message to the browser if it is not.
+	
+
+### 1.3 URL Query Strings
+
+Whilst URL parameters are used to define unique URLS to identify online resources, sometimes we want to be able to pass additional information and this is done through the use of **query strings**.
+
+1. Restart the server and access the `/hello/John%20Doe` route.
+	1. Since spaces are not permitted in a URL we have to replace spaces with special codes. This is known as **URL Encoding** and there are specific [codes](https://www.degraeve.com/reference/urlencoding.php) to use.
+	2. Notice that the message `hello John Doe` is displayed in the browser.
+2. Now change the URL to `/hello/John%20Doe?format=upper`.
+	1. Notice that the same data has been displayed just the format has changed.
+
+Open the `index.js` file. The route is between lines 34-40.
+
+1. Notice that the query string(s) are not part of the route.
+2. The query string comprises name-value pairs.
+3. The query string data can be accessed in the `req.query` object.
+4. Because this data is not part of the route it may or may not be present so you should check to see if the data is present before trying to use this.
+
+#### 1.3.1 Test Your Understanding
+
+1. Modify the route so that if the `format` query string is set to `lower` the name is set as [lowercase](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase).
+2. Add a second query string called `reverse`:
+	1. if missing or set to `false` the text is left alone.
+	2. If it has a value of `true` the text should be reversed by using the [`split()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) to convert the string to an array of characters and then the [`join()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) to convert the array back into a string.
+
+### 1.4 Request Headers
+
+Headers allow for additional information to be passed:
+
+1. Data can be sent as part of the HTTP request header sent from the browser to the web server.
+2. The server can send extra data back to the web browser.
+
+----
+
 1. Start up the server script in the `exercises/02_http/` directory. Refer the the previous lab if you get stuck at this point.
+2. Using the server URL (see previous lab), access the root url `/`. This is the same activity that you carried out in the first worksheet and you should see the string `hello world`.
+3. Modify the URL to point to `/hello/john smith`, substituting your name.
+	1. Notice that the browser now displays `hello john smith`.
 
 NB: Before running the script you will have to install the js2xmlparser package. To do this, type the following in ssh terminal;
     $ npm install js2xmlparser
@@ -54,7 +242,7 @@ In the **Request Headers** note that:
 
 1. The first line specifies the HTTP method (GET) and the version of HTTP we are using (HTTP/1.1).
 2. Next it specifies the host the request is being sent to.
-3. Then there are multiple request headers. These are always key-value pairs. Lets look at a few of the more interesting ones:
+3. Then there are multiple request headers. These are always property-value pairs. Lets look at a few of the more interesting ones:
     1. The `User-Agent` header sends information about the browser being used.
     2. The `Accepts` header tells the server what [MIME](https://goo.gl/W2SWtZ) data types our browser prefers.
 
@@ -93,7 +281,7 @@ The path in the Uniform Resource Locator (URL) represents a _resource_ on the se
 
 ### 3.1 Query Strings
 
-Query strings are additional pieces of information attached to the URL and because of this it will be included in the bookmark. They are added as key-value pairs.
+Query strings are additional pieces of information attached to the URL and because of this it will be included in the bookmark. They are added as property-value pairs.
 
 1. Still on the `/names` URL, add a `search` querystring, your URL will look like this: `/names?search=xxx` where the `xxx` represents the string fragment you are searching for.
     1. Try searching for a string fragment you know exists, what is the status code?

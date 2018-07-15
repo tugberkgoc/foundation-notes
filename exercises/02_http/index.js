@@ -30,6 +30,22 @@ app.get('/hello', (req, res) => {
 	res.sendFile(`${__dirname}/hello.html`)
 })
 
+app.get('/hello/:name', (req, res) => {
+	console.log(req.params)
+	const myname = req.params.first
+	res.send(`hello ${myname}`)
+})
+
+app.get('/hello/:first/:last', (req, res) => {
+	console.log(req.params)
+	const name = {
+		firstname: req.params.first,
+		lastname: req.params.last
+	}
+	console.log(name)
+	res.send(`hello ${name.firstname} ${name.lastname}`)
+})
+
 app.get('/animal/:name', (req, res) => {
 	console.log(req.params.name)
 	fs.exists(`public/${req.params.name}.png`, exists => {
