@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
-    "express-es6-template-engine": "^2.0.2"
+    "express": "^4.16.3",
+    "express-es6-template-engine": "^2.0.2",
+    "express3-handlebars": "^0.5.2"
   }
 }
