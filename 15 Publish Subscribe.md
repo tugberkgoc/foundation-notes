@@ -15,6 +15,8 @@ Start by installing the [Mosquitto Tools](https://www.eclipse.org/mosquitto/down
 
 If you are using MacOS you should install the [Brew Package Manager](https://brew.sh) and use this to install Mosquitto using `brew install mosquitto`.
 
+If you are using Ubuntu you can install using`sudo apt install mosquitto`.
+
 ```
 mosquitto_sub -h test.mosquitto.org -t "#" -v
 ```
