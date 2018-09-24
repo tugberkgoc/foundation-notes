@@ -44,6 +44,7 @@
     "no-var": 2,
     "prefer-arrow-callback": 1,
     "prefer-const": 2,
+    "prefer-template": 2,
     "quotes": [1, "single"],
     "semi": [1, "never"],
     "space-before-function-paren": [2, "never"],

@@ -22,7 +22,7 @@ const db = new sqlite3.Database('./bookshop.db', (err) => {
 	console.log('Connected to the "bookshop.db" SQlite database.')
 })
 
-app.get('/', async(req, res) => {
+app.get('/', (req, res) => {
 	const sql = 'SELECT id, title FROM books;'
 	console.log(sql)
 	db.all(sql, (err, data) => {
