@@ -1,20 +1,11 @@
+#!/usr/bin/env node
 
 'use strict'
-
-const express = require('express')
-const app = express()
-app.use(express.static('public'))
+const Koa = require('koa')
+const app = new Koa()
 
 const port = 8080
 
-app.get('/', (req, res) => {
-	res.send('Hello World')
-})
+app.use( ctx => ctx.body = 'Hello World')
 
-app.get('/hello', (req, res) => {
-	res.sendFile(`${__dirname}/hello.html`)
-})
-
-app.listen(port, () => {
-	console.log(`app listening on port ${port}`)
-})
+module.exports = app.listen(port, () => console.log(`listening on port ${port}`))
