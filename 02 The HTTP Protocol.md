@@ -30,14 +30,16 @@ We will be working through some exercises that make use of all of these.
 
 ### 1.1 The Uniform Resource Locator
 
-1. Start up the server script in the `exercises/02_http/01_url/` directory. Refer the the previous lab if you get stuck at this point.
-	1. Access the root url, notice that the message **Hello World** is displayed in the browser.
-	2. Access the `/hello` url. This should result in the same message being displayed.
-2. Open the `index.js` script and study lines 1-15.
-	1. Line 2 contains the string `'use strict'`. Strict mode preventsa certain 'unsafe' commands from running and enables you to catch a lot of potential coding errors. You should always add this to the top of your scripts.
-	2. Line 4 imports the `express` package and stores it in a constant called `express`.
-	3. Line 5 uses this package to create an `express` object. We store this in the `app` constant and will use this to build the server.
-	4. Line 6 stores the number 8080 in a constant called `port`. We will use this later. We should always create named constants to store key numbers, this makes our script easier to follow.
+1. Start up the server script in the `exercises/02_http/01_url/` directory.
+	1. Install the `koa` and `koa-router` packages. Refer the the previous lab if you get stuck at this point.
+	2. Access the root url, notice that the message **Hello World** is displayed in the browser.
+	3. Access the `/hello` url. This should result in the same message being displayed.
+2. Open the `index.js` script and study lines 1-10.
+	1. The first line is the _shebang_, it tells the script what application is needed to run it.
+	2. Line 3 contains the string `'use strict'`. Strict mode preventsa certain 'unsafe' commands from running and enables you to catch a lot of potential coding errors. You should always add this to the top of your scripts.
+	3. Lines 5 and 6 import the `koa` and `koa-router` packages and stores them in a pair of immutable variables (constants).
+	4. Lines 6 and 7 use these two packages to create new JS objects and store these in another two immutable variables.
+	5. Line 10 stores the number `8080` in an immutable variable called `port`. We will use this later. We should always create named constants to store key numbers, this makes our script easier to follow.
 
 #### 1.1.1 Callbacks
 
@@ -53,22 +55,21 @@ To solve this problem, any task that is likely to be time-consuming is passed to
 
 Let's see how this works in practice. Take a look at the `index.js` script once more:
 
-1. On line 8 we define a function called `hello`. This takes two parameters, `req` and `res` which are pre-defined objects. This is our _callback function_:
-	1. The `req` object represents the HTTP request sent from the web browser.
-	2. The `res` object represents the HTTP response that will be sent back to the browser.
-	3. The body of the function is enclosed in curly braces `{}`.
-	4. The body contains a single line which calls the `send()` function that is part of the `res` object and passes it a string.
-2. On line 12 and 14 we call the `get()` function that is part of the `app` object. This takes two parameters:
+1. On line 12 we define a function called `hello`. This takes a `ctx` parameter which represents both the http request and http response. This is a pre-defined object. This is our _callback function_:
+	1. Named functions are declared using the `function` keyword followed by the name of the function.
+	2. Any parameters are enclosed in standard braces `()`, this can be empty if there are none. Multiple parameters are separated by commas.
+	3. The body of the function is enclosed in curly braces `{}`. In this case the function contains a single line which sets the `body` property of our `ctx` parameter. This has the effect of sending this data back to the browser as the _response body_.
+2. On line 16 we call a function that is stored in the `get` property of our new `router` object, this requires two parameters:
 	1. The first parameter is the _route_ we want to handle (the end of the URL), `/` represents the _root url_.
 	2. The second parameter is the function we want to run when this route is requested by the browser.
 3. When the incoming http request is matched to an appropriate route the _callback function_ is called once the http request has been received.
-4. The function is passed both the request and response objects so it can both access the request data and send a response to the web browser.
+4. The function is passed the `ctx` object so it can both access the request data and send a response to the web browser.
 
 #### 1.1.2 Test Your Understanding
 
-1. Create a function called `goodbye` that takes the request and response objects and send the message `goodbye world` to the web browser.
+1. Create a function called `goodbye` that takes a `ctx` object and send the message `goodbye world` to the web browser.
 2. Create a route for `/goodbye` and use the function you created in the previous step as its callback function.
-3. Stop the server (ctrl + c) and restart.
+3. Stop the server (ctrl+c) and restart.
 4. Check it works.
 
 #### 1.1.3 Anonymous Functions
@@ -78,39 +79,58 @@ In the previous examples we defined a named JavaScript function (it was assigned
 Using a named _callback function_:
 
 ```javascript
-function hello(req, res) {
-	res.send('Hello World')
+function hello(ctx) {
+	ctx.body = 'Hello World'
 }
 
 app.get('/', hello)
 ```
 
-Using an _anonymous callback function_. Notice that we have inserted the entire function as the parameter without having to give it a name. Take a moment to make sense of the strange syntax.
+Using an _anonymous callback function_. Notice that we have inserted the entire function as the parameter without having to give it a name. Take a moment to make sense of the strange syntax. Each of the examples below is functionally identical:
+
+This first example uses the old style way to define an anonymous function using the `function` keyword:
 
 ```javascript
-app.get('/', (req, res) => res.send('Hello World'))
+app.get('/', function(ctx) {
+	ctx.body = 'Hello World'
+}
 ```
 
-And here is another example that is also functionally identical. In this example we have added the curly braces and split the function into multiple lines. In this way we can have more than one line of code in the callback function.
+Modern JavaScript replaces the `function` keyword with an [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions):
 
 ```javascript
-app.get('/', (req, res) => {
-	res.send('Hello ')
-	res.send('World')
-})
+app.get('/', (ctx) => {
+	ctx.body = 'Hello World'
+}
 ```
+
+If an arrow function has only one parameter, the braces are optional:
+
+```javascript
+app.get('/', ctx => {
+	ctx.body = 'Hello World'
+}
+```
+
+If the function body is only one line, the curly braces are also optional:
+
+```javascript
+app.get('/', ctx => ctx.body = 'Hello World'
+```
+
+As you can see, there are a number of ways to make functions more concise however you should never sacrifice clarity for conciseness!
 
 From this point onwards you will only be seeing (and using) anonymous callback functions. Take your time to ensure you fully understand the concepts and syntax before continuing.
 
 #### 1.1.4 Test Your Understanding
 
-1. Replace all the named functions you have seen so far with anonymous functions.
+1. Replace the named `hello()` function with an anonymous function.
 
 ### 1.2 URL Parameters
 
-In the HTTP protocol URLs represent resources on the server. Up to this point each URL has matched a different _route_ (defined by an `app.get()` function) but on a real server there might be a database containing many thousands of records that we want to be able to access. For this to work, each record would need a different, unique, URL! Since each record in an SQL database has a unique key (primary key), a simple solution would be to include the primary key in the URL thus creating a different URL for each record.
+In the HTTP protocol URLs represent resources on the server. Up to this point each URL has matched a different _route_ (defined by an `router.get()` function) but on a real server there might be a database containing many thousands of records that we want to be able to access. For this to work, each record would need a different, unique, URL! Since each record in an SQL database has a unique key (primary key), a simple solution would be to include the primary key in the URL thus creating a different URL for each record.
 
-To do this we need to extract some data from the request object `req` which is the first parameter passed to the _anonymous callback function_. The `req` object is a _JavaScript Object_ and so we need to fully understand how these work.
+To do this we need to extract some data from the http object `ctx` which is the parameter passed to the _anonymous callback function_. The `ctx` object is a _JavaScript Object_ and so we need to fully understand how these work.
 
 Start the server and access the `/books/1` route. What is displayed in the web browser?
 
@@ -118,7 +138,7 @@ Start the server and access the `/books/1` route. What is displayed in the web b
 2. Directly underneath this we have defined a route `/books/:index` which contains two **segments**:
 	1. The first matches the text `/books`, this works like all the routes we have seen previously.
 	2. The second, beginning with the colon (`:`) represents a **URL Parameter**. This represents one or more characters.
-3. In the _anonymous callback function_ we are accessing the `params` property of the `req` object and storing this in a constant called `parameters` which we are then printing to the terminal.
+3. In the _anonymous callback function_ we are accessing the `params` property of the `ctx` object and storing this in a constant called `parameters` which we are then printing to the terminal.
 	1. Check the terminal to see this constant.
 	2. Note that it is itself a JavaScript object and that it contains a single property called `index` which matches the name of the URL segment.
 	3. The value of this property is the string we added to the URL.
@@ -176,7 +196,6 @@ In this section you will learn about a number of JavaScript functions. In each c
 	1. If the index in the URL exceeds to number of books in the array you get an error. Insert an [`if...else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) that sends a suitable message to the browser if the index number in the URL is too high.
 	2. The index must be a number. Use the [`isNaN()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check and send a suitable message to the browser if it is not. if it is, use the [`parseInt()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt) to convert it to a number.
 	3. The number needs to be a whole number (integer). All JavaScript numbers are objects and have a number of useful functions. Use the [`Number.isInteger()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger) to check it is indeed an integer. Send a suitable message to the browser if it is not.
-	
 
 ### 1.3 URL Query Strings
 
@@ -188,11 +207,11 @@ Whilst URL parameters are used to define unique URLS to identify online resource
 2. Now change the URL to `/hello/John%20Doe?format=upper`.
 	1. Notice that the same data has been displayed just the format has changed.
 
-Open the `index.js` file. The route is between lines 34-40.
+Open the `index.js` file. The route is between lines 37-43.
 
 1. Notice that the query string(s) are not part of the route.
 2. The query string comprises name-value pairs.
-3. The query string data can be accessed in the `req.query` object.
+3. The query string data can be accessed in the `ctx.query` object.
 4. Because this data is not part of the route it may or may not be present so you should check to see if the data is present before trying to use this.
 
 #### 1.3.1 Test Your Understanding
@@ -211,7 +230,7 @@ Headers allow for additional information to be passed:
 
 ----
 
-1. Start up the server script in the `exercises/02_http/` directory. Refer the the previous lab if you get stuck at this point.
+1. Start up the server script in the `exercises/02_http/02_headers/` directory. Refer the the previous lab if you get stuck at this point.
 2. Using the server URL (see previous lab), access the root url `/`. This is the same activity that you carried out in the first worksheet and you should see the string `hello world`.
 3. Modify the URL to point to `/hello/john smith`, substituting your name.
 	1. Notice that the browser now displays `hello john smith`.

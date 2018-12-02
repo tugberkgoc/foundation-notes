@@ -169,3 +169,9 @@ Deleting tags (local then remote).
 $ git tag --delete 582f65c
 $ git push -delete origin 582f65c
 ```
+
+Notes:
+
+Express vs Koa vs Hapi: https://www.sitepoint.com/express-koa-hapi/
+
+Good article on Koa covering useful bits such as global error handling: https://scotch.io/tutorials/introduction-to-koa-the-future-of-express
