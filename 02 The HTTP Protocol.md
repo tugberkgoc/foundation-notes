@@ -31,7 +31,12 @@ We will be working through some exercises that make use of all of these.
 ### 1.1 The Uniform Resource Locator
 
 1. Start up the server script in the `exercises/02_http/01_url/` directory.
-	1. Install the `koa` and `koa-router` packages. Refer the the previous lab if you get stuck at this point.
+	1. Install the following node packages. Refer the the previous lab if you get stuck at this point:
+		1. `koa`
+		2. `koa-router`
+		3. `koa-bodyparser`
+		4. `koa-static`
+		5. `js2xmlparser`
 	2. Access the root url, notice that the message **Hello World** is displayed in the browser.
 	3. Access the `/hello` url. This should result in the same message being displayed.
 2. Open the `index.js` script and study lines 1-10.
@@ -228,24 +233,14 @@ Headers allow for additional information to be passed:
 1. Data can be sent as part of the HTTP request header sent from the browser to the web server.
 2. The server can send extra data back to the web browser.
 
-----
+Make sure the server is still running and use the [Chrome web browser](https://www.google.com/chrome/) to access the root URL `/`.
 
-1. Start up the server script in the `exercises/02_http/02_headers/` directory. Refer the the previous lab if you get stuck at this point.
-2. Using the server URL (see previous lab), access the root url `/`. This is the same activity that you carried out in the first worksheet and you should see the string `hello world`.
-3. Modify the URL to point to `/hello/john smith`, substituting your name.
-	1. Notice that the browser now displays `hello john smith`.
-
-NB: Before running the script you will have to install the js2xmlparser package. To do this, type the following in ssh terminal;
-    $ npm install js2xmlparser
-
-HINT:  use cd to change to the correct directory path - $cd TEACHING-MATERIALS/exercises/02_http and then run index.js ($node index.js)
-
-2. Using the server URL (see previous lab), access the root url `/`. This is the same activity that you carried out in the first worksheet and you should see the string `hello world`.
-
-HINT: Right-click on labs and select info from the dropdown. Then click on the url remembering to add :8080 to the end of it.
-
-3. Locate the **Network** tab in the Chrome developer tools and in there you should see the resource sent in the HTTP response together with some data dealing with response times.
-4. Click on the file name (as shown) to display the HTTP headers.
+1. Open the [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) by clicking on the _customise and control Google Chrome tools_ button (the three dots to the extreme right of the address bar).
+2. Choose **More tools** from the menu and then **Developer tools** from the submenu.
+3. Locate the **Network** tab in the Chrome developer tools.
+4. Reload the web page.
+5. You should now see the resource sent in the HTTP response together with some data dealing with response times.
+6. Click on the file name (as shown) to display the HTTP headers.
 
 ![how to show the headers in Chrome](exercises/.images/chrome_02.png)
 
@@ -283,10 +278,12 @@ As part of the worksheets you will be given some exercises to carry out to make 
 
 Now we have a good understanding of the request-response process used by the HTTP protocol and have learned about the headers we will extend this by examining the use of the HTTP POST method.
 
+Before completing this section in the lab sheet you will need to install the `koa-static` package.
+
 1. Start by accessing the list of names on the `/names` url Make sure you have the Chrome Developer Tools open on the Network tab.:
     1. Notice the browser displays an error message.
     2. If you look at the HTTP Status Code you will see it is `404 Not Found` which makes sense as there are no names in the list (yet)
-2. Now access the form page on the `/form` URL. By default browsers use the GET method. 
+2. Now access the form page on the `/form.html` URL. By default browsers use the GET method.
 3. Input your name and use the `submit` button to add this data to the website. Examine the request and response headers:
     1. Notice that the Request Method has changed to `POST`.
     2. Notice that the Response Code is `201 Created` to indicate that your data has been uploaded and stored.
@@ -312,6 +309,8 @@ Query strings are additional pieces of information attached to the URL and becau
 
 You have already seen the request headers that are sent automatically by the web browser however you can add your own to this. Let's start by replicating the search functionality by passing the search criteria as a request header.
 
+To complete this section of the lab you need to install the [Modify Headers](https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi) plugin for Google Chrome.
+
 1. Remove the query parameter from the URL so that all the names are displayed.
 2. Open the **Modify Headers** plugin and add a custom header called `search` and sets its value to something you want to search for (see screenshot below).
 3. Close the Modify Headers window and refresh the browser window, you should see the search is applied.
@@ -328,8 +327,8 @@ text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;
 
 This specified that the browser would prefer data in HTML/XML format (0.9 weighting) but will accept certain image formats and everything else. We will be changing this to request our data in specific formats.
 
-1. Still on the `/names` URL, modify the request headers by removing and search terms.
-2. Add a custom `Accept` header which will override the default and sets its value to `text/html` (see the screenshot below). If you refresh the browser you will see that the data is still displayed in an HTML table (because this format has been provided by the server).
+1. Still on the `/names` URL, modify the request headers by removing any search terms.
+2. Add a custom `Accept` header which will modify the default and set its value to `text/html` (see the screenshot below). If you refresh the browser you will see that the data is still displayed in an HTML table (because this format has been provided by the server).
 3. Now try the following MIME types:
     1. `application/json`
     2. `application/xml`
@@ -340,4 +339,3 @@ This specified that the browser would prefer data in HTML/XML format (0.9 weight
     2. We get an HTTP Status Code of `406 Not Acceptable`.
 
 ![setting a custom Accept header](exercises/.images/chrome_06.png)
-
