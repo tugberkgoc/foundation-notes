@@ -519,3 +519,91 @@ There are a couple of important concepts here.
 #### 2.6.1 Test Your Understanding
 
 1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
+
+--------
+
+
+#### 1.1.1 Callbacks
+
+The NodeJS language that is running on your server only has a single thread in an event loop (see diagram below). It is important to understand how this works and its benefits (and drawbacks).
+
+![NodeJS Event Loop](https://i.stack.imgur.com/BTm1H.png)
+
+Copyright medium.com
+
+All the incoming http requests from all connected users are placed in an event loop which means that they are processed one after another. Once the loop gets to the end of the connections it returns to the first one and continues. The main advantage of this is that the server does not have the overhead of creating new threads for each user however there is one obvious drawback, if one user's request takes time to complete everyone else is left waiting!
+
+To solve this problem, any task that is likely to be time-consuming is passed to an appropriate asynchronous interface (such as that used by a database or the filesystem). At this point a _callback_ is registered (this is normally a function). Once the time-consuming process has completed, the flow is returned to the event loop and the callback function is executed.
+
+Let's see how this works in practice. Take a look at the `index.js` script once more:
+
+1. On line 12 we define a function called `hello`. This takes a `ctx` parameter which represents both the http request and http response. This is a pre-defined object. This is our _callback function_:
+	1. Named functions are declared using the `function` keyword followed by the name of the function.
+	2. Any parameters are enclosed in standard braces `()`, this can be empty if there are none. Multiple parameters are separated by commas.
+	3. The body of the function is enclosed in curly braces `{}`. In this case the function contains a single line which sets the `body` property of our `ctx` parameter. This has the effect of sending this data back to the browser as the _response body_.
+2. On line 16 we call a function that is stored in the `get` property of our new `router` object, this requires two parameters:
+	1. The first parameter is the _route_ we want to handle (the end of the URL), `/` represents the _root url_.
+	2. The second parameter is the function we want to run when this route is requested by the browser.
+3. When the incoming http request is matched to an appropriate route the _callback function_ is called once the http request has been received.
+4. The function is passed the `ctx` object so it can both access the request data and send a response to the web browser.
+
+#### 1.1.2 Test Your Understanding
+
+1. Create a function called `goodbye` that takes a `ctx` object and send the message `goodbye world` to the web browser.
+2. Create a route for `/goodbye` and use the function you created in the previous step as its callback function.
+3. Stop the server (ctrl+c) and restart.
+4. Check it works.
+
+#### 1.1.3 Anonymous Functions
+
+In the previous examples we defined a named JavaScript function (it was assigned a name) and then passed this as a parameter to the `app.get()` function (as a _callback function_. This is a very common technique but going to the trouble to defined a named function and then passing the function by name as a function parameter (two steps) can be simplfied. Look at the two examples below.
+
+Using a named _callback function_:
+
+```javascript
+function hello(ctx) {
+	ctx.body = 'Hello World'
+}
+
+app.get('/', hello)
+```
+
+Using an _anonymous callback function_. Notice that we have inserted the entire function as the parameter without having to give it a name. Take a moment to make sense of the strange syntax. Each of the examples below is functionally identical:
+
+This first example uses the old style way to define an anonymous function using the `function` keyword:
+
+```javascript
+app.get('/', function(ctx) {
+	ctx.body = 'Hello World'
+}
+```
+
+Modern JavaScript replaces the `function` keyword with an [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions):
+
+```javascript
+app.get('/', (ctx) => {
+	ctx.body = 'Hello World'
+}
+```
+
+If an arrow function has only one parameter, the braces are optional:
+
+```javascript
+app.get('/', ctx => {
+	ctx.body = 'Hello World'
+}
+```
+
+If the function body is only one line, the curly braces are also optional:
+
+```javascript
+app.get('/', ctx => ctx.body = 'Hello World'
+```
+
+As you can see, there are a number of ways to make functions more concise however you should never sacrifice clarity for conciseness!
+
+From this point onwards you will only be seeing (and using) anonymous callback functions. Take your time to ensure you fully understand the concepts and syntax before continuing.
+
+#### 1.1.4 Test Your Understanding
+
+1. Replace the named `hello()` function with an anonymous function.
