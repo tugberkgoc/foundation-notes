@@ -3,10 +3,10 @@
 
 const puppeteer = require('puppeteer')
 
-module.exports.search = async query => {
+const search = async query => {
 	const width = 1920
 	const height = 926
-	const browser = await puppeteer.launch({ headless: false})
+	const browser = await puppeteer.launch({ headless: true})
 	const page = await browser.newPage()
 	await page.setViewport({ width: width, height: height })
 	await page.goto(`https://www.brainyquote.com/search_results?q=${query}`, { waitUntil: 'domcontentloaded' })
@@ -19,7 +19,7 @@ module.exports.search = async query => {
 			try {
 				quoteJson.quote = element.querySelector('a.b-qt').innerText
 				quoteJson.author = element.querySelector('a.bq-aut').innerText
-				quoteJson.tags = element.querySelector('div.kw-box').innerText.split(',').map( tag => tag.trim())
+				quoteJson.tags = element.querySelector('div.kw-box').innerText.split(',').map( tag => tag.trim().toUpperCase())
 				//quoteJson.id = document.querySelector('a.b-qt').className.match(/\d+/)[0]
 			} catch (err) {
 				return new Error('oops')
@@ -51,3 +51,5 @@ async function autoScroll(page){
 		})
 	})
 }
+
+module.exports.getQuotes = (query, callback) => search(query).then(data => callback(null, data)).catch(err => callback(err))
