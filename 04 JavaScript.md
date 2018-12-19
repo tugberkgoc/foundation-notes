@@ -125,7 +125,13 @@ Until ECMA6, you could not declare _immutable variables_ (otherwise known as con
 
 ### 2.4 Test Your Understanding
 
-//TODO: needs exercise on JS data types.
+Open the `todo.js` script and complete the following tasks:
+
+1. locate the `input` variable declaration (just inside the `do` loop)
+    - define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
+    - modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
+    - substitute a constant by substituting `const` for `let`, what effect does this have?
+2. the array at the top of the script is defined using `var`. What happens if you make this immutable (use `const`)?
 
 Open the `hoisting.js` file and run it. As you complete each of the tasks make sure you run the code to understand what is happening:
 
@@ -139,70 +145,11 @@ Open the `hoisting.js` file and run it. As you complete each of the tasks make s
 3. Now define the `name` variable using the `const` keyword and run the script again.
     1. Notice we get an error `TypeError: Assignment to constant variable` because we declared `name` as a constant (it can't be modified).
 
-## 3 Conditionals and Loops
-
-Javascript supports a range of branching and looping constructs. They all follow a similar syntax to Java and C++.
-
-### 3.1 Conditionals
-
-JavaScript includes the standard set of conditionals (if, if...else and switch) and the syntax is similar to other modern programming languages. The `todo.js` script makes use of a number of `if` statements to identify which option the user has entered, for example:
-
-```javascript
-if (input.indexOf('list') === 0) {
-  // the user has chosen the 'list' command.
-}
-```
-
-Later in this chapter you will be required to implement a `switch` conditional. These share the same syntax as most modern languages and require a `break` command to exit and take an optional `default` clause.
-
-```javascript
-const name = String(readline.question('your name: ')).trim()
-switch(name) {
-  case 'John':
-    console.log('your name is John')
-    break
-  case 'Jane':
-    console.log('your name is Jane')
-    break
-  default:
-    console.log('unknown name')
-}
-```
-
-### 3.2 Loops
-
-Javascript also supports a wide number of loop constructs:
-
-- for
-- while...do
-- do while
-
-In the `todo.js` script you can see the run-loop has been implemented using a do...while loop.
-
-```javascript
-do {
-  // this is the run loop
-} while (input !== 'exit')
-```
-
-It also uses a traditional for loop with loop variable using a syntax similar to C++ and Java. It uses the Array `length` property to iterate through it.
-
-```javascript
-for (let i=0; i< items.length; i++) {
-  /* Here we reference the array index. */
-  console.log(`${i}. ${items[i]}`)
-}
-```
-
-### 3.3 Test Your Understanding
-
-//TODO: need an exercise covering loops and branching...
-
-## 4 Strings
+## 3 Strings
 
 In common with most other programming languages, JavaScript supports strings.
 
-### 4.1 Strings as Objects
+### 3.1 Strings as Objects
 
 In JavaScript, all strings are objects and have a number of useful methods. In the `todo.js` example there is a line:
 
@@ -235,7 +182,7 @@ const item = input.substring(space).trim()
 
 It's worth taking a few moments to learn about some of the useful [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) methods.
 
-### 4.2 String Concatenation
+### 3.2 String Concatenation
 
 There are two ways to concatenate (join) strings. Prior to ECMA6 the `+` operator was used to join string literals and string variables.
 
@@ -253,11 +200,14 @@ console.log(`my name is ${name}`)
 
 By using _template literals_ your strings become much easier to read and so you should get into the habit of always using these.
 
-### 4.3 Test Your Understanding
+### 3.3 Test Your Understanding
 
-//TODO: need an exercise covering string functions and concatenation.
+Open the `todo.js` script and complete the following tasks:
 
-## 5 Arrays
+1. The current version is case sensitive. Modify the code so that items are converted to lowercase before being added or searched for. You will need to use the [`String.toLowerCase()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) method.
+2. Modify the code so that it displays `you are adding [xxx] to the list` when adding a new item (where xxx is the name of the item).
+
+## 4 Arrays
 
 Our `todo.js` script declares an array near the start to hold the items in our todo list. Notice that the array is declared as _immutable_ using the `const` keyword.
 
@@ -271,26 +221,109 @@ Arrays are _objects_ and have a number of built-in methods. Later in the script 
 items.push(item)
 ```
 
-### 5.1 Test Your Knowledge
+### 4.1 Test Your Understanding
 
-Now you are familiar with the basics of the ECMA6 language its time to put this to the test. Make sure you successfully complete all six tasks before continuing to the next section.
+Open the `todo.js` script and complete the following tasks:
 
-1. locate the `input` variable declaration (just inside the `do` loop)
-    - define it as a block-scoped variable by replacing the `var` with `let`, what effect does this have? Can you explain why this is the case?
-    - modify the script so that it still works (keep the `let` variable declaration). Hint: think about the variable _scope_, you will need to move the variable declaration.
-    - substitute a constant by substituting `const` for `let`, what effect does this have?
-2. the array at the top of the script is defined using `var`. What happens if you make this immutable (use `const`)?
-3. Items are added to the array using its `push()` method.
+1. Reverse the order in which the items are displayed on screen:
+    1. Can you use the built-in [reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) method?
+    2. Try adding more items, can you spot any unintended side effects?
+    3. Can you eliminate these side-effects in your code?
+2. Items are added to the array using its `push()` method.
     - substute the [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) method. How does this change the script?
-4. modify the code to prevent duplicate items being added. You will need to use the [`Array.indexOf()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) method.
-5. create a **remove** option so an item such as *cheese* can be removed using the syntax `remove cheese`. You may need to use the [`Array.splice()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) method.
-6. The current version is case sensitive. Modify the code so that items are converted to lowercase before being added or searched for. You will need to use the [`String.toLowerCase()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) method.
-7. The code currently uses a `for` loop to print out the contents of the array:
+3. Now use the [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method to store the items in alphabetical order.
+
+## 5 Conditionals
+
+JavaScript includes the standard set of conditionals (if, if...else and switch) and the syntax is similar to other modern programming languages. The `todo.js` script makes use of a number of `if` statements to identify which option the user has entered, for example:
+
+```javascript
+if (input.indexOf('list') === 0) {
+  // the user has chosen the 'list' command.
+}
+```
+
+Later in this chapter you will be required to implement a `switch` conditional. These share the same syntax as most modern languages and require a `break` command to exit and take an optional `default` clause.
+
+```javascript
+const name = String(readline.question('your name: ')).trim()
+switch(name) {
+  case 'John':
+    console.log('your name is John')
+    break
+  case 'Jane':
+    console.log('your name is Jane')
+    break
+  default:
+    console.log('unknown name')
+}
+```
+
+### 5.1 Test Your Understanding
+
+Open the `todo.js` script and complete the following tasks:
+
+1. modify the code to prevent duplicate items being added. You will need to use the [`Array.indexOf()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) method.
+2. create a **remove** option so an item such as *cheese* can be removed using the syntax `remove cheese`. You may need to use the [`Array.splice()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) method.
+
+## 6 Loops
+
+Javascript supports a wide number of loop constructs, which serve two main purposes:
+
+1. To iterate over _iterable_ objects such as arrays.
+2. To repeat an action until an exit condition is met.
+
+### 6.1 Iterating Over Arrays
+
+One of the most common uses for loops is to work through the contents of an array, one index at a time. This might be to perform a calculation or to display the content in a helpful manner.
+
+The standard `for` loop we use for this looks similar to one you may have come accross in other languages. This uses a loop variable together with the `Array.length` property so it knows when to stop.
+
+```javascript
+for (let i=0; i< items.length; i++) {
+  /* Here we reference the array index. */
+  console.log(`${i}. ${items[i]}`)
+}
+```
+
+In modern JavaScript there are two other looping constructs that do the same thing but with a cleaner syntax. They look similar but have one important difference as you will see.
+
+The `for in` loop can be used as a direct drop-in replacement for the `for` loop. It gives access to the array indexes. This means the previous example can be rewritten as:
+
+```javascript
+for(const i in items) {
+  console.log(`${i}. ${items[i]}`)
+}
+```
+
+The `for of` loop differs in that we get direct access to the array values without seeing the index. The benefit is cleaner code. Remember this should only be used if we _don't want to access the array index numbers_.
+
+```javascript
+for(const val of items) {
+  console.log(val)
+}
+```
+
+### 6.2 Looping Until Exit Condition Met
+
+In the `todo.js` script you can see the run-loop has been implemented using a do...while loop.
+
+```javascript
+do {
+  // this is the run loop
+} while (input !== 'exit')
+```
+
+### 6.3 Test Your Understanding
+
+Open the `todo.js` script and complete the following tasks:
+
+1. The code currently uses a `for` loop to print out the contents of the array:
     1. Replace this with the [`for...in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) statement.
     2. Replace this with the [`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) statement. What are its limitations?
     3. Replace this with the [`Array.forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) method.
 
-## 6 Errors and Exceptions
+## 5 Errors and Exceptions
 
 When JavaScript executes code errors and exceptions may occur. These may be due to incorrect user input or a broken network connection for example. JavaScript includes a rich set of tools for handling these, based on the [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object.
 
