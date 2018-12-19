@@ -19,7 +19,7 @@ module.exports.search = async query => {
 			try {
 				quoteJson.quote = element.querySelector('a.b-qt').innerText
 				quoteJson.author = element.querySelector('a.bq-aut').innerText
-				quoteJson.tags = document.querySelector('div.kw-box').innerText.split(',').map( tag => tag.trim())
+				quoteJson.tags = element.querySelector('div.kw-box').innerText.split(',').map( tag => tag.trim())
 				//quoteJson.id = document.querySelector('a.b-qt').className.match(/\d+/)[0]
 			} catch (err) {
 				return new Error('oops')
