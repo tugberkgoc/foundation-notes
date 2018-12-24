@@ -9,7 +9,7 @@ const search = async query => {
 	const browser = await puppeteer.launch({ headless: true})
 	const page = await browser.newPage()
 	await page.setViewport({ width: width, height: height })
-	await page.goto(`https://www.brainyquote.com/search_results?q=${query}`, { waitUntil: 'domcontentloaded' })
+	await page.goto(`https://www.brainyquote.com/search_results?q=${query}`, { waitUntil: 'networkidle0' })
 	await autoScroll(page)
 	const dom = await page.evaluate(() => {
 		const elements = document.querySelectorAll('div.m-brick')

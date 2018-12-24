@@ -1,26 +1,13 @@
 
 # Functions and Objects
 
-Before you start this worksheet make sure you have the latest lab materials:
-
-```shell
-$ git stash
-$ git pull origin master
-$ git stash pop
-```
-
-If the VI editor window pops open:
-
-1. press the Esc key.
-2. type `:wq` and press the Enter key.
-
 ## 1 Functions
 
 In JavaScript, as in most other languages, code can be divided in to modular blocks called functions. Once defined, these can be called from other code. Data can be passed in the form of parameters and functions can return data back to the calling code.
 
 Open the `maths.js` file. Notice that this contains several functions. Each is called directly under its definition.
 
-### 1.1 Function Syntax
+### 1.1 Function Declarations
 
 Lets start with a simple example.
 
@@ -35,7 +22,7 @@ const biggest = largestNumber(5, 8)
 ```
 
 1. The function is declared using the `function` keyword and the function is given a name which must be a valid variable name.
-    a. If the name comprises more than one word these should be written using camel casing as shown above.
+    a. If the name comprises more than one word these should be written using camel casing as shown above. This is known as a **Function Declaration**
 2. The function above takes two parameters, `a` and `b`.
     - These are variables with local scope (they can't ba accessed outside the function)
     - When the function is called, you need to pass two **values** which get assigned to the two parameters.
@@ -45,102 +32,7 @@ const biggest = largestNumber(5, 8)
     a. If the numbers are not the same it returns the largest.
     b. If they are the same it returns `null`.
 
-### 1.1.1 The Spread Operator
-
-If the data you want to pass to a function is stored in an `Array` (this is quite common), you could extract each value and assign to the function like this:
-
-```javascript
-const nums = [5, 8]
-const biggest2 = largestNumber(nums[0], nums[1])
-```
-
-Because this is such a common task, there is a shortcut called the **spread operator**. Using this, the same task can be expressed like this.
-
-```javascript
-const nums = [5, 8]
-const biggest2 = largestNumber(...nums)
-```
-
-Notice the syntax of the _spread operator_.
-
-### 1.1.2 The Arguments Object
-
-When a function is declared it has a **signature** which defines the number of parameters it is expecting, for example in the `largestNumber()` function, the signature defines two arguments.
-
-```javascript
-function largestNumber(a, b) { // this is the function signature.
-  // function body
-}
-```
-
-What happens if you try to call this with the _wrong_ number of arguments?
-
-- If you supply too few arguments the remaining parameters are assigned a data type and value of `null`.
-- If you supply too many arguments, the remaining ones are not assigned to the parameters, so where are they?
-
-Every JavaScript function has an object called `Arguments` which contains all the parameters passed to that function, even ones no assigned to the formal parameters. This provides a mechanism to access arguments that don't get assigned to parameters. Lets take a look at the `add()` function.
-
-```javascript
-function add() {
-  let total = 0
-  console.log(arguments)
-  console.log(arguments['1'])
-  for(const arg of arguments) {
-    total += arg
-  }
-  return total
-}
-```
-
-As you can see, the function signature defines no parameters, but when we call it we pass 4 arguments. What happens to these and how can we access them?
-
-```javascript
-const addNums = add(1, 2, 3, 4)
-```
-
-Inside the function we can access the `arguments` object. The `add()` function shows three ways to do this (we will be covering objects in detail in the next chapter):
-
-- display all the arguments (see below).
-- access individual arguments by referencing a key.
-- Use a `for...of` loop to iterate through the values.
-
-### 1.1.3 The Rest Parameter
-
-Whilst the `arguments` object provides a mechanism for accessing the function arguments, it returns an Object (the keys are `Strings`). It would be better if
-
-- the arguments could be accessed in an `Array`.
-- it ignored arguments already assigned to parameters.
-
-ECMA6 introduced a special parameter called a _rest parameter_ which captures all the arguments that have not been assigned to parameters and stores them in an array. Look at the `add2()` function.
-
-```javascript
-function add2(...values) {
-  let total = 0
-  console.log(values)
-  console.log(values[1])
-  for (let i=0; i<values.length; i++) {
-    total += values[i]
-  }
-  return total
-}
-```
-
-The `...values` parameter has a `...` prefix which defines it as a _rest parameter_. In the body of the function it can be seen that this is an `Array` and so each argument has a numerical index. This is the preferred way to handle arguments that are not assigned to parameters.
-
-### 1.1.4 Default Parameters
-
-As explained above, if you don't supply enough arguments for the parameters in the function signature, all the parameters without arguments are assigned a value of `null`. This means you have to add code within the function to check that there is a value assigned to the parameters before you can safely use them. ECMA6 has introduced **default parameters**. These allow you to assign a default value to a parameter if one is not supplied by when the function is called. Lets examine the `divide()` function.
-
-```javascript
-function divide(dividend, divisor=1) {
-  const quotient = dividend / divisor
-  return quotient
-}
-```
-
-Notice that the divisor has been assigned a value in the function signature. If this parameter is not assigned an argument, it defaults to this value.
-
-### Test Your Understanding
+#### 1.1.1 Test Your Understanding
 
 Start by running the `maths.js` script and map the output it generates against the `console.log` statements in the script.
 
@@ -167,6 +59,8 @@ const remainder = function(dividend, divisor) {
   return dividend - quotient
 }
 ```
+
+This is known as storing a _function expression_ in a variable (or just a _Function Expression_ for short).
 
 To execute the function you simply reference the variable and append `()`.
 
@@ -199,7 +93,14 @@ const sqr = num => num * num
 
 //TODO: add an exercise on function expressions.
 
+1. Refactor the `remainder2` function expression to take advantage of the implicit return (you will need to reduce it to a single line of code).
+2. Compare this to the original version: which is more _readable_?
+
 ### 1.3 Callbacks
+
+//TODO: need a replacemennt for the currency API (perhaps use screen scraping?) or books?
+
+NOT an API at this stage but reading/writing files?
 
 Since JavaScript supports _first class functions_, we can use a function in any place where we could use a literal, object or variable. Open the `currency.js` script and look at line 17. As you can see the `request` object has a key called `get` that stores a function (we have already covered this). This takes two parameters:
 
@@ -250,36 +151,13 @@ Lets improve the currency exchange tool. You will need to refer to the API [docu
 4. Use the [Number.prototype.toFixed()](https://goo.gl/DU4hvd) to truncate the number to 2 decimal places.
 5. Finally, modify your program so that it throws an error if it doesn't recognise either of the currency codes.
 
-## 1.4 Nested Callbacks
-
-Because the code to be run after a callback is run needs to be _inside_ the callback code it is very challenging to build a script that contains several long-running tasks you get into a situation where you nest callbacks inside callbacks (inside callbacks) which makes the code very difficult to write, debug and read and means its very difficult to split into separate functions, a situation commonly known as **Callback Hell**.
-
-Open the file `nestedCallbacks.js` which asks for a _base_ currency code then prints out all the exchange rates against other currencies. Notice that there are four functions defined, three of which include a callback. Our script is designed to capture user input using `stdin` (needing a callback), identify whether a currency code is valid (requiring a second callback) and then getting the currency conversion rates for the specified currency (requiring a third callback).
-
-1. Notice that the `checkValidCurrencyCode()` function is called by the callback for the `getInput()` function and the `getData()` function is called by the callback for the `checkValidCurrencyCode()` function.
-2. Each callback takes two parameters as normal. The first contains the error (if any) and this needs to be handled in each callback.
-3. The data from the first callback is needed when calling the third function so needs to be stored in an immutable variable (constant).
-4. The fourth, and final, function does not have a callback.
-
-Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
-
-### 1.4.1 Test Your Knowledge
-
-The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
-
-1. modify the script to ask for the currency to convert to and display only the one conversion rate.
-2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency.
-
-Even though the script is still simple you are probably already getting in a tangle! Imagine a more complex script with conditions, it would quickly get out of hand and become practically impossible to debug.
-
 ## 2 Objects
 
 Lets start by creating an manipulating objects using **object literals**. Open the `employee.js` file, read through it and see if you can work out what it does. Now run it to see if you were correct.
 
 ### 2.1 Creating Object Literals
 
-The simplest way to create new objects is by creating an _object literal_ which is defining an object and storing it in a variable. You should open the `employee.js` file which contains the code.
+The simplest way to create new objects is by creating an _object literal_ which is defining an object and storing it in a variable in a similar way to how we created function literals earlier in the lab. You should open the `employee.js` file which contains the code.
 
 ```javascript
 const employee = {
@@ -520,90 +398,51 @@ There are a couple of important concepts here.
 
 1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
 
---------
+## 3 RESTful APIs and JSON Data
 
+//TODO: write this section...!
 
-#### 1.1.1 Callbacks
+### 3.1 JSON Data
 
-The NodeJS language that is running on your server only has a single thread in an event loop (see diagram below). It is important to understand how this works and its benefits (and drawbacks).
+Show how objects can be turned into strings and saved. text data loaded and converted into a JavaScript object.
 
-![NodeJS Event Loop](https://i.stack.imgur.com/BTm1H.png)
+#### 3.1.1 Test Your Understanding
 
-Copyright medium.com
+### 3.2 RESTful APIs
 
-All the incoming http requests from all connected users are placed in an event loop which means that they are processed one after another. Once the loop gets to the end of the connections it returns to the first one and continues. The main advantage of this is that the server does not have the overhead of creating new threads for each user however there is one obvious drawback, if one user's request takes time to complete everyone else is left waiting!
+Show how data can be retrieved from an API in JSON format.
 
-To solve this problem, any task that is likely to be time-consuming is passed to an appropriate asynchronous interface (such as that used by a database or the filesystem). At this point a _callback_ is registered (this is normally a function). Once the time-consuming process has completed, the flow is returned to the event loop and the callback function is executed.
+//TODO: use the OMDB API in this section
 
-Let's see how this works in practice. Take a look at the `index.js` script once more:
+OMDB key: 220d2590
 
-1. On line 12 we define a function called `hello`. This takes a `ctx` parameter which represents both the http request and http response. This is a pre-defined object. This is our _callback function_:
-	1. Named functions are declared using the `function` keyword followed by the name of the function.
-	2. Any parameters are enclosed in standard braces `()`, this can be empty if there are none. Multiple parameters are separated by commas.
-	3. The body of the function is enclosed in curly braces `{}`. In this case the function contains a single line which sets the `body` property of our `ctx` parameter. This has the effect of sending this data back to the browser as the _response body_.
-2. On line 16 we call a function that is stored in the `get` property of our new `router` object, this requires two parameters:
-	1. The first parameter is the _route_ we want to handle (the end of the URL), `/` represents the _root url_.
-	2. The second parameter is the function we want to run when this route is requested by the browser.
-3. When the incoming http request is matched to an appropriate route the _callback function_ is called once the http request has been received.
-4. The function is passed the `ctx` object so it can both access the request data and send a response to the web browser.
+First task is for students to get an OMDB API key and paste it into the provided script.
 
-#### 1.1.2 Test Your Understanding
+### 3.3 Nested Callbacks
 
-1. Create a function called `goodbye` that takes a `ctx` object and send the message `goodbye world` to the web browser.
-2. Create a route for `/goodbye` and use the function you created in the previous step as its callback function.
-3. Stop the server (ctrl+c) and restart.
-4. Check it works.
+Use the same API and show that multiple steps cause nested callbacks and callback hell.
 
-#### 1.1.3 Anonymous Functions
+//TODO: use the OMDB API in this section.
 
-In the previous examples we defined a named JavaScript function (it was assigned a name) and then passed this as a parameter to the `app.get()` function (as a _callback function_. This is a very common technique but going to the trouble to defined a named function and then passing the function by name as a function parameter (two steps) can be simplfied. Look at the two examples below.
+Find films released in year X starring Y in genre Z from producer A, etc. country B.
 
-Using a named _callback function_:
+Because the code to be run after a callback is run needs to be _inside_ the callback code it is very challenging to build a script that contains several long-running tasks you get into a situation where you nest callbacks inside callbacks (inside callbacks) which makes the code very difficult to write, debug and read and means its very difficult to split into separate functions, a situation commonly known as **Callback Hell**.
 
-```javascript
-function hello(ctx) {
-	ctx.body = 'Hello World'
-}
+Open the file `nestedCallbacks.js` which asks for a _base_ currency code then prints out all the exchange rates against other currencies. Notice that there are four functions defined, three of which include a callback. Our script is designed to capture user input using `stdin` (needing a callback), identify whether a currency code is valid (requiring a second callback) and then getting the currency conversion rates for the specified currency (requiring a third callback).
 
-app.get('/', hello)
-```
+1. Notice that the `checkValidCurrencyCode()` function is called by the callback for the `getInput()` function and the `getData()` function is called by the callback for the `checkValidCurrencyCode()` function.
+2. Each callback takes two parameters as normal. The first contains the error (if any) and this needs to be handled in each callback.
+3. The data from the first callback is needed when calling the third function so needs to be stored in an immutable variable (constant).
+4. The fourth, and final, function does not have a callback.
 
-Using an _anonymous callback function_. Notice that we have inserted the entire function as the parameter without having to give it a name. Take a moment to make sense of the strange syntax. Each of the examples below is functionally identical:
+Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
 
-This first example uses the old style way to define an anonymous function using the `function` keyword:
+### 1.4.1 Test Your Knowledge
 
-```javascript
-app.get('/', function(ctx) {
-	ctx.body = 'Hello World'
-}
-```
+The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
 
-Modern JavaScript replaces the `function` keyword with an [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions):
+1. modify the script to ask for the currency to convert to and display only the one conversion rate.
+2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
+3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency.
 
-```javascript
-app.get('/', (ctx) => {
-	ctx.body = 'Hello World'
-}
-```
-
-If an arrow function has only one parameter, the braces are optional:
-
-```javascript
-app.get('/', ctx => {
-	ctx.body = 'Hello World'
-}
-```
-
-If the function body is only one line, the curly braces are also optional:
-
-```javascript
-app.get('/', ctx => ctx.body = 'Hello World'
-```
-
-As you can see, there are a number of ways to make functions more concise however you should never sacrifice clarity for conciseness!
-
-From this point onwards you will only be seeing (and using) anonymous callback functions. Take your time to ensure you fully understand the concepts and syntax before continuing.
-
-#### 1.1.4 Test Your Understanding
-
-1. Replace the named `hello()` function with an anonymous function.
+Even though the script is still simple you are probably already getting in a tangle! Imagine a more complex script with conditions, it would quickly get out of hand and become practically impossible to debug.

@@ -1,0 +1,644 @@
+[
+  {
+    "country": "European Union",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "USA",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Australia",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "Canada",
+    "currency": "Canadian Dollar",
+    "code": "CAD",
+    "rate": 1.6462
+  },
+  {
+    "country": "Aland Islands",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "American Samoa",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Andorra",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Australia",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "Austria",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Barbados",
+    "currency": "Barbadian Dollar",
+    "code": "BBD",
+    "rate": 2.3474
+  },
+  {
+    "country": "Belgium",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Brazil",
+    "currency": "Brazilian Real",
+    "code": "BRL",
+    "rate": 4.5301
+  },
+  {
+    "country": "Bulgaria",
+    "currency": "Bulgarian Lev",
+    "code": "BGN",
+    "rate": 2.0119
+  },
+  {
+    "country": "Canada",
+    "currency": "Canadian Dollar",
+    "code": "CAD",
+    "rate": 1.6462
+  },
+  {
+    "country": "China",
+    "currency": "Chinese Renminbi",
+    "code": "CNY",
+    "rate": 8.1426
+  },
+  {
+    "country": "Christmas Island",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "Cocos (Keeling) Islands",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "Cook Islands",
+    "currency": "New Zealand Dollar",
+    "code": "NZD",
+    "rate": 1.7508
+  },
+  {
+    "country": "Croatia",
+    "currency": "Croatian Kuna",
+    "code": "HRK",
+    "rate": 7.6781
+  },
+  {
+    "country": "Cyprus",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Czech Republic",
+    "currency": "Czech Koruna",
+    "code": "CZK",
+    "rate": 26.6556
+  },
+  {
+    "country": "Denmark",
+    "currency": "Danish Krone",
+    "code": "DKK",
+    "rate": 7.6552
+  },
+  {
+    "country": "Dominican Republic",
+    "currency": "Dominican Peso",
+    "code": "DOP",
+    "rate": 57.2267
+  },
+  {
+    "country": "Ecuador",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "El Salvador",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Estonia",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "European Union",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Faroe Islands",
+    "currency": "Danish Krone",
+    "code": "DKK",
+    "rate": 7.6552
+  },
+  {
+    "country": "Fiji",
+    "currency": "Fijian Dollar",
+    "code": "FJD",
+    "rate": 2.4674
+  },
+  {
+    "country": "Finland",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "France",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "French Guiana",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "French Southern Territories",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Germany",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Greece",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Greenland",
+    "currency": "Danish Krone",
+    "code": "DKK",
+    "rate": 7.6552
+  },
+  {
+    "country": "Guadeloupe",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Guam",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Haiti",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Holy See (Vatican City State)",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Hong Kong",
+    "currency": "Hong Kong Dollar",
+    "code": "HKD",
+    "rate": 9.537
+  },
+  {
+    "country": "Hungary",
+    "currency": "Hungarian Forint",
+    "code": "HUF",
+    "rate": 325.5257
+  },
+  {
+    "country": "Iceland",
+    "currency": "Icelandic Króna",
+    "code": "ISK",
+    "rate": 140.099
+  },
+  {
+    "country": "Indonesia",
+    "currency": "Indonesian Rupiah",
+    "code": "IDR",
+    "rate": 16
+  },
+  {
+    "country": "Ireland",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Israel",
+    "currency": "Israeli New Sheqel",
+    "code": "ILS",
+    "rate": 4.476
+  },
+  {
+    "country": "Italy",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Japan",
+    "currency": "Japanese Yen",
+    "code": "JPY",
+    "rate": 134.1945
+  },
+  {
+    "country": "Jordan",
+    "currency": "Jordanian Dinar",
+    "code": "JOD",
+    "rate": 0.8344
+  },
+  {
+    "country": "Kenya",
+    "currency": "Kenyan Shilling",
+    "code": "KES",
+    "rate": 119.2441
+  },
+  {
+    "country": "Kiribati",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "Korea, Republic of",
+    "currency": "South Korean Won",
+    "code": "KRW",
+    "rate": 1
+  },
+  {
+    "country": "Latvia",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Lesotho",
+    "currency": "South African Rand",
+    "code": "ZAR",
+    "rate": 17.4405
+  },
+  {
+    "country": "Liechtenstein",
+    "currency": "Swiss Franc",
+    "code": "CHF",
+    "rate": 1.2121
+  },
+  {
+    "country": "Lithuania",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Luxembourg",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Malaysia",
+    "currency": "Malaysian Ringgit",
+    "code": "MYR",
+    "rate": 4.912
+  },
+  {
+    "country": "Malta",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Marshall Islands",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Martinique",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Mauritius",
+    "currency": "Mauritian Rupee",
+    "code": "MUR",
+    "rate": 40.1008
+  },
+  {
+    "country": "Mayotte",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Mexico",
+    "currency": "Mexican Peso",
+    "code": "MXN",
+    "rate": 23.539
+  },
+  {
+    "country": "Micronesia, Federated States of",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Monaco",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Montenegro",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Namibia",
+    "currency": "South African Rand",
+    "code": "ZAR",
+    "rate": 17.4405
+  },
+  {
+    "country": "Nauru",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "Netherlands",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "New Zealand",
+    "currency": "New Zealand Dollar",
+    "code": "NZD",
+    "rate": 1.7508
+  },
+  {
+    "country": "Niue",
+    "currency": "New Zealand Dollar",
+    "code": "NZD",
+    "rate": 1.7508
+  },
+  {
+    "country": "Norfolk Island",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "Northern Mariana Islands",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Norway",
+    "currency": "Norwegian Krone",
+    "code": "NOK",
+    "rate": 10.5497
+  },
+  {
+    "country": "Palau",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Panama",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Philippines",
+    "currency": "Philippine Peso",
+    "code": "PHP",
+    "rate": 61.7703
+  },
+  {
+    "country": "Pitcairn",
+    "currency": "New Zealand Dollar",
+    "code": "NZD",
+    "rate": 1.7508
+  },
+  {
+    "country": "Poland",
+    "currency": "Polish Zloty",
+    "code": "PLN",
+    "rate": 4.3987
+  },
+  {
+    "country": "Portugal",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Puerto Rico",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Qatar",
+    "currency": "Qatari Riyal",
+    "code": "QAR",
+    "rate": 4.4062
+  },
+  {
+    "country": "Russian Federation",
+    "currency": "Russian Ruble",
+    "code": "RUB",
+    "rate": 80.3644
+  },
+  {
+    "country": "Saint Barthélemy",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Saint Martin (French part)",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "San Marino",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Saudi Arabia",
+    "currency": "Saudi Riyal",
+    "code": "SAR",
+    "rate": 4.5964
+  },
+  {
+    "country": "Singapore",
+    "currency": "Singapore Dollar",
+    "code": "SGD",
+    "rate": 1.6608
+  },
+  {
+    "country": "Slovakia",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Slovenia",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "South Africa",
+    "currency": "South African Rand",
+    "code": "ZAR",
+    "rate": 17.4405
+  },
+  {
+    "country": "Spain",
+    "currency": "Euro",
+    "code": "EUR",
+    "rate": 1.08
+  },
+  {
+    "country": "Sweden",
+    "currency": "Swedish Krona",
+    "code": "SEK",
+    "rate": 10.9409
+  },
+  {
+    "country": "Switzerland",
+    "currency": "Swiss Franc",
+    "code": "CHF",
+    "rate": 1.2121
+  },
+  {
+    "country": "Taiwan",
+    "currency": "New Taiwan Dollar",
+    "code": "TWD",
+    "rate": 36.3001
+  },
+  {
+    "country": "Thailand",
+    "currency": "Thai Baht",
+    "code": "THB",
+    "rate": 38.9959
+  },
+  {
+    "country": "Timor-Leste",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Tokelau",
+    "currency": "New Zealand Dollar",
+    "code": "NZD",
+    "rate": 1.7508
+  },
+  {
+    "country": "Turkey",
+    "currency": "Turkish New Lira",
+    "code": "TRY",
+    "rate": 6.2351
+  },
+  {
+    "country": "Turks and Caicos Islands",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Tuvalu",
+    "currency": "Australian Dollar",
+    "code": "AUD",
+    "rate": 1.7282
+  },
+  {
+    "country": "United Arab Emirates",
+    "currency": "UAE Dirham",
+    "code": "AED",
+    "rate": 4.4499
+  },
+  {
+    "country": "USA",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Vietnam",
+    "currency": "Vietnamese Dong",
+    "code": "VND",
+    "rate": 26
+  },
+  {
+    "country": "Virgin Islands, British",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  },
+  {
+    "country": "Virgin Islands, U.S.",
+    "currency": "U.S. Dollar",
+    "code": "USD",
+    "rate": 1.2362
+  }
+]
