@@ -1,7 +1,19 @@
 
-<p>The following books will help you in this module:</p>
-<ol>
-	{{#each books}}
-	<li>{{this.title}}</li>
-	{{/each}}
-</ol>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Favourite Books</title>
+</head>
+<body>
+	<header>
+		<h1>My Favourite Books</h1>
+        <h2>List of Books</h2>
+	</header>
+	<p>The following books will help you in this module:</p>
+	<ol>
+		{{#each books}}
+			<li>{{this.title}}</li>
+		{{/each}}
+	</ol>
+</body>
+</html>
