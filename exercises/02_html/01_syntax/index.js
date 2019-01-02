@@ -1,15 +1,15 @@
+#!/usr/bin/env node
 
-'use strict'
-
-const express = require('express')
-const app = express()
-
+const Koa = require('koa')
+const Router = require('koa-router')
+const app = new Koa()
+const router = new Router()
+const views = require('koa-views')
 const port = 8080
 
-app.get('/', (req, res) => {
-	res.sendFile(`${__dirname}/coventry.html`)
-})
+app.use(views(`${__dirname}`, { extension: 'html' }, {map: { handlebars: 'handlebars' }}))
 
-app.listen(port, () => {
-	console.log(`app listening on port ${port}`)
-})
+router.get('/', async ctx => await ctx.render('coventry'))
+
+app.use(router.routes())
+module.exports = app.listen(port, () => console.log(`listening on port ${port}`))

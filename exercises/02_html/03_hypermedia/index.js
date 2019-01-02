@@ -1,32 +1,27 @@
+#!/usr/bin/env node
 
-'use strict'
-
-const express = require('express')
-const app = express()
-app.use(express.static('public'))
-
+const Koa = require('koa')
+const Router = require('koa-router')
+const app = new Koa()
+const router = new Router()
+const views = require('koa-views')
+app.use(require('koa-static')('public'))
 const port = 8080
 
-app.get('/', (req, res) => {
-	res.sendFile(`${__dirname}/html/index.html`)
-})
+app.use(views(`${__dirname}/views`, { extension: 'html' }, {map: { handlebars: 'handlebars' }}))
 
-app.get('/paradoxes', (req, res) => {
-	res.sendFile(`${__dirname}/html/paradoxes.html`)
-})
+router.get('/', async ctx => await ctx.render('index'))
+router.get('/commodore', async ctx => ctx.render('commodore64'))
+router.get('/paradoxes', async ctx => ctx.render('paradoxes'))
+router.get('/cathedral', async ctx => ctx.render('cathedral'))
 
-app.get('/commodore', (req, res) => {
-	res.sendFile(`${__dirname}/html/commodore64.html`)
-})
-
-app.get('/date', (req, res) => {
+router.get('/date', async ctx => {
 	const today = new Date()
 	const dd = today.getDate()
 	const mm = today.getMonth()+1
 	const yyyy = today.getFullYear()
-	res.send(`<h1>The date is: ${dd}/${mm}/${yyyy}`)
+	ctx.body = `<h1>The date is: ${dd}/${mm}/${yyyy}`
 })
 
-app.listen(port, () => {
-	console.log(`app listening on port ${port}`)
-})
+app.use(router.routes())
+module.exports = app.listen(port, () => console.log(`listening on port ${port}`))

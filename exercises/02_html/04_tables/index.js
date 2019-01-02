@@ -1,16 +1,16 @@
+#!/usr/bin/env node
 
-'use strict'
-
-const express = require('express')
-const app = express()
-app.use(express.static('public'))
-
+const Koa = require('koa')
+const Router = require('koa-router')
+const app = new Koa()
+const router = new Router()
+const views = require('koa-views')
+app.use(require('koa-static')('public'))
 const port = 8080
 
-app.get('/', (req, res) => {
-	res.sendFile(`${__dirname}/comparison.html`)
-})
+app.use(views(`${__dirname}`, { extension: 'html' }, {map: { handlebars: 'handlebars' }}))
 
-app.listen(port, () => {
-	console.log(`app listening on port ${port}`)
-})
+router.get('/', async ctx => await ctx.render('comparison'))
+
+app.use(router.routes())
+module.exports = app.listen(port, () => console.log(`listening on port ${port}`))

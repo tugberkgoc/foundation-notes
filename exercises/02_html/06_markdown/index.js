@@ -1,23 +1,16 @@
-
-'use strict'
-
-const express = require('express')
-const app = express()
+#!/usr/bin/env node
 
 const marked = require('marked')
-const fs = require('fs')
+const readFile = require('fs-readfile-promise')
 
+const Koa = require('koa')
+const Router = require('koa-router')
+const app = new Koa()
+const router = new Router()
+app.use(require('koa-static')('public'))
 const port = 8080
 
-app.get('/', (req, res) => {
-	fs.readFile(`${__dirname}/computers.md`, 'utf8', (err, data) => {
-		if(err) {
-			console.log(err)
-		}
-		res.send(marked(data.toString()))
-	})
-})
+router.get('/', async ctx => ctx.body = marked(await readFile('./computers.md', 'utf8')))
 
-app.listen(port, () => {
-	console.log(`app listening on port ${port}`)
-})
+app.use(router.routes())
+module.exports = app.listen(port, () => console.log(`listening on port ${port}`))

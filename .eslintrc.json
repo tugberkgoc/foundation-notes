@@ -41,7 +41,7 @@
     "no-self-assign": 2,
     "no-trailing-spaces": 1,
     "no-undef": 2,
-    "no-unused-vars": 1,
+    "no-unused-vars": "warn",
     "no-var": 2,
     "prefer-arrow-callback": 1,
     "prefer-const": 2,
