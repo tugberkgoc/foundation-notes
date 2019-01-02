@@ -1,89 +1,95 @@
 #!/usr/bin/env node
 
-const express = require('express')
-const es6Renderer = require('express-es6-template-engine')
-const bodyParser = require('body-parser')
-const app = express()
-app.use(express.static('public'))
-app.use(bodyParser.urlencoded({ extended: true }))
+/* MODULE IMPORTS */
+const Koa = require('koa')
+const Router = require('koa-router')
+const views = require('koa-views')
+const staticDir = require('koa-static')
+const bodyParser = require('koa-bodyparser')
+const session = require('koa-session')
+const sqlite = require('sqlite-async')
+const bcrypt = require('bcrypt-promise')
 
-app.engine('html', es6Renderer)
-app.set('views', 'html')
-app.set('view engine', 'html')
+const app = new Koa()
+const router = new Router()
+
+/* CONFIGURING THE MIDDLEWARE */
+app.keys = ['darkSecret']
+app.use(staticDir('public'))
+app.use(bodyParser())
+app.use(session(app))
+app.use(views(`${__dirname}/views`, { extension: 'handlebars' }, {map: { handlebars: 'handlebars' }}))
 
 const port = 8080
-
-const sqlite3 = require('sqlite3').verbose()
-
-const bcrypt = require('bcrypt')
 const saltRounds = 10
 
-const session = require('express-session')
-const FileStore = require('session-file-store')(session)
-app.use(session({
-	name: 'server-session-cookie-id',
-	secret: 'my express secret',
-	saveUninitialized: true,
-	resave: true,
-	store: new FileStore()
-}))
-
-app.use( (req, res, next) => {
-	console.log('req.session', req.session)
-	return next()
+router.get('/', async ctx => {
+	try {
+		if(ctx.session.authorised !== true) return ctx.redirect('/login?msg=you need to log in')
+		const data = {}
+		if(ctx.query.msg) data.msg = ctx.query.msg
+		await ctx.render('index')
+	} catch(err) {
+		await ctx.render('error', {message: err.message})
+	}
+	// if(!req.session.authenticated) return res.redirect('/login')
 })
 
-const db = new sqlite3.Database('./auth.db', err => {
-	if (err) return console.error(err.message)
-	console.log('Connected to the SQlite database.')
-})
+router.get('/register', async ctx => await ctx.render('register'))
 
-app.get('/', (req, res) => {
-	if(!req.session.authenticated) return res.redirect('/login')
-	res.sendFile(`${__dirname}/html/index.html`)
-})
-
-app.get('/register', (req, res) => res.sendFile(`${__dirname}/html/register.html`))
-
-app.post('/register', (req, res) => {
-	console.log(req.body)
-	bcrypt.hash(req.body.pass, saltRounds, (err, hash) => {
-		if(err) console.error(err.message)
-		req.body.pass = hash
-		console.log(req.body)
+router.post('/register', async ctx => {
+	try {
+		const body = ctx.request.body
+		console.log(body)
+		body.pass = await bcrypt.hash(body.pass, saltRounds)
+		console.log(body)
 		const sql = `INSERT INTO users(name, username, email, password) 
-			VALUES("${req.body.name}", "${req.body.user}", "${req.body.email}", "${req.body.pass}")`
+			VALUES("${body.name}", "${body.user}", "${body.email}", "${body.pass}")`
 		console.log(sql)
-		db.run(sql, err => {
-			if(err) console.error(err.message)
-			return res.redirect('/')
-		})
-	})
+		const db = await sqlite.open('./website.db')
+		await db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, username TEXT, email TEXT, password TEXT);')
+		await db.run(sql)
+		await db.close()
+		ctx.redirect(`/?msg=new user "${body.name}" added`)
+	} catch(err) {
+		await ctx.render('error', {message: err.message})
+	}
 })
 
-app.get('/login', (req, res) => res.sendFile(`${__dirname}/html/login.html`))
-
-app.post('/login', (req, res) => {
-	if(req.body.pass === '') req.body.pass = ' '
-	const sql = `SELECT count(id) AS count FROM users WHERE username="${req.body.user}";`
-	db.get(sql, (err, data) => {
-		if(err) console.error(err.message)
-		if(!data.count) return res.redirect('/login?message=invalid%20username')
-		const sql2 = `SELECT password FROM users WHERE username = "${req.body.user}";`
-		db.get(sql2, (err, data) => {
-			if(err) console.error(err.message)
-			bcrypt.compare(req.body.pass, data.password, (err, data) => {
-				if(err) console.error(err.message)
-				if(data === true) req.session.authenticated = true
-				return res.redirect('/')
-			})
-		})
-	})
+router.get('/login', async ctx => {
+	const data = {}
+	if(ctx.query.msg) data.msg = ctx.query.msg
+	if(ctx.query.user) data.user = ctx.query.user
+	await ctx.render('login', data)
 })
 
-app.get('/logout', (req, res) => {
-	delete req.session.authenticated
-	return res.redirect('/')
+router.post('/login', async ctx => {
+	try {
+		const body = ctx.request.body
+		const db = await sqlite.open('./website.db')
+		const records = await db.get(`SELECT count(id) AS count FROM users WHERE username="${body.user}";`)
+		if(!records.count) return ctx.redirect('/login?msg=invalid%20username')
+		const record = await db.get(`SELECT password FROM users WHERE username = "${body.user}";`)
+		await db.close()
+		const valid = await bcrypt.compare(body.pass, record.password)
+		if(valid === false) return ctx.redirect(`/login?user=${body.user}&msg=invalid%20password`)
+		//TODO: credentials valid!
+		ctx.session.authorised = true
+		return ctx.redirect('/?msg=you are now logged in...')
+	} catch(err) {
+		await ctx.render('error', {message: err.message})
+	}
 })
 
-app.listen(port, () => console.log(`app listening on port ${port}`))
+router.get('/logout', async ctx => {
+	ctx.session.authorised = null
+	ctx.redirect('/')
+})
+
+app.use(router.routes())
+module.exports = app.listen(port, async() => {
+	const db = await sqlite.open('./website.db')
+	await db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, username TEXT, email TEXT, password TEXT);')
+	await db.close()
+	console.log(`listening on port ${port}`)
+})

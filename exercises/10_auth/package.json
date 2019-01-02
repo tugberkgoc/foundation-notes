@@ -1,5 +1,5 @@
 {
-  "name": "authentication",
+  "name": "10_auth",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,12 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^2.0.1",
-    "express": "^4.16.3",
-    "express-es6-template-engine": "^2.0.3",
-    "express-session": "^1.15.6",
-    "morgan": "^1.9.0",
-    "session-file-store": "^1.2.0",
-    "sqlite3": "^4.0.1"
+    "bcrypt": "^3.0.3",
+    "bcrypt-promise": "^2.0.0",
+    "handlebars": "^4.0.12",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.10.1",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.1.5",
+    "sqlite-async": "^1.0.11"
   }
 }

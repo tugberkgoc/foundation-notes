@@ -16,6 +16,7 @@ sessions/
 
 # Windows thumbnail db
 Thumbs.db
+website.db
 
 *.pptx
 *.mp4
