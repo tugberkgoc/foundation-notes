@@ -47,7 +47,6 @@ router.post('/register', async ctx => {
 			VALUES("${body.name}", "${body.user}", "${body.email}", "${body.pass}")`
 		console.log(sql)
 		const db = await sqlite.open('./website.db')
-		await db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, username TEXT, email TEXT, password TEXT);')
 		await db.run(sql)
 		await db.close()
 		ctx.redirect(`/?msg=new user "${body.name}" added`)
