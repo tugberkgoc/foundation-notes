@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 
+/* IMPORTING MODULES */
 const Koa = require('koa')
 const Router = require('koa-router')
-const app = new Koa()
-const router = new Router()
-
 const bodyParser = require('koa-bodyparser')
-app.use(bodyParser())
-
 const staticFiles = require('koa-static')
-app.use(staticFiles('./public'))
-
 const js2xmlparser = require('js2xmlparser')
 
+/* CONFIGURING THE MIDDLEWARE */
+const app = new Koa()
+const router = new Router()
+app.use(router.routes())
+app.use(bodyParser())
+app.use(staticFiles('./public'))
+
+/* GLOBAL VARIABLES */
 const port = 8080
 let names = []
 
@@ -118,5 +120,4 @@ function formatHTML(list) {
 	return data
 }
 
-app.use(router.routes())
 module.exports = app.listen(port, () => console.log(`listening on port ${port}`))

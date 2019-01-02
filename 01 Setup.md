@@ -88,6 +88,7 @@ Before you can work with Git you need to update the repository configuration. Fo
 2. Update your email (using your unversity email) `git config user.email 'bloggsj@uni.coventry.ac.uk'`
 3. Update your commandline editor choice using `git config core.editor nano` (the editor must be installed!)
 4. Cache your credential (username/password) for an hour using `git config credential.helper 'cache --timeout=3600'`
+5. Update the path to your _git hooks_ directory using `git config core.hooksPath ./.githooks` (more on this in a later lab).
 
 ## 5 Local Setup
 
