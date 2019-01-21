@@ -83,7 +83,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 
 Now click on the small blue oval on the terminal tab to reload the shell. There are lots of versions available, use the `nvm list-remote` command to see these. Install the latest using `nvm install 10.11.0` substituting the latest version number. To check the version installed use `node -v` again.
 
-## 3 Running an Express Server
+## 3 Running a Web Server
 
 Use the terminal to navigate to the `exercises/01_http/` directory and try running the `index.js` script:
 
