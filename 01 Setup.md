@@ -118,8 +118,6 @@ You need to set this up as your **run** configuration as shown.
 
 The final step is to open a new browser window and enter your chosen URL, you don't need to specify the port, this was done through port-forwarding:
 
-![Setting up a URL and port](exercises/.images/simple_template.png)
-
 If you make changes to the code or want to quit the IDE you will need to stop the server. To do this, select the terminal window and press ctrl+c.
 
 
