@@ -57,7 +57,17 @@ To do this we need to add a link to this repository and use this to pull new con
 2. Now you need to add the upstream remote using the `git remote add upstream https://github.coventry.ac.uk/205CDE-1819JANMAY/TEACHING-MATERIALS.git` command.
 3. Finally we should check we have links to both the original repository and our fork using the `git remote -v`.
 
-### 1.4 Disabling the Built-In Linter
+### 1.4 Git Configuration
+
+Before you can work with Git you need to update the repository configuration. Follow the instructions below:
+
+1. Update your name (this must be the name as it appears on your ID badge) using `git config user.name 'Joe Bloggs'`.
+2. Update your email (using your unversity email) `git config user.email 'bloggsj@uni.coventry.ac.uk'`
+3. Update your commandline editor choice using `git config core.editor nano` (the editor must be installed!)
+4. Cache your credential (username/password) for an hour using `git config credential.helper 'cache --timeout=3600'`
+5. Update the path to your _git hooks_ directory using `git config core.hooksPath ./.githooks` (more on this in a later lab).
+
+### 1.5 Disabling the Built-In Linter
 
 By default real-time linting is enabled however this currently uses an old linter and is not ECMA6 compatible. You should disable real-time linting from the **Project** menu.
 
@@ -112,17 +122,8 @@ The final step is to open a new browser window and enter your chosen URL, you do
 
 If you make changes to the code or want to quit the IDE you will need to stop the server. To do this, select the terminal window and press ctrl+c.
 
-## 4 Git Configuration
 
-Before you can work with Git you need to update the repository configuration. Follow the instructions below:
-
-1. Update your name (this must be the name as it appears on your ID badge) using `git config user.name 'Joe Bloggs'`.
-2. Update your email (using your unversity email) `git config user.email 'bloggsj@uni.coventry.ac.uk'`
-3. Update your commandline editor choice using `git config core.editor nano` (the editor must be installed!)
-4. Cache your credential (username/password) for an hour using `git config credential.helper 'cache --timeout=3600'`
-5. Update the path to your _git hooks_ directory using `git config core.hooksPath ./.githooks` (more on this in a later lab).
-
-## 5 Local Setup
+## 4 Local Setup
 
 If you are planning on using your own laptop you will need to install some key pieces of software. Obviously its impossible to cover the installation process in detail for every operating system but there are plenty of guides online. You should install:
 
@@ -136,7 +137,7 @@ Once the repository is cloned you should open VS Code and use the File > Open Fo
 
 Once the web server is up and running you access the page by pointing the browser to `localhost:8080`.
 
-## 6 Introducing Unit Testing
+## 5 Introducing Unit Testing
 
 As we develop more complex web apps it becomes more and more difficult to fully test our app every time we change the code. By not testing everything at regular intervals there is an increasing chance that our new code could break the existing code in our system. Since regular testing is a chore, programmers have developed ways to automate this process.
 
