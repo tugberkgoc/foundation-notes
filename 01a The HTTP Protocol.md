@@ -50,7 +50,7 @@ Study the `index.js` script in the `exercises/02_http/01_url/` directory.
 Now start the server:
 
 1. Access the root url, notice that the message **Hello World** is displayed in the browser.
-2. Access the `/hello` url. This should result in the same message being displayed.
+2. Access the `/anon` url. This should result in the same message being displayed.
 3. Locate the code for these two routes, can you understand how they work?
 
 ### 1.2 URL Parameters
