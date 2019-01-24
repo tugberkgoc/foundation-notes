@@ -5,6 +5,8 @@ In the lecture you learned about the HTTP protocol which is used to transfer inf
 
 You should refer to the [lecture slides](https://goo.gl/H88iFn).
 
+**TODO: explanation of a web server**
+
 ## Setup
 
 You will need to use the Chrome web browser for these exercises and have installed the [ModHeader](https://goo.gl/YWWK3q) plugin.
@@ -30,28 +32,15 @@ We will be working through some exercises that make use of all of these.
 
 ### 1.1 The Uniform Resource Locator
 
-Study the `index.js` script in the `exercises/02_http/01_url/` directory.
+Start the server:
 
-1. If you study lines 4-10 of `index.js` you will see a list of the modules we need to install. Refer the the previous lab if you get stuck at this point:
-	1. `koa`
-	2. `koa-router`
-	3. `koa-bodyparser`
-	4. `koa-static`
-	5. `js2xmlparser`
-2. The first line is the _shebang_, it tells the script what application is needed to run it.
-3. Lines 4-10 import the module packages we need for our script to work. Koa is a modular framework, on its own it does very little but depends on plugins (middleware) for its functionality.
-4. Lines 11-15 are where we configure the koa _middleware_.
-5. We need two global variables in our script, one to store a list of items and the second to store the port number we will be using:
-	1. The `let` keyword defines a _mutable variable_ which can change its value.
-	2. The `const` keyword defines an _immutable variable_. Once a value is assigned it cannot be changed, these are sometime called _constants_.
-6. The main part of the script defines the _routes_ and we will be covering these in more detail as we progress through the lab.
-7. Right at the end (line 123) we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
-
-Now start the server:
-
-1. Access the root url, notice that the message **Hello World** is displayed in the browser.
-2. Access the `/hello` url. This should result in the same message being displayed.
-3. Locate the code for these two routes, can you understand how they work?
+1. Open the terminal (on Windows this is called the bash shell).
+2. Navigate to the `exercises/01_http/` directory.
+3. Install the dependencies using 	1. `npm install koa koa-router koa-bodyparser koa-static js2xmlparser`.
+4. Start the server using `node index.js`
+5. Access the root url, notice that the message **Hello World** is displayed in the browser.
+6. Access the `/hello` url. This should result in the same message being displayed.
+7. Locate the code for these two routes, can you understand how they work?
 
 ### 1.2 URL Parameters
 
