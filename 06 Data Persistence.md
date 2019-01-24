@@ -1,6 +1,10 @@
 
 # Data Persistence
 
+By this stage you have become familiar with the intricacies of the HTTP protocol and used a combination of HTML5 and CSS3 to build static web pages. These pages are called static because any data they display has been hard-coded into the html. For the rest of this module we will be focussing on building _dynamic_ web pages. In a dynamic web page, the data comes from a persitent data store (typically a database).
+
+-------
+
 By this stage you are familiar with how to use NodeJS and the Express package to build a web server that can listen for http requests on a specific port and, based on the _route_ in the URL send data back to the browser. In this lab we will dive into how we can store data in a relational database and retrieve it in response to an http request.
 
 We will be using the [SQLite database](https://www.sqlite.org/index.html) which stores a database in a single binary file much like MS Access. The main benefit of this is that you don't need to install a DB on your server but for a production environment you will find it is not secure.

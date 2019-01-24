@@ -5,6 +5,8 @@ In the lecture you learned about the HTTP protocol which is used to transfer inf
 
 You should refer to the [lecture slides](https://goo.gl/H88iFn).
 
+**TODO: explanation of a web server**
+
 ## Setup
 
 You will need to use the Chrome web browser for these exercises and have installed the [ModHeader](https://goo.gl/YWWK3q) plugin.
