@@ -9,9 +9,9 @@ const js2xmlparser = require('js2xmlparser')
 
 /* CONFIGURING THE MIDDLEWARE */
 const app = new Koa()
+app.use(bodyParser())
 const router = new Router()
 app.use(router.routes())
-app.use(bodyParser())
 app.use(staticFiles('./public'))
 
 /* GLOBAL VARIABLES */
@@ -45,6 +45,7 @@ router.get('/hello/:name', ctx => {
 
 router.post('/form', ctx => {
 	const minLength = 3
+	console.log(ctx.request.body)
 	const body = ctx.request.body
 	if(body.lastname.length >= minLength) {
 		names.push( { firstname: body.firstname, lastname: body.lastname } )
@@ -54,6 +55,7 @@ router.post('/form', ctx => {
 		ctx.status = 422
 		ctx.body = 'invalid lastname'
 	}
+	//ctx.body = 'form processed'
 })
 
 router.get('/names', ctx => {
