@@ -139,12 +139,12 @@ Once the web server is up and running you access the page by pointing the browse
 
 As we develop more complex web apps it becomes more and more difficult to fully test our app every time we change the code. By not testing everything at regular intervals there is an increasing chance that our new code could break the existing code in our system. Since regular testing is a chore, programmers have developed ways to automate this process.
 
-In this section you will be given a sneak preview of how an automated test suite works. We will be using a testing framework developed by Facebook, called [Jest](https://jestjs.io) and will be using a second tool called [Supertest](https://github.com/visionmedia/supertest#readme) which allows us to interact with our code using http.
+In this section you will be given a sneak preview of how an automated test suite works. We will be using a testing framework developed by Facebook, called [Jest](https://jestjs.io) and will be using a second tool called [Supertest](https://github.com/visionmedia/supertest#readme) which allows us to interact with our code using http. Rather than using the status code numbers in our tests we will use a module called [http-status-codes](https://www.npmjs.com/package/http-status-codes) to display these as human-readable strings.
 
 The process requires you to install both these packages and then run the `jest` command:
 
 ```shell
-$ npm install jest supertest
+$ npm install jest supertest http-status-codes
 $ ./node_modules/.bin/jest
   PASS  .test/index.test.js
     GET /
