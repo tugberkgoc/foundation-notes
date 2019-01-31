@@ -13,7 +13,6 @@ app.use(views(`${__dirname}/views`, { extension: 'html' }, {map: { handlebars: '
 router.get('/', async ctx => await ctx.render('index'))
 router.get('/commodore', async ctx => ctx.render('commodore64'))
 router.get('/paradoxes', async ctx => ctx.render('paradoxes'))
-router.get('/cathedral', async ctx => ctx.render('cathedral'))
 
 router.get('/date', async ctx => {
 	const today = new Date()
