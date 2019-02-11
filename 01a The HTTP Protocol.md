@@ -121,7 +121,7 @@ In this section you will learn about a number of JavaScript functions. In each c
 	1. Modify the route to add a second parameter called `index2`.
 	2. Make sure this is triggered by restarting the server and accessing this by passing a second parameter.
 	3. Modify the script to print out both book titles.
-3. Next you need to add some validation to make sure the script does not crash:
+3. Next you need to add some validation to make sure the script does not crash (note that if you are using GoormIDE you will not be able to test it):
 	1. If the index in the URL exceeds to number of books in the array you get an error. Insert an [`if...else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) that sends a suitable message to the browser if the index number in the URL is too high.
 	2. The index must be a number. Use the [`isNaN()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check and send a suitable message to the browser if it is not. if it is, use the [`parseInt()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt) to convert it to a number.
 	3. The number needs to be a whole number (integer). All JavaScript numbers are objects and have a number of useful functions. Use the [`Number.isInteger()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger) to check it is indeed an integer. Send a suitable message to the browser if it is not.
@@ -148,7 +148,10 @@ Open the `index.js` file. The route is between lines 37-43.
 1. Modify the route so that if the `format` query string is set to `lower` the name is set as [lowercase](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase).
 2. Add a second query string called `reverse`:
 	1. if missing or set to `false` the text is left alone.
-	2. If it has a value of `true` the text should be reversed by using the [`split()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) to convert the string to an array of characters and then the [`join()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) to convert the array back into a string.
+	2. If it has a value of `true` the text should be reversed. You will need to use the following JavaScript functions, read the documentation carefully before trying to complete the task:
+	    1. You will need to use the [`split()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) to convert the string to an array of characters.
+	    2. Then you will need to use the [Array.reverse()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) function to reverse the array indexes.
+	    3. Finally the [`join()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) to convert the array back into a string.
 
 ### 1.4 Request Headers
 

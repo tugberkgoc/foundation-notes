@@ -58,19 +58,53 @@ Use the terminal tool to access the `exercises/06_routing/` directory and ope
 
 We will be using the [Koa](https://koajs.com) framework as our web server in this module. Koa was designed by the team who created the [Express Framework](https://expressjs.com) which was one of the first mainstream web servers to use the JavaSscript language. Almost all the online tutorials cover the use of Express so why have we chosen not to use this?
 
-**TODO: why use koa**
+The Express framework has grown over the years and contains a lot of functionaity that we won't need. Koa has the opposite philosophy. It’s a minimalist framework where all the functionality is aplit into smaller modules that can be imported when needed.
+.
+Koa is Express 5.0 in spirit; it’s by the same people that created Express, and the authors changed the name to avoid upsetting people because of the backwards incompatible changes (which also happened in the Express 3 to Express 4 transition).
 
-Study the `index.js` script in the `exercises/02_http/01_url/` directory.
+The only issue is that there was a big change from Koa v1 to Koa v2 and the older tutorials are therefore of no use. We will focus on using the latest version of Koa, currently 2.7 at the time of writing. Lets take an in-depth look at a script which should be familiar to you to understand how the web server works.
+
+### 2.1 The Manifest
+
+A correctly-configured NodeJS application includes a special _manifest_ file called `package.json`. You will find one in the `exercises/04_koa/` directory. This contains important _metadata_ about the application. If you open this you will notice it contains a [JSON string](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) which includes a number of [keys](https://nodesource.com/blog/the-basics-of-package-json-in-node-js-and-npm/):
+
+1. The `name` key contains the name of the application, in this case `koa-intro`.
+2. Underneath this you will find the version number and a brief description of the software.
+3. The `main` key defined the entry point to the application (the script that should be run).
+4. Next are _script aliases_, shortcuts to run different commands. In our example we have a `test` alias that is used to trigger the jest testing tool and a `server` alias to start the server.
+5. After the `scripts` key you will notice a `jest` key that contains the configuration options for the [Jest](https://jestjs.io) testing tools.
+6. Next we have the author and licence fields.
+7. Finally the manifest list the packages needed for the application to run:
+    1. The `dependencies` key contains all the packages needed to run the application such as `koa` and its plugins.
+    2. The `devDependencies` key lists all the extra packages needed when developing the application but not needed by the app itself such as the testing tools.
+
+To see how the manifest can help us with running an application:
+
+1. Navigate to the `exercises/04_koa/` directory using terminal.
+2. Use the `npm install --production` command to install all the packages needed to run the application (no development tools).
+3. Use the `npm run server` to trigger the `server` alias.
+4. Try using `npm run test` to run the test suite, notice that the `jest` command is no currently installed.
+5. Run `npm install` to install the developer tools (it won't' install the production modules because these are already installed).
+6. Now you can run the test suite.
+
+### 2.2 The Routing File
+
+Study the `index.js` script in the `exercises/04_koa/` directory.
 
 1. The first line is the _shebang_, it tells the script what application is needed to run it. If the file is _executable_ you can simply call this without using the node command like this: `./index.js` instead of `node index.js`.
-2. If you study lines 4-10 of `index.js` you will see a list of the modules we need to install.
-3. Lines 4-10 import the module packages we need for our script to work. Koa is a modular framework, on its own it does very little but depends on plugins (middleware) for its functionality.
-4. Lines 11-15 are where we configure the koa _middleware_.
-5. We need two global variables in our script, one to store a list of items and the second to store the port number we will be using:
-	1. The `let` keyword defines a _mutable variable_ which can change its value.
-	2. The `const` keyword defines an _immutable variable_. Once a value is assigned it cannot be changed, these are sometime called _constants_.
+2. Lines 3-6 are where we import all the modules we are going to be using.
+3. Lines 8-12 are where we create instances of the `koa` and `router` objects and configure the plugins (known as the _middleware_).
+4. Next we define any global variables and constants. In this script we store the port number as a constant.
 6. The main part of the script defines the _routes_ and we will be covering these in more detail as we progress through the lab.
-7. Right at the end (line 123) we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
+7. Right at the end we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
+
+### 2.2.1 Test Your Understanding
+
+Lets start with a quick refresher:
+
+1. Create a new route called `/test` and create a file called `mytest.html` containing a valid HTML5 web page that displays your name in the `views/` directory. Restart the server and make sure the page displays.
+2. Create a new CSS3 stylesheet called `test.css` in the `css/` directory in the `public/` directory. Link it to your new page and change the font face and colour of the text.
+3. Find a download a photo of the University, add it to the `images/` directory inside the `public/` directory and make sure you can view this in the browser.
 
 --------
 
@@ -87,6 +121,8 @@ Contents:
 A package manifest is an json-formatted file called `package.json` that is created in the root directory of a NodeJS application. I describes the application (name, author, etc), the _entry point_ (the script that needs to be run to launch the application) and identifies the third-party packages (including their specific versions) needed to run the application. It also supports development be defining the packages needed to support the code _development_ and also allows us to define command _aliases) which means we don't need to type in complex commands.
 
 The real benefit to having dependencies defined like this in package.json, is that it becomes possible to install the correct versions of all the required packages with a single command. This means that we could use an automated build and deploy tool.
+
+You have probably spotted another file called `package-lock.json`. This contains a list of _all_ packages installed indicating their dependencies plus details of all dependencies.
 
 ### 1.1 Understanding the Manifest
 
@@ -106,21 +142,6 @@ Let's look at a simple example. You can find this in the `examples/06_express/to
     1. Lets install these packages using `npm install --only=dev`. This will install the `eslint` package.
     2. List the locally-installed modules again using `npm list --depth=0` to make sure the package was installed.
 
-You have probably spotted another file called `package-lock.json`. This contains a list of _all_ packages installed indicating their dependencies plus details of all dependencies.
-
-### 1.2 Creating and Editing the Manifest
-
-Now we understand the contents of the manifest we will create one from scratch.
-
-1. Open the SSH Terminal and navigate to the `exercises/06_express/todo/` directory.
-2. Delete the current manifest using `rm package.json` and the package lock file using `rm package-lock.json`.
-3. Delete the `node_modules/` directory using `rm -rf node_modules`
-4. Run the manifest wizard using `npm init` and choose the default options by pressing enter for each question. This will create a new `package.json` file.
-5. Install the `express` package using `npm install --save express`. The `--save` flag adds the package to the manifest file in the `dependencies` object.
-6. Install the `eslint` package using `npm install --save-dev eslint`. The `--save-dev` flag adds the package to the manifest file in the `devDependencies` object.
-7. Open the `package.json` and check that these two packages are listed.
-8. add a `hello` object to the `scripts` object and set its value to `"echo HelloWorld!"`.
-
 ## 2 Routing
 
 1. Start by locating the `exercises/06_express/todo/` directory and locate the `index.js` file. This is the routing file used by the express web server.
@@ -138,45 +159,41 @@ Now we understand the contents of the manifest we will create one from scratch.
 
 ### 2.1 Routes
 
-Every _request_ sent from the client is handled by a route. The server compares the requested HTTP method and route against the strings passed as the first parameter until it finds a match. If there are no routes that match the specific URL the express server will repond with a `404 NOT FOUND` response.
+Every _request_ sent from the client is handled by a route. The server compares the requested HTTP method and route against the strings passed as the first parameter until it finds a match. If there are no routes that match the specific URL the koa server will repond with a `404 NOT FOUND` response.
 
-When a match is found, the server runs the _callback_ (anonymous function) that has been supplied as the second parameter. This function takes three parameters:
-
-1. A `request` object that contains all the data passed as part of the HTTP request headers.
-2. A `response` object that will contain the data to be returned the the client as part of the response.
-3. A `body` object that contains the string passed as the _request body_.
+When a match is found, the server runs the _callback_ (anonymous function) that has been supplied as the second parameter. This function takes a single `ctx` parameter which is an object that contains all the data from both the request and response (the _context_).
 
 
 
 ```javascript
-app.get('/test', (req, res, body) {
+app.get('/test', ctx => {
     // code goes here
 })
 ```
 
-use the todo/ example
+----------
 
 ### 2.2 The Request Object
 
-The `request` object that contains all the data passed as part of the HTTP request headers and body. it contains all the information from these headers, in particular, given the request:
+The `ctx` parameter contains a `request` object (`ctx.request`) that contains all the data passed as part of the HTTP request headers and body. it contains all the information from these headers, in particular, given the request:
 
 ```
 http://www.example.com/hello/mark?gender=male
 ```
 
-| Object         | Contains              | Example           |
-| -------------- | --------------------- | ----------------- |
-| `req.query`    | The querystring       | `gender=male`     |
-| `req.body`     | The request body      | -                 |
-| `req.hostname` | The server hostname   | `www`             |
-| `req.baseUrl`  | The base URL          | `www.example.com` |
-| `req.path`     | The route             | `/hello/mark`     |
-| `req.ip`       | The server IP address | `192.168.0.1`     |
-| `req.params`   | The parameters        | `/mark`           |
+| Object                 | Contains              | Example           |
+| ---------------------- | --------------------- | ----------------- |
+| `ctx.request.query`    | The querystring       | `gender=male`     |
+| `ctx.request.body`     | The request body      | -                 |
+| `ctx.request.hostname` | The server hostname   | `www`             |
+| `ctx.request.baseUrl`  | The base URL          | `www.example.com` |
+| `ctx.request.path`     | The route             | `/hello/mark`     |
+| `ctx.request.ip`       | The server IP address | `192.168.0.1`     |
+| `ctx.request.params`   | The parameters        | `/mark`           |
 
-req.accepts(types) Checks if the specified content types are acceptable, based on the request’s Accept HTTP header field. The method returns the best match, or if none of the specified content types is acceptable, returns false (in which case, the application should respond with 406 "Not Acceptable"). req.accepts('html')
+`ctx.request.accepts(types)` Checks if the specified content types are acceptable, based on the request’s Accept HTTP header field. The method returns the best match, or if none of the specified content types is acceptable, returns false (in which case, the application should respond with 406 "Not Acceptable"). req.accepts('html')
 
-req.get(field) Returns the specified HTTP request header field (case-insensitive match). The Referrer and Referer fields are interchangeable. req.get('Content-Type')
+`ctx.request.get(field)` Returns the specified HTTP request header field (case-insensitive match). The Referrer and Referer fields are interchangeable. req.get('Content-Type')
 
 ### 2.3 The Response Object
 
