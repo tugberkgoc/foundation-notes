@@ -171,44 +171,7 @@ app.get('/test', ctx => {
 })
 ```
 
-----------
 
-### 2.2 The Request Object
-
-The `ctx` parameter contains a `request` object (`ctx.request`) that contains all the data passed as part of the HTTP request headers and body. it contains all the information from these headers, in particular, given the request:
-
-```
-http://www.example.com/hello/mark?gender=male
-```
-
-| Object                 | Contains              | Example           |
-| ---------------------- | --------------------- | ----------------- |
-| `ctx.request.query`    | The querystring       | `gender=male`     |
-| `ctx.request.body`     | The request body      | -                 |
-| `ctx.request.hostname` | The server hostname   | `www`             |
-| `ctx.request.baseUrl`  | The base URL          | `www.example.com` |
-| `ctx.request.path`     | The route             | `/hello/mark`     |
-| `ctx.request.ip`       | The server IP address | `192.168.0.1`     |
-| `ctx.request.params`   | The parameters        | `/mark`           |
-
-`ctx.request.accepts(types)` Checks if the specified content types are acceptable, based on the request’s Accept HTTP header field. The method returns the best match, or if none of the specified content types is acceptable, returns false (in which case, the application should respond with 406 "Not Acceptable"). req.accepts('html')
-
-`ctx.request.get(field)` Returns the specified HTTP request header field (case-insensitive match). The Referrer and Referer fields are interchangeable. req.get('Content-Type')
-
-### 2.3 The Response Object
-
-The response object contains the data to be returned to the client as the HTTP response. It contains a number of functions.
-
-| Function          | Description                                         | Example                                      |
-| ----------------- | --------------------------------------------------- | -------------------------------------------- |
-| `res.write()`     | adds text to the response body                      | `res.write('hello world')`                   |
-| `res.send()`      | sends text to the response body and sends to client | `res.send('hello world')`                    |
-| `res.setHeader()` | adds a new response header                          | `res.setHeader('content-type', 'text/html')` |
-| `res.sendFile()`  | sends the contents of a file to the client          | `res.sendFile(\`${__dirname}/form.html\`)`   |
-| `res.status()`    | sets the HTTP status                                | `res.status(201)`                            |
-| `res.end()`       | sends the current response body to the client       | `res.end()`                                  |
-
-currency/ example
 
 ## 3 Modular Code
 
