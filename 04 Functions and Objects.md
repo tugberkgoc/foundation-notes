@@ -91,10 +91,11 @@ const sqr = num => num * num
 
 ### 1.2.1 Test Your Understanding
 
-//TODO: add an exercise on function expressions.
-
 1. Refactor the `remainder2` function expression to take advantage of the implicit return (you will need to reduce it to a single line of code).
 2. Compare this to the original version: which is more _readable_?
+3. Create a function expression that takes two string parameters and returns the longest string and assign this to a constant called `longest. check this works correctly.
+4. Modify the function expression so that it can handle any number of string parameters (use a _rest parameter_).
+5. Can you reduce this function expression to a single line (hint: explore using the [reduce function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) combined with the [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator))?
 
 ### 1.3 Callbacks
 
