@@ -11,7 +11,6 @@ const handlebars = require('koa-hbs-renderer')
 const app = new Koa()
 const router = new Router()
 app.use(stat('public'))
-
 app.use(handlebars({ paths: { views: `${__dirname}/views` } }))
 app.use(router.routes())
 

@@ -17,7 +17,7 @@ Start by installing the tools on your computer:
     2. `$ sudo apt-get install sqlite3 libsqlite3-dev`
 3. It a bit of a pain to install on Windows 10 but there is a good [YouTube video](https://youtu.be/zOJWL3oXDO8) that covers the process.
 
-If you use the terminal/command prompt to navigate to the `exercises/01_nodejs/02_dynamic_website/bookshop/` directory you will find a prebuilt database called `bookshop.db`. To open a database you use the `sqlite3 bookshop.db` command. Note: if the file you specify does not exist, a new database will be created. Open the `bookshop.db` database.
+If you use the terminal/command prompt to navigate to the `exercises/05_dynamic_website/` directory you will find a prebuilt database called `bookshop.db`. To open a database you use the `sqlite3 bookshop.db` command. Note: if the file you specify does not exist, a new database will be created. Open the `bookshop.db` database.
 
 Notice that the prompt changes to `sqlite>`, this means you are interacting with the `sqlite3` program. There are a number of special [commands](https://www.sqlite.org/cli.html) that include standard SQL statements as well as special sqlite commands (these start with a period/dot and are sometimes called _dotcommands_. Try the following commands (note: the up arrow recalls previous commands):
 
@@ -107,7 +107,7 @@ Using the data in the `books.csv` file, add the authors to each of your book rec
 
 ## 2 Building a Dynamic Web Page
 
-Now you have a working database containing some useful data you need to display this in a web page. It uses the [sqlite3](https://www.npmjs.com/package/sqlite3) package which comes with [detailed documentation](https://github.com/mapbox/node-sqlite3/wiki/API) which you should refer to as you make sense of the code.
+Now you have a working database containing some useful data you need to display this in a web page. It uses the [sqlite-async](https://www.npmjs.com/package/sqlite-async) package which implements the database connectivity as functions returning promises (see the lecture slides for more explanation of these). By implementing promises, we can avoid using callbacks and this will simplify our code.
 
 This project includes a manifest file called `package.json`. Open this and study the `dependencies` key which lists all the packages and their versions needed by the server. To install all dependencies type:
 
@@ -117,24 +117,32 @@ $ npm install
 
 This will install all the modules defined in the manifest.
 
-Now you should run the `index.js` script in the same `bookshop/` directory.t
+Now you should run the `index.js` script in the same `exercises/05_dynamic_website/` directory we were using earlier. and access the _root_ url.
 
 Notice that there is a message in the terminal to let you know the script has connected to the database. Now view the web page, notice it displays the book titles from your database (including the ones you added).
 
+The web page should display a numbered list of technical books.
+
 This is known as a dynamic (or data-driven) website. By the end of this section you will have a clear understanding of how this can be created using NodeJS. Lets look at how this works. Open the `index.js` script.
 
-1. The top of the script imports and configures the express package. This is identical to the previous scripts you have written.
-2. One line 18 we import the sqlite3 package and then directly below this we create a `Database` object that points to the `bookshop.db` database we worked on earlier. The callback is triggered either when the database is connected or an error occurs.
-3. Underneath this is the first of two routes. This first one `/` will be used to display a list of books.
-4. the first step (on line 26) is to write an SQL statement to retrieve all the book titles and their primary keys from the `books` table. We display this in the terminal to check the syntax.
-    1. Copy this SQL statement and, using either the CLI or GUI tools, run this against your database to check it works as expected.
-5. Now we call the `all()` function that is part of the database (`db`) object. This takes two parameters:
-    1. The SQL statement we created previously.
-    2. A _callback_ function to run once the statement has been executed. This takes two parameters, an error object (null if no error) plus a data object that contains an array of JS objects containing the data returned from the query.
-6. We now print the data object to the terminal. Note that it is not easy to read.
-    1. Replace line 30 with `console.log(JSON.stringify(data, null, 2))`. What has changed? Can you explain why?
-7. The query returns an array of records stored in the `data` parameter in the callback function. On line 31 we pass this to the `home.handlebars` template.
-8. If you open the `home.handlebars` template you will see the template helper function that loops through the array of records and builds a list.
+1. The top of the script is where we import modules and configure the server:
+    1. On lines 5-9 we import all the module package dependencies, the packages listed in the manifest file `package.json`.
+    2. Lines 11-15 are where we create the koa server and configure its plugins.
+    3. Lines 17 and 18 are where we define any global constants.
+2. The middle section of the script is where we define our routes. Each works in a similar manner:
+    1. The function takes a string to define the URL route and an anonymous function which has the `async` keyword in front of the `ctx` parameter, this denotes that the function is an async one that will return a promise.
+    2. The async function contains a `try-catch` block. If any of the steps in the `try` block throw an error, the program will immediately jump to the catch block and the thrown error will be available in the `err` parameter.
+    3. Some function calls such as the ones on lines 24-26 use the `await` keyword. This means they call asynchronous function that return promises. The `await` keyword extracts the return value from the promise.
+    4. The final step (such as that on line 28) is to use the [Handlebars Template Engine](https://handlebarsjs.com) to render the page. The first parameter specifies the name of the _template_ (found in the `views/` directory) and the second is the data to be passed to the template.
+
+### 2.1 Templating
+
+When we render the web page we need to combine some static elements such as the header and footer with dynamic data taken from a database. If you open the `views/home.hbs` template file you should see some static html elements but also some unfamiliar markup.
+
+1. If you study line 28 in the `index.js` script you will see that the second parameter is a JavaScript object with two keys, one called `title` and the other `books`.
+2. In the template you will see a placeholder inside the top level heading `<h1>{{title}}</h1>`. This tells the template engine to insert the data stored in the `title` key of the object passed to it, in this case the string `Favourite Books`.
+3. Lower down the page you will see an `li` element inside a `ul` element. The `books` key contains an array of values (so more than one index). The markup around the `li` element tells the template to repeat the block for each index in the `books` array.
+4. Each array index contains a `title` key (check the terminal output to see the overall structure) and the value in the title key is placed inside the `li` element.
 
 When retrieving data using the SQLite package there are two key functions you should understand:
 
@@ -232,7 +240,7 @@ There is already a working form. Access the `/form` route in your browser, this 
         2. The `method="post"` attribute directs the form to send its data in the message body and not in the URL.
         3. Taken together it means that the data will be sent using the POST method to the `/add` route.
     2. Each form element has a `name` attribute which defines the object key each piece of data can be found under.
-3. In the `index.js` script you will see a route `app.post('/add', callback)`, it is this that will be called when the form data has been submitted.
+3. In the `index.js` script you will see a route `server.post('/add', callback)`, it is this that will be called when the form data has been submitted.
     1. All the post data can be accessed through the `req.body` object and, on line 81 we print this to the terminal to check all the data is there.
     2. Next we use this data to build an SQL statement to insert a new record into the database.
     3. The `db.run()` function executes the SQL statement and the callback runs either on success or if there was an error.
@@ -241,7 +249,7 @@ There is already a working form. Access the `/form` route in your browser, this 
 ### 5.1 Test Your Understanding
 
 1. Modify the form to add the additional fields of data you have added to the books table (author, publisher, year).
-2. Modify the `app.post('/add', callback)` to insert this additional data into the database.
+2. Modify the `server.post('/add', callback)` to insert this additional data into the database.
 3. Add a link to the home page to take the user to the new book form.
 4. Add a _Cancel_ link on the form to return the user to the home page.
 5. Style the table to improve its appearance and usability.
