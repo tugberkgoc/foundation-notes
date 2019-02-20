@@ -99,10 +99,6 @@ const sqr = num => num * num
 
 ### 1.3 Callbacks
 
-//TODO: need a replacemennt for the currency API (perhaps use screen scraping?) or books?
-
-NOT an API at this stage but reading/writing files?
-
 Since JavaScript supports _first class functions_, we can use a function in any place where we could use a literal, object or variable. Open the `currency.js` script and look at line 17. As you can see the `request` object has a key called `get` that stores a function (we have already covered this). This takes two parameters:
 
 1. A string representing the url to be accessed.
@@ -142,15 +138,10 @@ Take a few moments to make sure you fully understand the syntax, you will be see
 
 #### 1.3.2 Test Your Understanding
 
-Lets improve the currency exchange tool. You will need to refer to the API [documentation](http://fixer.io) as you work through the tasks.
+Lets apply our knowledge of callbacks to implement a simple quotes tool.
 
-1. Replace the _function expression_ with an _anonymous function_.
-2. Print the entire response body to the terminal window using [json.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
-3. The **base rate** defaults to the € (EUR) however the API allows you to set a different currency as the base rate:
-    1. Add a constant `base` to store your preferred currency.
-    2. Modify the URL using the API documentation to guide you.
-4. Use the [Number.prototype.toFixed()](https://goo.gl/DU4hvd) to truncate the number to 2 decimal places.
-5. Finally, modify your program so that it throws an error if it doesn't recognise either of the currency codes.
+1. Create a json-formatted text file containing 10 quotes, you can find lots of these on websites such as [brainyquotes](https://www.brainyquote.com/topics/inspirational).
+2. Create a callback function that
 
 ## 2 Objects
 

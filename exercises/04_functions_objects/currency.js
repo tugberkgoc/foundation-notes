@@ -12,6 +12,6 @@ const printRates = (err, res, body) => {
 	console.log(`for each EUR you will get ${data.rates[symbol]} ${symbol} today`)
 }
 
-const url = `http://api.fixer.io/latest?symbols=${symbol}`
+const url = 'currency.json'
 
 request.get( url, printRates)
