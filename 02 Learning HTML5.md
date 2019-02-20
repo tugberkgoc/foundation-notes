@@ -210,7 +210,7 @@ There are a couple of notable things about the `img` element:
 | src       | For locating the image file. The file path is normally given as relative path, starting from the directory where the HTML file is located.  |
 | alt       | For displaying an alternative text if the image cannot be displayed, or if the user prefers using a screen reader for accessibility purposes. |
 
-#### 3.3.1 Test Your Knowledge
+#### 3.3.1 Test Your Understanding
 
 1. Find photographs of the following computers and upload to the `images/` directory you created:
     1. Sinclair ZX Spectrum
@@ -231,7 +231,7 @@ Now we will learn how to embed audio in a website. There are a number of resourc
     2. Firefox needs an `.ogg` encoded version.
 3. You can also embed a [YouTube](https://www.youtube.com) video in an `<iframe>` or alternatively using the `<object>` element. This is achieved by clicking on the share button then on the **embed** link that is displayed. You copy the html code into your website.
 
-#### 3.4.1 Test Your Knowledge
+#### 3.4.1 Test Your Understanding
 
 1. Add the `guitar` audio file to the `index.html` web page. The file has been provided in the two required formats.
     1. Test that the audio plays in both Firefox and Chrome.
@@ -263,7 +263,7 @@ Verify that you understand the elements used in marking up the table:
 
 > A summary of all HTML table tags can be found [here](http://www.w3schools.com/html/html_tables.asp).
 
-### 4.1 Test your understanding
+### 4.1 Test your Understanding
 
 1. Modify the table structure to contain a column for Spectravideo home computer. Its data is: Spectravideo SV-328, Zilog Z80A CPU, 64kB RAM, 32kB ROM.
 2. Generate two additional rows where each row should have a multi-column cell (use `colspan` attribute):
