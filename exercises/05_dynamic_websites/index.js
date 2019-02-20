@@ -2,77 +2,87 @@
 
 'use strict'
 
-const express = require('express')
+const Koa = require('koa')
+const Router = require('koa-router')
+const stat = require('koa-static')
+const Database = require('sqlite-async')
+const handlebars = require('koa-hbs-renderer')
 
-const handlebars = require('express-handlebars').create({defaultLayout: 'main'})
-const bodyParser = require('body-parser')
-const app = express()
-app.use(express.static('public'))
-app.use(bodyParser.urlencoded({ extended: true }))
+const app = new Koa()
+const router = new Router()
+app.use(stat('public'))
 
-app.engine('handlebars', handlebars.engine)
-app.set('view engine', 'handlebars')
+app.use(handlebars({ paths: { views: `${__dirname}/views` } }))
+app.use(router.routes())
 
 const port = 8080
+const dbName = 'bookshop.db'
 
-const sqlite3 = require('sqlite3').verbose()
-
-const db = new sqlite3.Database('./bookshop.db', (err) => {
-	if (err) return console.error(err.message)
-	console.log('Connected to the "bookshop.db" SQlite database.')
-})
-
-app.get('/', async(req, res) => {
-	const sql = 'SELECT id, title FROM books;'
-	console.log(sql)
-	db.all(sql, (err, data) => {
-		if(err) console.error(err.message)
+router.get('/', async ctx => {
+	try {
+		console.log('/')
+		const sql = 'SELECT id, title FROM books;'
+		const db = await Database.open(dbName)
+		const data = await db.all(sql)
+		await db.close()
 		console.log(data)
-		res.render('home', {books: data})
-	})
-})
-
-/* app.get('/', async(req, res) => {
-	let sql = 'SELECT id, title FROM books;'
-	// --------
-	let querystring = ''
-	console.log(req.query.q)
-	if(req.query !== undefined && req.query.q !== undefined) {
-		sql = `SELECT id, title FROM books 
-						WHERE upper(title) LIKE "%${req.query.q}%" 
-						OR upper(description) LIKE upper("%${req.query.q}%");`
-		querystring = req.query.q
+		await ctx.render('home', {title: 'Favourite Books', books: data})
+	} catch(err) {
+		ctx.body = err.message
 	}
-	// --------
-	db.all(sql, (err, data) => {
-		if(err) console.error(err.message)
+})
+
+/* router.get('/', async ctx => {
+	try {
+		let sql = 'SELECT id, title FROM books;'
+		let querystring = ''
+		console.log(ctx.query.q)
+		if(ctx.query !== undefined && ctx.query.q !== undefined) {
+			sql = `SELECT id, title FROM books 
+							WHERE upper(title) LIKE "%${ctx.query.q}%" 
+							OR upper(description) LIKE upper("%${ctx.query.q}%");`
+			querystring = ctx.query.q
+		}
+		const db = await Database.open(dbName)
+		const data = await db.all(sql)
+		await db.close()
 		console.log(data)
-		res.render('newindex', {books: data, query: querystring})
-	})
+		await ctx.render('newindex', {books: data, query: querystring})
+	} catch(err) {
+		ctx.body = err.message
+	}
 }) */
 
-app.get('/details/:id', (req, res) => {
-	console.log(req.params.id)
-	const sql = `SELECT * FROM books WHERE id = ${req.params.id};`
-	console.log(sql)
-	db.get(sql, (err, data) => {
-		if(err) console.error(err.message)
+router.get('/details/:id', async ctx => {
+	try {
+		console.log(ctx.params.id)
+		const sql = `SELECT * FROM books WHERE id = ${ctx.params.id};`
+		const db = await Database.open(dbName)
+		const data = await db.get(sql)
+		await db.close()
 		console.log(data)
-		res.render('details', data)
-	})
+		await ctx.render('details', data)
+	} catch(err) {
+		ctx.body = err.message
+	}
 })
 
-app.get('/form', async(req, res) => res.render('form'))
+router.get('/form', async ctx => await ctx.render('form'))
 
-app.post('/add', async(req, res) => {
-	console.log(req.body)
-	const sql = `INSERT INTO books(title, isbn, description)
-								VALUES("${req.body.title}", "${req.body.isbn}", "${req.body.description}");`
-	console.log(sql)
-	db.run(sql, err => {
-		if(err) console.error(err.message)
-		res.redirect('/')
-	})
+router.post('/add', async ctx => {
+	try {
+		console.log(ctx.request.body)
+		const body = ctx.request.body
+		const sql = `INSERT INTO books(title, isbn, description) 
+			VALUES("${body.title}", "${body.isbn}", "${body.description}";`
+		console.log(sql)
+		const db = await Database.open(dbName)
+		await db.run(sql)
+		await db.close()
+		ctx.redirect('/')
+	} catch(err) {
+		ctx.body = err.message
+	}
 })
 
-app.listen(port, () => console.log(`app listening on port ${port}`))
+module.exports = app.listen(port, () => console.log(`listening on port ${port}`))
