@@ -114,16 +114,6 @@ NodeJS is a single-threaded event loop that processes queued events. This means 
 
 Because callbacks are such a fundamental part of NodeJS you need to spend time to make sure you fully understand how they work.
 
-Try running the `currency.js` program and note the output (remember you will need to install the `request` package.
-
-1. The currency code we want to convert to is stored in a constant.
-2. We create a _function expression_ called `printRates()` which has three parameters and prints out data from the response:
-    1. An error, this will be `null` if there is no error.
-    2. An object containing all the data from the HTTP response.
-    3. The string returned in the response body.
-3. Next we use a [template literal](https://goo.gl/3vznuR) to create the URL we will be calling.
-4. Finally we call the function stored in the `get` key in the `request` object and pass the string and function literal we created earlier.
-
 #### 1.3.1 Using Anonymous Functions in Callbacks
 
 Although this code works, you will rarely see callbacks written in this manner. Creating a function literal is a bit clunky and we can clean up the code by simply passing an anonymous function.
@@ -140,8 +130,8 @@ Take a few moments to make sure you fully understand the syntax, you will be see
 
 Lets apply our knowledge of callbacks to implement a simple quotes tool.
 
-1. Create a json-formatted text file containing 10 quotes, you can find lots of these on websites such as [brainyquotes](https://www.brainyquote.com/topics/inspirational).
-2. Create a callback function that
+1. Create a json-formatted text file called `quotes.json` containing 10 quotes, you can find lots of these on websites such as [brainyquotes](https://www.brainyquote.com/topics/inspirational). Each quote should include the quote and the author.
+2. Create a callback function that uses the [`fs.readfile()`](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) function to read the contents of the file and display the quotes (but not the authors) in the terminal window.
 
 ## 2 Objects
 
