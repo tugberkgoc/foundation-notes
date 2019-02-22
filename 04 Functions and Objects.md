@@ -148,7 +148,7 @@ const employee = {
 }
 ```
 
-As you can see from the simple example above, the data is stored in name-value pairs, referred to as **Properties**. This example is defining an object with **3** properties.
+As you can see from the simple example above, the data is stored in name-value pairs, referred to as **Properties**. This example is defining an object with **2** properties.
 
 The _name_ part of each property is a JavaScript string which may be enclosed in single quotes. These quotes are optional if the _property name_ is a valid _JavaScript variable_ but they are required if this is not the case.
 
