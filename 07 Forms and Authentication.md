@@ -5,7 +5,7 @@ In this worksheet you will be learning how to build valid html5 forms and how th
 
 ## Resources
 
-1. Lecture slides
+1. [Lecture slides](https://docs.google.com/presentation/d/105h61SpfKCpyb1NTzNQtzUJmQDOvyGa4tkcQwQdAmhU/edit?usp=sharing)
 
 ## 1. Configuring the Repository
 
