@@ -35,7 +35,6 @@ router.get('/', async ctx => {
 	} catch(err) {
 		await ctx.render('error', {message: err.message})
 	}
-	// if(!req.session.authenticated) return res.redirect('/login')
 })
 
 router.get('/register', async ctx => await ctx.render('register'))
@@ -44,12 +43,14 @@ router.post('/register', koaBody, async ctx => {
 	try {
 		const body = ctx.request.body
 		console.log(body)
+		// PROCESSING FILE
 		const {path, type} = ctx.request.files.avatar
 		const fileExtension = mime.extension(type)
 		console.log(`path: ${path}`)
 		console.log(`type: ${type}`)
 		console.log(`fileExtension: ${fileExtension}`)
 		await fs.copy(path, 'public/avatars/avatar.png')
+		// ENCRYPTING PASSWORD AND BUILDING SQL
 		body.pass = await bcrypt.hash(body.pass, saltRounds)
 		const sql = `INSERT INTO users(user, pass) VALUES("${body.user}", "${body.pass}")`
 		console.log(sql)
@@ -57,7 +58,7 @@ router.post('/register', koaBody, async ctx => {
 		const db = await sqlite.open('./website.db')
 		await db.run(sql)
 		await db.close()
-		// END DATABASE COMMANDS
+		// REDIRECTING USER TO HOME PAGE
 		ctx.redirect(`/?msg=new user "${body.name}" added`)
 	} catch(err) {
 		await ctx.render('error', {message: err.message})
@@ -75,13 +76,15 @@ router.post('/login', async ctx => {
 	try {
 		const body = ctx.request.body
 		const db = await sqlite.open('./website.db')
+		// DOES THE USERNAME EXIST?
 		const records = await db.get(`SELECT count(id) AS count FROM users WHERE user="${body.user}";`)
 		if(!records.count) return ctx.redirect('/login?msg=invalid%20username')
 		const record = await db.get(`SELECT pass FROM users WHERE user = "${body.user}";`)
 		await db.close()
+		// DOES THE PASSWORD MATCH?
 		const valid = await bcrypt.compare(body.pass, record.pass)
 		if(valid === false) return ctx.redirect(`/login?user=${body.user}&msg=invalid%20password`)
-		//TODO: credentials valid!
+		// WE HAVE A VALID USERNAME AND PASSWORD
 		ctx.session.authorised = true
 		return ctx.redirect('/?msg=you are now logged in...')
 	} catch(err) {
@@ -96,6 +99,7 @@ router.get('/logout', async ctx => {
 
 app.use(router.routes())
 module.exports = app.listen(port, async() => {
+	// MAKE SURE WE HAVE A DATABASE WITH THE CORRECT SCHEMA
 	const db = await sqlite.open('./website.db')
 	await db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT);')
 	await db.close()
