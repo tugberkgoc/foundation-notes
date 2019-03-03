@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+/* eslint-disable max-lines */
+/* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function */
+
+'use strict'
 
 /* MODULE IMPORTS */
 const Koa = require('koa')
