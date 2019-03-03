@@ -162,6 +162,29 @@ In this website we are using cookies to flag whether a user is logged in. The ho
 
 If the cookie is found and set to true we know they have already logged in and can provide access to the secured section of the site. When the user clicks on the log out button we simply delete the cookie (line 102) and send them to the home page.
 
+Start the web server and open the homepage in the Chrome browser. Open the developer tools, select the **Network** tab and refresh the page. Select the html page as shown and study the request headers, notice that there is no cookie.
+
+![headers without cookies](exercises/.images/cookies_01.png)
+
+If you now log in you will be directed back to the homepage. If you study the request headers you will see it now includes a cookie. This contains a hash that contains all the data we have stored. It is created by the following steps:
+
+session data is encoded into JSON, then into base64, then attached to a cookie. Locate this string which looks something like this, the second line shows the data part:
+
+```
+koa:sess=eyJhdXRob3Jpc2VkIjp0cnVlLCJfZXhwaXJlIjoxNTUxNzMyODA5NjU1LCJfbWF4QWdlIjo4NjQwMDAwMH0=
+eyJhdXRob3Jpc2VkIjp0cnVlLCJfZXhwaXJlIjoxNTUxNzMyODA5NjU1LCJfbWF4QWdlIjo4NjQwMDAwMH0=
+```
+
+Now copy the base64 encoded string and paste it into a website that can decode base64 data. You will end up with something like this:
+
+```
+{"authorised":true,"_expire":1551732809655,"_maxAge":86400000}
+```
+
+As you can see, the value we set is directly stored in the cookie. As you are now probably aware, cookies are not the most secure way to store session data!
+
+So how can we improve this security? The simplest way is to use xxx encryption on the data. Luckily there is a module called [koa-encrypted-session](https://www.npmjs.com/package/koa-encrypted-session) that makes it easy to implement. It is recommended that you use the unencrypted sessions to help debug your code but switch to an encrypted cookie on the production server.
+
 ### 4.1 Test Your Understanding
 
 In this section we will be implementing more granular authorisation by creating an admin-only area on the website:
@@ -177,9 +200,10 @@ In this section we will be implementing more granular authorisation by creating 
 
 Congratulations, you now have a working secure website shell which can be used as the base code for your coursework. You should now consider the following:
 
-1. The website is currently using a relational database (SQLite). If you plan on using a different form of persistence such as a document database (eg MongoDB) or a graph database (eg Neo4J) this is the time to make the change. Make sure the existing functionality works with your chosen persistence technology.
-2. In your last lab you learned how to build list and details pages and connect these together. Read your assignment brief carefully and decide if and how you will implement these. You should start work on this part of your project at the earliest opportunity.
-3. You will need to implement one or more forms as part of your assignment. Analyse the problem and build template files containing your required forms. Also implement the code required to process this data and add it to your preferred database.
+1. Start by encrypting your cookies using an appropriate npm package.
+2. The website is currently using a relational database (SQLite). If you plan on using a different form of persistence such as a document database (eg MongoDB) or a graph database (eg Neo4J) this is the time to make the change. Make sure the existing functionality works with your chosen persistence technology.
+3. In your last lab you learned how to build list and details pages and connect these together. Read your assignment brief carefully and decide if and how you will implement these. You should start work on this part of your project at the earliest opportunity.
+4. You will need to implement one or more forms as part of your assignment. Analyse the problem and build template files containing your required forms. Also implement the code required to process this data and add it to your preferred database.
 
 ## Advanced Topics
 
