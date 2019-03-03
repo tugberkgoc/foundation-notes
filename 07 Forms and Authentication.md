@@ -120,6 +120,8 @@ If you examine the URL you will see that this has changed to:
 
 Because you are not logged in, the server is redirecting the browser to the login page.
 
+There are two forms (login and register) and each has a POST route to process the data. At the end of each of the POST scripts the browser will be redirected to the appropriate page.
+
 Now try accessing the `/register` route, this should display a registration form where a site visitor can create an account. Try creating an account then returning to the home screen and logging in.
 
 Before attempting the exercises below, make sure you read through the JavaScript code in the `index.js` file and that you understand the html in the file in the `views/` directory.
@@ -135,9 +137,7 @@ Before attempting the exercises below, make sure you read through the JavaScript
 
 ## 3 HTML5 Forms
 
-Now we have a functional secure website its time to improve the forms.
-
-explain how to pass data into a form and how to process multipart data.
+The website currently has two forms, one handles user registration and the other logging in. Both send their data using the POST method which means the server must provide POST routes to process the data. If you examine the registration form you will see that there is an `enctype` attribute. This stands for _encoding type_. The enctype attribute specifies how the form-data should be encoded when submitting it to the server. In this form it is set to `multipart/form-data`. This value is required when you are using forms that have a file upload control.
 
 ### 3.1 Test Your Understanding
 
@@ -148,9 +148,18 @@ explain how to pass data into a form and how to process multipart data.
 
 ## 4 Authentication and Authorisation
 
-explain the difference!
+When you build a dynamic website there is a requirement for users to be able to access online resources in a controlled manner. We need to consider:
 
-Explain how cookies work, and how these are implemented in Koa.
+1. Authentication: can a user get access to the site (log in).
+2. Authorisation: when they are logged in, what access rights will a user have.
+
+Because http is stateless, it has no way to remember whether someone is logged in or not and what permissions they have. To solve this problem, a web server can send some data to be stored in the web browser, these are known as cookies.
+
+All cookies are encrypted and only available to the website that created them. Every time a user makes a request to the site they are sent in the HTTP headers. The server can also delete any cookies is has created.
+
+In this website we are using cookies to flag whether a user is logged in. The home page is secure, it checks for the presence of a suitable cookie and, if it does not find one it redirects the user to the log in page. You can see this on line 37. The login page checks the username and password and, if they match creates a cookie called `authorised` and setits value to `true` (line 94).
+
+If the cookie is found and set to true we know they have already logged in and can provide access to the secured section of the site. When the user clicks on the log out button we simply delete the cookie (line 102) and send them to the home page.
 
 ### 4.1 Test Your Understanding
 

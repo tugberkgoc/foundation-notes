@@ -17,6 +17,7 @@ const sqlite = require('sqlite-async')
 const bcrypt = require('bcrypt-promise')
 const fs = require('fs-extra')
 const mime = require('mime-types')
+//const jimp = require('jimp')
 
 const app = new Koa()
 const router = new Router()
