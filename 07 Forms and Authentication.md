@@ -146,6 +146,7 @@ The website currently has two forms, one handles user registration and the other
 2. It would be useful to ask for the user's actual name. Modify the form to request this and change the back-end database and code to ensure this is stored.
 3. We want to know which country the user is from and store this as a two digit country code such as `GB`. Create a dropdown list using the [`select`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) element which will allow the user to choose their country name, use the data in the `countries.json` file and import this using the `fs.readfile()` function which returns a promise. Make sure you update the database schema to include this additional field.
 4. A user should be able to view and change their profile information. Create a new page based on a new template called `profile.handlebars`. This should populate a form with the user information and, if the user changes this and clicks on an **Update** button should update their record in the database. There should be a link to this on the homepage.
+    1. The page should display the user's profile picture but also give them the option of uploading a replacement image.
 
 ## 4 Authentication and Authorisation
 
