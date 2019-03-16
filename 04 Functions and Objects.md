@@ -126,12 +126,9 @@ request.get( url, (err, res, body) => {
 
 Take a few moments to make sure you fully understand the syntax, you will be seeing a lot of this over the next few weeks.
 
-#### 1.3.2 Test Your Understanding
+### 1.3.2 Test Your Understanding
 
-Lets apply our knowledge of callbacks to implement a simple quotes tool.
-
-1. Create a json-formatted text file called `quotes.json` containing 10 quotes, you can find lots of these on websites such as [brainyquotes](https://www.brainyquote.com/topics/inspirational). Each quote should include the quote and the author.
-2. Create a callback function that uses the [`fs.readfile()`](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) function to read the contents of the file and display the quotes (but not the authors) in the terminal window.
+TODO
 
 ## 2 Objects
 
@@ -209,6 +206,16 @@ const grade = employee.grade || 'A'
 ```
 
 This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
+
+#### 2.2.1 Test Your Understanding
+
+Lets apply our knowledge of callbacks to implement a simple quotes tool.
+
+1. Create a json-formatted text file called `quotes.json` containing 10 quotes, you can find lots of these on websites such as [brainyquotes](https://www.brainyquote.com/topics/inspirational). Each quote should include the quote and the author.
+2. Create a new script called `quotes.js` and use the [`fs.readfile()`](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) function to read the contents of the file and display it in the terminal.
+3. The contents of the file is a utf8 string, use `JSON.parse()` to convert this into a JavaScript object (array) and print this to the terminal instead.
+4. Create a loop to iterate through the array, printing the contents of each index.
+5. Modify the code so that it only prints the quotes string (not the entire object).
 
 #### 2.3.1 ECMA6 Object Destructuring
 
