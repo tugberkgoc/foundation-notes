@@ -11,13 +11,16 @@ const Router = require('koa-router')
 const views = require('koa-views')
 const staticDir = require('koa-static')
 const bodyParser = require('koa-bodyparser')
-const koaBody   = require('koa-body')({multipart: true, uploadDir: '.'})
+const koaBody = require('koa-body')({multipart: true, uploadDir: '.'})
 const session = require('koa-session')
 const sqlite = require('sqlite-async')
 const bcrypt = require('bcrypt-promise')
 const fs = require('fs-extra')
 const mime = require('mime-types')
 //const jimp = require('jimp')
+
+/* IMPORT CUSTOM MODULES */
+const accounts = require('./modules/accounts')
 
 const app = new Koa()
 const router = new Router()
@@ -78,23 +81,34 @@ router.get('/login', async ctx => {
 	await ctx.render('login', data)
 })
 
-router.post('/login', async ctx => {
+// router.post('/login', async ctx => {
+// 	try {
+// 		const body = ctx.request.body
+// 		const db = await sqlite.open('./website.db')
+// 		// DOES THE USERNAME EXIST?
+// 		const records = await db.get(`SELECT count(id) AS count FROM users WHERE user="${body.user}";`)
+// 		if(!records.count) return ctx.redirect('/login?msg=invalid%20username')
+// 		const record = await db.get(`SELECT pass FROM users WHERE user = "${body.user}";`)
+// 		await db.close()
+// 		// DOES THE PASSWORD MATCH?
+// 		const valid = await bcrypt.compare(body.pass, record.pass)
+// 		if(valid === false) return ctx.redirect(`/login?user=${body.user}&msg=invalid%20password`)
+// 		// WE HAVE A VALID USERNAME AND PASSWORD
+// 		ctx.session.authorised = true
+// 		return ctx.redirect('/?msg=you are now logged in...')
+// 	} catch(err) {
+// 		await ctx.render('error', {message: err.message})
+// 	}
+// })
+
+router.post('/login', async ctx => { // 19 lines reduced to 10!
+	const body = ctx.request.body
 	try {
-		const body = ctx.request.body
-		const db = await sqlite.open('./website.db')
-		// DOES THE USERNAME EXIST?
-		const records = await db.get(`SELECT count(id) AS count FROM users WHERE user="${body.user}";`)
-		if(!records.count) return ctx.redirect('/login?msg=invalid%20username')
-		const record = await db.get(`SELECT pass FROM users WHERE user = "${body.user}";`)
-		await db.close()
-		// DOES THE PASSWORD MATCH?
-		const valid = await bcrypt.compare(body.pass, record.pass)
-		if(valid === false) return ctx.redirect(`/login?user=${body.user}&msg=invalid%20password`)
-		// WE HAVE A VALID USERNAME AND PASSWORD
+		await accounts.checkCredentials(body.user, body.pass)
 		ctx.session.authorised = true
 		return ctx.redirect('/?msg=you are now logged in...')
 	} catch(err) {
-		await ctx.render('error', {message: err.message})
+		return ctx.redirect(`/login?user=${body.user}&msg=${err.message}`)
 	}
 })
 
