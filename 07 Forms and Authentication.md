@@ -129,7 +129,7 @@ Before attempting the exercises below, make sure you read through the JavaScript
 ### 2.1 Test Your Understanding
 
 1. Create a link on the log in screen to take the user to the registration screen and a link there to take the user back to the log in screen.
-2. Create a **Log Out** link on the homepage. If a user clicks on this it should take them to the `/logout` route which will log them out.
+2. Create a **Log Out** link on the homepage. If a user clicks on this it should take them to the `/logout` route which will log them out. HINT: you will need to delete the session key!
 3. Currently all uploaded files are saved as `avatar.png` in the `public/avatars/` directory which means when a new user creates their account the avatar will overwrite the previous one. Modify the code so that the name of the avatar matches the username. How will you decide what file extension to use?
 4. The registration form should only allow each username to be assigned once. Modify the script so that if a new user chooses a username that is already in use they should be prompted to choose another one. The form should display the message **Username already in use**.
 5. The registration code allows a user to create an account with a blank username and/or password. Modify the code to prevent this. The form should be displayed with a message informing the user which field needs correcting. Make sure you pass the form data back to the form and display this.
