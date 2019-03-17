@@ -7,12 +7,12 @@
 
 'use strict'
 
-const sqlite = require('sqlite-async')
-const bcrypt = require('bcrypt-promise')
+var sqlite = require('sqlite-async');
+let bcrypt = require('bcrypt-promise');
 
 /**
  * This is a generic function that opens the database, executes a query,
- * closes the database connection and returns the data.
+ * closes the database connection and returns the data.  
  * @param {String} query - The SQL statement to execute.
  * @returns {Object} - the date returned by the query.
  */
@@ -42,6 +42,8 @@ module.exports.checkCredentials = async(username, password)=> {
 	}
 }
 
+
+
 /* ----------------------------- STUB FUNCTIONS ----------------------------- */
 
 /**
@@ -52,14 +54,7 @@ module.exports.checkCredentials = async(username, password)=> {
  * @throws {Error} - throws an error if the username already exists.
  */
 async function checkNoDuplicateUsername (username) {
-	try {
-		const sql = `SELECT count(id) AS count FROM users WHERE user="${username}";`
-		const num_records = await runSQL (sql)
-		if(num_records.count) throw new Error ('Username already Exists!')
-		return true
-	} catch (err) {
-		throw err
-	}
+	return true
 }
 
 /**
@@ -81,14 +76,5 @@ async function saveImage(path, mimetype) {
  * @throws {Error} - throws an error if the new user account has been created.
  */
 module.exports.addUser = async(username, password) => {
-	try {
-		await checkNoDuplicateUsername(username)
-		const saltRounds = 10
-		password = await bcrypt.hash(password, saltRounds)
-		const sql = `INSERT INTO users(user, pass) VALUES("${username}", "${password}")`
-		await runSQL(sql)
-		return true
-	} catch(err) {
-		throw err
-	}
+    return true;  
 }
