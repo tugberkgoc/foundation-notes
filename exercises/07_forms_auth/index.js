@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-/* eslint-disable max-lines */
-/* eslint-disable max-statements */
-/* eslint-disable max-lines-per-function */
+
+/**
+ * Routes File
+ */
 
 'use strict'
 
@@ -35,6 +36,13 @@ app.use(views(`${__dirname}/views`, { extension: 'handlebars' }, {map: { handleb
 const port = 8080
 const saltRounds = 10
 
+/**
+ * The secure home page.
+ *
+ * @name Home Page
+ * @route {GET} /
+ * @authentication This route requires cookie-based authentication.
+ */
 router.get('/', async ctx => {
 	try {
 		if(ctx.session.authorised !== true) return ctx.redirect('/login?msg=you need to log in')
@@ -46,8 +54,20 @@ router.get('/', async ctx => {
 	}
 })
 
+/**
+ * The user registration page.
+ *
+ * @name Register Page
+ * @route {GET} /register
+ */
 router.get('/register', async ctx => await ctx.render('register'))
 
+/**
+ * The script to process new user registrations.
+ *
+ * @name Register Script
+ * @route {POST} /register
+ */
 router.post('/register', koaBody, async ctx => {
 	try {
 		const body = ctx.request.body
@@ -78,43 +98,43 @@ router.get('/login', async ctx => {
 	const data = {}
 	if(ctx.query.msg) data.msg = ctx.query.msg
 	if(ctx.query.user) data.user = ctx.query.user
-	await ctx.render('login', data)
+	await ctx.render('login', data)  
 })
 
-// router.post('/login', async ctx => {
-// 	try {
-// 		const body = ctx.request.body
-// 		const db = await sqlite.open('./website.db')
-// 		// DOES THE USERNAME EXIST?
-// 		const records = await db.get(`SELECT count(id) AS count FROM users WHERE user="${body.user}";`)
-// 		if(!records.count) return ctx.redirect('/login?msg=invalid%20username')
-// 		const record = await db.get(`SELECT pass FROM users WHERE user = "${body.user}";`)
-// 		await db.close()
-// 		// DOES THE PASSWORD MATCH?
-// 		const valid = await bcrypt.compare(body.pass, record.pass)
-// 		if(valid === false) return ctx.redirect(`/login?user=${body.user}&msg=invalid%20password`)
-// 		// WE HAVE A VALID USERNAME AND PASSWORD
-// 		ctx.session.authorised = true
-// 		return ctx.redirect('/?msg=you are now logged in...')
-// 	} catch(err) {
-// 		await ctx.render('error', {message: err.message})
-// 	}
-// })
-
-router.post('/login', async ctx => { // 19 lines reduced to 10!
-	const body = ctx.request.body
+router.post('/login', async ctx => {
 	try {
-		await accounts.checkCredentials(body.user, body.pass)
+		const body = ctx.request.body
+		const db = await sqlite.open('./website.db')
+		// DOES THE USERNAME EXIST?
+		const records = await db.get(`SELECT count(id) AS count FROM users WHERE user="${body.user}";`)
+		if(!records.count) return ctx.redirect('/login?msg=invalid%20username')
+		const record = await db.get(`SELECT pass FROM users WHERE user = "${body.user}";`)
+		await db.close()
+		// DOES THE PASSWORD MATCH?
+		const valid = await bcrypt.compare(body.pass, record.pass)
+		if(valid == false) return ctx.redirect(`/login?user=${body.user}&msg=invalid%20password`)
+		// WE HAVE A VALID USERNAME AND PASSWORD
 		ctx.session.authorised = true
 		return ctx.redirect('/?msg=you are now logged in...')
 	} catch(err) {
-		return ctx.redirect(`/login?user=${body.user}&msg=${err.message}`)
+		await ctx.render('error', {message: err.message})
 	}
 })
 
+// router.post('/login', async ctx => { // 19 lines reduced to 10!
+// 	const body = ctx.request.body
+// 	try {
+// 		await accounts.checkCredentials(body.user, body.pass)
+// 		ctx.session.authorised = true
+// 		return ctx.redirect('/?msg=you are now logged in...')
+// 	} catch(err) {
+// 		return ctx.redirect(`/login?user=${body.user}&msg=${err.message}`)
+// 	}
+// })
+
 router.get('/logout', async ctx => {
-	ctx.session.authorised = null
-	ctx.redirect('/')
+	ctx.session.authorised = null;
+	ctx.redirect('/')	
 })
 
 app.use(router.routes())

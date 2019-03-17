@@ -18,6 +18,7 @@
     "complexity": ["error", 4],
     "eol-last": "warn",
     "eqeqeq": "error",
+    "func-call-spacing": ["error", "never"],
     "global-require": "error",
     "handle-callback-err": "warn",
     "indent": [1, "tab", {"SwitchCase": 1}],
@@ -54,6 +55,7 @@
     "prefer-const": 2,
     "quotes": [1, "single"],
     "semi": [1, "never"],
+    "space-before-blocks": ["error", "never"],
     "space-before-function-paren": [2, "never"],
     "strict": [2, "global"],
     "yoda": 2

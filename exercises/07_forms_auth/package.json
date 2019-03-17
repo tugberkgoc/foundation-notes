@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "jsdoc": "node_modules/.bin/jsdoc -c jsdoc.conf",
+    "linter": "node_modules/.bin/eslint .",
     "test": "jest --coverage --detectOpenHandles"
   },
   "jest": {
@@ -28,7 +30,10 @@
     "sqlite-async": "^1.0.11"
   },
   "devDependencies": {
+    "eslint": "^5.15.2",
     "jest": "^24.1.0",
+    "jsdoc": "^3.5.5",
+    "jsdoc-route-plugin": "^0.1.0",
     "puppeteer": "^1.12.2"
   }
 }

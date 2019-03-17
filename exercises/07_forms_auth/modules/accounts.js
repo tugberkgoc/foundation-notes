@@ -17,28 +17,28 @@ const bcrypt = require('bcrypt-promise')
  * @returns {Object} - the date returned by the query.
  */
 async function runSQL(query) {
-	try {
-		const DBName = './website.db'
-		const db = await sqlite.open(DBName)
-		const data = await db.all(query)
-		await db.close()
+    try {
+		let DBName = "./website.db";
+		const db = await sqlite.open(DBName);	
+		const data = await db.all(query);  
+		await db.close();
 		if(data.length === 1) return data[0]
-		return data
+		return data;
 	} catch(err) {
 		throw err
 	}
 }
 
-module.exports.checkCredentials = async(username, password) => {
+module.exports.checkCredentials = async(username, password)=> {
 	try {
-		const records = await runSQL(`SELECT count(id) AS count FROM users WHERE user="${username}";`)
-		if(!records.count) throw new Error('invalid username')
+	    var records = await runSQL(`SELECT count(id) AS count FROM users WHERE user="${username}";`);
+		if(!records.count) throw new Error("invalid username")
 		const record = await runSQL(`SELECT pass FROM users WHERE user = "${username}";`)
 		const valid = await bcrypt.compare(password, record.pass)
-		if(valid === false) throw new Error(`invalid password`)
+		if(valid == false) throw new Error(`invalid password`)
 		return true
 	} catch(err) {
-		throw err
+	throw err
 	}
 }
 
@@ -51,13 +51,13 @@ module.exports.checkCredentials = async(username, password) => {
  * @returns {boolean} - returns true if the username does not exist.
  * @throws {Error} - throws an error if the username already exists.
  */
-async function checkNoDuplicateUsername(username) {
+async function checkNoDuplicateUsername (username) {
 	try {
 		const sql = `SELECT count(id) AS count FROM users WHERE user="${username}";`
-		const data = await runSQL(sql)
-		if(data.count) throw new Error('Username already Exists!')
+		const num_records = await runSQL (sql)
+		if(num_records.count) throw new Error ('Username already Exists!')
 		return true
-	} catch(err) {
+	} catch (err) {
 		throw err
 	}
 }
