@@ -24,7 +24,13 @@ Now locate the second `router.post('/login')` route (this is currently commented
 
 Now we need to look at the `accounts.js` module. This implements some very important concepts that you will need to understand and apply to your assignment.
 
-1. 
+1. The `accounts` module contains two types of function:
+    1. The [function declarations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) such as `runSQL()` have a private scope and are not visible outside the module.
+    2. Any [function expressions](https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Operators/function) stored as keys in the `module.exports` object such as `module.exports.checkCredentials` are available to any code that imports this module.
+2. All the code in a function is wrapped in a [try-catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) block to handle any exceptions.
+3. The catch block simple propagates the [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object to the calling code.
+4. Any non-valid code flow is handled by throwing an Error object which forces the code flow to jump directly to the catch block.
+5. This means that if the program flow reaches the end of the try block everything was successful and data can be returned.
 
 ### 1.1 Test Your Understanding
 
