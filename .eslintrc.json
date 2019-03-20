@@ -55,14 +55,15 @@
     "prefer-const": 2,
     "quotes": [1, "single"],
     "semi": [1, "never"],
-    "space-before-blocks": ["error", "never"],
+    "space-before-blocks": ["error", { "functions": "always", "keywords": "always", "classes": "never" }],
     "space-before-function-paren": [2, "never"],
     "strict": [2, "global"],
     "yoda": 2
 	},
 	"overrides": [{
-		"files": [ "*.test.js", "*.spec.js" ],
+		"files": [ "*.test.js", "*.spec.js", "sqlite-async.js" ],
 		"rules": {
+      "global-require": "off",
 			"max-lines-per-function": "off",
 			"max-lines": "off",
 			"max-statements": "off",

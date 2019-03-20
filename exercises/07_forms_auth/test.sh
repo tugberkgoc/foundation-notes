@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 node index.js&
-npm run test
+node_modules/.bin/jest --detectOpenHandles tests/acceptance/
 kill %1
