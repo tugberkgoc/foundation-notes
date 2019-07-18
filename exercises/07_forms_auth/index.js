@@ -60,7 +60,12 @@ router.get('/', async ctx => {
  * @name Register Page
  * @route {GET} /register
  */
-router.get('/register', async ctx => await ctx.render('register'))
+router.get('/register', async ctx => {
+	const data = {}
+	if(ctx.query.msg) data.msg = ctx.query.msg
+	data.countries = ['UK', 'Europe', 'World']
+	await ctx.render('register', data)
+})
 
 /**
  * The script to process new user registrations.
