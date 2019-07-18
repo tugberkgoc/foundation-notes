@@ -1,8 +1,0 @@
-{
-  "spec_files": [
-    "lists-spec.js"
-  ],
-  "helpers": [
-    "helpers/**/*.js"
-  ]
-}

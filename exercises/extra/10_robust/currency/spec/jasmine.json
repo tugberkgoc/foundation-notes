@@ -1,9 +1,0 @@
-
-{
-	"spec_files": [
-		"spec/currency-spec.js"
-	],
-	"helpers": [
-		"helpers/**/*.js"
-	]
-}
