@@ -387,11 +387,11 @@ There are a couple of important concepts here.
 
 1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
 
-### 2.7 The New Keyword
+## 3 Custom Object Definitions
 
-As you have seen from the previous section, each object (String, Number, etc) has its own _prototype_, but what about the custom objects you created? It turns out that these also have a prototype, _Object_. Any functionality you add to this will get added to _all the objects in your application!_. To get round this problem NodeJS has the `new` keyword. When this is used we can isolate any changes to the targeted object. Specifically when we use the `new` keyword:
+As you have seen from the previous section, each object (String, Number, etc) has its own _prototype_, but what about the custom objects you created? It turns out that these also have a prototype, _Object_. Any functionality you add to this will get added to _all the objects in your application!_. To get round this problem NodeJS has the `new` keyword. When this is used we can isolate any changes to the targeted object. Specifically when we use the `new` keyword.
 
-#### 2.7.1 The Constructor Function
+### 3.1 Constructor Functions
 
 Until ECMA6, there wa a way to achieve this by using a **constructor function**. Whilst this is not now considered the optimal way to achieve our goal there are so many examples of this approach it is important you understand both the syntax and how it works. When we use this approach using the `new` keyword triggers four steps:
 
@@ -421,7 +421,7 @@ console.log(nigel)
 
 Note that it is a convention that objects that can be used to create objects using the `new` keyword start with a capital letter.
 
-#### 2.7.2 Extending using Constructor Functions
+### 3.2 Extending using Constructor Functions
 
 Whilst this syntax is not using traditional classes, one object can _extend_ another. This is best illustrated through the example below where we create another object called `Student`.
 
@@ -440,7 +440,7 @@ console.log(anne)
 // Student { name: 'anne', startYear: 2019, years: 0, course: 'not enrolled' }
 ```
 
-#### 2.7.3 ECMA6 Class Syntax
+### 3.3 ECMA6 Class Syntax
 
 Whilst constructor functions are not particularly elegant they do provide a way to structure your objects efficiently. ECMA6 introduced a cleaner way to work with these using **classes**. Note that despite this looking like a (traditional) OOP language, remember it is really only a different syntax for constructor functions. Let's look at the previous example using the new syntax:
 
@@ -486,7 +486,7 @@ class Student extends Person {
 }
 ```
 
-#### 2.7.4 Static Members
+### 3.4 Static Members
 
 Currently each instance of a prototype function is completely self-contained. What if we need to store data about the prototype function itself? In a traditional OOP language we would use static methods and the new ECMA `class` syntax allows us to do something similar by adding properties to the prototype function itself. We can also define static methods that can be called directly from the prototype function, see the example below.
 
@@ -511,7 +511,7 @@ console.log(ECMA6Student.studentCount()) // prints '2'
 
 Notice that the static vsriable `count` is public (so the `studentCount()` method is somewhat superfluous in this example!). This highlights one of the limitations of JavaScript, the lack of a simple way to define private attributes (variables and methods). The next section goes into this in more detail and explains some workarounds (hacks) to get around this.
 
-#### 2.7.5 Handling Data Encapsulation
+### 3.5 Handling Data Encapsulation
 
 In all of these objects all data is public (you can see the entire object by using `console.log()`). One of the weaknesses of NodeJS (and JavaScript in general) is that there is no clean way to _encapsulate_ data and make it hidden from the outside world. There are a number of techniques to get around this problem:
 
@@ -522,24 +522,24 @@ In all of these objects all data is public (you can see the entire object by usi
 
 You should take time to understand the [pros and cons](https://2ality.com/2016/01/private-data-classes.html) of all four approaches.
 
-#### 2.7.6 Test Your Understanding
+### 3.6 Test Your Understanding
 
 1. Create a **constructor function** called `OldVehicle` that includes `make`, `model` and `price` information. Use this to create two vehicles of your choice.
 2. Use this to create a second **constructor function** class called `OldPickup` that includes `payload` and `seats` fields and use this to create two pickup objects.
 3. Now use the same information to create a class called `NewVehicle` and extend this to create a class called `NewPickup` and use this to create two or more pickup objects.
 4. Add a static member to capture the total value of all the pickup sales and print this to the terminal.
 
-## 3 RESTful APIs and JSON Data
+## 4 RESTful APIs and JSON Data
 
 //TODO: write this section...!
 
-### 3.1 JSON Data
+### 4.1 JSON Data
 
 Show how objects can be turned into strings and saved. text data loaded and converted into a JavaScript object.
 
-#### 3.1.1 Test Your Understanding
+#### 4.1.1 Test Your Understanding
 
-### 3.2 RESTful APIs
+### 4.2 RESTful APIs
 
 Show how data can be retrieved from an API in JSON format.
 
@@ -549,7 +549,7 @@ OMDB key: 220d2590
 
 First task is for students to get an OMDB API key and paste it into the provided script.
 
-### 3.3 Nested Callbacks
+### 4.3 Nested Callbacks
 
 Use the same API and show that multiple steps cause nested callbacks and callback hell.
 
@@ -568,7 +568,7 @@ Open the file `nestedCallbacks.js` which asks for a _base_ currency code then pr
 
 Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
 
-### 1.4.1 Test Your Knowledge
+### 4.4 Test Your Knowledge
 
 The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
 
