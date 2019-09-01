@@ -387,6 +387,148 @@ There are a couple of important concepts here.
 
 1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
 
+### 2.7 The New Keyword
+
+As you have seen from the previous section, each object (String, Number, etc) has its own _prototype_, but what about the custom objects you created? It turns out that these also have a prototype, _Object_. Any functionality you add to this will get added to _all the objects in your application!_. To get round this problem NodeJS has the `new` keyword. When this is used we can isolate any changes to the targeted object. Specifically when we use the `new` keyword:
+
+#### 2.7.1 The Constructor Function
+
+Until ECMA6, there wa a way to achieve this by using a **constructor function**. Whilst this is not now considered the optimal way to achieve our goal there are so many examples of this approach it is important you understand both the syntax and how it works. When we use this approach using the `new` keyword triggers four steps:
+
+1. We create an empty object.
+2. We set the its prototype property to the constructor function's prototype function.
+3. We bind its `this` object to the new object.
+4. We then return the new object.
+
+Lets see an example:
+
+```javascript
+function Person(name, startYear) {
+	const currentYear = 2019
+	this.name = name
+	this.startYear = startYear || currentYear
+	this.years = currentYear - this.startYear
+}
+
+const colin = new Person('colin', 2012)
+console.log(colin)
+// Person { name: 'colin', startYear: 2012, years: 7 }
+
+const nigel = new Person('nigel')
+console.log(nigel)
+// Person { name: 'nigel', startYear: 2019, years: 0 }
+```
+
+Note that it is a convention that objects that can be used to create objects using the `new` keyword start with a capital letter.
+
+#### 2.7.2 Extending using Constructor Functions
+
+Whilst this syntax is not using traditional classes, one object can _extend_ another. This is best illustrated through the example below where we create another object called `Student`.
+
+```javascript
+function Student(name, startYear, course) {
+	Person.call(this, name, startYear)
+	this.subject = course || 'not enrolled'
+}
+
+const emily = new Student('emily', 2017, 'architecture')
+console.log(emily)
+// Student { name: 'emily', startYear: 2017, years: 2, course: 'architecture' }
+
+const anne = new Student('anne')
+console.log(anne)
+// Student { name: 'anne', startYear: 2019, years: 0, course: 'not enrolled' }
+```
+
+#### 2.7.3 ECMA6 Class Syntax
+
+Whilst constructor functions are not particularly elegant they do provide a way to structure your objects efficiently. ECMA6 introduced a cleaner way to work with these using **classes**. Note that despite this looking like a (traditional) OOP language, remember it is really only a different syntax for constructor functions. Let's look at the previous example using the new syntax:
+
+```javascript
+class Person {
+  const currentYear = 2019
+
+  constructor(name, startYear) {
+	  this.name = name
+	  this.startYear = startYear || currentYear
+	  this.years = currentYear - this.startYear
+  }
+}
+```
+
+Since this is syntactic sugar for the constructor function we can extend this to create different objects.
+
+```javascript
+class Student extends Person {
+  constructor(name, startYear, course) {
+    super(name, startYear)
+    this.subject = course || 'not enrolled'
+  }
+}
+```
+
+Note that we use the `constructor()` function rather than calling the base object.
+
+We can also make use of **getters** and **setters** to retrieve and modify object properties.
+
+```javascript
+class Student extends Person {
+  constructor(name, startYear, course) {
+    super(name, startYear)
+    this.subject = course || 'not enrolled'
+  }
+  get course() {
+    return this.subject
+  }
+  set course(newCourse) {
+    this.subject = newCourse
+  }
+}
+```
+
+#### 2.7.4 Static Members
+
+Currently each instance of a prototype function is completely self-contained. What if we need to store data about the prototype function itself? In a traditional OOP language we would use static methods and the new ECMA `class` syntax allows us to do something similar by adding properties to the prototype function itself. We can also define static methods that can be called directly from the prototype function, see the example below.
+
+```javascript
+class Student {
+  constructor(name, startYear, course) {
+		super(name, startYear)
+		this.subject = course || 'not enrolled'
+		if(ECMA6Student.count === undefined) ECMA6Student.count = 0
+		ECMA6Student.count++
+  }
+  static studentCount() {
+		return ECMA6Student.count
+	}
+}
+
+const ruth = new ECMA6Student('ruth')
+console.log(ECMA6Student.count)          // prints '1'
+const matt = new ECMA6Student('matt')
+console.log(ECMA6Student.studentCount()) // prints '2'
+```
+
+Notice that the static vsriable `count` is public (so the `studentCount()` method is somewhat superfluous in this example!). This highlights one of the limitations of JavaScript, the lack of a simple way to define private attributes (variables and methods). The next section goes into this in more detail and explains some workarounds (hacks) to get around this.
+
+#### 2.7.5 Handling Data Encapsulation
+
+In all of these objects all data is public (you can see the entire object by using `console.log()`). One of the weaknesses of NodeJS (and JavaScript in general) is that there is no clean way to _encapsulate_ data and make it hidden from the outside world. There are a number of techniques to get around this problem:
+
+1. Storing the data in the class [constructor environment](http://speakingjs.com/es5/ch17.html#private_data_constructor_environment).
+2. Using a naming convention such as starting all private data with an underscore.
+3. Storing data in a [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap).
+4. Use a property who's key is a [Symbol](https://developer.mozilla.org/en-US/docs/Glossary/Symbol).
+
+You should take time to understand the [pros and cons](https://2ality.com/2016/01/private-data-classes.html) of all four approaches.
+
+#### 2.7.6 Test Your Understanding
+
+1. Create a **constructor function** called `OldVehicle` that includes `make`, `model` and `price` information. Use this to create two vehicles of your choice.
+2. Use this to create a second **constructor function** class called `OldPickup` that includes `payload` and `seats` fields and use this to create two pickup objects.
+3. Now use the same information to create a class called `NewVehicle` and extend this to create a class called `NewPickup` and use this to create two or more pickup objects.
+4. Add a static member to capture the total value of all the pickup sales and print this to the terminal.
+
 ## 3 RESTful APIs and JSON Data
 
 //TODO: write this section...!
