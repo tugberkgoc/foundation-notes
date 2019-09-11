@@ -5,7 +5,7 @@ In this worksheet you will learn how to configure your work environment using VS
 
 If you are using Windows 10 you will also need to install [Git](https://git-scm.com/download/win), this may already be installed on a Coventry University computer.
 
-## Forking the Foundation Materials
+## 1 Forking the Foundation Materials
 
 You should start by logging in to the University GitHub server using your university username and password. Make sure you don't log into GitHub.com!
 
@@ -21,7 +21,7 @@ This will create an exact copy (clone) of the repository in your personal worksp
 
 ![The Clone Button](exercises/.images/fork03.png)
 
-## Cloning the Lab Exercises
+## 2 Cloning the Lab Exercises
 
 Locate the green **Clone or Download** button and click this. You will see the option to clone with HTTPS. Click on the copy icon as shown to copy the URL to the clipboard.
 
@@ -45,7 +45,7 @@ This will create a directory called `foundation` which contains all the content 
 
 Now you can launch Visual Studio Code and use the **File** menu to open this `foundation/` directory.
 
-## Additional Steps for Windows 10 Users
+### 2.1 Additional Steps for Windows 10 Users
 
 If you are using Windows 10 you will need to carry out some additional steps before starting the lab exercises:
 
@@ -56,24 +56,38 @@ If you are using Windows 10 you will need to carry out some additional steps bef
 
 This will open a new Git Bash shell in the project directory.
 
-## Pushing the Changes to GitHub
+## 3 Pushing the Changes to GitHub
 
 As you work through the lab activities two things are likely to happen:
 
 1. You make changes to the code that you want to push to the forked copy of your repository.
 2. You will need to pull any bug fixes from the original repository.
 
-### Pushing Changes
+### 3.1 Configuring the Repository
+
+Before you start interacting with the GitHub server you need to configure the local repository. Open the Bash Shell and run the following commands:
+
+```shell
+git config user.name 'John Doe'
+git config user.email 'doej@coventry.ac.uk'
+```
+
+remember to replace the values with you own name and your university email (but without the uni part).
+
+### 3.2 Pushing Changes
 
 As you save your changes you will see a blue circle against the **Source Control** tab that indicates how many files have been changed, we need to get these changed files up to GitHub. Start by opening the tab, you will see a list of all the files you have changed.
 
 1. Click on the + button to stage these changes.
 2. Type in a commit message to explain what changes you have made.
 3. Click in the tick button to commit the changes.
+4. Click on the arrow ring button to push the new commit up to your GitHub repository.
 
 ![Committing Changes](exercises/.images/push01.png)
 
-### Pulling from Upstream
+At this point you should be able to refresh your GitHub repository page to see the changes.
+
+### 3.3 Pulling from Upstream
 
 As changes are made to the master repository you will want to merge these into your forked repository. Before you can do this you will need to add a link to the upstream repository. Open a bash shell:
 
@@ -92,7 +106,7 @@ git merge upstream/master
 
 Don't worry if you don't understand what is happening, this will be explained in a future lab.
 
-## Installing NodeJS
+## 4 Installing NodeJS
 
 Next we need to install and configure NodeJS. The first task is to install the Node Version Manager tool, there are different instructions for [Windows10](https://github.com/coreybutler/nvm-windows) and [MacOS and Linux](https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/).
 
@@ -110,7 +124,7 @@ nvm install node
 node -v
 ```
 
-## 3 Running a Web Server
+## 5 Running a Web Server
 
 Use the terminal to navigate to the `exercises/01_http/` directory and try running the `index.js` script:
 
