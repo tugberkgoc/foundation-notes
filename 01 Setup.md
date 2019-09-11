@@ -1,87 +1,114 @@
 
-# The Goorm IDE
+# Setup VS Code
 
-This is a good example of an online IDE. These enable you to do software development without needing to install anything on your computer. They are also ideal for use with a Chromebook. You need to sign up for an account on [their website](https://ide.goorm.io/), sign in and access the dashboard page. Click on the **Create a New Container** button.
+In this worksheet you will learn how to configure your work environment using VS Code. You should start by installing Visual Studio Code from the [website](https://code.visualstudio.com), note that it might already be installed. If you are using a Coventry University computer and the software is not installed you can do this using AppsAnywhere.
 
-![Create a New Container](exercises/.images/goorm01.png)
+If you are using Windows 10 you will also need to install [Git](https://git-scm.com/download/win), this may already be installed on a Coventry University computer.
 
-You will be presented with a screen where you can name your project and choose a software stack:
-
-![Create a New Container](exercises/.images/goorm02.png)
-
-You should see an IDE that displays the files down the left side with an editor in the main view and a terminal window below:
-
-![Create a New Container](exercises/.images/goorm03.png)
-
-## 1 Accessing the Lab Content
-
-The lab materials are in a repository on the University GitHub server. We need to make a copy of this repository by forking it, then clone it into Goorm.io, follow the instructions below carefully.
-
-### 1.1 Forking the Teaching Materials
+## Forking the Foundation Materials
 
 You should start by logging in to the University GitHub server using your university username and password. Make sure you don't log into GitHub.com!
 
-Next you should open the web page containing the 205CDE teaching materials and click on the small **Fork** button in the top-right corner of the page.
+Next you should open the [web page](https://github.coventry.ac.uk/web/foundation) containing the foundation materials and click on the small Fork button in the top-right corner of the page
 
-![The Clone Button](exercises/.images/github_fork_1.png)
+![The Clone Button](exercises/.images/fork01.png)
 
 You will be asked to select where you want to place the forked repository, make sure you choose your own personal space (the one that is named using your username).
 
-![The Clone Button](exercises/.images/github_fork_2.png)
+![The Clone Button](exercises/.images/fork02.png)
 
 This will create an exact copy (clone) of the repository in your personal workspace. It should indicate where the original version was (see below).
 
-![The Clone Button](exercises/.images/github_fork_3.png)
+![The Clone Button](exercises/.images/fork03.png)
 
-### 1.2 Cloning Your Repository
+## Cloning the Lab Exercises
 
-The next step is to clone the forked repository containing the lab materials into the IDE. Locate the **Clone or download** button, clicking this pops open a small window as shown. Copy the URL in this window to your clipboard.
+Locate the green **Clone or Download** button and click this. You will see the option to clone with HTTPS. Click on the copy icon as shown to copy the URL to the clipboard.
 
-![The Clone Button](exercises/.images/github_fork_4.png)
+![The Clone Button](exercises/.images/clone01.png)
 
-Returning to the IDE, run the following command in the terminal, the url to your forked repository should already be in the clipboard:
+Launch the **terminal** app (Mac and Linux users) or Bash Shell (Windows 10 users). Now use this to navigate to the directory where you want to store the lab materials. You should use the following bash commands:
 
-```shell
-git clone https://github.coventry.ac.uk/xxx/TEACHING-MATERIALS.git labs
-```
+1. `ls` is used to see the contents of the current directory.
+2. `pwd` prints the path to the current directory.
+3. `cd` changes to the directory you specify, `cd ..` takes you to the parent directory.
 
-This creates a `labs/` directory containing all the files from your forked repository.
-
-### 1.3 Adding an Upstream Remote
-
-Your forked repository is a snapshot of the contents of the original one. The problem is that the repository you forked (called the upstream repo) will be updated on a regular basis and we need to ensure these changes are pulled into your fork.
-
-To do this we need to add a link to this repository and use this to pull new content down. Follow these instructions carefully:
-
-1. Make sure you have the terminal window open and have navigated to inside the `labs/` directory. A quick check is to use the `pwd` command, the folder path should end with `/labs`. You may need to use the `cd labs` command to get to the right place.
-2. Now you need to add the upstream remote using the `git remote add upstream https://github.coventry.ac.uk/205CDE-1819JANMAY/TEACHING-MATERIALS.git` command.
-3. Finally we should check we have links to both the original repository and our fork using the `git remote -v`.
-
-### 1.4 Git Configuration
-
-Before you can work with Git you need to update the repository configuration. Follow the instructions below:
-
-1. Update your name (this must be the name as it appears on your ID badge) using `git config user.name 'Joe Bloggs'`.
-2. Update your email (using your unversity email) `git config user.email 'bloggsj@uni.coventry.ac.uk'`
-3. Update your commandline editor choice using `git config core.editor nano` (the editor must be installed!)
-4. Cache your credential (username/password) for an hour using `git config credential.helper 'cache --timeout=3600'`
-5. Update the path to your _git hooks_ directory using `git config core.hooksPath ./.githooks` (more on this in a later lab).
-
-### 1.5 Disabling the Built-In Linter
-
-By default real-time linting is enabled however this currently uses an old linter and is not ECMA6 compatible. You should disable real-time linting from the **Project** menu.
-
-## 2 Updating NodeJS
-
-We can see the current version of NodeJS by running the `node -v` command. The latest version is 10.11.0 and so we need to upgrade this.
-
-Start by installing the Node Version Manager tool:
+When you are in the chosen location you need to clone the repository using the URL we copied earlier:
 
 ```shell
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+git clone xxx
 ```
 
-Now click on the small blue oval on the terminal tab to reload the shell. There are lots of versions available, use the `nvm list-remote` command to see these. Install the latest using `nvm install 10.11.0` substituting the latest version number. To check the version installed use `node -v` again.
+Replacing xxx with the content of the clipboard.
+
+This will create a directory called `foundation` which contains all the content from the repository.
+
+Now you can launch Visual Studio Code and use the **File** menu to open this `foundation/` directory.
+
+## Additional Steps for Windows 10 Users
+
+If you are using Windows 10 you will need to carry out some additional steps before starting the lab exercises:
+
+2. Open the integrated terminal using the **Terminal** menu.
+3. Type - Select Default Shell
+4. Select Git Bash from the options
+5. Click on the + icon in the terminal window.
+
+This will open a new Git Bash shell in the project directory.
+
+## Pushing the Changes to GitHub
+
+As you work through the lab activities two things are likely to happen:
+
+1. You make changes to the code that you want to push to the forked copy of your repository.
+2. You will need to pull any bug fixes from the original repository.
+
+### Pushing Changes
+
+As you save your changes you will see a blue circle against the **Source Control** tab that indicates how many files have been changed, we need to get these changed files up to GitHub. Start by opening the tab, you will see a list of all the files you have changed.
+
+1. Click on the + button to stage these changes.
+2. Type in a commit message to explain what changes you have made.
+3. Click in the tick button to commit the changes.
+
+![Committing Changes](exercises/.images/push01.png)
+
+### Pulling from Upstream
+
+As changes are made to the master repository you will want to merge these into your forked repository. Before you can do this you will need to add a link to the upstream repository. Open a bash shell:
+
+```bash
+git remote add upstream https://github.coventry.ac.uk/web/foundation.git
+git remote -v
+```
+
+Now, every time you have committed and pushed you changes you can pull the changes from the master repository:
+
+```shell
+git fetch upstream
+git checkout master
+git merge upstream/master
+```
+
+Don't worry if you don't understand what is happening, this will be explained in a future lab.
+
+## Installing NodeJS
+
+Next we need to install and configure NodeJS. The first task is to install the Node Version Manager tool, there are different instructions for [Windows10](https://github.com/coreybutler/nvm-windows) and [MacOS and Linux](https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/).
+
+Once installed you may need to restart your computer. Now check it was installed correctly:
+
+```bash
+$ command -v nvm
+  nvm
+```
+
+Now we can install the latest version of NodeJS:
+
+```bash
+nvm install node
+node -v
+```
 
 ## 3 Running a Web Server
 
@@ -101,81 +128,4 @@ $ node index.js
   app listening on port 8080
 ```
 
-Now we have the server up and running so the final task is to view the web page using the web browser.
-
-![Setting up a URL and port](exercises/.images/goorm04.png)
-
-This will open a window where you will need to register a new URL and port:
-
-![Setting up a URL and port](exercises/.images/goorm05.png)
-
-1. Use your **University Username** as the URL segment.
-2. Make sure you specify port **8080** (this is the one used by your server).
-
-You need to set this up as your **run** configuration as shown.
-
-![Setting up a URL and port](exercises/.images/goorm06.png)
-
-The final step is to open a new browser window and enter your chosen URL, you don't need to specify the port, this was done through port-forwarding:
-
-If you make changes to the code or want to quit the IDE you will need to stop the server. To do this, select the terminal window and press ctrl+c.
-
-
-## 4 Local Setup
-
-If you are planning on using your own laptop you will need to install some key pieces of software. Obviously its impossible to cover the installation process in detail for every operating system but there are plenty of guides online. You should install:
-
-1. Visual Studio Code (Not Visual Studio!)
-2. The latest version of NodeJS. For Linux follow the instructions to install nvm, for other platforms download and install the latest version from the [official site](https://nodejs.org/en/), make sure you install the **latest** and not the LTS version.
-3. You also need to install Git if it is not already installed. Mac and Windows users can download the installer from the [official website](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-
-Once everything is installed you can clone the module repository using the same command you used in the Goorm IDE lab (make sure you clone it to a sensible location).
-
-Once the repository is cloned you should open VS Code and use the File > Open Folder option to select and open the folder containing the repository (On some systems you choose File > Open).
-
-Once the web server is up and running you access the page by pointing the browser to `localhost:8080`.
-
-## 5 Introducing Unit Testing
-
-As we develop more complex web apps it becomes more and more difficult to fully test our app every time we change the code. By not testing everything at regular intervals there is an increasing chance that our new code could break the existing code in our system. Since regular testing is a chore, programmers have developed ways to automate this process.
-
-In this section you will be given a sneak preview of how an automated test suite works. We will be using a testing framework developed by Facebook, called [Jest](https://jestjs.io) and will be using a second tool called [Supertest](https://github.com/visionmedia/supertest#readme) which allows us to interact with our code using http. Rather than using the status code numbers in our tests we will use a module called [http-status-codes](https://www.npmjs.com/package/http-status-codes) to display these as human-readable strings.
-
-The process requires you to install both these packages and then run the `jest` command:
-
-```shell
-$ npm install jest supertest http-status-codes
-$ ./node_modules/.bin/jest
-  PASS  .test/index.test.js
-    GET /
-      ✓ the page should return a status code of "200 OK" (25ms)
-      ✓ we should see the text "Hello World" displayed (3ms)
-
-  Test Suites: 1 passed, 1 total
-  Tests:       2 passed, 2 total
-  Snapshots:   0 total
-  Time:        1.478s
-  Ran all test suites.
-```
-
-If you study the test output carefully you will notice that there is a test script `.test/index.test.js` which contains 2 tests in 1 test suite. Each test has a name and the ticks indicate that both tests have passed.
-
-### 6.1 Watch Mode
-
-It is possible (and desirable) to run the test suites every time you save any changes to your app. Testing tools such as Jest support a _watch mode_ that detects if files have changed and automatically runs the full test suite if this happens:
-
-```shell
-./node_modules/.bin/jest --watch
-```
-
-To exit watch mode press (ctrl+c).
-
-### 6.1 Test Your Understanding
-
-Make sure that you are running Jest in watch mode.
-
-1. Modify the `index.js` script so that the web page displays your name.
-2. The unit test suite will be triggered by you saving your changes. Read the output carefully.
-3. Modify the test suite so that it is looking for the text `My First Tests`.
-4. The unit test suit will be triggered again, note that one of the tests has still failed.
-5. Modify the `index.js` file to make the test suite pass.
+Now we have the server up and running so the final task is to view the web page using the web browser. Simply open the Chrome browser and navigate to localhost:8080 where you should see a message. If this works you are ready to start the lab exercises.

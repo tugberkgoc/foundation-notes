@@ -8,9 +8,18 @@ function Person(name, startYear) {
 	this.years = currentYear - this.startYear
 }
 
+Person.prototype.capitalise = function(name) {
+	console.log(`name: ${this.name}`)
+	this.name = name
+	//return this.name[0].toUpperCase() + this.name.substring(1)
+}
+
 const colin = new Person('colin', 2012)
 console.log(colin)
 const nigel = new Person('nigel')
+console.log(nigel)
+nigel.capitalise()
+console.log('name changed')
 console.log(nigel)
 // Person { name: 'colin', startYear: 2012, years: 7 }
 // Person { name: 'nigel', startYear: 2019, years: 0 }

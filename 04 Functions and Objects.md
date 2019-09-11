@@ -387,11 +387,11 @@ There are a couple of important concepts here.
 
 1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
 
-## 3 Custom Object Definitions
+## 3 Object Constructors
 
-As you have seen from the previous section, each object (String, Number, etc) has its own _prototype_, but what about the custom objects you created? It turns out that these also have a prototype, _Object_. Any functionality you add to this will get added to _all the objects in your application!_. To get round this problem NodeJS has the `new` keyword. When this is used we can isolate any changes to the targeted object. Specifically when we use the `new` keyword.
+As you have seen from the previous section, each object (String, Number, etc) has its own _prototype_, but what about the custom objects you created? It turns out that these also have a prototype, _Object_. Any functionality you add to this will get added to _all the objects in your application!_. To get round this problem NodeJS has the `new` keyword. When this is used we can isolate any changes to the targeted object.
 
-### 3.1 Constructor Functions
+### 3.1 Object Constructor Functions
 
 Until ECMA6, there wa a way to achieve this by using a **constructor function**. Whilst this is not now considered the optimal way to achieve our goal there are so many examples of this approach it is important you understand both the syntax and how it works. When we use this approach using the `new` keyword triggers four steps:
 
@@ -419,9 +419,9 @@ console.log(nigel)
 // Person { name: 'nigel', startYear: 2019, years: 0 }
 ```
 
-Note that it is a convention that objects that can be used to create objects using the `new` keyword start with a capital letter.
+Note that it is a convention that objects that can be used to create objects using the `new` keyword start with a capital letter. Also notice that when we print the object it clearly shows that it is an instance of `Person` and not `Object`.
 
-### 3.2 Extending using Constructor Functions
+### 3.2 Extending using Object Constructor Functions
 
 Whilst this syntax is not using traditional classes, one object can _extend_ another. This is best illustrated through the example below where we create another object called `Student`.
 
