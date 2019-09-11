@@ -1,5 +1,5 @@
 
-# Setup VS Code
+# Setup
 
 In this worksheet you will learn how to configure your work environment using VS Code. You should start by installing Visual Studio Code from the [website](https://code.visualstudio.com), note that it might already be installed. If you are using a Coventry University computer and the software is not installed you can do this using AppsAnywhere.
 
