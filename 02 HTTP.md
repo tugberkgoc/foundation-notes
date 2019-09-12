@@ -3,18 +3,18 @@
 
 In the lecture you learned about the HTTP protocol which is used to transfer information between web server and the web browser. Without this the World-Wide Web (WWW) would not exist. This lab will allow you to apply this knowledge and learn the details. In this lab you will be using the [NodeJS](http://nodejs.org) [Express package](https://www.npmjs.com/package/express) to write scripts that make use of this protocol.
 
-The HTTP protocol is used by web servers to send content to devices such as web browsers. It uses a [request-response](https://en.wikipedia.org/wiki/Request–response) method which involves a _client_ device sending a request to the server. This request includes:
+The HTTP protocol is used by web servers to send content to devices such as web browsers. It uses a [request-response](https://en.wikipedia.org/wiki/Request–response) mechanism which involves a _client_ device sending a request to the server. This request includes:
 
-1. The _resource_ it is requesting (defined as a URL).
-2. Additional information such as filters provided as one or more query strings.
-3. The action or _method_ it wants to carry out (typically GET or POST).
-4. Additional information such as log in credentials and permitted data formats supplied as request headers.
+1. The _resource_ it is requesting (defined as a [URL](https://en.wikipedia.org/wiki/URL)).
+2. Additional information such as filters (provided as one or more [query strings](https://en.wikipedia.org/wiki/Query_string)).
+3. The action or [method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) it wants to carry out (typically GET or POST).
+4. Additional information such as log in credentials and permitted data formats supplied as [request headers](https://developer.mozilla.org/en-US/docs/Glossary/Request_header).
 
 When this request is received by the server it analyses the information provided and sends a _response_ back to the client. This typically might include:
 
-1. The response _body_, typically the data that was requested.
-2. A _status code_, a number representing the success or otherwise of the request.
-3. Extra information such as the format the data is in sent as _response headers_.
+1. The [HTTP message body](https://en.wikipedia.org/wiki/HTTP_message_body), typically the data that was requested such as a html page or image.
+2. A [status code](https://searchengineland.com/the-ultimate-guide-to-http-status-codes-and-headers-for-seo-302786), a number representing the success or otherwise of the request.
+3. Extra information such as the format the data is in sent as [response headers](https://developer.mozilla.org/en-US/docs/Glossary/Response_header).
 
 In this lab you will explore this protocol and learn how the server reads and understands the request and how it constructs and sends a response. This is fundamental to all the work you will subsequently be doing in web development.
 
