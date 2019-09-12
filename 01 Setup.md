@@ -126,7 +126,7 @@ node -v
 
 ## 5 Running a Web Server
 
-Use the terminal to navigate to the `exercises/01_http/` directory and try running the `index.js` script:
+Use the terminal to navigate to the `exercises/01_setup/` directory and try running the `index.js` script:
 
 ```shell
 $ cd exercises/01_setup/
