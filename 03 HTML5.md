@@ -1,7 +1,7 @@
 
 # Learning HTML5
 
-Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab.
+Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab. You should get into the habit of doing this each time you sit down to work on your lab exercises as you will then be working on the latest versions of the files (with fewer bugs).
 
 In this worksheet you will be learning about the markup language HTML which is currently in version 5. The worksheet is split into five parts with the resources for each part in their own subdirectory. The `template.html` file contains a basic HTML5 template you will find useful when creating your own web pages.
 
@@ -16,8 +16,6 @@ In this worksheet you will be learning about the markup language HTML which is c
     ├── 06_semantic
     └── template.html
 ```
-
-You should get into the habit of doing this each time you sit down to work on your lab exercises as you will then be working on the latest versions of the files (with fewer bugs).
 
 ## 1 Syntax
 
