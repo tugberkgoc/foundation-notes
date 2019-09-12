@@ -81,9 +81,12 @@ As you save your changes you will see a blue circle against the **Source Control
 1. Click on the + button to stage these changes.
 2. Type in a commit message to explain what changes you have made.
 3. Click in the tick button to commit the changes.
-4. Click on the arrow ring button to push the new commit up to your GitHub repository.
 
 ![Committing Changes](exercises/.images/push01.png)
+
+Now you should click on the **Sync** icon (shown below) to push the new commit up to your GitHub repository.
+
+![Pushing Commits](exercises/.images/push-pull.png)
 
 At this point you should be able to refresh your GitHub repository page to see the changes.
 
