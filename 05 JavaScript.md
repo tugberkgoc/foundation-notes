@@ -1,7 +1,9 @@
 
-# Functions and Objects
+# JavaScript
 
 Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab.
+
+In this lab you will be exploring the JavaScript programming language. This will not cover programming fundamentals since you can already program in Python and/or C++ but will instead focus on the features of the language that differ from other languages you may be comfortable with.
 
 ## 1 Functions
 
@@ -53,7 +55,7 @@ Open the `contact.js` script, implement the `validateEmail()` function and thoro
 
 ### 1.2 Function Expressions
 
-Functions are a data type in JavaScript (they are objects but more on that in the next chapter). As such they can be stored in variables for later execution. Prior to ECMA6 they were declared using the `function` keyword like this:
+Functions are a data type in JavaScript (they are objects but more on that later). As such they can be stored in variables for later execution. Prior to ECMA6 they were declared using the `function` keyword like this:
 
 ```javascript
 const remainder = function(dividend, divisor) {
@@ -99,7 +101,7 @@ const sqr = num => num * num
 4. Modify the function expression so that it can handle any number of string parameters (use a _rest parameter_).
 5. Can you reduce this function expression to a single line (hint: explore using the [reduce function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) combined with the [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator))?
 
-### 1.3 Callbacks
+## 2 Callbacks
 
 Since JavaScript supports _first class functions_, we can use a function in any place where we could use a literal, object or variable. Open the `currency.js` script and look at line 17. As you can see the `request` object has a key called `get` that stores a function (we have already covered this). This takes two parameters:
 
@@ -107,6 +109,10 @@ Since JavaScript supports _first class functions_, we can use a function in any 
 2. A function that will be called once the data has been retrived from the url. This was defined earlier in the script and takes 3 parameters.
 
 ```javascript
+const printRates = (err, res, body) => {
+  const data = JSON.parse(body)
+  console.log(`for each EUR you will get ${data.rates[symbol]} ${symbol} today`)
+}
 request.get(url, printRates)
 ```
 
@@ -116,27 +122,38 @@ NodeJS is a single-threaded event loop that processes queued events. This means 
 
 Because callbacks are such a fundamental part of NodeJS you need to spend time to make sure you fully understand how they work.
 
-#### 1.3.1 Using Anonymous Functions in Callbacks
+#### 2.1 Using Anonymous Functions in Callbacks
 
 Although this code works, you will rarely see callbacks written in this manner. Creating a function literal is a bit clunky and we can clean up the code by simply passing an anonymous function.
 
 ```javascript
 request.get( url, (err, res, body) => {
-  // callback code goes here.
+  const data = JSON.parse(body)
+  console.log(`for each EUR you will get ${data.rates[symbol]} ${symbol} today`)
 })
 ```
 
 Take a few moments to make sure you fully understand the syntax, you will be seeing a lot of this over the next few weeks.
 
-### 1.3.2 Test Your Understanding
+### 2.1.1 Test Your Understanding
 
-TODO
+You are now going to apply you knowledge of JavaScript callbacks by connecting to the [Open Weather API](https://openweathermap.org/api). Start by opening the `weather.js` file:
 
-## 2 Objects
+1. Read through the code to make sure you understand how it works.
+2. Register for an API key and add this to the script where indicated.
+2. Run the script and check the output, can you explain the first two lines of output, why are the data types as shown?
+3. Can you make sense of the other data?
+3. Use the [Open Weather API](https://openweathermap.org/api) to retrieve and display the hourly forcast.
+
+## 2.2 Defining Functions with Callbacks
+
+In the previous section you learned how to call pre-defined functions with callbacks. Now you will learn how to write your own functions that include callbacks. This is important since NodeJS has a single-threaded model and any activity that may take time to complete should never be in the main thread. By creating a function with a callback you can push the task onto its own thread and free up the main event thread.
+
+## 3 Objects
 
 Lets start by creating an manipulating objects using **object literals**. Open the `employee.js` file, read through it and see if you can work out what it does. Now run it to see if you were correct.
 
-### 2.1 Creating Object Literals
+### 3.1 Creating Object Literals
 
 The simplest way to create new objects is by creating an _object literal_ which is defining an object and storing it in a variable in a similar way to how we created function literals earlier in the lab. You should open the `employee.js` file which contains the code.
 
@@ -175,12 +192,12 @@ firstName!
 first-name
 ```
 
-#### 2.1.1 Test Your Understanding
+#### 3.1.1 Test Your Understanding
 
 1. Add a property called `gender` and assign a suitable String value.
 2. Add a new property called `date of birth` that stores the year the person was born and assign a suitable value.
 
-### 2.2 Retrieving Object Properties
+### 3.2 Retrieving Object Properties
 
 Whilst it is possible (and useful) to log an entire object to the console, normally we would want to retrieve the values of specific properties, this is known as **destructuring** an object.
 
@@ -209,7 +226,7 @@ const grade = employee.grade || 'A'
 
 This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
 
-#### 2.2.1 Test Your Understanding
+#### 3.2.1 Test Your Understanding
 
 Lets apply our knowledge of callbacks to implement a simple quotes tool.
 
@@ -219,7 +236,7 @@ Lets apply our knowledge of callbacks to implement a simple quotes tool.
 4. Create a loop to iterate through the array, printing the contents of each index.
 5. Modify the code so that it only prints the quotes string (not the entire object).
 
-#### 2.3.1 ECMA6 Object Destructuring
+### 3.3 ECMA6 Object Destructuring
 
 In ECMA6 is is possible to extract multiple pieces of data into separate variables by destructuring using an _object pattern_. This is syntactically similar to creating object literals (see the example below).
 
@@ -235,7 +252,7 @@ console.log(first) // prints 'Colin'
 console.log(dept) // prints 'Computing'
 ```
 
-### 2.3 Getters and Setters
+### 3.4 Getters and Setters
 
 Most object properties are simple values and you can simply assign a value. Sometimes however properties need to be calculated. One solution is to store a function as one of the properties however we would need to call a function to retrieve the value:
 
@@ -295,12 +312,12 @@ const employee = {
 employee.name = 'Micky Mouse'
 ```
 
-#### 2.3.1 Test Your Understanding
+#### 3.4.1 Test Your Understanding
 
 1. Print the person's details in an easy to understand sentence.
 2. Add a getter to return the number of years the employee has been working for the company, you will need to round this down to a whole number. You should make use of one of the static methods of the built-in [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) object.
 
-### 2.4 Modifying Objects
+### 3.5 Modifying Objects
 
 Once an object has been created it can be modified in several ways.
 
@@ -336,7 +353,7 @@ const employee = {
 delete employee.department
 ```
 
-### 2.5 Undefined Values
+### 3.6 Undefined Values
 
 Undefined Objects
 
@@ -357,13 +374,13 @@ const postCode = employee.address && employee.address.postCode
 console.log(postCode) // returns undefined
 ```
 
-#### 2.5.1 Test Your Understanding
+#### 3.6.1 Test Your Understanding
 
 1. Modify the code to handle bad data:
     1. Remove the startYear property.
     2. Set the startYear property to a String.
 
-### 2.6 Object Prototypes
+### 3.7 Object Prototypes
 
 All JavaScript object (such as String, Number, Array, etc.) inherit properties and methods from a **prototype**. This also applies to any new objects you create. Since JavaScript does not support _traditional_ classes, this becomes the way to add new functionality. Let's look at a simple example.
 
@@ -385,15 +402,15 @@ There are a couple of important concepts here.
 2. Inside the function we manipulate the `this` object which represents the value of the object.
     1. Replace the `function() {}` construct with an arrow function. What happens when you run the script?
 
-#### 2.6.1 Test Your Understanding
+#### 3.7.1 Test Your Understanding
 
 1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
 
-## 3 Object Constructors
+## 4 Object Constructors
 
 As you have seen from the previous section, each object (String, Number, etc) has its own _prototype_, but what about the custom objects you created? It turns out that these also have a prototype, _Object_. Any functionality you add to this will get added to _all the objects in your application!_. To get round this problem NodeJS has the `new` keyword. When this is used we can isolate any changes to the targeted object.
 
-### 3.1 Object Constructor Functions
+### 4.1 Object Constructor Functions
 
 Until ECMA6, there wa a way to achieve this by using a **constructor function**. Whilst this is not now considered the optimal way to achieve our goal there are so many examples of this approach it is important you understand both the syntax and how it works. When we use this approach using the `new` keyword triggers four steps:
 
@@ -423,7 +440,7 @@ console.log(nigel)
 
 Note that it is a convention that objects that can be used to create objects using the `new` keyword start with a capital letter. Also notice that when we print the object it clearly shows that it is an instance of `Person` and not `Object`.
 
-### 3.2 Extending using Object Constructor Functions
+### 4.2 Extending using Object Constructor Functions
 
 Whilst this syntax is not using traditional classes, one object can _extend_ another. This is best illustrated through the example below where we create another object called `Student`.
 
@@ -442,7 +459,7 @@ console.log(anne)
 // Student { name: 'anne', startYear: 2019, years: 0, course: 'not enrolled' }
 ```
 
-### 3.3 ECMA6 Class Syntax
+### 4.3 ECMA6 Class Syntax
 
 Whilst constructor functions are not particularly elegant they do provide a way to structure your objects efficiently. ECMA6 introduced a cleaner way to work with these using **classes**. Note that despite this looking like a (traditional) OOP language, remember it is really only a different syntax for constructor functions. Let's look at the previous example using the new syntax:
 
@@ -488,7 +505,7 @@ class Student extends Person {
 }
 ```
 
-### 3.4 Static Members
+### 4.4 Static Members
 
 Currently each instance of a prototype function is completely self-contained. What if we need to store data about the prototype function itself? In a traditional OOP language we would use static methods and the new ECMA `class` syntax allows us to do something similar by adding properties to the prototype function itself. We can also define static methods that can be called directly from the prototype function, see the example below.
 
@@ -513,7 +530,7 @@ console.log(ECMA6Student.studentCount()) // prints '2'
 
 Notice that the static vsriable `count` is public (so the `studentCount()` method is somewhat superfluous in this example!). This highlights one of the limitations of JavaScript, the lack of a simple way to define private attributes (variables and methods). The next section goes into this in more detail and explains some workarounds (hacks) to get around this.
 
-### 3.5 Handling Data Encapsulation
+### 4.5 Handling Data Encapsulation
 
 In all of these objects all data is public (you can see the entire object by using `console.log()`). One of the weaknesses of NodeJS (and JavaScript in general) is that there is no clean way to _encapsulate_ data and make it hidden from the outside world. There are a number of techniques to get around this problem:
 
@@ -524,24 +541,24 @@ In all of these objects all data is public (you can see the entire object by usi
 
 You should take time to understand the [pros and cons](https://2ality.com/2016/01/private-data-classes.html) of all four approaches.
 
-### 3.6 Test Your Understanding
+### 4.6 Test Your Understanding
 
 1. Create a **constructor function** called `OldVehicle` that includes `make`, `model` and `price` information. Use this to create two vehicles of your choice.
 2. Use this to create a second **constructor function** class called `OldPickup` that includes `payload` and `seats` fields and use this to create two pickup objects.
 3. Now use the same information to create a class called `NewVehicle` and extend this to create a class called `NewPickup` and use this to create two or more pickup objects.
 4. Add a static member to capture the total value of all the pickup sales and print this to the terminal.
 
-## 4 RESTful APIs and JSON Data
+## 5 JSON Data
 
 //TODO: write this section...!
 
-### 4.1 JSON Data
+### 5.1 JSON Data
 
 Show how objects can be turned into strings and saved. text data loaded and converted into a JavaScript object.
 
-#### 4.1.1 Test Your Understanding
+#### 5.1.1 Test Your Understanding
 
-### 4.2 RESTful APIs
+### 5.2 RESTful APIs
 
 Show how data can be retrieved from an API in JSON format.
 
@@ -551,7 +568,7 @@ OMDB key: 220d2590
 
 First task is for students to get an OMDB API key and paste it into the provided script.
 
-### 4.3 Nested Callbacks
+### 5.3 Nested Callbacks
 
 Use the same API and show that multiple steps cause nested callbacks and callback hell.
 
@@ -570,7 +587,7 @@ Open the file `nestedCallbacks.js` which asks for a _base_ currency code then pr
 
 Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
 
-### 4.4 Test Your Knowledge
+### 5.4 Test Your Knowledge
 
 The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
 
