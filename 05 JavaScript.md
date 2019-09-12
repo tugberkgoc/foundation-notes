@@ -122,7 +122,7 @@ NodeJS is a single-threaded event loop that processes queued events. This means 
 
 Because callbacks are such a fundamental part of NodeJS you need to spend time to make sure you fully understand how they work.
 
-#### 2.1 Using Anonymous Functions in Callbacks
+### 2.1 Using Anonymous Functions in Callbacks
 
 Although this code works, you will rarely see callbacks written in this manner. Creating a function literal is a bit clunky and we can clean up the code by simply passing an anonymous function.
 
@@ -141,13 +141,21 @@ You are now going to apply you knowledge of JavaScript callbacks by connecting t
 
 1. Read through the code to make sure you understand how it works.
 2. Register for an API key and add this to the script where indicated.
-2. Run the script and check the output, can you explain the first two lines of output, why are the data types as shown?
-3. Can you make sense of the other data?
-3. Use the [Open Weather API](https://openweathermap.org/api) to retrieve and display the hourly forcast.
+3. Run the script and check the output, can you explain the first two lines of output, why are the data types as shown?
+4. Can you make sense of the other data?
+5. Use the [Open Weather API](https://openweathermap.org/api) to retrieve and display the hourly forcast.
 
 ## 2.2 Defining Functions with Callbacks
 
 In the previous section you learned how to call pre-defined functions with callbacks. Now you will learn how to write your own functions that include callbacks. This is important since NodeJS has a single-threaded model and any activity that may take time to complete should never be in the main thread. By creating a function with a callback you can push the task onto its own thread and free up the main event thread.
+
+Start by opening the `files.js` script and study it carefully:
+
+1. Notice that we are reading and writing to files in the main thread! This would normally block the thread, slowing down the program execution.
+2. Also notice that the reading and writing takes place in a function `savetext()` with a callback defined as its second parameter.
+3. At the end of the `saveText()` function we execute the callback.
+4. We can then call our `saveText()` function, passing an anonymous callback function as the second parameter, this is executed within the `saveText()` function.
+5. The convention when defining functions that take a callback function is to define the error as the first parameter.
 
 ## 3 Objects
 
@@ -226,7 +234,52 @@ const grade = employee.grade || 'A'
 
 This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
 
-#### 3.2.1 Test Your Understanding
+### 3.3 JSON Data
+
+JSON (JavaScript Object Notation) is a standard text-based format to represent structured data. This is very useful as it means we can take any JavaScript object and convert it into a text string. This can then be saved to disk or posted to a web server, etc. It also means that you can take a JSON-formatted text string and convert it into a complex JavaScript object!
+
+#### 3.3.1 Parsing JSON Strings into Objects
+
+It is trivial to convert a JSON string into an object using the `JSON.parse()` function. Study the following code carefully:
+
+```javascript
+const jsonstring = '{ "firstName": "Colin", "last name": "Stephen", "department": "Computing"}'
+const employee = JSON.parse(jsonstring)
+```
+
+Notice that in a JSON string all the properties and values _must_ be enclosed in double-quotes. The constant `jsonstring` is a **String** but `employee` is a standard JavaScript **Object**.
+
+#### 3.3.2 Converting Objects into Strings
+
+In the same way that we can convert a JSON string into a JavaScript object we can also do the reverse.
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  'department': 'Computing'
+}
+const jsonstring = JSON.stringify(employee)
+console.log(jsonstring)
+// { "firstName": "Colin", "last name": "Stephen", "department": "Computing"}
+```
+
+In this example `jsonstring` is a **String**. If we print out this string we will see that it contains a single line of text which can sometimes be hard to understand. If we want the string to be more readable we can pass another parameter.
+
+```javascript
+const jsonstring = JSON.stringify(employee, null, 2)
+/*
+{
+  "firstName": "Colin",
+  "last name": "Stephen",
+  "department": "Computing"
+}
+*?
+```
+
+This inserts newline and space characters to make the string more readable. The third parameter defines the level of indent (in spaces).
+
+#### 3.3.3 Test Your Understanding
 
 Lets apply our knowledge of callbacks to implement a simple quotes tool.
 
@@ -548,15 +601,11 @@ You should take time to understand the [pros and cons](https://2ality.com/2016/0
 3. Now use the same information to create a class called `NewVehicle` and extend this to create a class called `NewPickup` and use this to create two or more pickup objects.
 4. Add a static member to capture the total value of all the pickup sales and print this to the terminal.
 
-## 5 JSON Data
 
-//TODO: write this section...!
-
-### 5.1 JSON Data
 
 Show how objects can be turned into strings and saved. text data loaded and converted into a JavaScript object.
 
-#### 5.1.1 Test Your Understanding
+### 5.1.1 Test Your Understanding
 
 ### 5.2 RESTful APIs
 
