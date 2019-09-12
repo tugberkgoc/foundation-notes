@@ -21,7 +21,7 @@ You should get into the habit of doing this each time you sit down to work on yo
 
 ## 1 Syntax
 
-Lets take a look at some basic HTML syntax. Start by locating the `exercises/02_html/01_syntax/` directory. Navigate to this using the SSH Terminal, install the all the necessary `koa` packages and start the web server. If you navigate to the base route `/` you will see a screen full of text.
+Lets take a look at some basic HTML syntax. Start by locating the `exercises/03_html/01_syntax/` directory. Navigate to this using the SSH Terminal, install the all the necessary `koa` packages and start the web server. If you navigate to the base route `/` you will see a screen full of text.
 
 ![the unformatted text](exercises/.images/chrome_07.png)
 
@@ -90,7 +90,7 @@ Now you have mastered the basics of HTML markup we will look at one of the most 
 
 ### 3.1 Routes
 
-Every resource on the WWW (such as html documents and images) has a unique URL and so when we design our website we need to define these. In a website built using _NodeJS_ and _Koa_ these are known as **routes**. Start by locating the `exercises/02_html/03_hypermedia/` directory. Start the web server and open the `index.js` file.
+Every resource on the WWW (such as html documents and images) has a unique URL and so when we design our website we need to define these. In a website built using _NodeJS_ and _Koa_ these are known as **routes**. Start by locating the `exercises/03_html/03_hypermedia/` directory. Start the web server and open the `index.js` file.
 
 1. Some resources need to be directly accessible in the web browser (they are accessed either directly or loaded by the html web page). These need to have their own directly accessible URL.
     1. One directory needs to be specified as being publicly available. In this example we have created a directory called `public/`
