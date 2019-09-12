@@ -3,6 +3,8 @@
 
 In this worksheet you will be applying a range of techniques to improve the quality of your code.
 
+Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab.
+
 ## 1 Modularisation
 
 The first step you will need to do is to split your code up to make it easier to understand. Take a look at the end of the `index.js` routes file.

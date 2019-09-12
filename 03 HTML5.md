@@ -1,27 +1,7 @@
 
 # Learning HTML5
 
-The worksheet is based on the materials from the HTML lecture and you should refer to the [slide deck](https://drive.google.com/open?id=1-kA3w6-H7AkW5iWRG2D1O-soxAnHgnU0YgOH3eYfeAQ) to help your understanding. It will take approximately **15 hours** to work through all the exercises and you should ensure that you have completed them all before attempting subsequent worksheets.
-
-Before you start you need to download and new materials. To do this you will be carrying out three tasks:
-
-1. You need to use your **SSH Terminal** and navigate to the _root directory_ of your project (the one containing the `exercises/` directory).
-2. There must be no changes in your working directories. These must be stashed using the `git stash` command.
-3. You can then use the `git pull` command to pull any changes from the GitHub repository.
-4. Finally you need to unstash the changes you made.
-
-The full list of commands is:
-
-```shell
-$ git stash
-$ git pull origin master
-$ git stash pop
-```
-
-If the VI editor window pops open:
-
-1. press the Esc key.
-2. type `:wq` and press the Enter key.
+Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab.
 
 In this worksheet you will be learning about the markup language HTML which is currently in version 5. The worksheet is split into five parts with the resources for each part in their own subdirectory. The `template.html` file contains a basic HTML5 template you will find useful when creating your own web pages.
 

@@ -3,3 +3,4 @@
 
 In this worksheet you will learn the basics of using automated tests to improve the quality of your code.
 
+Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab.
