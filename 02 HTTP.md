@@ -1,9 +1,11 @@
 
 # The HTTP Protocol
 
-In the lecture you learned about the HTTP protocol which is used to transfer information between web server and the web browser. Without this the World-Wide Web (WWW) would not exist. This lab will allow you to apply this knowledge and learn the details. In this lab you will be using the [NodeJS](http://nodejs.org) [Express package](https://www.npmjs.com/package/express) to write scripts that make use of this protocol.
+In the lecture you learned about the HTTP protocol which is used to transfer information between web server and the web browser. 
 
-The HTTP protocol is used by web servers to send content to devices such as web browsers. It uses a [request-response](https://en.wikipedia.org/wiki/Request–response) mechanism which involves a _client_ device sending a request to the server. This request includes:
+The HTTP protocol is used by web servers to send content to devices such as web browsers. Without this the World-Wide Web (WWW) would not exist. In this lab you will be using the [NodeJS](http://nodejs.org) language running the [Koa web server](https://www.npmjs.com/package/koa) to write scripts that make use of this protocol.
+
+HTTP uses a [request-response](https://en.wikipedia.org/wiki/Request–response) mechanism which involves a _client_ device sending a request to the server. This request includes:
 
 1. The _resource_ it is requesting (defined as a [URL](https://en.wikipedia.org/wiki/URL)).
 2. Additional information such as filters (provided as one or more [query strings](https://en.wikipedia.org/wiki/Query_string)).
