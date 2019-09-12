@@ -84,7 +84,7 @@ As you save your changes you will see a blue circle against the **Source Control
 
 ![Committing Changes](exercises/.images/push01.png)
 
-Now you should click on the **Sync** icon (shown below) to push the new commit up to your GitHub repository.
+Now you should click on the **Sync** icon (shown below) to push the new commit up to your GitHub repository, this will also pull doen any commits that are on the GitHub server but that you don't have on your local computer. The first number is the number of commits it will pull from GitHub (down arrow) and the second the number of commits it will push from your local computer to GitHub (up arrow).
 
 ![Pushing Commits](exercises/.images/push-pull.png)
 
