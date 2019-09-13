@@ -14,7 +14,6 @@ module.exports.add = (item, qty) => {
 }
 
 module.exports.getAll = () => {
-	//if(data.length === 0) throw new Error('empty list')
 	for(const key in data) data[key].key = key
 	return data
 }
