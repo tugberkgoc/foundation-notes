@@ -1,14 +1,36 @@
+
 {
 	"version": "0.2.0",
 	"configurations": [
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Jest Tests",
-			"program": "${workspaceFolder}/exercises/12_spa/books/node_modules/.bin/jest",
+			"name": "Jest All",
+			"program": "${workspaceFolder}/exercises/07_unit_testing/todo/node_modules/jest/bin/jest",
+			"args": ["--runInBand"],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"disableOptimisticBPs": true,
+			"windows": {
+				"program": "${workspaceFolder}/exercises/07_unit_testing/todo/node_modules/jest/bin/jest",
+			}
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Jest Current File",
+			"program": "${workspaceFolder}/exercises/07_unit_testing/todo/node_modules/jest/bin/jest",
 			"args": [
-				"-i"
-			]
+				"${fileBasenameNoExtension}",
+				"--config",
+				"jest.config.js"
+			],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"disableOptimisticBPs": true,
+			"windows": {
+				"program": "${workspaceFolder}/exercises/07_unit_testing/todo/node_modules/jest/bin/jest",
+			}
 		}
 	]
 }

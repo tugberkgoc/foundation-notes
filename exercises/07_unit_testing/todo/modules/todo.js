@@ -8,6 +8,7 @@ module.exports.clear = () => {
 }
 
 module.exports.add = (item, qty) => {
+	if(typeof qty !== 'number') throw new Error('qty must be a number')
 	data.push({item: item, qty: qty})
 }
 
@@ -21,3 +22,7 @@ module.exports.delete = key => {
 	console.log(`delete key ${key}`)
 	return
 }
+
+module.exports.countItems = () => data.length
+
+module.exports.count = data.length
