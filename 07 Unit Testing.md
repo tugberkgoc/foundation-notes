@@ -7,20 +7,6 @@ Before you start you need to pull any _upstream changes_. Detailed instructions 
 
 We will be using both the Jest commandline tools and the integrated unit testing tools in Visual Studio Code, you should be familiar with both approaches.
 
-## Visual Studio Code Extensions
-
-One of the powerful features of VS Code is its support for **Extensions** which allow you to add additional capabilities to the editor.
-
-![The Extensions Tab](exercises/.images/extensions_tab.png)
-
-You should start by opening the tab and checking for the extensions already installed, these will be listed in the **ENABLED** section. If any of these are not listed you can use the search box to search for them and then install. Once the extensions are installed you will need to shutdown and reload VS Code for them to take effect.
-
-In this lab you will need:
-
-1. coverage-gutters
-2. jest
-3. test-explorer
-
 ## Opening the Project
 
 In the previous labs you have opened the `foundation` directory in VS Code and hd access to all the files and subfolders. The testing tools require you to open the folder containing the project we want to test directly so you will need to use the file menu and open the `foundation/exercises/07_unit_testing/todo/` directory.
@@ -113,3 +99,27 @@ This lists the code coverage for all the files you are testing. If you click on 
 ![Coverage Detail](exercises/.images/coverage_detail.png)
 
 Any code highlighted in red is not covered by your test suite.
+
+## Running the Tests Using Visual Studio Code
+
+In the previous section you learned how to run a test suite and check code coverage just using the CLI (terminal) and this will work regardless of the environment you are using. In this section you will learn how to run your test suite using VS Code together with a feww useful extensions.
+
+### Visual Studio Code Extensions
+
+One of the powerful features of VS Code is its support for **Extensions** which allow you to add additional capabilities to the editor.
+
+![The Extensions Tab](exercises/.images/extensions_tab.png)
+
+You should start by opening the tab and checking for the extensions already installed, these will be listed in the **ENABLED** section. If any of these are not listed you can use the search box to search for them and then install. Once the extensions are installed you will need to shutdown and reload VS Code for them to take effect.
+
+In this lab you will need:
+
+1. coverage-gutters
+2. jest
+3. test-explorer
+
+### Running a Test Suite
+
+After reloading the editor you should see an additional tab, directly under the **Extensions** tab. This is called the **Test**  tab and has an icon that looks like a conical flask from your chemistry lesson.
+
+If you open this tab you will see the **Test Explorer** which has a number of button along the top. The most prominent of these is the _play_ button. If you click this it will run the entire suite of tests in your project.
