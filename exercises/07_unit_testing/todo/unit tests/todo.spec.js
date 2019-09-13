@@ -41,4 +41,23 @@ describe('add()', () => {
 			done()
 		}
 	})
+
+	test('duplicates should increase qty', async done => {
+		expect.assertions(2)
+		try {
+			// ACT
+			todo.add('bread', 4)
+			todo.add('bread', 2)
+			// ASSERT
+			expect(todo.countItems()).toBe(1)
+			expect(todo.getAll()[0].qty).toEqual(6)
+		} catch(err) {
+			done.fail('test failed')
+		} finally {
+			done()
+		}
+	})
+
+	// New test goes HERE!
+
 })
