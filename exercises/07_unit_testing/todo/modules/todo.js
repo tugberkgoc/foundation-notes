@@ -32,5 +32,3 @@ module.exports.delete = key => {
 }
 
 module.exports.countItems = () => data.length
-
-module.exports.count = data.length

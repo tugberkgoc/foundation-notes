@@ -314,3 +314,7 @@ You will now complete a few more TDD iterations:
 1. What happens if you leave the item box empty? This should throw an error, not add a blank item.
 2. What happens if you leave the qty box empty? Solve this in a similar way.
 3. What happens if you click on one of the **Delete** links? Implement this feature. Remember that since this is testing the `delete()` function you need to create a new _test suite_ called `delete()` in the same test suite.
+4. Can you write one or more tests for the `getAll()` function?
+5. And for the `clear()` function as well.
+
+Try generating a code coverage report, are you getting 100% coverage? If not you may need more tests.
