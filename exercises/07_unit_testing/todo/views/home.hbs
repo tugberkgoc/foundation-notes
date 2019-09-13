@@ -8,13 +8,20 @@
 	<body>
 		<h1>ToDo List</h1>
 		<h2>My List</h2>
+		{{#if msg}}
+ 			<p class="msg">{{msg}}</p>
+		{{/if}}
+		{{#if items.length}}
     <table>
 	    <caption>Shopping List</caption>
 	    <tr><th>Item</th><th>Qty</th><th>Action</th></tr>
 	      {{#each items}}
 		      <tr><td>{{this.item}}</td><td>{{this.qty}}</td><td><a href="/delete/{{this.key}}">delete</a></td></tr>
-	      {{/each}}
+				{{/each}}
     </table>
+		{{else}}
+		<h2>Your list is empty, lets add some items...</h2>
+		{{/if}}
 		<form method="post" action="/">
 			Item:
 			<input type="text" name="item" />

@@ -8,12 +8,13 @@ module.exports.clear = () => {
 }
 
 module.exports.add = (item, qty) => {
-	if(typeof qty !== 'number') throw new Error('qty must be a number')
+	qty = Number(qty)
+	if(isNaN(qty)) throw new Error('the quantity must be a number')
 	data.push({item: item, qty: qty})
 }
 
 module.exports.getAll = () => {
-	if(data.length === 0) throw new Error('empty list')
+	//if(data.length === 0) throw new Error('empty list')
 	for(const key in data) data[key].key = key
 	return data
 }
