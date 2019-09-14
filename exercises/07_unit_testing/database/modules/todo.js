@@ -36,7 +36,7 @@ module.exports = class ToDo {
 	async countItems() {
 		const sql = 'SELECT COUNT(*) as items FROM items'
 		const data = await this.db.get(sql)
-		return data
+		return data.items
 	}
 
 }
