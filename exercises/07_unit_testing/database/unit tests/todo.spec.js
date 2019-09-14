@@ -57,7 +57,7 @@ describe('add()', () => {
 			const count = await todo.countItems()
 			const data = await todo.getAll()
 			const qty = data[0].qty
-			// ASSERT
+			// ASSERT (note there are two assertions as stated on line 50)
 			expect(count).toBe(1)
 			expect(qty).toEqual(6)
 		} catch(err) {
