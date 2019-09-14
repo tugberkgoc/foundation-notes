@@ -18,7 +18,7 @@ module.exports = class ToDo {
 		qty = Number(qty)
 		if(isNaN(qty)) throw new Error('the quantity must be a number')
 		let sql = 'SELECT * FROM items;'
-		const dataAll = await this.db.all(sql)
+		// const dataAll = await this.db.all(sql)
 		sql = `SELECT * FROM items WHERE ITEM = "${item}"`
 		const data = await this.db.all(sql)
 		if(data.length === 0) {

@@ -22,9 +22,12 @@ describe('add()', () => {
 	test('add a single item', async done => {
 		expect.assertions(1)
 		try {
+			// ARRANGE
 			const todo = await new ToDo() // DB runs in-memory if no name supplied
+			// ACT
 			await todo.add('bread', 3)
 			const count = await todo.countItems()
+			// ASSERT
 			expect(count).toBe(1)
 		} catch(err) {
 			done.fail(err)
@@ -36,10 +39,13 @@ describe('add()', () => {
 	test('qty must be a number', async done => {
 		expect.assertions(1)
 		try {
+			// ARRANGE
 			const todo = await new ToDo()
+			// ACT
 			await todo.add('bread', 'three')
 			done.fail('test failed')
 		} catch(err) {
+			// ASSERT
 			expect(err.message).toBe('the quantity must be a number')
 		} finally {
 			done()
