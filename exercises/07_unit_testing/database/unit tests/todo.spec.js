@@ -32,6 +32,7 @@ describe('add()', () => {
 			done()
 		}
 	})
+
 	test('qty must be a number', async done => {
 		expect.assertions(1)
 		try {
@@ -39,13 +40,32 @@ describe('add()', () => {
 			await todo.add('bread', 'three')
 			done.fail('test failed')
 		} catch(err) {
-			expect(err.message).toBe('qty must be a number')
+			expect(err.message).toBe('the quantity must be a number')
 		} finally {
 			done()
 		}
 	})
 
-	// New test goes HERE!
+	test('duplicates should increase qty', async done => {
+		expect.assertions(2)
+		try {
+			// ARRANGE
+			const todo = await new ToDo()
+			// ACT
+			await todo.add('bread', 4)
+			await todo.add('bread', 2)
+			const count = await todo.countItems()
+			const data = await todo.getAll()
+			const qty = data[0].qty
+			// ASSERT
+			expect(count).toBe(1)
+			expect(qty).toEqual(6)
+		} catch(err) {
+			done.fail(err.message)
+		} finally {
+			done()
+		}
+	})
 
 })
 

@@ -7,13 +7,19 @@ Before you start you need to pull any _upstream changes_. Detailed instructions 
 
 We will be using both the Jest commandline tools and the integrated unit testing tools in Visual Studio Code, you should be familiar with both approaches.
 
-## Opening the Project
+## 1 Unit Testing
+
+Unit testing involves testing each _unit_ of code (in our case each module) isolated from the rest of the code in the project. To achieve this we write a _test suite_ that imports our module, calls each function with different values of parameters and checks to see we are getting the right values returned.
+
+We will be using a tool called [Jest](https://jestjs.io) which was originally developed by Facebook to enable them to test their own products.
+
+### 1.1 Opening the Project
 
 In the previous labs you have opened the `foundation` directory in VS Code and hd access to all the files and subfolders. The testing tools require you to open the folder containing the project we want to test directly so you will need to use the file menu and open the `foundation/exercises/07_unit_testing/todo/` directory.
 
 The project has a number of node package dependencies which are listed in the `package.json` file. Start by installing all of these and then you should start the server and have a look at the website. As you can see it is a simple todo list, try adding a few items and deleting them, you will see that only some of the functionality has been implemented!
 
-## Understanding the File Structure
+### 1.2 Understanding the File Structure
 
 If you have opened the correct directory in VS Code you should see these files in the file explorer:
 
@@ -40,7 +46,7 @@ By now you are familiar with most of these however there are a couple of files y
 1. The `modules/` directory contains the code providing the logic for our app (the _Model_ in the _MVC_).
 2. The `unit tests/` directory contains our test _fixtures_ (the code containing the tests to run). There should be one test file for each file we want to test, the naming covention is that it should match the name of the file to test with `spec` between the name and extension.
 
-## Running the Tests From the CLI
+### 1.3 Running the Tests From the CLI
 
 We will start by running the tests from the shell. Open the integrated terminal and run the command:
 
@@ -100,11 +106,11 @@ This lists the code coverage for all the files you are testing. If you click on 
 
 Any code highlighted in red is not covered by your test suite.
 
-## Running the Tests Using Visual Studio Code
+### 1.4 Running the Tests Using Visual Studio Code
 
 In the previous section you learned how to run a test suite and check code coverage just using the CLI (terminal) and this will work regardless of the environment you are using. In this section you will learn how to run your test suite using VS Code together with a feww useful extensions.
 
-### Visual Studio Code Extensions
+### 1.5 Visual Studio Code Extensions
 
 One of the powerful features of VS Code is its support for **Extensions** which allow you to add additional capabilities to the editor.
 
@@ -118,7 +124,7 @@ In this lab you will need:
 2. jest
 3. test-explorer
 
-### Running a Test Suite
+### 1.6 Running a Test Suite
 
 After reloading the editor you should see an additional tab, directly under the **Extensions** tab. This is called the **Test**  tab and has an icon that looks like a conical flask from your chemistry lesson.
 
@@ -132,7 +138,7 @@ You can run the entire suite of tests using the _play_ button or click on the `.
 
 Any failing test is shown with a red circle and cross and tests that pass a green circle and tick. In this way it is very easy to monitor the state of your test suites and quickly spot any issues.
 
-## Test-Driven Development
+### 1.7 Test-Driven Development
 
 Our next task is to decide what functionality we need to develop next. Run the server and try adding the same item more than once, what happens?
 
@@ -148,7 +154,7 @@ We will use this task to understand the three-step process involved in **Test-Dr
 
 This process is sometimes called **red-green-refactor**.
 
-### Red: Writing a Test
+#### 1.7.1 Red: Writing a Test
 
 The tests are grouped by test suite. Our new test is for adding new functionality to the `add()` function and so it needs to go in the space indicated by a comment.
 
@@ -202,7 +208,7 @@ If we reload the tests in the test explorer we will see that our new test fails.
 
 ![Reloading the Test Explorer](exercises/.images/reloading_tests.png)
 
-### Green: Passing the Test
+#### 1.7.2 Green: Passing the Test
 
 The next step is to write enough code to pass the new test. VS Code provides a robust suite of tools to help us with this. Key is the integrated debugger which you covered in the previous lab.
 
@@ -237,7 +243,7 @@ From left to right:
 
 Most of the time you will be using the **Step Over** button.
 
-Continue stepping over the code until ot terminates, keeping an eye on the Watch variable.
+Continue stepping over the code until ot terminates, keeping an eye on the Watch variable. An alternative to viewing the variables in the debug pane is to hover the cursor over any variable name in the source code before the current line and its value appears as a tool tip!
 
 Now we need to write a solution to pass the test. As you add code keep running the debugger on the failed test.
 
@@ -264,7 +270,7 @@ Note that we store the data in constants before asserting as this means we can s
 
 NOTE: sometimes you need to click on the **Reload tests** button to trigger a full re-run of the tests.
 
-### Refactor
+#### 1.7.3 Refactor
 
 Now we can clean up the code (refactor) to make it easier to read. This should be done for both the program code and the test.
 
@@ -307,7 +313,7 @@ Run the test suite to check there are no errors.
 
 Again, check that all the test still pass. As a final check start the web server and see if it works in the browser. Congratulations, you have now completed your first TDD iteration.
 
-### Test Your Understanding
+### 1.8 Test Your Understanding
 
 You will now complete a few more TDD iterations:
 
@@ -318,3 +324,70 @@ You will now complete a few more TDD iterations:
 5. And for the `clear()` function as well.
 
 Try generating a code coverage report, are you getting 100% coverage? If not you may need more tests.
+
+## 2 FIRST Principles
+
+There are some best practices to follow when writing unit tests. The first, **Arrange**, **Act**, **Assert** we have already covered but there is a second, more important one known as [FIRST](https://dzone.com/articles/writing-your-first-unit-tests) and you should ensure you understand and follow these principles to achieve effective unit testing:
+
+1. **FAST**: In a medium-sized project you might have upwards of a couple of hundred tests and each time your code changes you need to run them all. Even if each only took 1 second it would take 3 min+ to run them all! The most important thing therefore is that each test should take milliseconds to run and this means **absolutely no test should write to disk** because writing to disk is very slow.
+2. **ISOLATED**: Jest will run your tests in parallel in multiple threads. This means you can't predict the order in which the tests will run and so each test must be completely self-contained and not be dependent on other tests.
+3. **REPEATABLE**: A test should produce the same results every time you run it so there should be no external dependencies that might change. For example if your code makes an API call there is a risk the data returned will change over time, breaking the test.
+4. **SELF-VALIDATING**: Each test should be able to determine if it passed or failed with no human interpretation required. This means it should conform to the **AAA** pattern covered in the previous section.
+5. **TIMELY**: Each test should be written _just before_ the code is implemented. You should not write more than one test at a time. As you get better at TDD you will find that you can complete an entire TDD red-green-refactor iteration in under 5 min!
+
+Looking at these rules they all make sense until you try to apply them to a real problem. In this section of the lab we will be performing TDD on some code that talks to a relational database. This means it could break the first 3 **FIRST** principles!
+
+1. The database is stored on the hard drive so its really slow to read and write data.
+2. The database is persistent which means all the tests are reading and writing to a single source. If the tests run in a different order the data will be different!
+3. If we run a test on a function that adds a record, each time we run the test we will get a different record id and a different number of records in the database.
+
+### 2.1 Understanding the Code
+
+You should start by opening the `exercises/07_unit_testing/database/` directory in VS Code using the File menu (as we did in the previous section).
+
+Start by running the server and interacting with the website. Note that it works exactly the same as the previous version. Stop and restart the server. Notice that, unlike the previous version, it remembers (persists) the list. Behind the scenes it is storing the data in an SQLite database called `todo.db`.
+
+Try deleting the `todo.db` database file and restarting the server, notice that the data is now lost but the server has created a new database file.
+
+If you examine the code structure it looks superficially like the previous example but there are some key differences. The main difference is in the `modules/todo.js` script.
+
+In this version we export a NodeJS [Class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). Remember these are not OOP classes but syntactical sugar on top of the JS prototypal inheritance.
+
+1. The constructor takes a single optional parameter which is the name of the database file to use.
+    1. If we don't specify a database filename the database runs [in-memory](https://www.sqlite.org/inmemorydb.html) (more on this later).
+		2. The constructor returns a promise.
+		3. The constructor creates a connection to the database and creates a table if it does not already exist.
+2. Each of the functions is implemented as async methods.
+    1. Each runs an SQL query on the database.
+
+The `unit tests/todo.js` script contains the same tests as the array-based version but each test now:
+
+1. Uses an object constructor to get a `ToDo` object asynchronouly.
+2. Calls the appropriate async method(s).
+
+### 2.2 In-Memory Databases
+
+As explained earlier, databases break three of the **FIRST** principles because they write to disk and share their data.
+
+Try running the unit tests multiple times noting that they seem to address _all_ the FIRST principles! How is this possible?
+
+The solution is to run the database _in memory_ rather than writing any data to the hard drive. This has two main benefits:
+
+1. Increased performance since we are not touching the hard drive.
+2. Each open connection to the database creates its own isolated database that can't be seen by other connections, in other words each time we use the object constructor to create a new `ToDo` object, it comes with its own empty database!
+
+To enable SQLite to run in-memory we simply tell it to use a database file called `:memory:`.
+
+Almost all databases will have this feature, check the documentation.
+
+### 2.3 Test Your Understanding
+
+You will now complete a few more TDD iterations:
+
+1. What happens if you leave the item box empty? This should throw an error, not add a blank item.
+2. What happens if you leave the qty box empty? Solve this in a similar way.
+3. What happens if you click on one of the **Delete** links? Implement this feature. Remember that since this is testing the `delete()` function you need to create a new _test suite_ called `delete()` in the same test suite.
+4. Can you write one or more tests for the `getAll()` function?
+5. And for the `clear()` function as well.
+
+Note that there appears to be a bug in the VS Code debugger when stepping through a function that returns a promise. If the debugger sends you to a script called `async_hooks.js` you can get stuck in an loop. When the debugger is highlighting the closing brace of an async function press the **Step Out** button a few times (typically) to return to the parent function. Remember you can add breakpoints to the test as well as the module code.

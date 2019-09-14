@@ -17,8 +17,18 @@ module.exports = class ToDo {
 	async add(item, qty) {
 		qty = Number(qty)
 		if(isNaN(qty)) throw new Error('the quantity must be a number')
-		const sql = `INSERT INTO items(item, qty) VALUES("${item}", ${qty})`
-		await this.db.run(sql)
+		let sql = 'SELECT * FROM items;'
+		const dataAll = await this.db.all(sql)
+		sql = `SELECT * FROM items WHERE ITEM = "${item}"`
+		const data = await this.db.all(sql)
+		if(data.length === 0) {
+			sql = `INSERT INTO items(item, qty) VALUES("${item}", ${qty})`
+			await this.db.run(sql)
+		} else {
+			const newQty = data[0].qty + qty
+			sql = `UPDATE items SET qty=${newQty} WHERE ITEM = "${item}"`
+			await this.db.run(sql)
+		}
 	}
 
 	async getAll() {
@@ -40,6 +50,3 @@ module.exports = class ToDo {
 	}
 
 }
-
-// https://stackoverflow.com/questions/43431550/async-await-class-constructor
-// https://www.sqlite.org/inmemorydb.html
