@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+/* eslint max-lines-per-function: 0 */
+/* eslint complexity: 0 */
+/* eslint max-len: 0 */
+
 'use strict'
 
 /* IMPORTING MODULES */
