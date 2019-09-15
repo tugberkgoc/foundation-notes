@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict'
+
 /* IMPORTING MODULES */
 const Koa = require('koa')
 const Router = require('koa-router')
@@ -31,6 +33,7 @@ router.get('/anon', ctx => {
 router.get('/books/:index', ctx => {
 	const books = ['The Hobbit', 'Alice in Wonderland', 'The Secret Garden']
 	const parameters = ctx.params
+	console.log(parameters)
 	const title = books[parameters.index]
 	ctx.body = title
 })

@@ -76,7 +76,7 @@ To do this we need to extract some data from the http object `ctx` which is the 
 
 Start the server and access the `/books/1` route. What is displayed in the web browser?
 
-1. Since we have not yet covered how to connect to a database, on line 20 we have defined a JavaScript array which contains 3 indexes, these are numbered 0-2.
+1. Since we have not yet covered how to connect to a database, on line 34 we have defined a JavaScript array which contains 3 indexes, these are numbered 0-2.
 2. Directly underneath this we have defined a route `/books/:index` which contains two **segments**:
 	1. The first matches the text `/books`, this works like all the routes we have seen previously.
 	2. The second, beginning with the colon (`:`) represents a **URL Parameter**. This represents one or more characters.
