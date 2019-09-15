@@ -402,7 +402,7 @@ test('qty must be a number', async done => {
 	})
 ```
 
-As you can see, [`rejects`](https://jestjs.io/docs/en/expect#rejectsunwraps the reason for a rejected promise, if the Promise resolves the test automatically fails. This is the only way Jest can check for a thrown Error in your tests.
+As you can see, [`rejects`](https://jestjs.io/docs/en/expect#rejects) unwraps the reason for a rejected promise, if the Promise resolves the test automatically fails. This is the only way Jest can check for a thrown Error in your tests.
 
 ### 2.4 Test Your Understanding
 
