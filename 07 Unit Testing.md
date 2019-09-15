@@ -168,7 +168,12 @@ If you study the test suite carefully you will see that there is a block of code
 
 In our test the **action** should be to add the same item twice.
 
-We can then **assert** to see that there is only one item in the list but that the qty has incremented correctly.
+We can then **assert** using the `expect()` function to see that there is only one item in the list but that the qty has incremented correctly. `expect` gives you access to a number of [matchers](https://jestjs.io/docs/en/expect). In this example we are using:
+
+1. [`.toBe()`](https://jestjs.io/docs/en/expect#tobevalue) checks that two things are the same (the same object for example).
+2. [`.toEqual()`](https://jestjs.io/docs/en/expect#toequalvalue) checks that two things contain the same value.
+
+There are a [wide range of matchers](https://jestjs.io/docs/en/expect) available and you should take time to understand their purpose so that you always use the most appropriate ones in your tests. In particular take time to learn the most commonly useful matchers: [`toBeTruthy`](https://jestjs.io/docs/en/expect#tobetruthy), [`toBeFalsy`](https://jestjs.io/docs/en/expect#tobefalsy), [`toHaveLength`](https://jestjs.io/docs/en/expect#tohavelengthnumber), [`toContain`](https://jestjs.io/docs/en/expect#tocontainitem).
 
 A suitable test might look like this:
 
@@ -395,7 +400,7 @@ test('qty must be a number', async done => {
 	})
 ```
 
-As you can see, Jest has a special type of assert (using `expect`) that checks the promise reject state against a standard JavaScript `Error()`. This is the only way you can check for a thrown Error in your tests.
+As you can see, [`rejects`](https://jestjs.io/docs/en/expect#rejectsunwraps the reason for a rejected promise, if the Promise resolves the test automatically fails. This is the only way Jest can check for a thrown Error in your tests.
 
 ### 2.4 Test Your Understanding
 
