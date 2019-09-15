@@ -380,7 +380,24 @@ To enable SQLite to run in-memory we simply tell it to use a database file calle
 
 Almost all databases will have this feature, check the documentation.
 
-### 2.3 Test Your Understanding
+### 2.3 Handling Exceptions in Async Functions
+
+All the class code in this example uses async functions so that the main thread is not blocked by code reading and writing to the database (on disk). This creates an interesting issue regarding thrown exceptions. As you remember from the lab on code quality, an async function returns a Promise (set to one of three states, pending resolved or rejected). This means that when an exception is thrown it simply sets the Promise state to rejected rather than throwing a traditional Error object.
+
+This means you can't use a try-catch block in your unit tests but instead have to treat the code that will throw the exception as a promise and capture the error at the end of the chain. Jest has built-in support for this, take the following test:
+
+```javascript
+test('qty must be a number', async done => {
+		expect.assertions(1)
+		const todo = await new ToDo()
+		await expect( todo.add('bread', 'three') ).rejects.toEqual( Error('the quantity must be a number') )
+		done()
+	})
+```
+
+As you can see, Jest has a special type of assert (using `expect`) that checks the promise reject state against a standard JavaScript `Error()`. This is the only way you can check for a thrown Error in your tests.
+
+### 2.4 Test Your Understanding
 
 You will now complete a few more TDD iterations:
 
