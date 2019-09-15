@@ -149,7 +149,7 @@ Whilst URL parameters are used to define unique URLS to identify online resource
 2. Now change the URL to `/hello/John%20Doe?format=upper`.
 	1. Notice that the same data has been displayed just the format has changed.
 
-Open the `index.js` file. The route is between lines 37-43.
+Open the `index.js` file. The route is between lines 48-52.
 
 1. Notice that the query string(s) are not part of the route.
 2. The query string comprises name-value pairs.

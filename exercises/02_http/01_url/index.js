@@ -30,9 +30,11 @@ function hello(ctx) {
 }
 
 router.get('/', hello)
+// base case
 
 router.get('/anon', ctx => {
 	ctx.body = 'Hello World'
+	// anon case
 })
 
 router.get('/books/:index', ctx => {
@@ -48,6 +50,7 @@ router.get('/name', ctx => ctx.body = JSON.stringify(ctx.query))
 router.get('/hello/:name', ctx => {
 	let myname = ctx.params.name
 	if(ctx.query.format === 'upper') myname = myname.toUpperCase()
+	// only applies uppercase if formatting query exists
 	ctx.body = `hello ${myname}`
 })
 
