@@ -26,15 +26,15 @@ const biggest = largestNumber(5, 8)
 ```
 
 1. The function is declared using the `function` keyword and the function is given a name which must be a valid variable name.
-    a. If the name comprises more than one word these should be written using camel casing as shown above. This is known as a **Function Declaration**
+    - If the name comprises more than one word these should be written using camel casing as shown above. This is known as a **Function Declaration**
 2. The function above takes two parameters, `a` and `b`.
     - These are variables with local scope (they can't ba accessed outside the function)
     - When the function is called, you need to pass two **values** which get assigned to the two parameters.
     - If you pass too many values the extra ones get _ignored_.
     - If you don't pass enough values the remainder are assigned a value of `null`. `Null` is an assignment value (means a value of no value).
 3. The function returns a value.
-    a. If the numbers are not the same it returns the largest.
-    b. If they are the same it returns `null`.
+    - If the numbers are not the same it returns the largest.
+    - If they are the same it returns `null`.
 
 #### 1.1.1 Test Your Understanding
 
