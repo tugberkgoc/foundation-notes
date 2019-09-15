@@ -8,7 +8,7 @@ const views = require('koa-views')
 app.use(require('koa-static')('public'))
 const port = 8080
 
-app.use(views(`${__dirname}/views`, { extension: 'html' }, {map: { handlebars: 'handlebars' }}))
+app.use(views(`${__dirname}/html`, { extension: 'html' }, {map: { handlebars: 'handlebars' }}))
 
 router.get('/', async ctx => await ctx.render('hello'))
 router.get('/test', async ctx => await ctx.render('csstest'))
