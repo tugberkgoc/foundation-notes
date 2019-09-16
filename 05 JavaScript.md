@@ -26,15 +26,15 @@ const biggest = largestNumber(5, 8)
 ```
 
 1. The function is declared using the `function` keyword and the function is given a name which must be a valid variable name.
-    a. If the name comprises more than one word these should be written using camel casing as shown above. This is known as a **Function Declaration**
+    - If the name comprises more than one word these should be written using camel casing as shown above. This is known as a **Function Declaration**
 2. The function above takes two parameters, `a` and `b`.
     - These are variables with local scope (they can't ba accessed outside the function)
     - When the function is called, you need to pass two **values** which get assigned to the two parameters.
     - If you pass too many values the extra ones get _ignored_.
     - If you don't pass enough values the remainder are assigned a value of `null`. `Null` is an assignment value (means a value of no value).
 3. The function returns a value.
-    a. If the numbers are not the same it returns the largest.
-    b. If they are the same it returns `null`.
+    - If the numbers are not the same it returns the largest.
+    - If they are the same it returns `null`.
 
 #### 1.1.1 Test Your Understanding
 
@@ -617,31 +617,3 @@ OMDB key: 220d2590
 
 First task is for students to get an OMDB API key and paste it into the provided script.
 
-### 5.3 Nested Callbacks
-
-Use the same API and show that multiple steps cause nested callbacks and callback hell.
-
-//TODO: use the OMDB API in this section.
-
-Find films released in year X starring Y in genre Z from producer A, etc. country B.
-
-Because the code to be run after a callback is run needs to be _inside_ the callback code it is very challenging to build a script that contains several long-running tasks you get into a situation where you nest callbacks inside callbacks (inside callbacks) which makes the code very difficult to write, debug and read and means its very difficult to split into separate functions, a situation commonly known as **Callback Hell**.
-
-Open the file `nestedCallbacks.js` which asks for a _base_ currency code then prints out all the exchange rates against other currencies. Notice that there are four functions defined, three of which include a callback. Our script is designed to capture user input using `stdin` (needing a callback), identify whether a currency code is valid (requiring a second callback) and then getting the currency conversion rates for the specified currency (requiring a third callback).
-
-1. Notice that the `checkValidCurrencyCode()` function is called by the callback for the `getInput()` function and the `getData()` function is called by the callback for the `checkValidCurrencyCode()` function.
-2. Each callback takes two parameters as normal. The first contains the error (if any) and this needs to be handled in each callback.
-3. The data from the first callback is needed when calling the third function so needs to be stored in an immutable variable (constant).
-4. The fourth, and final, function does not have a callback.
-
-Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
-
-### 5.4 Test Your Knowledge
-
-The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
-
-1. modify the script to ask for the currency to convert to and display only the one conversion rate.
-2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency.
-
-Even though the script is still simple you are probably already getting in a tangle! Imagine a more complex script with conditions, it would quickly get out of hand and become practically impossible to debug.
