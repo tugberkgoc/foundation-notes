@@ -5,6 +5,14 @@ In this worksheet you will learn how to configure your work environment using VS
 
 If you are using Windows 10 you will also need to install [Git](https://git-scm.com/download/win), this may already be installed on a Coventry University computer.
 
+Visual Studio Code comes with an integrated **Terminal** that can be used instead of the standard _Command Prompt_ or _Terminal_. If you are using Linux or MacOS this will give you a Bash prompt however on Windows 10 it defaults to the _Command Prompt_ and will need to be changed to the _Bash Shell_.
+
+Press CTRL-SHIFT-P and a selection box should appear at the top of the editor. Type in `default shell` and click on the `Terminal: Select Default Shell` option.
+
+![Changing the Default Shell in Windows 10](exercises/.images/windows_shell.png)
+
+Now the integrated terminal uses the _Bash Shell_ meaning you can use the standard *nix bash commands!
+
 ## 1 Forking the Foundation Materials
 
 You should start by logging in to the University GitHub server using your university username and password. Make sure you don't log into GitHub.com!
