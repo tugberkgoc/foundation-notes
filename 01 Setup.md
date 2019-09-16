@@ -1,7 +1,7 @@
 
 # Setup
 
-In this worksheet you will learn how to configure your work environment using VS Code. You should start by installing Visual Studio Code from the [website](https://code.visualstudio.com), note that it might already be installed. If you are using a Coventry University computer and the software is not installed you can do this using AppsAnywhere.
+In this worksheet you will learn how to configure your work environment using VS Code. You should start by installing **Visual Studio Code** (NOT VISUAL STUDIO!) from the [website](https://code.visualstudio.com), note that it might already be installed. If you are using a Coventry University computer and the software is not installed you can do this using AppsAnywhere.
 
 If you are using Windows 10 you will also need to install [Git](https://git-scm.com/download/win), this may already be installed on a Coventry University computer.
 
@@ -111,7 +111,7 @@ Don't worry if you don't understand what is happening, this will be explained in
 
 ## 4 Installing NodeJS
 
-Next we need to install and configure NodeJS. The first task is to install the Node Version Manager tool, there are different instructions for [Windows10](https://github.com/coreybutler/nvm-windows) and [MacOS and Linux](https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/).
+Next we need to install and configure NodeJS. If you are using MacOS or Linux the first task is to install the Node Version Manager tool. You can find detailed [instructions](https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/).
 
 Once installed you may need to restart your computer. Now check it was installed correctly:
 
@@ -126,6 +126,8 @@ Now we can install the latest version of NodeJS:
 nvm install node
 node -v
 ```
+
+If you are running Windows 10 you need to [download the installer](https://nodejs.org/en/) for the **Current** version of NodeJS (12.10 at the time of writing).
 
 ## 5 Running a Web Server
 
