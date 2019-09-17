@@ -37,12 +37,17 @@ router.get('/anon', ctx => {
 	// anon case
 })
 
-router.get('/books/:index', ctx => {
-	const books = ['The Hobbit', 'Alice in Wonderland', 'The Secret Garden']
+router.get('/books/:index/:index2', ctx => {
+	const books = ['The Hobbit', 'Alice in Wonderland', 'The Secret Garden','Animal Farm']
 	const parameters = ctx.params
 	console.log(parameters)
-	const title = books[parameters.index]
-	ctx.body = title
+	if (parameters.index > 3) {
+		ctx.body = "Number cannot be greater than 3"
+	}else{
+		const title = books[parameters.index]
+		const title2 = books[parameters.index2]
+		ctx.body = title + title2 + parameters.index
+	}
 })
 
 router.get('/name', ctx => ctx.body = JSON.stringify(ctx.query))
