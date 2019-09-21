@@ -1,7 +1,7 @@
 
 # Setup
 
- this worksheet you will learn how to configure your work environment using VS Code. You should start by installing **Visual Studio Code** (NOT VISUAL STUDIO!) from the [website](https://code.visualstudio.com), note that it might already be installed. If you are using a Coventry University computer and the software is not installed you can do this using AppsAnywhere.
+In this worksheet you will learn how to configure your work environment using VS Code. You should start by installing **Visual Studio Code** (NOT VISUAL STUDIO!) from the [website](https://code.visualstudio.com), note that it might already be installed. If you are using a Coventry University computer and the software is not installed you can do this using AppsAnywhere.
 
 If you are using Windows 10 you will also need to install [Git](https://git-scm.com/download/win), this may already be installed on a Coventry University computer.
 
