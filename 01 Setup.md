@@ -13,6 +13,37 @@ Press CTRL-SHIFT-P and a selection box should appear at the top of the editor. T
 
 Now the integrated terminal uses the _Bash Shell_ meaning you can use the standard *nix bash commands!
 
+# If _Bash Shell_ is _not_ listed on your Windows 10 machine
+
+On some versions of Windows 10, some extra configuration is required before Bash Shell is able to be selected within VS Code. If this is the case on your machine, follow the below troubleshooting steps before reattempting to change your shell as above.
+
+To start, we need to make sure Developer Mode is enabled in the Update and Security section of Windows 10. Press **WIN+R** (Windows Key and R simultaneosly) to open a Run dialog. In the dialog enter **ms-settings:developers** followed by the enter key. The window shown below should appear on screen.
+
+![Enabling Windows 10 Developer Mode](exercises/.images/developerMode.PNG)
+
+Select the **Developer mode** radio button and **yes** on any succeeding dialog boxes. Wait for any neccessary installations to complete.
+
+Once that has completed, we need to enable the WSL (Windows Subsystem for Linux). Press **WIN+R**, in the dialog enter **powershell** followed by the enter key. In the powershell window copy and paste the following:
+
+```
+Start-Process powershell -Verb runAs
+exit
+```
+
+Press the enter key and accept the UAC (User Account Control) dialog. A new powershell window will launch with Administrator rights. 
+
+Copy and paste the following:
+
+```
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+
+Press the enter key and wait for the process to complete. Once complete, restart your computer before continuing. 
+
+Finally, we need to install [Ubuntu from the Microsoft Store](https://www.microsoft.com/en-gb/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab). Click the blue **Get** button and accept any dialogs to launch the Microsoft Store and begin the installation. Once Ubuntu for WSL (Windows Subsystem for Linux) has installed, restart Windows. 
+
+Once restarted, reattempt to enable Bash Shell in VS Code as per the section above. 
+
 ## 1 Forking the Foundation Materials
 
 You should start by logging in to the University GitHub server using your university username and password. Make sure you don't log into GitHub.com!
