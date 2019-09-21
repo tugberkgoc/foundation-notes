@@ -85,7 +85,7 @@ Start the server and access the `/books/1` route. What is displayed in the web b
 	2. Note that it is itself a JavaScript object and that it contains a single property called `index` which matches the name of the URL segment.
 	3. The value of this property is the string we added to the URL.
 4. This index value is used to look up the title of the book in the array, the book title is stored in a constant.
-5. Finally the book title is send to the web browser.
+5. Finally the book title is sent to the web browser.
 
 #### 1.3.1 Core Knowledge
 
