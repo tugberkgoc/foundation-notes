@@ -19,7 +19,7 @@ On some versions of Windows 10, some extra configuration is required before Bash
 
 To start, we need to make sure Developer Mode is enabled in the Update and Security section of Windows 10. Press **WIN+R** (Windows Key and R simultaneosly) to open a Run dialog. In the dialog enter **ms-settings:developers** followed by the enter key. The window shown below should appear on screen.
 
-![Enabling Windows 10 Developer Mode](exercises/.images/developerMode.png)
+![Enabling Windows 10 Developer Mode](exercises/.images/developerMode.PNG)
 
 Select the **Developer mode** radio button and **yes** on any succeeding dialog boxes. Wait for any neccessary installations to complete.
 
