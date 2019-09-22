@@ -244,7 +244,7 @@ In the example above we store the data returned from the `getData` promise in th
 
 ### 6.4 Test Your Knowledge
 
-Run the `promises.js` script, its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
+Run the `promises.js` script located in the otherScripts folder. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
 
 Open the `promises.js` script and study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
 
@@ -376,7 +376,7 @@ both `printObjectPromise` and `printObjectAsync` behave in exactly the same mann
 
 ### 7.3 Test Your Knowledge
 
-Run the `asyncFunctions.js` script. Note that it works in the same way as the previous ones. Open the script and study it carefully.
+Run the `asyncFunctions.js` script, located in the otherScripts folder. Note that it works in the same way as the previous ones. Open the script and study it carefully.
 
 1. modify the script to ask for the currency to convert to and display only the one conversion rate.
 2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency

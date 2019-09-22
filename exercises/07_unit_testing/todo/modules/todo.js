@@ -9,7 +9,7 @@ module.exports.clear = () => {
 
 module.exports.add = (item, qty) => {
 	qty = Number(qty)
-	if(isNaN(qty)) throw new Error('the quantity must be a number')
+	if(isNaN(qty)) throw new Error('qty must be a number')
 	data.push({item: item, qty: qty})
 }
 
