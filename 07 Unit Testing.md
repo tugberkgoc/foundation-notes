@@ -114,7 +114,7 @@ In the previous section you learned how to run a test suite and check code cover
 
 ### 1.5 Visual Studio Code Extensions
 
-One of the powerful features of VS Code is its support for **Extensions** which allow you to add additional capabilities to the editor.
+One of the powerful features of VS Code is its support for **Extensions** which allow you to add additional capabilities to the editor. Make sure you are running the _latest_ version of VS Code (1.38.1 at the time of writing).
 
 ![The Extensions Tab](exercises/.images/extensions_tab.png)
 
@@ -122,9 +122,10 @@ You should start by opening the tab and checking for the extensions already inst
 
 In this lab you will need:
 
-1. coverage-gutters
-2. jest
-3. test-explorer
+1. Coverage Gutters
+2. Jest
+3. Jest Test Explorer
+4. Test Explorer
 
 ### 1.6 Running a Test Suite
 
