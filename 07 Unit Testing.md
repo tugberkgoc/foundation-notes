@@ -127,7 +127,7 @@ In this lab you will need:
 1. Coverage Gutters
 2. Jest
 3. Jest Test Explorer
-4. Test Explorer
+4. Test Explorer UI
 
 Once installed you will need to _completely shutdown and restart_ the VS Code editor before continuing.
 
