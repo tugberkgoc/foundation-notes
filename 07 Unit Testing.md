@@ -122,16 +122,24 @@ You should start by opening the tab and checking for the extensions already inst
 
 In this lab you will need:
 
+![Extensions](exercises/.images/extension_icons.png)
+
 1. Coverage Gutters
 2. Jest
 3. Jest Test Explorer
 4. Test Explorer
 
+Once installed you will need to _completely shutdown and restart_ the VS Code editor before continuing.
+
 ### 1.6 Running a Test Suite
 
-After reloading the editor you should see an additional tab, directly under the **Extensions** tab. This is called the **Test**  tab and has an icon that looks like a conical flask from your chemistry lesson.
+After restarting the editor you should see an additional tab, directly under the **Extensions** tab. This is called the **Test** tab and has an icon that looks like a conical flask from your chemistry lesson. This was added by the **Test Explorer** extension.
 
-If you open this tab you will see the **Test Explorer** which has a number of button along the top. The most prominent of these is the _play_ button. If you click this it will run the entire suite of tests in your project.
+If you open this tab you will see the **Test Explorer** which should eventually locate your unit test suites, run them and display them. The first time you will need to expand the tree nodes to see them. There are a number of button along the top. The most prominent of these is the _play_ button. If you click this it will run the entire suite of tests in your project.
+
+If the tests don't load, check at the bottom of the editor to see if Jest has stopped working. There are two main reasons this happens:
+1. If there is a space in the path to your project directory. If this happens, close down the editor, move the entire `foundation/` directory to a more suitable location and open the `todo/` directory again using VS Code.
+2. If you have opened the `foundation/` directory in VS Code instead of just the `todo/` directory.
 
 ![The Test Explorer](exercises/.images/test_explorer.png)
 
