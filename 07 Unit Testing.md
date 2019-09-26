@@ -125,7 +125,7 @@ In this lab you will need:
 1. Coverage Gutters
 2. Jest
 3. Jest Test Explorer
-4. Test Explorer
+4. Test Explorer UI
 
 ### 1.6 Running a Test Suite
 
