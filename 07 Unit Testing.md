@@ -423,4 +423,6 @@ You will now complete a few more TDD iterations:
 4. Can you write one or more tests for the `getAll()` function?
 5. And for the `clear()` function as well.
 
+As before, are you gettting 100% code coverage? If not, write more tests. Are you covering the edge cases and checking for correct handling of bad data?
+
 Note that there appears to be a bug in the VS Code debugger when stepping through a function that returns a promise. If the debugger sends you to a script called `async_hooks.js` you can get stuck in an loop. When the debugger is highlighting the closing brace of an async function press the **Step Out** button a few times (typically) to return to the parent function. Remember you can add breakpoints to the test as well as the module code.
