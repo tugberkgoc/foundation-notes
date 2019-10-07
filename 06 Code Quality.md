@@ -10,43 +10,49 @@ In this worksheet you will be applying a range of techniques to improve the qual
 
 Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab.
 
-## 1 Modularisation
+## 1 The Package Manifest
 
-The first step you will need to do is to split your code up to make it easier to understand. Take a look at the `06_code_quality/login` project.
+Up until now you have needed to install each NodeJS package separately however most projects you will see from now onwards include a **package manifest** whick contains the project metadata. In a NodeJS project this file is named `package.json`. Locate the `06_code_quality/todo/` directory and open the `package.json` file it contains. This is a JSON file that contains a number of properties that are used by the application.
 
-Notice the line where we import the module.
+Locate the `dependencies` property, notice that this lists a number of packages that are needed by the application. Rather than install depndencies one by one we can tell the package manager to install all the packages listed here.
 
-```javascript
-const accounts = require('modules/accounts')
+```bash
+$ npm install
 ```
 
-This loads the module into a constant called `accounts`.
+Notice that this has installed all these listed packages. The manifest also specifies which version of each package are installed. If you want to install additional packages you can get these added to the `package.json` file automatically. For example if we want to install the `http-status-codes` package this should be done like this:
 
-Now locate the second `router.post('/login')` route (this is currently commented out). Comment out the one you have been using and uncomment this new shorter version. If you run your server and test it you will find the functionality is identical. Its time to understand how this new version works:
+```bash
+$ npm install --save http-status-codes
+```
 
-1. We start by storing the `request.body` data (the HTTP POST request body data) in an immutable variable called `body`.
-2. Next we call the `checkCredentials()` function that we imported from the `accounts.js` module passing the username and password as parameters.
-3. If this function does not throw an exception it means the credentials are valid so we set the cookie and redirect to the home page.
-4. If either the username or password are invalid, the `checkCredentials()` function will throw an exception which will be handled by the `catch()` block. The error message will explain what us wrong so we pass this back to the login page.
+## 2 Modularisation
 
-Now we need to look at the `accounts.js` module. This implements some very important concepts that you will need to understand and apply to your assignment.
+Next you will need to do is to split your code up to make it easier to understand. Take a look at the `06_code_quality/todo/` project. If you run this you will see that it is a simple shopping list app where you can add multiple items and quantities. Currently all the functionality is contained in the `index.js` file. Locate the `modules/list.js` file. This declares a new Object Prototype called `List` which includes all the necessary functionality for the app. At the moment this is not being used by the app.
 
-1. The `accounts` module contains two types of function:
-    1. The [function declarations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) such as `runSQL()` have a private scope and are not visible outside the module.
-    2. Any [function expressions](https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Operators/function) stored as keys in the `module.exports` object such as `module.exports.checkCredentials` are available to any code that imports this module.
-2. All the code in a function is wrapped in a [try-catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) block to handle any exceptions.
-3. The catch block simple propagates the [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object to the calling code.
-4. Any non-valid code flow is handled by throwing an Error object which forces the code flow to jump directly to the catch block.
-5. This means that if the program flow reaches the end of the try block everything was successful and data can be returned.
+Lets examine this module:
 
-### 1.1 Test Your Understanding
+1. The `module.exports` object is used to define what functionality will be made available to our `index.js` file. In this case we are exporting the Object Prototype. Notice we are using the new `Class` constructor.
+2. Lines 6-8 are the constructor where we define our array that can be accessed by the object.
+3. The rest of the file defines a series of functions that form part of the object prototype.
 
-To check you understand how to use modules you are now expected to move more of the functionality from the `index.js` file into this separate module. To help you with this you will find stub functions that only require the functionality to be added! You will be modifying the functions below the `/* --- STUB FUNCTIONS --- */` line.
+Now look at the top of the `index.js` file. Lines 22-23 import our module into the `ToDo` variable. This can then be used to create a new object using our `ToDo` object prototype. This object is called `todo` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
 
-1. Implement the `checkNoDuplicateUsername(username)` function to comply with the JSDoc comments, it should throw an exception if a duplicate user is found or `true` if not.
-2. Implement the `saveImage()` function. This should check that the image is of the correct type then save it to the `avatars/` directory.
-3. Now implement the `addUser()` function. This should make use of the functions you created in the first two tasks. It should check for duplicates before saving the image then it should encrypting the password and then saving the new record.
-4. The final step is to comment out the `router.post('register')` route in `index.js` then create a replacement that makes use of the functions you added to the `accounts.js` module.
+```javascript
+todo.add('bread', 42)
+```
+
+This will call the `add()` function that is part of our `todo` object prototype.
+
+### 2.1 Test Your Understanding
+
+The custom object prototype defined in the `list.js` module already contains the functionality needed by your app. 
+
+1. Uncomment lines 22-23 to import the module and create a custom object.
+2. In the `router.post('/')` function call replace lines 41-42 with a call to `todo.add()`, passing the item name and quantity as parameters.
+3. Now modify the `router.get('/')` function callback by replacing lines 29-30 with a call to the `todo.getAll()` function.
+4. To test the functionality so far, comment out the array declaration on line 20 and try starting the web server. You should be able to add items, the data is now stored in the custom object.
+5. Finally replace line 53 with a call to the appropriate function in the custom object.
 
 Now much of the business logic has been moved to the separate module, are there any module imports in `index.js` that are no longer needed? Locate these and delete.
 
