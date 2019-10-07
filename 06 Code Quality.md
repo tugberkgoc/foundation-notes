@@ -12,9 +12,9 @@ Before you start you need to pull any _upstream changes_. Detailed instructions 
 
 ## 1 Modularisation
 
-The first step you will need to do is to split your code up to make it easier to understand. Take a look at the end of the `index.js` routes file.
+The first step you will need to do is to split your code up to make it easier to understand. Take a look at the `06_code_quality/login` project.
 
-Start by updating your routes file by copying over the `modules/accounts.js` file from the lab materials and making sure you import it into your `index.js` file by adding the following statement just below where all the other modules are imported:
+Notice the line where we import the module.
 
 ```javascript
 const accounts = require('modules/accounts')
