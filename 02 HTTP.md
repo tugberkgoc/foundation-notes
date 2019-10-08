@@ -85,7 +85,7 @@ Start the server and access the `/books/1` route. What is displayed in the web b
 	2. Note that it is itself a JavaScript object and that it contains a single property called `index` which matches the name of the URL segment.
 	3. The value of this property is the string we added to the URL.
 4. This index value is used to look up the title of the book in the array, the book title is stored in a constant.
-5. Finally the book title is send to the web browser.
+5. Finally the book title is sent to the web browser.
 
 #### 1.3.1 Core Knowledge
 
@@ -178,7 +178,7 @@ Make sure the server is still running and use the [Chrome web browser](https://w
 1. Open the [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) by clicking on the _customise and control Google Chrome tools_ button (the three dots to the extreme right of the address bar).
 2. Choose **More tools** from the menu and then **Developer tools** from the submenu.
 3. Locate the **Network** tab in the Chrome developer tools.
-4. Reload the web page.
+4. Reload the web page. (Press F5)
 5. You should now see the resource sent in the HTTP response together with some data dealing with response times.
 6. Click on the file name (as shown) to display the HTTP headers.
 

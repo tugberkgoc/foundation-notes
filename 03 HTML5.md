@@ -213,7 +213,7 @@ Now we will learn how to embed audio in a website. There are a number of resourc
 
 1. Add the `guitar` audio file to the `index.html` web page. The file has been provided in the two required formats.
     1. Test that the audio plays in both Firefox and Chrome.
-    2. Can you modify the `<audio>` element to make the video auto-play?
+    2. Can you modify the `<audio>` element to make the sound auto-play?
 2. Add the `coventry` video clip to the `index.html` file, again the file has been provided in both formats (note that you will need to change one of the extensions from `.mp5` to `.mp4`).
     1. Test the video using both Firefox and Chrome.
     2. Restrict the video window to 320px wide without stretching the image.
@@ -250,7 +250,7 @@ Verify that you understand the elements used in marking up the table:
 
 ## 5 Semantic Markup
 
-In this final exercise we will look at how [MicroData](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata) can be used to add semantic information to a web page. Start by using the SSH Terminal to run the server in the `exercises/03_html/06_semantic/` directory and navigating to the base route `/`. This should display a simple review page.
+In this final exercise we will look at how [MicroData](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata) can be used to add semantic information to a web page. Start by using the SSH Terminal to run the server in the `exercises/03_html/05_semantic/` directory and navigating to the base route `/`. This should display a simple review page.
 
 1. Paste the URL into the [Rich Snippets Tool](http://www.google.com/webmasters/tools/richsnippets) to see what semantic data it contains. Notice:
     1. There are two **items** on in the webpage, a movie and a rating. These are defined using the `itemscope` attribute in the html. Each item has an `itemtype` attribute that points to the appropriate Microdata definition.
