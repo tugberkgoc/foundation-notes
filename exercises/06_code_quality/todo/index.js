@@ -19,8 +19,8 @@ const port = 8080
 
 const items = []
 
-// const ToDo = require('./modules/todo')
-// const todo = new ToDo()
+// const List = require('./modules/list')
+// const list = new List()
 
 router.get('/', async ctx => {
 	try {

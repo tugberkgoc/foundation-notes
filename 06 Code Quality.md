@@ -36,10 +36,10 @@ Lets examine this module:
 2. Lines 6-8 are the constructor where we define our array that can be accessed by the object.
 3. The rest of the file defines a series of functions that form part of the object prototype.
 
-Now look at the top of the `index.js` file. Lines 22-23 import our module into the `ToDo` variable. This can then be used to create a new object using our `ToDo` object prototype. This object is called `todo` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
+Now look at the top of the `index.js` file. Lines 22-23 import our module into the `List` variable. This can then be used to create a new object using our `List` object prototype. This object is called `list` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
 
 ```javascript
-todo.add('bread', 42)
+list.add('bread', 42)
 ```
 
 This will call the `add()` function that is part of our `todo` object prototype.
@@ -49,8 +49,8 @@ This will call the `add()` function that is part of our `todo` object prototype.
 The custom object prototype defined in the `list.js` module already contains the functionality needed by your app. 
 
 1. Uncomment lines 22-23 to import the module and create a custom object.
-2. In the `router.post('/')` function call replace lines 41-42 with a call to `todo.add()`, passing the item name and quantity as parameters.
-3. Now modify the `router.get('/')` function callback by replacing lines 29-30 with a call to the `todo.getAll()` function.
+2. In the `router.post('/')` function call replace lines 41-42 with a call to `list.add()`, passing the item name and quantity as parameters.
+3. Now modify the `router.get('/')` function callback by replacing lines 29-30 with a call to the `list.getAll()` function.
 4. To test the functionality so far, comment out the array declaration on line 20 and try starting the web server. You should be able to add items, the data is now stored in the custom object.
 5. Finally replace line 53 with a call to the appropriate function in the custom object.
 
@@ -238,6 +238,7 @@ getData('http://api.fixer.io/latest?base=GBP')
 
 
 There are some situations where you can't simply pass the output from one promise to the input of the next one. Sometimes you need to store data for use further down the promise chain. This can be achieved by storing the data in the `this` object.
+
 ```javascript
 getData('http://api.fixer.io/latest?base=GBP')
   .then( data => this.jsonData = data)
@@ -246,13 +247,14 @@ getData('http://api.fixer.io/latest?base=GBP')
   .catch(err => console.error(`error: ${err.message}`))
   .then(exit)
 ```
+
 In the example above we store the data returned from the `getData` promise in the `this` object. This is then used when we call the `printObject` promise.
 
 ### 6.4 Test Your Knowledge
 
-Run the `promises.js` script located in the otherScripts folder. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
+Run the `promises.js` script. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
 
-Open the `promises.js` script and study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
+Study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
 
 1. modify the script to ask for the currency to convert to and display only the one conversion rate.
 2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
