@@ -244,7 +244,7 @@ In the example above we store the data returned from the `getData` promise in th
 
 ### 6.4 Test Your Knowledge
 
-Run the `promises.js` script located in the otherScripts folder. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
+Run the `promises.js` script. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
 
 Open the `promises.js` script and study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
 
