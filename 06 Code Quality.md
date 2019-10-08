@@ -49,8 +49,8 @@ This will call the `add()` function that is part of our `todo` object prototype.
 The custom object prototype defined in the `list.js` module already contains the functionality needed by your app. 
 
 1. Uncomment lines 22-23 to import the module and create a custom object.
-2. In the `router.post('/')` function call replace lines 41-42 with a call to `todo.add()`, passing the item name and quantity as parameters.
-3. Now modify the `router.get('/')` function callback by replacing lines 29-30 with a call to the `todo.getAll()` function.
+2. In the `router.post('/')` function call replace lines 41-42 with a call to `list.add()`, passing the item name and quantity as parameters.
+3. Now modify the `router.get('/')` function callback by replacing lines 29-30 with a call to the `list.getAll()` function.
 4. To test the functionality so far, comment out the array declaration on line 20 and try starting the web server. You should be able to add items, the data is now stored in the custom object.
 5. Finally replace line 53 with a call to the appropriate function in the custom object.
 
