@@ -238,6 +238,7 @@ getData('http://api.fixer.io/latest?base=GBP')
 
 
 There are some situations where you can't simply pass the output from one promise to the input of the next one. Sometimes you need to store data for use further down the promise chain. This can be achieved by storing the data in the `this` object.
+
 ```javascript
 getData('http://api.fixer.io/latest?base=GBP')
   .then( data => this.jsonData = data)
@@ -246,13 +247,14 @@ getData('http://api.fixer.io/latest?base=GBP')
   .catch(err => console.error(`error: ${err.message}`))
   .then(exit)
 ```
+
 In the example above we store the data returned from the `getData` promise in the `this` object. This is then used when we call the `printObject` promise.
 
 ### 6.4 Test Your Knowledge
 
 Run the `promises.js` script. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
 
-Open the `promises.js` script and study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
+Study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
 
 1. modify the script to ask for the currency to convert to and display only the one conversion rate.
 2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
