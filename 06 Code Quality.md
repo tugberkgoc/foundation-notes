@@ -36,10 +36,10 @@ Lets examine this module:
 2. Lines 6-8 are the constructor where we define our array that can be accessed by the object.
 3. The rest of the file defines a series of functions that form part of the object prototype.
 
-Now look at the top of the `index.js` file. Lines 22-23 import our module into the `ToDo` variable. This can then be used to create a new object using our `ToDo` object prototype. This object is called `todo` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
+Now look at the top of the `index.js` file. Lines 22-23 import our module into the `List` variable. This can then be used to create a new object using our `List` object prototype. This object is called `list` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
 
 ```javascript
-todo.add('bread', 42)
+list.add('bread', 42)
 ```
 
 This will call the `add()` function that is part of our `todo` object prototype.
