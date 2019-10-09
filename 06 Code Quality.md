@@ -135,7 +135,16 @@ The callbacks are already nested 3 deep. To test your knowledge of deeply nested
 
 1. modify the script to ask for the currency to convert to and display only the one conversion rate.
 2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency.
+3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency. Below is some code to get you started.
+
+You will need to import the `fs` module and use the `fs.readFile()` function which takes a callback!
+
+```javascript
+fs.readFile('currencies.json', 'utf8', (err, contents) => {
+    if(err) console.log('you need to handle this properly')
+    console.log(contents)
+})
+```
 
 Even though the script is still simple you are probably already getting in a tangle! Imagine a more complex script with conditions, it would quickly get out of hand and become practically impossible to debug.
 
