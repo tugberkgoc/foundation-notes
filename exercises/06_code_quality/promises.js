@@ -2,6 +2,7 @@
 'use strict'
 
 const request = require('request')
+const baseURL = 'https://api.exchangeratesapi.io/latest'
 
 const getInput = prompt => new Promise( (resolve) => {
 	process.stdin.resume()
@@ -12,7 +13,7 @@ const getInput = prompt => new Promise( (resolve) => {
 
 const checkValidCurrencyCode = code => new Promise( (resolve, reject) => {
 	code = code.trim()
-	request('http://api.fixer.io/latest', (err, res, body) => {
+	request(baseURL, (err, res, body) => {
 		if (err) reject(new Error('invalid API call'))
 		const rates = JSON.parse(body).rates
 		if (!rates.hasOwnProperty(code)) reject(new Error(`invalid currency code ${code}`))
@@ -21,7 +22,7 @@ const checkValidCurrencyCode = code => new Promise( (resolve, reject) => {
 })
 
 const getData = code => new Promise( (resolve, reject) => {
-	request(`http://api.fixer.io/latest?base=${code}`, (err, res, body) => {
+	request(`${baseURL}?base=${code}`, (err, res, body) => {
 		if (err) reject(new Error('invalid API call'))
 		resolve(body)
 	})

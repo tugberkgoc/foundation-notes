@@ -14,7 +14,7 @@ getInput('enter base currency', (err, base) => {
 			console.log(err.message)
 			process.exit()
 		}
-		getData(`http://api.fixer.io/latest?base=${base}`, (err, data) => {
+		getData(`https://api.exchangeratesapi.io/latest?base=${base}`, (err, data) => {
 			if (err) {
 				console.log(err.message)
 				process.exit()
@@ -39,7 +39,7 @@ function getInput(prompt, callback) {
 
 function checkValidCurrencyCode(code, callback) {
 	code = code.trim()
-	request('http://api.fixer.io/latest', (err, res, body) => {
+	request('https://api.exchangeratesapi.io/latest', (err, res, body) => {
 		if (err) callback(new Error('invalid API call'))
 		const rates = JSON.parse(body).rates
 		if (!rates.hasOwnProperty(code)) callback(new Error(`invalid currency code ${code}`))

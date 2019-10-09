@@ -564,7 +564,7 @@ class Student extends Person {
 Currently each instance of a prototype function is completely self-contained. What if we need to store data about the prototype function itself? In a traditional OOP language we would use static methods and the new ECMA `class` syntax allows us to do something similar by adding properties to the prototype function itself. We can also define static methods that can be called directly from the prototype function, see the example below.
 
 ```javascript
-class Student {
+class ECMA6Student extends Person {
   constructor(name, startYear, course) {
 		super(name, startYear)
 		this.subject = course || 'not enrolled'

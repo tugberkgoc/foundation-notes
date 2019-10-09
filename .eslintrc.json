@@ -57,7 +57,6 @@
     "semi": [1, "never"],
     "space-before-blocks": ["error", { "functions": "always", "keywords": "always", "classes": "always" }],
     "space-before-function-paren": [2, "never"],
-    "strict": [2, "global"],
     "yoda": 2
 	},
 	"overrides": [{
