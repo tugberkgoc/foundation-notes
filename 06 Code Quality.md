@@ -164,6 +164,7 @@ A promise represents the result of an asynchronous operation. As such it can be 
 
 Promises are created using the `new` keyword. This function is called immediately with two arguments. The first argument resolves the promise and the second one rejects it. Once the appropriate argument is called the promise state changes.
 ```javascript
+const url = 'https://api.exchangeratesapi.io/latest?base=GBP'
 const getData = url => new Promise( (resolve, reject) => {
   request(url, (err, res, body) => {
     if (err) reject(new Error('invalid API call'))
@@ -182,7 +183,7 @@ As you can see it it simple to wrap any async callbacks in promises but how are 
 
 To use promises we need a mechanism that gets triggered as soon as a promise changes state. A promise includes a `then()` method which gets called if the state changes to _fulfilled_ and a `catch()` method that gets called if the state changes to _rejected_. 
 ```javascript
-const aPromise = getData('http://api.fixer.io/latest?base=GBP')
+const aPromise = getData('https://api.exchangeratesapi.io/latest?base=GBP')
 
 aPromise.then( data => console.log(data))
 
@@ -194,7 +195,7 @@ If the state of the promise changes to _rejected_, the `catch()` method is calle
 
 This code can be written in a more concise way by _chaining_ the promise methods.
 ```javascript
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then( data => console.log(data))
   .catch( err => console.error(`error: ${err.message}`))
 ```
@@ -223,7 +224,7 @@ const exit = () => new Promise( () => {
   process.exit()
 })
 
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then( data => printObject(data))
   .then( () => exit())
   .catch(err => console.error(`error: ${err.message}`))
@@ -238,7 +239,7 @@ Despite the code in the `printObject` promise being _synchronous_ it is better t
 If a promise only takes a single parameter and this matches the data passed back when the previous promise _fulfills_ there is a more concise way to write this.
 
 ```javascript
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then(printObject)
   .then(exit)
   .catch(err => console.error(`error: ${err.message}`))
@@ -249,7 +250,7 @@ getData('http://api.fixer.io/latest?base=GBP')
 There are some situations where you can't simply pass the output from one promise to the input of the next one. Sometimes you need to store data for use further down the promise chain. This can be achieved by storing the data in the `this` object.
 
 ```javascript
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then( data => this.jsonData = data)
   .then( () => printObject(this.jsonData))
   .then(exit)
@@ -265,9 +266,9 @@ Run the `promises.js` script. Its functionality should be familiar to the `curre
 
 Study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
 
-1. modify the script to ask for the currency to convert to and display only the one conversion rate.
-2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency
+1. Modify the script to ask for the currency to convert to and display only the one conversion rate.
+2. Instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency.
+3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency.
 
 ### 6.5 Executing Code Concurrently
 
@@ -290,7 +291,7 @@ const dataArray = ['USD', 'EUR']
 const promiseArray = []
 dataArray.forEach( curr => {
 	promiseArray.push(new Promise( (resolve, reject) => {
-		const url = `http://api.fixer.io/latest?base=GBP&symbols=${curr}`
+		const url = `https://api.exchangeratesapi.io/latest?base=GBP&symbols=${curr}`
 		request.get(url, (err, res, body) => {
 			if (err) reject(new Error(`could not get conversion rate for ${curr}`))
 			resolve(body)
@@ -356,7 +357,7 @@ const printObject = data => new Promise( resolve => {
 
 async function main() {
   try {
-    const data = await getData('http://api.fixer.io/latest?base=GBP')
+    const data = await getData('https://api.exchangeratesapi.io/latest?base=GBP')
     await printObject(data)
     process.exit()
   } catch (err) {
@@ -395,8 +396,8 @@ both `printObjectPromise` and `printObjectAsync` behave in exactly the same mann
 
 Run the `asyncFunctions.js` script, located in the otherScripts folder. Note that it works in the same way as the previous ones. Open the script and study it carefully.
 
-1. modify the script to ask for the currency to convert to and display only the one conversion rate.
-2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency
-4. rewrite the `printObject` promise as an _async function_.
-5. rewrite another promise as an _async function_.
+1. Modify the script to ask for the currency to convert to and display only the one conversion rate.
+2. Instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
+3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency.
+4. Rewrite the `printObject` promise as an _async function_.
+5. Rewrite another promise as an _async function_.
