@@ -2,13 +2,17 @@
 'use strict'
 
 const request = require('request')
+const readline = require('readline')
+
 const baseURL = 'https://api.exchangeratesapi.io/latest'
 
-const getInput = prompt => new Promise( (resolve) => {
-	process.stdin.resume()
-	process.stdin.setEncoding('utf8')
-	process.stdout.write(`${prompt}: `)
-	process.stdin.on('data', text => resolve(text))
+const getInput = prompt => new Promise(resolve => {
+	const read = readline.createInterface({ input: process.stdin, output: process.stdout })
+	read.question(`${prompt}: `, value => {
+		console.log(`You entered ${value}`)
+		read.close()
+		resolve(value)
+	})
 })
 
 const checkValidCurrencyCode = code => new Promise( (resolve, reject) => {
