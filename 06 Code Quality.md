@@ -10,43 +10,49 @@ In this worksheet you will be applying a range of techniques to improve the qual
 
 Before you start you need to pull any _upstream changes_. Detailed instructions can be found in the **Setup** lab.
 
-## 1 Modularisation
+## 1 The Package Manifest
 
-The first step you will need to do is to split your code up to make it easier to understand. Take a look at the end of the `index.js` routes file.
+Up until now you have needed to install each NodeJS package separately however most projects you will see from now onwards include a **package manifest** whick contains the project metadata. In a NodeJS project this file is named `package.json`. Locate the `06_code_quality/todo/` directory and open the `package.json` file it contains. This is a JSON file that contains a number of properties that are used by the application.
 
-Start by updating your routes file by copying over the `modules/accounts.js` file from the lab materials and making sure you import it into your `index.js` file by adding the following statement just below where all the other modules are imported:
+Locate the `dependencies` property, notice that this lists a number of packages that are needed by the application. Rather than install depndencies one by one we can tell the package manager to install all the packages listed here.
 
-```javascript
-const accounts = require('modules/accounts')
+```bash
+$ npm install
 ```
 
-This loads the module into a constant called `accounts`.
+Notice that this has installed all these listed packages. The manifest also specifies which version of each package are installed. If you want to install additional packages you can get these added to the `package.json` file automatically. For example if we want to install the `http-status-codes` package this should be done like this:
 
-Now locate the second `router.post('/login')` route (this is currently commented out). Comment out the one you have been using and uncomment this new shorter version. If you run your server and test it you will find the functionality is identical. Its time to understand how this new version works:
+```bash
+$ npm install --save http-status-codes
+```
 
-1. We start by storing the `request.body` data (the HTTP POST request body data) in an immutable variable called `body`.
-2. Next we call the `checkCredentials()` function that we imported from the `accounts.js` module passing the username and password as parameters.
-3. If this function does not throw an exception it means the credentials are valid so we set the cookie and redirect to the home page.
-4. If either the username or password are invalid, the `checkCredentials()` function will throw an exception which will be handled by the `catch()` block. The error message will explain what us wrong so we pass this back to the login page.
+## 2 Modularisation
 
-Now we need to look at the `accounts.js` module. This implements some very important concepts that you will need to understand and apply to your assignment.
+Next you will need to do is to split your code up to make it easier to understand. Take a look at the `06_code_quality/todo/` project. If you run this you will see that it is a simple shopping list app where you can add multiple items and quantities. Currently all the functionality is contained in the `index.js` file. Locate the `modules/list.js` file. This declares a new Object Prototype called `List` which includes all the necessary functionality for the app. At the moment this is not being used by the app.
 
-1. The `accounts` module contains two types of function:
-    1. The [function declarations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) such as `runSQL()` have a private scope and are not visible outside the module.
-    2. Any [function expressions](https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Operators/function) stored as keys in the `module.exports` object such as `module.exports.checkCredentials` are available to any code that imports this module.
-2. All the code in a function is wrapped in a [try-catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) block to handle any exceptions.
-3. The catch block simple propagates the [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object to the calling code.
-4. Any non-valid code flow is handled by throwing an Error object which forces the code flow to jump directly to the catch block.
-5. This means that if the program flow reaches the end of the try block everything was successful and data can be returned.
+Lets examine this module:
 
-### 1.1 Test Your Understanding
+1. The `module.exports` object is used to define what functionality will be made available to our `index.js` file. In this case we are exporting the Object Prototype. Notice we are using the new `Class` constructor.
+2. Lines 6-8 are the constructor where we define our array that can be accessed by the object.
+3. The rest of the file defines a series of functions that form part of the object prototype.
 
-To check you understand how to use modules you are now expected to move more of the functionality from the `index.js` file into this separate module. To help you with this you will find stub functions that only require the functionality to be added! You will be modifying the functions below the `/* --- STUB FUNCTIONS --- */` line.
+Now look at the top of the `index.js` file. Lines 22-23 import our module into the `List` variable. This can then be used to create a new object using our `List` object prototype. This object is called `list` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
 
-1. Implement the `checkNoDuplicateUsername(username)` function to comply with the JSDoc comments, it should throw an exception if a duplicate user is found or `true` if not.
-2. Implement the `saveImage()` function. This should check that the image is of the correct type then save it to the `avatars/` directory.
-3. Now implement the `addUser()` function. This should make use of the functions you created in the first two tasks. It should check for duplicates before saving the image then it should encrypting the password and then saving the new record.
-4. The final step is to comment out the `router.post('register')` route in `index.js` then create a replacement that makes use of the functions you added to the `accounts.js` module.
+```javascript
+list.add('bread', 42)
+```
+
+This will call the `add()` function that is part of our `todo` object prototype.
+
+### 2.1 Test Your Understanding
+
+The custom object prototype defined in the `list.js` module already contains the functionality needed by your app. 
+
+1. Uncomment lines 22-23 to import the module and create a custom object.
+2. In the `router.post('/')` function call replace lines 41-42 with a call to `list.add()`, passing the item name and quantity as parameters.
+3. Now modify the `router.get('/')` function callback by replacing lines 29-30 with a call to the `list.getAll()` function.
+4. To test the functionality so far, comment out the array declaration on line 20 and try starting the web server. You should be able to add items, the data is now stored in the custom object.
+5. Finally replace line 53 with a call to the appropriate function in the custom object.
 
 Now much of the business logic has been moved to the separate module, are there any module imports in `index.js` that are no longer needed? Locate these and delete.
 
@@ -129,7 +135,16 @@ The callbacks are already nested 3 deep. To test your knowledge of deeply nested
 
 1. modify the script to ask for the currency to convert to and display only the one conversion rate.
 2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency.
+3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency. Below is some code to get you started.
+
+You will need to import the `fs` module and use the `fs.readFile()` function which takes a callback!
+
+```javascript
+fs.readFile('currencies.json', 'utf8', (err, contents) => {
+    if(err) console.log('you need to handle this properly')
+    console.log(contents)
+})
+```
 
 Even though the script is still simple you are probably already getting in a tangle! Imagine a more complex script with conditions, it would quickly get out of hand and become practically impossible to debug.
 
@@ -149,6 +164,7 @@ A promise represents the result of an asynchronous operation. As such it can be 
 
 Promises are created using the `new` keyword. This function is called immediately with two arguments. The first argument resolves the promise and the second one rejects it. Once the appropriate argument is called the promise state changes.
 ```javascript
+const url = 'https://api.exchangeratesapi.io/latest?base=GBP'
 const getData = url => new Promise( (resolve, reject) => {
   request(url, (err, res, body) => {
     if (err) reject(new Error('invalid API call'))
@@ -167,7 +183,7 @@ As you can see it it simple to wrap any async callbacks in promises but how are 
 
 To use promises we need a mechanism that gets triggered as soon as a promise changes state. A promise includes a `then()` method which gets called if the state changes to _fulfilled_ and a `catch()` method that gets called if the state changes to _rejected_. 
 ```javascript
-const aPromise = getData('http://api.fixer.io/latest?base=GBP')
+const aPromise = getData('https://api.exchangeratesapi.io/latest?base=GBP')
 
 aPromise.then( data => console.log(data))
 
@@ -179,7 +195,7 @@ If the state of the promise changes to _rejected_, the `catch()` method is calle
 
 This code can be written in a more concise way by _chaining_ the promise methods.
 ```javascript
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then( data => console.log(data))
   .catch( err => console.error(`error: ${err.message}`))
 ```
@@ -208,7 +224,7 @@ const exit = () => new Promise( () => {
   process.exit()
 })
 
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then( data => printObject(data))
   .then( () => exit())
   .catch(err => console.error(`error: ${err.message}`))
@@ -223,7 +239,7 @@ Despite the code in the `printObject` promise being _synchronous_ it is better t
 If a promise only takes a single parameter and this matches the data passed back when the previous promise _fulfills_ there is a more concise way to write this.
 
 ```javascript
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then(printObject)
   .then(exit)
   .catch(err => console.error(`error: ${err.message}`))
@@ -232,25 +248,27 @@ getData('http://api.fixer.io/latest?base=GBP')
 
 
 There are some situations where you can't simply pass the output from one promise to the input of the next one. Sometimes you need to store data for use further down the promise chain. This can be achieved by storing the data in the `this` object.
+
 ```javascript
-getData('http://api.fixer.io/latest?base=GBP')
+getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then( data => this.jsonData = data)
   .then( () => printObject(this.jsonData))
   .then(exit)
   .catch(err => console.error(`error: ${err.message}`))
   .then(exit)
 ```
+
 In the example above we store the data returned from the `getData` promise in the `this` object. This is then used when we call the `printObject` promise.
 
 ### 6.4 Test Your Knowledge
 
-Run the `promises.js` script, its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
+Run the `promises.js` script. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
 
-Open the `promises.js` script and study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
+Study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
 
-1. modify the script to ask for the currency to convert to and display only the one conversion rate.
-2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency
+1. Modify the script to ask for the currency to convert to and display only the one conversion rate.
+2. Instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency.
+3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency.
 
 ### 6.5 Executing Code Concurrently
 
@@ -273,7 +291,7 @@ const dataArray = ['USD', 'EUR']
 const promiseArray = []
 dataArray.forEach( curr => {
 	promiseArray.push(new Promise( (resolve, reject) => {
-		const url = `http://api.fixer.io/latest?base=GBP&symbols=${curr}`
+		const url = `https://api.exchangeratesapi.io/latest?base=GBP&symbols=${curr}`
 		request.get(url, (err, res, body) => {
 			if (err) reject(new Error(`could not get conversion rate for ${curr}`))
 			resolve(body)
@@ -339,7 +357,7 @@ const printObject = data => new Promise( resolve => {
 
 async function main() {
   try {
-    const data = await getData('http://api.fixer.io/latest?base=GBP')
+    const data = await getData('https://api.exchangeratesapi.io/latest?base=GBP')
     await printObject(data)
     process.exit()
   } catch (err) {
@@ -376,10 +394,10 @@ both `printObjectPromise` and `printObjectAsync` behave in exactly the same mann
 
 ### 7.3 Test Your Knowledge
 
-Run the `asyncFunctions.js` script. Note that it works in the same way as the previous ones. Open the script and study it carefully.
+Run the `asyncFunctions.js` script, located in the otherScripts folder. Note that it works in the same way as the previous ones. Open the script and study it carefully.
 
-1. modify the script to ask for the currency to convert to and display only the one conversion rate.
-2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
-3. use the [OpenExchangeRates](https://openexchangerates.org/api/currencies.json) API to display the full name of the chosen currency
-4. rewrite the `printObject` promise as an _async function_.
-5. rewrite another promise as an _async function_.
+1. Modify the script to ask for the currency to convert to and display only the one conversion rate.
+2. Instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
+3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency.
+4. Rewrite the `printObject` promise as an _async function_.
+5. Rewrite another promise as an _async function_.

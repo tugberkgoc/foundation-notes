@@ -114,7 +114,7 @@ In the previous section you learned how to run a test suite and check code cover
 
 ### 1.5 Visual Studio Code Extensions
 
-One of the powerful features of VS Code is its support for **Extensions** which allow you to add additional capabilities to the editor.
+One of the powerful features of VS Code is its support for **Extensions** which allow you to add additional capabilities to the editor. Make sure you are running the _latest_ version of VS Code (1.38.1 at the time of writing).
 
 ![The Extensions Tab](exercises/.images/extensions_tab.png)
 
@@ -122,15 +122,24 @@ You should start by opening the tab and checking for the extensions already inst
 
 In this lab you will need:
 
-1. coverage-gutters
-2. jest
-3. test-explorer
+![Extensions](exercises/.images/extension_icons.png)
+
+1. Coverage Gutters
+2. Jest
+3. Jest Test Explorer
+4. Test Explorer UI
+
+Once installed you will need to _completely shutdown and restart_ the VS Code editor before continuing.
 
 ### 1.6 Running a Test Suite
 
-After reloading the editor you should see an additional tab, directly under the **Extensions** tab. This is called the **Test**  tab and has an icon that looks like a conical flask from your chemistry lesson.
+After restarting the editor you should see an additional tab, directly under the **Extensions** tab. This is called the **Test** tab and has an icon that looks like a conical flask from your chemistry lesson. This was added by the **Test Explorer** extension.
 
-If you open this tab you will see the **Test Explorer** which has a number of button along the top. The most prominent of these is the _play_ button. If you click this it will run the entire suite of tests in your project.
+If you open this tab you will see the **Test Explorer** which should eventually locate your unit test suites, run them and display them. The first time you will need to expand the tree nodes to see them. There are a number of button along the top. The most prominent of these is the _play_ button. If you click this it will run the entire suite of tests in your project.
+
+If the tests don't load, check at the bottom of the editor to see if Jest has stopped working. There are two main reasons this happens:
+1. If there is a space in the path to your project directory. If this happens, close down the editor, move the entire `foundation/` directory to a more suitable location and open the `todo/` directory again using VS Code.
+2. If you have opened the `foundation/` directory in VS Code instead of just the `todo/` directory.
 
 ![The Test Explorer](exercises/.images/test_explorer.png)
 
@@ -413,5 +422,7 @@ You will now complete a few more TDD iterations:
 3. What happens if you click on one of the **Delete** links? Implement this feature. Remember that since this is testing the `delete()` function you need to create a new _test suite_ called `delete()` in the same test suite.
 4. Can you write one or more tests for the `getAll()` function?
 5. And for the `clear()` function as well.
+
+As before, are you gettting 100% code coverage? If not, write more tests. Are you covering the edge cases and checking for correct handling of bad data?
 
 Note that there appears to be a bug in the VS Code debugger when stepping through a function that returns a promise. If the debugger sends you to a script called `async_hooks.js` you can get stuck in an loop. When the debugger is highlighting the closing brace of an async function press the **Step Out** button a few times (typically) to return to the parent function. Remember you can add breakpoints to the test as well as the module code.

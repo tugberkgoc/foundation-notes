@@ -28,7 +28,7 @@ const biggest = largestNumber(5, 8)
 1. The function is declared using the `function` keyword and the function is given a name which must be a valid variable name.
     - If the name comprises more than one word these should be written using camel casing as shown above. This is known as a **Function Declaration**
 2. The function above takes two parameters, `a` and `b`.
-    - These are variables with local scope (they can't ba accessed outside the function)
+    - These are variables with local scope (they can't be accessed outside the function)
     - When the function is called, you need to pass two **values** which get assigned to the two parameters.
     - If you pass too many values the extra ones get _ignored_.
     - If you don't pass enough values the remainder are assigned a value of `null`. `Null` is an assignment value (means a value of no value).
@@ -98,8 +98,9 @@ const sqr = num => num * num
 1. Refactor the `remainder2` function expression to take advantage of the implicit return (you will need to reduce it to a single line of code).
 2. Compare this to the original version: which is more _readable_?
 3. Create a function expression that takes two string parameters and returns the longest string and assign this to a constant called `longest. check this works correctly.
-4. Modify the function expression so that it can handle any number of string parameters (use a _rest parameter_).
-5. Can you reduce this function expression to a single line (hint: explore using the [reduce function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) combined with the [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator))?
+4. Modify the function expression so that it can handle any number of string parameters (use a _rest parameter_). (hint: you will need to use a [`for...in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) statement to loop through the strings. How does this differ from a [`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) statement?)
+5. Use a [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) instead of the `if` statement in the loop. 
+6. Finally use the [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method to replace the `for...in` loop to reduce the function to a single line.
 
 ## 2 Callbacks
 
@@ -563,7 +564,7 @@ class Student extends Person {
 Currently each instance of a prototype function is completely self-contained. What if we need to store data about the prototype function itself? In a traditional OOP language we would use static methods and the new ECMA `class` syntax allows us to do something similar by adding properties to the prototype function itself. We can also define static methods that can be called directly from the prototype function, see the example below.
 
 ```javascript
-class Student {
+class ECMA6Student extends Person {
   constructor(name, startYear, course) {
 		super(name, startYear)
 		this.subject = course || 'not enrolled'
