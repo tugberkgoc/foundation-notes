@@ -1,61 +1,45 @@
+#!/usr/bin/env node
+
+/* eslint max-lines-per-function: 0 */
 
 'use strict'
 
 const request = require('request')
+const readline = require('readline')
 
-getInput('enter base currency', (err, base) => {
-	if (err) {
-		console.log(err.message)
-		process.exit()
-	}
+const io = { input: process.stdin, output: process.stdout }
+
+const read = readline.createInterface(io)
+read.question('input base currency: ', base => {
+	console.log(`You entered ${base}`)
+	read.close()
 	base = base.trim()
-	checkValidCurrencyCode(base, err => {
+	// now we need to check the code is valid
+	request('https://api.exchangeratesapi.io/latest', (err, res, body) => {
 		if (err) {
-			console.log(err.message)
+			console.error(err.message)
 			process.exit()
 		}
-		getData(`https://api.exchangeratesapi.io/latest?base=${base}`, (err, data) => {
+		const rates = JSON.parse(body).rates
+		if (!rates.hasOwnProperty(base)) {
+			console.error(`invalid currency code ${base}`)
+			process.exit()
+		}
+		// now we can get the currency rates
+		request(`https://api.exchangeratesapi.io/latest?base=${base}`, (err, res, body) => {
 			if (err) {
-				console.log(err.message)
+				console.error(err.message)
 				process.exit()
 			}
-			const obj = JSON.parse(data)
-			printObject(obj)
-			process.exit()
+			body = JSON.parse(body)
+			console.log(body)
+			// lets ask another question
+			const read = readline.createInterface(io)
+			read.question('convert to: ', curr => {
+				console.log(curr)
+				read.close()
+				process.exit
+			})
 		})
 	})
 })
-
-function getInput(prompt, callback) {
-	try {
-		process.stdin.resume()
-		process.stdin.setEncoding('utf8')
-		process.stdout.write(`${prompt}: `)
-		process.stdin.on('data', text => callback(null, text))
-	} catch(err) {
-		callback(err)
-	}
-}
-
-function checkValidCurrencyCode(code, callback) {
-	code = code.trim()
-	request('https://api.exchangeratesapi.io/latest', (err, res, body) => {
-		if (err) callback(new Error('invalid API call'))
-		const rates = JSON.parse(body).rates
-		if (!rates.hasOwnProperty(code)) callback(new Error(`invalid currency code ${code}`))
-		callback(null, true)
-	})
-}
-
-function getData(url, callback) {
-	request(url, (err, res, body) => {
-		if (err) callback(new Error('invalid API call'))
-		callback(null, body)
-	})
-}
-
-function printObject(data) {
-	const indent = 2
-	const str = JSON.stringify(data, null, indent)
-	console.log(str)
-}
