@@ -131,10 +131,10 @@ Callbacks are the simplest possible mechanism for asynchronous code in JavaScrip
 
 ### 5.2 Test Your Knowledge
 
-The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
+The callbacks are already nested 4 deep. You are now going to add some additional functionality and, in doing this, are going to have to make use of additional nested callbacks!
 
-1. modify the script to ask for the currency to convert to and display only the one conversion rate.
-2. instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
+1. The deepest callback is a prompt asking the user for the currency they want to convert into. Add the logic to retrieve the correct exchange rate from the data returned from the previous API call.
+2. Instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
 3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency. Below is some code to get you started.
 
 You will need to import the `fs` module and use the `fs.readFile()` function which takes a callback!
