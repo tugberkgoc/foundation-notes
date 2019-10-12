@@ -8,6 +8,7 @@ coverage/
 docs/
 sessions/
 screenshots/*
+out/
 
 # sqlite databases
 # *.db

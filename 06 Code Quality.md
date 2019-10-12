@@ -56,7 +56,7 @@ The custom object prototype defined in the `list.js` module already contains the
 
 Now much of the business logic has been moved to the separate module, are there any module imports in `index.js` that are no longer needed? Locate these and delete.
 
-## 2 Linting
+## 3 Linting
 
 When using a language as flexible as JavaScript which contains so many legal (but terrible) features, it is important to use a linter. This will check your code against a set of rules. These ensure:
 
@@ -64,14 +64,14 @@ When using a language as flexible as JavaScript which contains so many legal (bu
 2. You are implementing optional syntax (such as indentation and semicolons) in a consistent manner.
 3. You are writing code that is easy to maintain.
 
-If you look over both your `index.js` and `accounts.js` files you should be feeling pretty comfortable that you are already writing clean, consistent and maintainable code, lets see how good your code really is!
+Locate the `06_code_quality/todo/` directory and study the `index.js` file. You should be feeling pretty comfortable that you are looking at clean, consistent and maintainable code, lets see how good your code really is!
 
-You should start by ensuring you have installed `eslint` which is considered the industry standard and that you have a copy of the approved configuration file `.eslintrc.json` in the root directory of your project. You can find this in the `TEACHING-MATERIALS` repository but make sure you take a copy of the latest version from the master repository!
+You should start by ensuring you have installed `eslint` which is considered the industry standard and that you have a copy of the approved configuration file `.eslintrc.json` in the root directory of your project.
 
-Try running the linter on your `index.js` routes file:
+Now navigate to the `06_code_quality/` directory using terminal and run the linter on the `index.js` code in the `todo/` directory:
 
 ```shell
-$ node_modules/.bin/eslint index.js
+$ node_modules/.bin/eslint todo/index.js
 ```
 
 You will see a list of issues that the linter has flagged in your code. Notice that some of these are flagged as errors (serious) and some as warnings (recommendations). Each message includes:
@@ -85,38 +85,38 @@ The latter can be used to quickly look up the rules in the [comprehensive docume
 Instead of running separate checks on every file, we can specify the directory we want to check and it will automatically scan all the subdirectories. For example to scan all the files in the `modules/` directory we could run:
 
 ```shell
-$ node_modules/.bin/eslint modules/
+$ node_modules/.bin/eslint todo/
 ```
 
-### 2.1 Test Your Understanding
+### 3.1 Test Your Understanding
 
-1. How could you run the linter to scan _all_ the files in your project (HINT: you need to start scanning in the _current directory_)?
-2. Now you should locate and fix all the errors and warnings in your code.
-3. If you are using VS Code, install `eslint` globally and then install the [eslint extension](https://github.com/Microsoft/vscode-eslint). After restarting your editor you should see any errors and warnings flagged in the editor.
+1. Locate and fix all the errors and warnings in the `index.js`.
+2. Install `eslint` globally and then install the [eslint extension](https://github.com/Microsoft/vscode-eslint). After restarting your editor you should see any errors and warnings flagged in the editor.
+3. Use the `eslint` plugin to locate and fix all the errors in the `modules/list.js` file.
 
-## 3 Documentation
+## 4 Documentation
 
 In this third and last topic we will be using the [JSDoc](http://usejsdoc.org) tool to build a detailed code documentation website by extracting special comments inserted into our source code.
 
 The default set of documentation tools provided in JSDoc are not suitable for documenting Koa routes and so we will be using a plugin called [jsdoc-route-plugin](https://www.npmjs.com/package/jsdoc-route-plugin). This should have been installed by the package manifest however you should check that you are using the current version of the `package.json` file and update if needed, rerunning the `npm install` command to ensure all packages are installed. You should also check that you have the latest version of the `jsdoc.conf` configuration file.
 
-Now everything is installed we can run the `jsdoc` tool to generate our documentation.
+Now everything is installed we can run the `jsdoc` tool on the project in the `todo/` directory which will generate our documentation. The `-d` destination flag tells the tool where to save the documentation.
 
 ```shell
-$ node_modules/.bin/jsdoc
+$ ./node_modules/.bin/jsdoc -d ./docs/jsdoc/  modules/*
 ```
 
 If you run this command you should see a new directory called `docs/` which will contain a `jsdoc/` directory. Inside this you will see some website files, opening the `index.html` file in your browser you should see the documentation pages for your website!
 
-### 3.1 Test Your Understanding
+### 4.1 Test Your Understanding
 
 You will probably have noticed that only a couple of the functions include complete JSDoc comments and so the documentation website is incomplete. Your task is to use the existing comments for guidance and complete the task of documenting your code. You will find the [JSDoc](http://usejsdoc.org) and [jsdoc-route-plugin](https://www.npmjs.com/package/jsdoc-route-plugin) documentation helpful.
 
-## 4 Improved Async Code
+## 5 Improved Async Code
 
 Since NodeJS has a single thread that handles all incoming requests it is vital that we push long-running tasks into their own threads, typically through the use of _callback functions_. In this section of the lab you will learn about the limitations of callbacks and explore more powerful ways to handle multi-threading.
 
-## 4.1 Nested Callbacks
+## 5.1 Nested Callbacks
 
 Because the code to be run after a callback is run needs to be _inside_ the callback code it is very challenging to build a script that contains several long-running tasks you get into a situation where you nest callbacks inside callbacks (inside callbacks) which makes the code very difficult to write, debug and read and means its very difficult to split into separate functions, a situation commonly known as **Callback Hell**.
 
@@ -129,7 +129,7 @@ Open the file `nestedCallbacks.js` which asks for a _base_ currency code then pr
 
 Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
 
-### 4.1 Test Your Knowledge
+### 5.2 Test Your Knowledge
 
 The callbacks are already nested 3 deep. To test your knowledge of deeply nested callbacks you are going to create a script that has 6 levels of nested callbacks!
 
