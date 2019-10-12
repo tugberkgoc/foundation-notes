@@ -108,6 +108,8 @@ $ ./node_modules/.bin/jsdoc -d ./docs/jsdoc/  modules/*
 
 If you run this command you should see a new directory called `docs/` which will contain a `jsdoc/` directory. Inside this you will see some website files, opening the `index.html` file in your browser you should see the documentation pages for your website!
 
+![JSDoc Documentation](exercises/.images/jsdoc.png)
+
 ### 4.1 Test Your Understanding
 
 You will probably have noticed that only a couple of the functions include complete JSDoc comments and so the documentation website is incomplete. Your task is to use the existing comments for guidance and complete the task of documenting your code. You will find the [JSDoc](http://usejsdoc.org) and [jsdoc-route-plugin](https://www.npmjs.com/package/jsdoc-route-plugin) documentation helpful.

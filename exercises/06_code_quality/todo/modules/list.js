@@ -2,7 +2,7 @@
 /** 
  * Class representing a list of items.
  * */
-module.exports = class List {  
+class List {  
 
     /**
      * Create a list.
@@ -29,20 +29,17 @@ module.exports = class List {
         return this.items.map( (element, index) => ({key: index, item: element.item, qty: element.qty}));
     }
 
-    /**
-     * Delete a single item.
-     * @param {Number} id - The index to be deleted.
-     */
     delete(id){
         this.items.splice(id, 1);	
     }
 
-    /**
-     * Return the number of items in the list.
-     * @return {Number} The number of items.
-     */
     count(){
         return this.items.count;
     }
 
+}
+
+// exporting the class by name adds the name to the documentation 
+module.exports = {
+    List
 }
