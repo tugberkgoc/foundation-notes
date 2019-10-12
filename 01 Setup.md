@@ -3,7 +3,9 @@
 
 In this worksheet you will learn how to configure your work environment using VS Code. You should start by installing **Visual Studio Code** (NOT VISUAL STUDIO!) from the [website](https://code.visualstudio.com), note that it might already be installed. If you are using a Coventry University computer and the software is not installed you can do this using AppsAnywhere.
 
-If you are using Windows 10 you will also need to install [Git](https://git-scm.com/download/win), this may already be installed on a Coventry University computer.
+If you are using Windows 10 you will also need to install [Git](https://git-scm.com/download/win), this may already be installed on a Coventry University computer. If you are on MacOS you may already have it installed as it comes with the XCode IDE but if you have recently updated your OS you may need to run the `xcode-select --install` command to update the **Xcode Command-line Tools** but if you don't want to install XCode you can install git using [HomeBrew](http://brew.sh/) using the `brew install git` command. If you are running Ubuntu you can install it using the `sudo apt install git` command.
+
+DO NOT INSTALL THE GIT GUI TOOLS!
 
 Visual Studio Code comes with an integrated **Terminal** that can be used instead of the standard _Command Prompt_ or _Terminal_. If you are using Linux or MacOS this will give you a Bash prompt however on Windows 10 it defaults to the _Command Prompt_ and will need to be changed to the _Bash Shell_.
 
