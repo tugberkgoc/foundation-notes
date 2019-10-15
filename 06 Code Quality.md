@@ -124,10 +124,16 @@ Because the code to be run after a callback is run needs to be _inside_ the call
 
 Open the file `nestedCallbacks.js` which asks for a _base_ currency code then prints out all the exchange rates against other currencies. Notice that there are four functions defined, three of which include a callback. Our script is designed to capture user input using `stdin` (needing a callback), identify whether a currency code is valid (requiring a second callback) and then getting the currency conversion rates for the specified currency (requiring a third callback).
 
-1. Notice that the `checkValidCurrencyCode()` function is called by the callback for the `getInput()` function and the `getData()` function is called by the callback for the `checkValidCurrencyCode()` function.
-2. Each callback takes two parameters as normal. The first contains the error (if any) and this needs to be handled in each callback.
-3. The data from the first callback is needed when calling the third function so needs to be stored in an immutable variable (constant).
-4. The fourth, and final, function does not have a callback.
+1. The script starts be calling the `read.question()` function (line 13) which takes a callback function as its second parameter.
+2. We want the first `request()` function (line 18) to be run after the initial `read.question()` function has completed.
+    1. To do this it needs to be called from inside the `read.question()` callback function.
+3. The second `request()` function should run after the first one has completed and the data has been processed.
+    1. To do this it needs to be called from inside the callback function of the first `request()` call.
+4. The final step is to call the `read.question()` function again (line 38)) which should be run once the second request has completed.
+    1. Therefore this needs to be in the callback function from the second `request()` function.
+
+As you can see, each step has to be nested inside the previous step's callback, creating an ever increasing level of nested code sometime referred to as [Callback Hell](http://callbackhell.com/) or the [Pyramid of Doom](https://en.wikipedia.org/wiki/Pyramid_of_doom_(programming)).
+
 
 Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
 
