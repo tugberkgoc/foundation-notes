@@ -13,13 +13,11 @@ app.use(bodyParser());
 app.use(handlebars({ paths: { views: __dirname + "/views" } }));
 app.use(router.routes());
 
-
 var port = 8080
-
 var items = []
 
-// const List = require('./modules/list')
-// const list = new List()
+const List = require('./modules/list')
+const list = new List()
 
 router.get("/", async function(ctx) {
     try {
@@ -46,7 +44,7 @@ router.get("/delete/:key", function(ctx) {
     try {
         console.log(`key: ${ctx.params.key}`); 
         items.splice(ctx.params.key, 1);  
-        ctx.redirect('/msg=item deleted');
+        ctx.redirect('/?msg=item deleted');
     } catch(err) {	
         console.log(err.message);
         ctx.redirect("/" + err.message); 

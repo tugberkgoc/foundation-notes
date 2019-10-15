@@ -46,7 +46,7 @@ router.get('/delete/:key', ctx => {
 	try {
 		console.log(`key: ${ctx.params.key}`)
 		todo.delete(ctx.params.key)
-		ctx.redirect('/msg=item deleted')
+		ctx.redirect('/?msg=item deleted')
 	} catch(err) {
 		console.log(err.message)
 		ctx.redirect(`/${err.message}`)
