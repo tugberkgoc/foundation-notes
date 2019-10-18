@@ -50,7 +50,9 @@ Now look at the top of the `index.js` file. Lines 18-19 import the module and cr
 list.add('bread', 42)
 ```
 
-This will call the `add()` function that is part of our `todo` object prototype. If you try and run this you will find that there is no functionality at all!
+This will call the `add()` function that is part of our `todo` object prototype.
+
+Try running the server and adding an item to the list. Currently there is no functionality implemented at all! All the functionality is in the module we have imported.
 
 ### 2.1 Test Your Understanding
 
@@ -81,7 +83,7 @@ $ node_modules/.bin/eslint todo/index.js
 
 You will see a list of issues that the linter has flagged in your code. Notice that some of these are flagged as errors (serious) and some as warnings (recommendations). Each message includes:
 
-1. The line and comumn number where the error was found.
+1. The line and column number where the error was found.
 2. A description of the error.
 3. The rule that is being broken.
 
@@ -96,7 +98,7 @@ $ node_modules/.bin/eslint todo/
 ### 3.1 Test Your Understanding
 
 1. Locate and fix all the errors and warnings in the `index.js`.
-2. Install `eslint` globally and then install the [eslint extension](https://github.com/Microsoft/vscode-eslint). After restarting your editor you should see any errors and warnings flagged in the editor.
+2. Install the [eslint extension](https://github.com/Microsoft/vscode-eslint). After restarting your editor you should see any errors and warnings flagged in the editor.
 3. Use the `eslint` plugin to locate and fix all the errors in the `modules/list.js` file.
 
 ## 4 Documentation
