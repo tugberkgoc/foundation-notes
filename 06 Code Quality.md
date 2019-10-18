@@ -32,29 +32,34 @@ Next you will need to do is to split your code up to make it easier to understan
 
 Lets examine this module:
 
-1. The `module.exports` object is used to define what functionality will be made available to our `index.js` file. In this case we are exporting the Object Prototype. Notice we are using the new `Class` constructor.
-2. Lines 6-8 are the constructor where we define our array that can be accessed by the object.
-3. The rest of the file defines a series of functions that form part of the object prototype.
+1. We define an object prototype called `List`.
+2. This contains an object prototype definition using the modern `class` syntax. If you are not familiar with the concept refer back to the **JavaScript** lab sheet.
+3. On lines 43-45 we create an object containing all the functionality we want to export and pass this to the `module.exports` object. This uses the new **Object Property Value Shorthand** syntax (see below).
 
-Now look at the top of the `index.js` file. Lines 22-23 import our module into the `List` variable. This can then be used to create a new object using our `List` object prototype. This object is called `list` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
+The object property value shorthand notation is useful if the keys have the same name as the variables passed-in as properties. For example the code in the module could be written as:
+
+```javascript
+module.exports = {
+    List: List
+}
+```
+
+Now look at the top of the `index.js` file. Lines 18-19 import the module and create an instance of the List prototype. Notice that we are only importing the `List` prototype from the module. This `List` object prototype is then used to create a new object. This object is called `list` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
 
 ```javascript
 list.add('bread', 42)
 ```
 
-This will call the `add()` function that is part of our `todo` object prototype.
+This will call the `add()` function that is part of our `todo` object prototype. If you try and run this you will find that there is no functionality at all!
 
 ### 2.1 Test Your Understanding
 
 The custom object prototype defined in the `list.js` module already contains the functionality needed by your app. 
 
-1. Uncomment lines 22-23 to import the module and create a custom object.
-2. In the `router.post('/')` function call replace lines 41-42 with a call to `list.add()`, passing the item name and quantity as parameters.
-3. Now modify the `router.get('/')` function callback by replacing lines 29-30 with a call to the `list.getAll()` function.
-4. To test the functionality so far, comment out the array declaration on line 20 and try starting the web server. You should be able to add items, the data is now stored in the custom object.
-5. Finally replace line 53 with a call to the appropriate function in the custom object.
-
-Now much of the business logic has been moved to the separate module, are there any module imports in `index.js` that are no longer needed? Locate these and delete.
+1. Modify the callback function in the `router.post('/')` function, inserting a call to `list.add()`, passing the item name and quantity as parameters.
+2. Now modify the callback function in the `router.get('/')` function, replacing the empty array declaration with a call to the `list.getAll()` function.
+3. Test the base functionality so far, you should be able to add items to the list.
+4. Finally implement the delete functionality.
 
 ## 3 Linting
 

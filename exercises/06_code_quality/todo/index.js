@@ -14,14 +14,17 @@ app.use(handlebars({ paths: { views: __dirname + "/views" } }));
 app.use(router.routes());
 
 var port = 8080
-var items = []
 
-const List = require('./modules/list')
+const List = require('./modules/list').List
 const list = new List()
 
 router.get("/", async function(ctx) {
     try {
-        var data = {}
+        var items = [] // you will need to add a call to the 'list' object!!!
+        const items = list.getAll()
+        console.log(items)
+        var data = {items}
+        ctx.render('home', data);
     } catch(err) {
         console.log(err.message);
         ctx.render('home', {msg: err.message});
@@ -31,8 +34,8 @@ router.get("/", async function(ctx) {
 router.post("/", function(ctx) {
     try {
         var body = ctx.request.body;
-        var data = {item: body.item, qty: body.qty};
-        items.push(data);		
+        console.log(body)
+        // you will need to add a call to the 'list' object!!!		
         ctx.redirect("/"); 
     } catch(err) {
         console.log(err.message);	
@@ -43,7 +46,7 @@ router.post("/", function(ctx) {
 router.get("/delete/:key", function(ctx) { 
     try {
         console.log(`key: ${ctx.params.key}`); 
-        items.splice(ctx.params.key, 1);  
+        // you will need to add a call to the 'list' object!!!
         ctx.redirect('/?msg=item deleted');
     } catch(err) {	
         console.log(err.message);
