@@ -42,16 +42,94 @@ Start by running the `maths.js` script and map the output it generates against t
 
 1. Create a new function called `multiply()` that takes two parameters, `a` and `b` and returns the _product_ of the two.
     - what happens if you call it with only a single parameter?
-2. Modify the function so it uses a default parameter to multiply by 1 if the second parameter is missing.
-    - What happens if you don't supply _any_ parameters?
-    - Add a second default parameter to prevent this.
-3. Write an _arrow function expression_ stored in a constant called `squareRoot` which calculates and returns the square root of the supplied number. You will need to use the `sqrt()` method which is part of the `Math` object.
+2. Write an _arrow function expression_ stored in a constant called `squareRoot` which calculates and returns the square root of the supplied number. You will need to use the `sqrt()` method which is part of the `Math` object.
 
 Open the `contact.js` script, implement the `validateEmail()` function and thoroughly test it, you should avoid using regular expressions at this stage:
 
 1. Check that the string is at least 5 character long
 2. Check that there is a `@` character and that it is not at the start of the string (HINT: use the [indexOf](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) String prototype method.
 3. Check that there is a period (.) character after the `@` character but before the end of the string.
+
+#### 1.1.2 Function Parameters
+
+In the JavaScript language although we define a function with a set of specified _parameters_, when we call the function we don't need to pass these arguments:
+
+We can choose to pass fewer arguments than are specified in the function parameters. Any parameters that don't have a matching argument are set to `undefined`. For example, the following code will print `undefined`.
+
+```javascript
+function sqr(num) {
+  return num * num
+}
+sql()  // returns NaN (not a number)
+```
+
+This can cause issues in your code so to prevent this we provide [Default Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters). If an arguement is missing when a function is called this specified a default value to use. For example consider this version of the function:
+
+```javascript
+function sqr(num = null) {
+  return num * num
+}
+sqr()   // returns 0
+```
+
+In JavaScript:
+
+- A value of `undefined` means a value has not been assigned to a variable.
+- A value of `null` is a value assigned to a variable and means _no value_.
+
+It is also possible to pass in more arguements than there are parameters in the function declaration. The following is quite valid:
+
+```javascript
+function add(num1, num2) {
+  return num1 + num2
+}
+add(4, 2, 1)   // returns 6
+```
+
+As you can see, if there are too many arguments, the extra ones are ignored however JavaScript provides a mechanism to access all the arguments passed to a function regardless of whether they match the parameter list by using the _array-like_ `arguments` object, for example:
+
+```javascript
+function add() {
+  let total = 0
+  for(arg of arguments) total += arg
+  return total
+}
+add(4, 2, 1)   // returns 7
+```
+
+Using _hidden_ or _magic_ variables that magically come into existence can make your code hard to understand so ECMA6 introduced [Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), parameters that can hold any arguments that don't match the parameters in the function declaration. Take the following code:
+
+```javascript
+function add(num1, num2, ...others) {
+  let total = num1 + num2
+  for(arg of others) total += arg
+  return total
+}
+add(4, 2,1)   // returns 7
+```
+
+This demonstrates how the rest parameter _mops up_ any surplus arguments and could be written as:
+
+```javascript
+function add(...numbers) {
+  let total = 0
+  for(arg of numbers) total += arg
+  return total
+}
+
+console.log(add(4, 2, 1))   // returns 7
+```
+
+#### 1.1.3 Test Your Understanding
+
+1. create a function called `divideThis()` that takes two arguments, a number to be divided, `dividend` and the number to divide by, `divisor`. The function should return the _quotient_.
+2. What happens if you don't pass a parameter for the `divisor` parameter? Can you fix this by supplying a suitable _default parameter_?
+3. Call the `multiply()` function from the previous task omitting the second parameter. Can you modify the function so it uses a default parameter to multiply by 1 if the second parameter is missing.
+    - What happens if you don't supply _any_ parameters?
+    - Add a second default parameter to prevent this.
+4. Create a new function called `average()` that takes one or more numerical parameters to return the average of these:
+    - Write this to make use of the `arguments` construct.
+    - Rewrite this to use an ECMA6 rest parameter.
 
 ### 1.2 Function Expressions
 
@@ -99,7 +177,7 @@ const sqr = num => num * num
 2. Compare this to the original version: which is more _readable_?
 3. Create a function expression that takes two string parameters and returns the longest string and assign this to a constant called `longest. check this works correctly.
 4. Modify the function expression so that it can handle any number of string parameters (use a _rest parameter_). (hint: you will need to use a [`for...in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) statement to loop through the strings. How does this differ from a [`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) statement?)
-5. Use a [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) instead of the `if` statement in the loop. 
+5. Use a [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) instead of the `if` statement in the loop.
 6. Finally use the [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method to replace the `for...in` loop to reduce the function to a single line.
 
 ## 2 Callbacks
@@ -235,6 +313,13 @@ const grade = employee.grade || 'A'
 
 This will retrieve the value of the grade property if defined and store it in the `const` variable. If this property is missing the `const` variable will contain the string `'A'`.
 
+#### 3.2.1 Test Your Understanding
+
+1. Create a new object called `university` which should contain three properties, `year1`, `year2` and `year3`. Each of these properties should store an object whos keys are the module codes and values the titles of the modules.
+2. Create a variable called `study01` containing the `year1` object.
+3. Use the `for...in` statement to iterate over this `study01` object printing out all of the _module codes_.
+4. Use the `for...of` statement to print out all of the _module names_.
+
 ### 3.3 JSON Data
 
 JSON (JavaScript Object Notation) is a standard text-based format to represent structured data. This is very useful as it means we can take any JavaScript object and convert it into a text string. This can then be saved to disk or posted to a web server, etc. It also means that you can take a JSON-formatted text string and convert it into a complex JavaScript object!
@@ -289,10 +374,24 @@ Lets apply our knowledge of callbacks to implement a simple quotes tool.
 3. The contents of the file is a utf8 string, use `JSON.parse()` to convert this into a JavaScript object (array) and print this to the terminal instead.
 4. Create a loop to iterate through the array, printing the contents of each index.
 5. Modify the code so that it only prints the quotes string (not the entire object).
+6. Convert the `university` object from the previous exercise into a JSON string and save it to the filesystem as `university.json`.
 
 ### 3.3 ECMA6 Object Destructuring
 
-In ECMA6 is is possible to extract multiple pieces of data into separate variables by destructuring using an _object pattern_. This is syntactically similar to creating object literals (see the example below).
+There are situations where we want to retrieve multiple object properties and store then in different variables, for example:
+
+```javascript
+const employee = {
+  firstName: 'Colin',
+  'last name': 'Stephen',
+  'department': 'Computing'
+}
+const first = employee.firstName
+const last = employee['last name']
+console.log(`${first} ${last}`)
+```
+
+In ECMA6 is is possible to extract multiple pieces of data into separate variables by destructuring using a [Desctructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring). This is syntactically similar to creating object literals (see the example below).
 
 ```javascript
 const employee = {
@@ -301,10 +400,14 @@ const employee = {
   'department': 'Computing'
 }
 
-let {firstName: first, 'last name': last, department: dept} = employee
+const {firstName: first, 'last name': last, department: dept} = employee
 console.log(first) // prints 'Colin'
 console.log(dept) // prints 'Computing'
 ```
+
+#### 3.3.1 Test Your Understanding
+
+1. Take the `university` object you created in an earlier exercise and use a single line destructuring assignment to create three variables, `year1`, `year2` and `year3`.
 
 ### 3.4 Getters and Setters
 
@@ -601,20 +704,3 @@ You should take time to understand the [pros and cons](https://2ality.com/2016/0
 2. Use this to create a second **constructor function** class called `OldPickup` that includes `payload` and `seats` fields and use this to create two pickup objects.
 3. Now use the same information to create a class called `NewVehicle` and extend this to create a class called `NewPickup` and use this to create two or more pickup objects.
 4. Add a static member to capture the total value of all the pickup sales and print this to the terminal.
-
-
-
-Show how objects can be turned into strings and saved. text data loaded and converted into a JavaScript object.
-
-### 5.1.1 Test Your Understanding
-
-### 5.2 RESTful APIs
-
-Show how data can be retrieved from an API in JSON format.
-
-//TODO: use the OMDB API in this section
-
-OMDB key: 220d2590
-
-First task is for students to get an OMDB API key and paste it into the provided script.
-
