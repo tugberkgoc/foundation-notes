@@ -20,8 +20,7 @@ const list = new List()
 
 router.get("/", async function(ctx) {
     try {
-        var items = [] // you will need to add a call to the 'list' object!!!
-        const items = list.getAll()
+        var items = [] // you will need to REPLACE this with a call to the 'list' object!!!
         console.log(items)
         var data = {items}
         ctx.render('home', data);
@@ -54,5 +53,6 @@ router.get("/delete/:key", function(ctx) {
     }
 });
 
-module.exports = app.listen(port, function() {
+module.exports = app.listen(port, async function() {
+    console.log('listening on port ' + port);
 });
