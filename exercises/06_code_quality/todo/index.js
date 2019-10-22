@@ -53,5 +53,6 @@ router.get("/delete/:key", function(ctx) {
     }
 });
 
-module.exports = app.listen(port, function() {
+module.exports = app.listen(port, async function() {
+    console.log('listening on port ' + port);
 });
