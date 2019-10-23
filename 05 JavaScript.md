@@ -685,7 +685,7 @@ const matt = new ECMA6Student('matt')
 console.log(ECMA6Student.studentCount()) // prints '2'
 ```
 
-Notice that the static vsriable `count` is public (so the `studentCount()` method is somewhat superfluous in this example!). This highlights one of the limitations of JavaScript, the lack of a simple way to define private attributes (variables and methods). The next section goes into this in more detail and explains some workarounds (hacks) to get around this.
+Notice that the static variable `count` is public (so the `studentCount()` method is somewhat superfluous in this example!). This highlights one of the limitations of JavaScript, the lack of a simple way to define private attributes (variables and methods). The next section goes into this in more detail and explains some workarounds (hacks) to get around this.
 
 ### 4.5 Handling Data Encapsulation
 
