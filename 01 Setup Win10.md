@@ -11,7 +11,9 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 Restart your computer when prompted.
 
-Now install Visual Studio Code and once launched install the **WSL** component by Microsoft.
+Now install Visual Studio Code and once launched install the [remote-wsl](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) component by Microsoft.
+
+![remote-wsl](exercises/.images/remote-wsl.png)
 
 Now you need to install Ubuntu. This can be found by searching for `run linux on windows` in the Microsoft Store. You will be presented with the following screen.
 
