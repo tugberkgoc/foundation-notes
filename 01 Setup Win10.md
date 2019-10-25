@@ -11,7 +11,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 Restart your computer when prompted.
 
-Now install Visual Studio Code and once launched install the [remote-wsl](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) component by Microsoft.
+Now install Visual Studio Code and once launched install the [remote-wsl](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) component by Microsoft. You should also install the [browser-preview](https://marketplace.visualstudio.com/items?itemName=auchenberg.vscode-browser-preview) component which will allow you to open html web pages.
 
 ![remote-wsl](exercises/.images/remote-wsl.png)
 
