@@ -391,7 +391,7 @@ const last = employee['last name']
 console.log(`${first} ${last}`)
 ```
 
-In ECMA6 is is possible to extract multiple pieces of data into separate variables by destructuring using a [Desctructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring). This is syntactically similar to creating object literals (see the example below).
+In ECMA6 it is possible to extract multiple pieces of data into separate variables by destructuring using a [Desctructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring). This is syntactically similar to creating object literals (see the example below).
 
 ```javascript
 const employee = {
