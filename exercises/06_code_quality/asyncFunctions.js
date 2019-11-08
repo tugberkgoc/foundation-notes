@@ -2,7 +2,7 @@
 'use strict'
 
 const request = require('request')
-const readline = require('readline')
+const readline = require('readline-sync')
 
 const baseURL = 'https://api.exchangeratesapi.io/latest'
 
@@ -21,12 +21,8 @@ async function main() {
 }
 
 const getInput = prompt => new Promise(resolve => {
-	const read = readline.createInterface({ input: process.stdin, output: process.stdout })
-	read.question(`${prompt}: `, value => {
-		console.log(`You entered ${value}`)
-		read.close()
-		resolve(value)
-	})
+	const response = readline.question(`${prompt}: `)
+	return resolve(response)
 })
 
 const checkValidCurrencyCode = code => new Promise( (resolve, reject) => {
