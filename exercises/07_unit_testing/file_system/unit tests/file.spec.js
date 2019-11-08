@@ -2,29 +2,30 @@
 'use strict'
 
 const mock = require('mock-fs')
-const fs = require('fs')
-
 const File = require('../modules/file')
 
+const fs = require('fs')
 const file = new File()
 
+
 beforeAll( async() => {
+    mock({
+        'test': {
+            'foo': 'bar'
+        }
+    })
 })
 
 afterAll( async() => {
+    mock.restore()
 })
 
 describe('savePicture()', () => {
     beforeEach( async() => {
-        mock({
-            'test': {
-                'foo': 'bar'
-            }
-        })
     })
     afterEach( async() => {
-        mock.restore()
     })
+
     test(`filename can't be empty string`, async done => {
         expect.assertions(1)
         try {
@@ -59,15 +60,15 @@ describe('savePicture()', () => {
         }
     })
     test(`binary information has to be correctly saved`, async done => {
-        expect.assertions(1)
+        expect.assertions(2)
         try {
-            await fs.savePicture('image', 'raboof')
-            fs.readFile('image', 'binary', (err, data) => {
-                if (err) throw new Error(err)
+            await file.savePicture('image', 'raboof')
+            file.readPicture('image', 'binary', (err, data) => {
                 expect(data).toBe('raboof')
+                expect(err).toBeUndefined()
             })
         } catch(err) {
-            done.fail('test failed')
+            expect(err.message).toBe(null)
         } finally {
             done()
         }
@@ -113,7 +114,7 @@ describe('readPicture()', () => {
             await file.readPicture('nonExistent.txt')
             done.fail('test failed')
         } catch(err) {
-            expect(err.message).toBe(`file doesn't exist`)
+            expect(err.message).toBe(`ENOENT: no such file or directory, open 'nonExistent.txt'`)
         } finally {
             done()
         }
@@ -123,7 +124,7 @@ describe('readPicture()', () => {
         try {
             expect(file.readPicture('test/foo')).toBe('bar')
         } catch(err) {
-            done.fail('test failed')
+            expect(err.message).toBe(null)
         } finally {
             done()
         }
