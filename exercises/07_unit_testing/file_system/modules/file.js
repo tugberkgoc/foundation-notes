@@ -3,24 +3,27 @@
 const fs = require('fs')
 
 module.exports = class File {
-    constructor() {}
+	constructor() {}
 
-    async savePicture(filename, imageData) {
-        if (filename === undefined || filename === '') throw new Error(`filename can't be empty`)
-        if (imageData === undefined || imageData === '') throw new Error(`imageData can't be empty`)
-        fs.writeFile(filename, imageData, 'binary', (err) => {
-            if (err) throw new Error(err)
-            console.log('File saved.')
-        })
-    }
+	async savePicture(filename, imageData) {
+		if (filename === undefined || filename === '') throw new Error(`filename can't be empty`)
+		if (imageData === undefined || imageData === '') throw new Error(`imageData can't be empty`)
+		try {
+			fs.writeFileSync(filename, imageData, 'binary')
+		} catch(err) {
+			throw err
+		}
+	}
 
-    readPicture(filename) {
-        if (filename === undefined || filename === '') throw new Error(`filename can't be empty`)
-        try {
-            fs.readFileSync(filename, 'binary')
-        } catch(err) {
-            console.log(err)
-            throw new Error(`file doesn't exist`)
-        }
-    }
+	async readPicture(filename) {
+		if (filename === undefined || filename === '') throw new Error(`filename can't be empty`)
+		try {
+			return fs.readFileSync(filename, 'binary')
+		} catch(err) {
+			if (err.message == `ENOENT: no such file or directory, open '${filename}'`)
+				throw new Error("file doesn't exist")
+			else
+				throw err
+		}
+	}
 }

@@ -16,23 +16,23 @@ const file = new File()
 const app = new Koa()
 app.use(views(`${__dirname}/views`, { extension: 'html' }, {map: { handlebars: 'handlebars' }}))
 app.use(BodyParser({
-    encoding: 'multipart/form-data'
+	encoding: 'multipart/form-data'
 }))
 
 const router = new Router()
 
 router.get('/', async ctx => {
-    await ctx.render('pictures.html')
+	await ctx.render('pictures.html')
 })
 router.post('/', ctx => {
-    try {
-        console.log('processing the post request')
-        const body = ctx.request.body
-        console.log(body.fileUpload)
-    } catch(err) {
-        ctx.status = status.UNPROCESSABLE_ENTITY
+	try {
+		console.log('processing the post request')
+		const body = ctx.request.body
+		console.log(body.fileUpload)
+	} catch(err) {
+		ctx.status = status.UNPROCESSABLE_ENTITY
 		ctx.body = err.message
-    }
+	}
 })
 
 app.use(router.routes())
