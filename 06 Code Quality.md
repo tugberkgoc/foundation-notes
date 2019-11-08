@@ -26,6 +26,36 @@ Notice that this has installed all these listed packages. The manifest also spec
 $ npm install --save http-status-codes
 ```
 
+### 1.1 Scripts
+
+As you continue your development in NodeJS you will need to run a number of scripts in the terminal. Many of these include a number of options and flags. Rather then trying to remember all of these you can store these scripts using easy to remember aliases.
+
+The package manifest includes a `scripts` object which can be used to store your custom scripts. Take a look at the `package.json` manifest file in the `exercises/06_code_quality/todo/` directory. The `scripts` object looks like this:
+
+```json
+"scripts": {
+    "linter": "./node_modules/.bin/eslint ."
+  }
+```
+
+Don't wory about understanding what a linter is for the moment. Since you have already installed all the module dependencies in the previous section you can run the script using:
+
+```shell
+$ npm run linter
+```
+
+This will execute the `eslint` command located in the `./node_modules/.bin/` directory. The `.` indicated it should run on the files in the current directory:
+
+```shell
+./node_modules/.bin/eslint .
+```
+
+#### 1.1.1 Running Scripts in VS Code
+
+In the previous example you ran the script from the terminal. If you open a project directory in VS Code that includes a `package.json` file in its root directory you will see a section in the explorer sidebar listing all the script aliases. next to each is a _play_ button which can be clicked to run the script!
+
+![Scripts Explorer](exercises/.images/npm_scripts.png)
+
 ## 2 Modularisation
 
 Next you will need to do is to split your code up to make it easier to understand. Take a look at the `06_code_quality/todo/` project. If you run this you will see that it is a simple shopping list app where you can add multiple items and quantities. Currently all the functionality is contained in the `index.js` file. Locate the `modules/list.js` file. This declares a new Object Prototype called `List` which includes all the necessary functionality for the app. At the moment this is not being used by the app.
@@ -56,7 +86,7 @@ Try running the server and adding an item to the list. Currently there is no fun
 
 ### 2.1 Test Your Understanding
 
-The custom object prototype defined in the `list.js` module already contains the functionality needed by your app. 
+The custom object prototype defined in the `list.js` module already contains the functionality needed by your app.
 
 1. Modify the callback function in the `router.post('/')` function, inserting a call to `list.add()`, passing the item name and quantity as parameters.
 2. Now modify the callback function in the `router.get('/')` function, replacing the empty array declaration with a call to the `list.getAll()` function.
@@ -141,7 +171,6 @@ Open the file `nestedCallbacks.js` which asks for a _base_ currency code then pr
 
 As you can see, each step has to be nested inside the previous step's callback, creating an ever increasing level of nested code sometime referred to as [Callback Hell](http://callbackhell.com/) or the [Pyramid of Doom](https://en.wikipedia.org/wiki/Pyramid_of_doom_(programming)).
 
-
 Callbacks are the simplest possible mechanism for asynchronous code in JavaScript. Unfortunately, raw callbacks sacrifice the control flow, exception handling, and function semantics familiar from synchronous code.
 
 ### 5.2 Test Your Knowledge
@@ -178,6 +207,7 @@ A promise represents the result of an asynchronous operation. As such it can be 
 ### 6.1 Creating a Promise
 
 Promises are created using the `new` keyword. This function is called immediately with two arguments. The first argument resolves the promise and the second one rejects it. Once the appropriate argument is called the promise state changes.
+
 ```javascript
 const url = 'https://api.exchangeratesapi.io/latest?base=GBP'
 const getData = url => new Promise( (resolve, reject) => {
@@ -187,6 +217,7 @@ const getData = url => new Promise( (resolve, reject) => {
   })
 })
 ```
+
 This example creates a `Promise` that wraps a standard callback used to handle an API call. Notice that there are two possible cases handled here.
 
 1. If the API call throws an error we set the promise state to _rejected_.
@@ -196,7 +227,8 @@ As you can see it it simple to wrap any async callbacks in promises but how are 
 
 ### 6.2 Consuming a Promise
 
-To use promises we need a mechanism that gets triggered as soon as a promise changes state. A promise includes a `then()` method which gets called if the state changes to _fulfilled_ and a `catch()` method that gets called if the state changes to _rejected_. 
+To use promises we need a mechanism that gets triggered as soon as a promise changes state. A promise includes a `then()` method which gets called if the state changes to _fulfilled_ and a `catch()` method that gets called if the state changes to _rejected_.
+
 ```javascript
 const aPromise = getData('https://api.exchangeratesapi.io/latest?base=GBP')
 
@@ -204,21 +236,25 @@ aPromise.then( data => console.log(data))
 
 aPromise.catch( err => console.error(`error: ${err.message}`) )
 ```
+
 In this example we create a _new Promise_ and store it in a variable. It get executed _immediately_. The second line calls its `then()` method which will get executed if the promise state becomes _fulfilled_ (the API call is successful). The parameter will be assigned the value passed when the `resolve()` function is called in the promise, in this case it will contain the JSON data returned by the API call.
 
 If the state of the promise changes to _rejected_, the `catch()` method is called. The parameter will be set to the value passed to the `reject()` function inside the promise. In this example it will contain an `Error` object.
 
 This code can be written in a more concise way by _chaining_ the promise methods.
+
 ```javascript
 getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .then( data => console.log(data))
   .catch( err => console.error(`error: ${err.message}`))
 ```
+
 Because the Promise is executed immediately we don't need to store it in a variable. The `.then()` and `.catch()` methods are simply chained onto the promise. This form is much more compact and allows us to chain multiple promises together to solve more complex tasks.
 
 ### 6.3 Chaining Promises
 
 The real power of promises comes from their ability to be _chained_. This allows the results from a promise to be passed to another promise. All you need to do is pass another promise to the `next()` method.
+
 ```javascript
 const getData = url => new Promise( (resolve, reject) => {
   request(url, (err, res, body) => {
@@ -245,11 +281,12 @@ getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .catch(err => console.error(`error: ${err.message}`))
   .then( () => exit())
 ```
+
 Notice that we pass the `printObject` promise to the `then()` method. The data passed back from the `getData` promise is passed to the `printObject` promise.
 
 Because we can chain `then()` and `catch()` methods in any order we can add additional steps after the error has been handled. In the example above we want to exit the script whether or not an error has occurred.
 
-Despite the code in the `printObject` promise being _synchronous_ it is better to wrap this in a promise object to allow the steps to be chained. 
+Despite the code in the `printObject` promise being _synchronous_ it is better to wrap this in a promise object to allow the steps to be chained.
 
 If a promise only takes a single parameter and this matches the data passed back when the previous promise _fulfills_ there is a more concise way to write this.
 
@@ -260,7 +297,6 @@ getData('https://api.exchangeratesapi.io/latest?base=GBP')
   .catch(err => console.error(`error: ${err.message}`))
   .then(exit)
 ```
-
 
 There are some situations where you can't simply pass the output from one promise to the input of the next one. Sometimes you need to store data for use further down the promise chain. This can be achieved by storing the data in the `this` object.
 
@@ -288,10 +324,12 @@ Study the code carefully. Notice that it defines 5 promises and chains them toge
 ### 6.5 Executing Code Concurrently
 
 In the async examples we have seen so far, each async function needs to complete before the next async call is run. The diagram below shows how this looks.
+
 ```
-         1      2      3        
+         1      2      3
       ───⬤─────⬤─────⬤
 ```
+
 The program flow is.
 
 1. The first async call `getData` is executed.
@@ -301,6 +339,7 @@ The program flow is.
 There are many situations where two steps can run at the _same time_. This would be impossible to build using standard callbacks but this can be written using promises.
 
 The first stage is to create an array of promises. Typically this is done by looping through an array of data and using this to return an array of promises.
+
 ```javascript
 const dataArray = ['USD', 'EUR']
 const promiseArray = []
@@ -314,6 +353,7 @@ dataArray.forEach( curr => {
 	}))
 })
 ```
+
 In the example above we loop through the `dataArray`, creating a new promise object that we push onto our `promiseArray`.
 
  Once we have an array of promises there are two possible scenarios.
@@ -330,16 +370,19 @@ Promise.all(itemPromises)
   .then( results => results.forEach( item => console.log(item)))
   .catch( err => console.log(`error: ${err.message}`))
 ```
+
 When the `Promise.all()` method fulfills it returns an array of results. In the example above we loop through these and print each to the terminal.
 
 #### 6.5.2 Promises Race
 
 The alternative is that once one of the promises in the array has fulfilled we want to take its returned value and continue the promise chain. In this scenario we use `Promise.race()`.
+
 ```javascript
 Promise.race(promiseArray)
 	.then( result => console.log(result))
 	.catch( err => console.log(`error: ${err.message}`))
 ```
+
 As you can see, only a single value is returned by `Promise.race()`. In the example above you won't be able to predict which conversion rate will be returned but you will only get the one. A good application of this would be if you can get your data from multiple APIs but you don't know which ones are working.
 
 ## 7 Async Functions
@@ -382,6 +425,7 @@ async function main() {
 }
 main()
 ```
+
 Async functions are declared using the `async` keyword in the function declaration, all errors are handled using the standard `try-catch` block. Because the main block of code needs to be in an _async function_, this has to be explicitly executed at the end of the script.
 
 The `getData()` function returns a _promise_. it is called using the `await` keyword, this pauses the execution of the `main()` function until `getData()` is either _fulfilled_ or _rejected_. If it is _fulfilled_, the data returned is stored in the `data` variable and control moves to the next line, if it is _rejected_ code execution jumps to the `catch()` block.
@@ -389,6 +433,7 @@ The `getData()` function returns a _promise_. it is called using the `await` key
 ### 7.2 Simplified Promises
 
 Async functions are implicitly wrapped in a `Promise.resolve()` and any uncaught errors are wrapped in a `Promise.reject()`. This means that an _async function_ can be substituted for a _promise_. let's look at a simple example.
+
 ```javascript
 const printObjectPromise = data => new Promise( (resolve) => {
   const indent = 2
@@ -405,6 +450,7 @@ const printObjectAsync = async data => {
   console.log(str)
 }
 ```
+
 both `printObjectPromise` and `printObjectAsync` behave in exactly the same manner. They both return a `Promise.resolve()` and so can be used in either a _promise chain_ or an _async function_.
 
 ### 7.3 Test Your Knowledge

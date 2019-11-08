@@ -391,7 +391,7 @@ const last = employee['last name']
 console.log(`${first} ${last}`)
 ```
 
-In ECMA6 is is possible to extract multiple pieces of data into separate variables by destructuring using a [Desctructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring). This is syntactically similar to creating object literals (see the example below).
+In ECMA6 it is possible to extract multiple pieces of data into separate variables by destructuring using a [Desctructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring). This is syntactically similar to creating object literals (see the example below).
 
 ```javascript
 const employee = {
@@ -685,7 +685,7 @@ const matt = new ECMA6Student('matt')
 console.log(ECMA6Student.studentCount()) // prints '2'
 ```
 
-Notice that the static vsriable `count` is public (so the `studentCount()` method is somewhat superfluous in this example!). This highlights one of the limitations of JavaScript, the lack of a simple way to define private attributes (variables and methods). The next section goes into this in more detail and explains some workarounds (hacks) to get around this.
+Notice that the static variable `count` is public (so the `studentCount()` method is somewhat superfluous in this example!). This highlights one of the limitations of JavaScript, the lack of a simple way to define private attributes (variables and methods). The next section goes into this in more detail and explains some workarounds (hacks) to get around this.
 
 ### 4.5 Handling Data Encapsulation
 
