@@ -1,4 +1,3 @@
-
 'use strict'
 
 const mock = require('mock-fs')
@@ -9,124 +8,114 @@ const file = new File()
 
 
 beforeAll( async() => {
-    mock({
-        'test': {
-            'foo': 'bar'
-        }
-    })
+	// mock({
+	// 	'test': {
+	// 		'foo': 'bar'
+	// 	}
+	// })
 })
 
 afterAll( async() => {
-    mock.restore()
+	// mock.restore()
 })
 
 describe('savePicture()', () => {
-    beforeEach( async() => {
-    })
-    afterEach( async() => {
-    })
+	beforeEach( async() => {})
+	afterEach( async() => {})
 
-    test(`filename can't be empty string`, async done => {
-        expect.assertions(1)
-        try {
-            await file.savePicture('', 'asd')
-            done.fail('test failed')
-        } catch(err) {
-            expect(err.message).toBe(`filename can't be empty`)
-        } finally {
-            done()
-        }
-    })
-    test(`filename can't be undefined`, async done => {
-        expect.assertions(1)
-        try {
-            await file.savePicture()
-            done.fail('test failed')
-        } catch(err) {
-            expect(err.message).toBe(`filename can't be empty`)
-        } finally {
-            done()
-        }
-    })
-    test(`imageData can't be empty`, async done => {
-        expect.assertions(1)
-        try {
-            await file.savePicture('foo.jpg')
-            done.fail('test failed')
-        } catch(err) {
-            expect(err.message).toBe(`imageData can't be empty`)
-        } finally {
-            done()
-        }
-    })
-    test(`binary information has to be correctly saved`, async done => {
-        expect.assertions(2)
-        try {
-            await file.savePicture('image', 'raboof')
-            file.readPicture('image', 'binary', (err, data) => {
-                expect(data).toBe('raboof')
-                expect(err).toBeUndefined()
-            })
-        } catch(err) {
-            expect(err.message).toBe(null)
-        } finally {
-            done()
-        }
-    })
+	test(`filename can't be empty string`, async done => {
+		expect.assertions(1)
+		try {
+			await file.savePicture('', 'asd')
+			done.fail('test failed')
+		} catch(err) {
+			expect(err.message).toBe(`filename can't be empty`)
+		} finally {
+			done()
+		}
+	})
+	test(`filename can't be undefined`, async done => {
+		expect.assertions(1)
+		try {
+			await file.savePicture()
+			done.fail('test failed')
+		} catch(err) {
+			expect(err.message).toBe(`filename can't be empty`)
+		} finally {
+			done()
+		}
+	})
+	test(`imageData can't be empty`, async done => {
+		expect.assertions(1)
+		try {
+			await file.savePicture('foo.jpg')
+			done.fail('test failed')
+		} catch(err) {
+			expect(err.message).toBe(`imageData can't be empty`)
+		} finally {
+			done()
+		}
+	})
+	test(`binary information has to be correctly saved`, async done => {
+		expect.assertions(3)
+		try {
+			await file.savePicture('image', 'raboof')
+			await file.readPicture('image', 'binary', (err, data) => {
+				expect(data).toBe('raboof')
+				expect(err).toBeUndefined()
+			})
+		} catch(err) {
+			expect(err.message).toBe(null)
+		} finally {
+			done()
+		}
+	})
 })
 
 describe('readPicture()', () => {
-    beforeEach( async() => {
-        mock({
-            'test': {
-                'foo': 'bar'
-            }
-        })
-    })
-    afterEach( async() => {
-        mock.restore()
-    })
-    test(`filename can't be empty`, async done => {
-        expect.assertions(1)
-        try {
-            await file.readPicture('')
-            done.fail('test failed')
-        } catch(err) {
-            expect(err.message).toBe(`filename can't be empty`)
-        } finally {
-            done()
-        }
-    })
-    test(`filename can't be undefined`, async done => {
-        expect.assertions(1)
-        try {
-            await file.readPicture()
-            done.fail('test failed')
-        } catch(err) {
-            expect(err.message).toBe(`filename can't be empty`)
-        } finally {
-            done()
-        }
-    })
-    test('file has to exist', async done => {
-        expect.assertions(1)
-        try {
-            await file.readPicture('nonExistent.txt')
-            done.fail('test failed')
-        } catch(err) {
-            expect(err.message).toBe(`ENOENT: no such file or directory, open 'nonExistent.txt'`)
-        } finally {
-            done()
-        }
-    })
-    test(`binary information has to be correctly read`, async done => {
-        expect.assertions(1)
-        try {
-            expect(file.readPicture('test/foo')).toBe('bar')
-        } catch(err) {
-            expect(err.message).toBe(null)
-        } finally {
-            done()
-        }
-    })
+	beforeEach( async() => { })
+	afterEach( async() => { })
+	test(`filename can't be empty`, async done => {
+		expect.assertions(1)
+		try {
+			await file.readPicture('')
+			done.fail('test failed')
+		} catch(err) {
+			expect(err.message).toBe(`filename can't be empty`)
+		} finally {
+			done()
+		}
+	})
+	test(`filename can't be undefined`, async done => {
+		expect.assertions(1)
+		try {
+			await file.readPicture()
+			done.fail('test failed')
+		} catch(err) {
+			expect(err.message).toBe(`filename can't be empty`)
+		} finally {
+			done()
+		}
+	})
+	test('file has to exist', async done => {
+		expect.assertions(1)
+		try {
+			await file.readPicture('nonExistent.txt')
+			done.fail('test failed')
+		} catch(err) {
+			expect(err.message).toBe(`ENOENT: no such file or directory, open 'nonExistent.txt'`)
+		} finally {
+			done()
+		}
+	})
+	test(`binary information has to be correctly read`, async done => {
+		expect.assertions(2)
+		try {
+			expect(file.readPicture('foobar')).toBe('foobar2')
+		} catch(err) {
+			expect(err.message).toBe(null)
+		} finally {
+			done()
+		}
+	})
 })
