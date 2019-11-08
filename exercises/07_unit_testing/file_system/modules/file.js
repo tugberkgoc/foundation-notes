@@ -15,12 +15,15 @@ module.exports = class File {
 		}
 	}
 
-	readPicture(filename) {
+	async readPicture(filename) {
 		if (filename === undefined || filename === '') throw new Error(`filename can't be empty`)
 		try {
-			return fs.readFileSync(filename, 'binary')
+			return fs.readFileSync(filename, 'UTF-8')
 		} catch(err) {
-			throw err
+			if (err.message == `ENOENT: no such file or directory, open '${filename}'`)
+				throw new Error("file doesn't exist")
+			else
+				throw err
 		}
 	}
 }
