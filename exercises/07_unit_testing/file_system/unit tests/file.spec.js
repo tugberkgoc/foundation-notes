@@ -2,9 +2,11 @@
 'use strict'
 
 const mock = require('mock-fs')
+const fs = require('fs')
 
 const File = require('../modules/file')
-const fs = require('fs')
+
+const file = new File()
 
 beforeAll( async() => {
 })
@@ -19,10 +21,9 @@ describe('savePicture()', () => {
                 'foo': 'bar'
             }
         })
-        const file = new File()
     })
     afterEach( async() => {
-        afterEach(mock.restore)
+        mock.restore()
     })
     test(`filename can't be empty string`, async done => {
         expect.assertions(1)
@@ -80,10 +81,9 @@ describe('readPicture()', () => {
                 'foo': 'bar'
             }
         })
-        const file = new File()
     })
     afterEach( async() => {
-        afterEach(mock.restore)
+        mock.restore()
     })
     test(`filename can't be empty`, async done => {
         expect.assertions(1)
