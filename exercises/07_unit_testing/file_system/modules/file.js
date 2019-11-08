@@ -19,6 +19,7 @@ module.exports = class File {
         try {
             fs.readFileSync(filename, 'binary')
         } catch(err) {
+            console.log(err)
             throw new Error(`file doesn't exist`)
         }
     }
