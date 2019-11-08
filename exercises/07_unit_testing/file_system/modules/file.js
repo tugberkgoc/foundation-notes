@@ -9,7 +9,7 @@ module.exports = class File {
 		if (filename === undefined || filename === '') throw new Error(`filename can't be empty`)
 		if (imageData === undefined || imageData === '') throw new Error(`imageData can't be empty`)
 		try {
-			fs.writeFile(filename, imageData, 'binary')
+			fs.writeFileSync(filename, imageData, 'binary')
 		} catch(err) {
 			throw err
 		}
