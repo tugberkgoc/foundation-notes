@@ -14,7 +14,7 @@ HTTP uses a [request-response](https://en.wikipedia.org/wiki/Request–response)
 
 When this request is received by the server it analyses the information provided and sends a _response_ back to the client. This typically might include:
 
-1. The [HTTP message body](https://en.wikipedia.org/wiki/HTTP_message_body), typically the data that was requested such as a html page or image.
+1. The [HTTP message body](https://en.wikipedia.org/wiki/HTTP_message_body), typically the data that was requested such as an HTML page or image.
 2. A [status code](https://searchengineland.com/the-ultimate-guide-to-http-status-codes-and-headers-for-seo-302786), a number representing the success or otherwise of the request.
 3. Extra information such as the format the data is in sent as [response headers](https://developer.mozilla.org/en-US/docs/Glossary/Response_header).
 
@@ -60,7 +60,7 @@ Study the `index.js` script in the `exercises/02_http/01_url/` directory.
 	1. The `let` keyword defines a _mutable variable_ which can change its value.
 	2. The `const` keyword defines an _immutable variable_. Once a value is assigned it cannot be changed, these are sometime called _constants_.
 6. The main part of the script defines the _routes_ and we will be covering these in more detail as we progress through the lab.
-7. Right at the end (line 123) we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
+7. Right at the end (line 161) we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
 
 Now start the server:
 
