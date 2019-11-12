@@ -112,7 +112,7 @@ Each value in an object can be extracted using one or two different syntaxes:
 
 ```javascript
 const firstName = name.first
-const lastName = name['last']
+const lastName = name['last name']
 const prop = year
 const dobYear = name.dob.[prop]
 ```
