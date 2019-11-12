@@ -8,7 +8,6 @@ In this worksheet you will be learning about the markup language HTML which is c
 ```
 └── 03_html
     ├── 01_syntax
-    ├── 02_hypermedia
     ├── 02_lists
     ├── 03_hypermedia
     ├── 04_tables
