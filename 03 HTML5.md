@@ -11,8 +11,8 @@ In this worksheet you will be learning about the markup language HTML which is c
     ├── 02_lists
     ├── 03_hypermedia
     ├── 04_tables
-    ├── 05_forms
-    ├── 06_semantic
+    ├── 05_semantic
+    ├── 06_markdown
     └── template.html
 ```
 
