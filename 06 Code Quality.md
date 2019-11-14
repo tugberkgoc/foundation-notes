@@ -56,6 +56,17 @@ In the previous example you ran the script from the terminal. If you open a proj
 
 ![Scripts Explorer](exercises/.images/npm_scripts.png)
 
+### 1.2 Managing Modules
+
+As you continue developing your project you will both be adding additional dependencies and stop using some existing ones. In addition certain modules receive major updates. All these issues can cause a lack of consistency between the package manifest and the modules in use by your code. Thankfully there is a useful tool called `npm-check` to identify where there might be issues. Once installed you can run it from the `node_modules/.bin/` directory just like other binaries.
+
+```shell
+npm install --save-dev npm-check
+./node_modules/.bin/npm-check
+```
+
+This will generate a detailed report to help you manage your package dependencies.
+
 ## 2 Modularisation
 
 Next you will need to do is to split your code up to make it easier to understand. Take a look at the `06_code_quality/todo/` project. If you run this you will see that it is a simple shopping list app where you can add multiple items and quantities. Currently all the functionality is contained in the `index.js` file. Locate the `modules/list.js` file. This declares a new Object Prototype called `List` which includes all the necessary functionality for the app. At the moment this is not being used by the app.
