@@ -101,7 +101,7 @@ describe('readPicture()', () => {
 			await file.readPicture('nonExistent.txt')
 			done.fail('test failed')
 		} catch(err) {
-			expect(err.message).toBe("file doesn't exist")
+			expect(err.message).toBe("file 'nonExistent.txt' doesn't exist")
 		} finally {
 			done()
 		}
@@ -110,7 +110,6 @@ describe('readPicture()', () => {
 		expect.assertions(1)
 		try {
 			let output = await file.readPicture('test/foobar')
-			//console.log("Output: ", output)
 			expect(output).toBe("foobar2\n")
 		} catch(err) {
 			console.log(err)
