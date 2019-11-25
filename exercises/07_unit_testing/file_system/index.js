@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-
+//todo: fix this
 'use strict'
 
 const File = require('./modules/file')
 
 const Koa = require('koa')
 const Router = require('koa-router')
-const BodyParser = require('koa-bodyparser')
+const koaForm = require("formidable-upload-koa");
 const views = require('koa-views')
 const status = require('http-status-codes')
 
@@ -15,21 +15,31 @@ const file = new File()
 
 const app = new Koa()
 app.use(views(`${__dirname}/views`, { extension: 'html' }, {map: { handlebars: 'handlebars' }}))
-app.use(BodyParser({
-	encoding: 'multipart/form-data'
-}))
-
+// app.use(Body({
+// 	encoding: 'multipart/form-data'
+// }))
+// app.use(BodyParser({
+// 	formidable:{uploadDir: './uploads'},    //This is where the files would come
+// 	multipart: true,
+// 	urlencoded: true
+//  }))
+const options = {
+	uploadDir: `./upload/`,
+	keepExtensions: true
+}
 const router = new Router()
 
 router.get('/', async ctx => {
 	await ctx.render('pictures.html')
 })
-router.post('/', ctx => {
+router.post('/', koaForm(options), ctx => {
 	try {
 		console.log('processing the post request')
-		const body = ctx.request.body
-		console.log(body.fileUpload)
+		// const body = ctx.request.body
+		// console.log(ctx.request.body)
+		console.log(ctx.req.files)
 	} catch(err) {
+		console.log(err)
 		ctx.status = status.UNPROCESSABLE_ENTITY
 		ctx.body = err.message
 	}

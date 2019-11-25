@@ -1,3 +1,5 @@
+// Example file that demonstrates the use of mock-fs
+
 'use strict'
 
 const mock = require('mock-fs')
@@ -19,5 +21,5 @@ fs.readFile('test/bar', 'UTF-8', (err, data) => {
 	if (err) throw new Error(err)
 	console.log(data)
 })
-
-mock.restore()
+// shouldn't be restored prematurely when dealing with async code
+// mock.restore()

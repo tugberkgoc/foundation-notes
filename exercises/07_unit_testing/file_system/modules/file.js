@@ -8,11 +8,7 @@ module.exports = class File {
 	async savePicture(filename, imageData) {
 		if (filename === undefined || filename === '') throw new Error(`filename can't be empty`)
 		if (imageData === undefined || imageData === '') throw new Error(`imageData can't be empty`)
-		try {
-			fs.writeFileSync(filename, imageData, 'binary')
-		} catch(err) {
-			throw err
-		}
+		fs.writeFileSync(filename, imageData, 'binary')
 	}
 
 	async readPicture(filename) {
@@ -20,10 +16,11 @@ module.exports = class File {
 		try {
 			return fs.readFileSync(filename, 'binary')
 		} catch(err) {
-			if (err.message == `ENOENT: no such file or directory, open '${filename}'`)
-				throw new Error("file doesn't exist")
-			else
+			if (err.message == `ENOENT: no such file or directory, open '${filename}'`) {
+				throw new Error(`file '${filename}' doesn't exist`)
+			} else {
 				throw err
+			}
 		}
 	}
 }
