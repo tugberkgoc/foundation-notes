@@ -320,11 +320,28 @@ This will retrieve the value of the grade property if defined and store it in th
 3. Use the `for...in` statement to iterate over this `study01` object printing out all of the _module codes_.
 4. Use the `for...of` statement to print out all of the _module names_.
 
-### 3.3 JSON Data
+### 3.3 Context
+
+Every JavaScript object has a reference to its current execution **context**. This refers to how the function was called. To reference the current context we use the `this` object.
+
+You should start by opening the `counties.js` file and studying it carefully. This simple script demonstrates some of the key features of working with context.
+
+1. Lines 5-7 define a simple function called `print()` which prints the context object `this`.
+2. Lines 9-11 define two objects:
+    1. Each contains two properties, a `name` string and the `print()` function.
+    2. Since we are storing the `print()` function in a property with the same name we can use the ES6 Object Shorthand syntax. The second object uses this.
+3. Line 13 calls the `print()` function from the global context. This prints an empty object.
+4. Lines 15 and 16 call the `print()` function from inside each of the objects. This demonstrates that the `name` properties are part of the object context.
+
+If you look at the console output you will notice that, when we access `this` from _inside_ an object, it is bound to the object from where it was called.
+
+Because we are operating in _strict mode_, when we try to access `this` in the global context it returns `undefined`.
+
+### 3.4 JSON Data
 
 JSON (JavaScript Object Notation) is a standard text-based format to represent structured data. This is very useful as it means we can take any JavaScript object and convert it into a text string. This can then be saved to disk or posted to a web server, etc. It also means that you can take a JSON-formatted text string and convert it into a complex JavaScript object!
 
-#### 3.3.1 Parsing JSON Strings into Objects
+#### 3.4.1 Parsing JSON Strings into Objects
 
 It is trivial to convert a JSON string into an object using the `JSON.parse()` function. Study the following code carefully:
 
@@ -335,7 +352,7 @@ const employee = JSON.parse(jsonstring)
 
 Notice that in a JSON string all the properties and values _must_ be enclosed in double-quotes. The constant `jsonstring` is a **String** but `employee` is a standard JavaScript **Object**.
 
-#### 3.3.2 Converting Objects into Strings
+#### 3.4.2 Converting Objects into Strings
 
 In the same way that we can convert a JSON string into a JavaScript object we can also do the reverse.
 
@@ -365,7 +382,7 @@ const jsonstring = JSON.stringify(employee, null, 2)
 
 This inserts newline and space characters to make the string more readable. The third parameter defines the level of indent (in spaces).
 
-#### 3.3.3 Test Your Understanding
+#### 3.4.3 Test Your Understanding
 
 Lets apply our knowledge of callbacks to implement a simple quotes tool.
 
@@ -376,7 +393,7 @@ Lets apply our knowledge of callbacks to implement a simple quotes tool.
 5. Modify the code so that it only prints the quotes string (not the entire object).
 6. Convert the `university` object from the previous exercise into a JSON string and save it to the filesystem as `university.json`.
 
-### 3.3 ECMA6 Object Destructuring
+### 3.5 ECMA6 Object Destructuring
 
 There are situations where we want to retrieve multiple object properties and store then in different variables, for example:
 
@@ -405,11 +422,11 @@ console.log(first) // prints 'Colin'
 console.log(dept) // prints 'Computing'
 ```
 
-#### 3.3.1 Test Your Understanding
+#### 3.5.1 Test Your Understanding
 
 1. Take the `university` object you created in an earlier exercise and use a single line destructuring assignment to create three variables, `year1`, `year2` and `year3`.
 
-### 3.4 Getters and Setters
+### 3.6 Getters and Setters
 
 Most object properties are simple values and you can simply assign a value. Sometimes however properties need to be calculated. One solution is to store a function as one of the properties however we would need to call a function to retrieve the value:
 
@@ -469,12 +486,12 @@ const employee = {
 employee.name = 'Micky Mouse'
 ```
 
-#### 3.4.1 Test Your Understanding
+#### 3.6.1 Test Your Understanding
 
 1. Print the person's details in an easy to understand sentence.
 2. Add a getter to return the number of years the employee has been working for the company, you will need to round this down to a whole number. You should make use of one of the static methods of the built-in [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) object.
 
-### 3.5 Modifying Objects
+### 3.7 Modifying Objects
 
 Once an object has been created it can be modified in several ways.
 
@@ -510,7 +527,7 @@ const employee = {
 delete employee.department
 ```
 
-### 3.6 Undefined Values
+### 3.8 Undefined Values
 
 Undefined Objects
 
@@ -531,13 +548,13 @@ const postCode = employee.address && employee.address.postCode
 console.log(postCode) // returns undefined
 ```
 
-#### 3.6.1 Test Your Understanding
+#### 3.8.1 Test Your Understanding
 
 1. Modify the code to handle bad data:
     1. Remove the startYear property.
     2. Set the startYear property to a String.
 
-### 3.7 Object Prototypes
+### 3.9 Object Prototypes
 
 All JavaScript object (such as String, Number, Array, etc.) inherit properties and methods from a **prototype**. This also applies to any new objects you create. Since JavaScript does not support _traditional_ classes, this becomes the way to add new functionality. Let's look at a simple example.
 
@@ -559,7 +576,7 @@ There are a couple of important concepts here.
 2. Inside the function we manipulate the `this` object which represents the value of the object.
     1. Replace the `function() {}` construct with an arrow function. What happens when you run the script?
 
-#### 3.7.1 Test Your Understanding
+#### 3.9.1 Test Your Understanding
 
 1. Extend the `Array` object by adding a function `toStr()` that takes an array and turns it into a string. You will need to use the [`Array.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) function.
 
@@ -627,7 +644,8 @@ class Person {
   constructor(name, startYear) {
 	  this.name = name
 	  this.startYear = startYear || currentYear
-	  this.years = currentYear - this.startYear
+    this.years = currentYear - this.startYear
+    return this
   }
 }
 ```
