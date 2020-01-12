@@ -1,0 +1,23 @@
+{
+  "name": "mocking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "handlebars": "^4.5.3",
+    "mysql-promise": "^5.0.0",
+    "prompt-async": "^0.9.9",
+    "sqlite-async": "^1.0.12"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
