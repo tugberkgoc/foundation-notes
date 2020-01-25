@@ -63,7 +63,7 @@ Study the `index.js` script in the `exercises/02_http/01_url/` directory.
 			2. Install the dependencies for the first time using the `-S` _switch_ with `npm install`
 				- e.g.: `npm install -S koa koa-bodyparser`
 					- This would add something like this to the `package.json` file:
-						```
+						```json
 						"dependencies": {
 						"koa": "^2.11.0",
 						"koa-bodyparser": "^4.2.1"
@@ -71,9 +71,11 @@ Study the `index.js` script in the `exercises/02_http/01_url/` directory.
 						```
 				- When you next run `npm install -S <package>`, the given package's _newest version_ will be simply added to the list, or in case of a new version for a _previously listed_ dependency, the _version number_ will be updated
 				- This `-S` is just a short version of the `--save` _switch_
-					- **You can use the alternative `--save-dev` switch to install and save _development dependencies_**
+					- **You can use the alternative `--save-dev` switch to install and save them as _development dependencies_**
 						- Something that you wouldn't want to deploy, but is necessary for development
 							- E.g. we will use `jest` for testing, and `eslint` for linting during the development phase, but these shouldn't be required to be installed during deployment
+				- You are done with adding the dependencies, now simply use `npm install` to install all of them at once!
+					- If you don't want to install development dependencies, use `npm install --production`
 			3. This `package.json` file is also useful to store _scripts_:
 				- Look at the following line: ` "start": "nodemon index.js"`
 				- This lets us simply type `npm start` in the terminal to start our application via _nodemon_
