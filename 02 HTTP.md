@@ -47,20 +47,46 @@ We will be working through some exercises that make use of all of these.
 
 Study the `index.js` script in the `exercises/02_http/01_url/` directory.
 
-1. If you study lines 4-10 of `index.js` you will see a list of the modules we need to install. Refer the the previous lab if you get stuck at this point:
+1. If you study lines 11-15 of `index.js` you will see a list of the modules we need to install. Refer the the previous lab if you get stuck at this point:
 	1. `koa`
 	2. `koa-router`
 	3. `koa-bodyparser`
 	4. `koa-static`
 	5. `js2xmlparser`
+	- **You can install all these dependencies by simply running 'npm install' in the terminal.**
+		- This command installs all the documented dependencies from the `package.json` file, which is already preconfigured in this case.
+			- **Have a look at your `package.json` file and understand its contents**
+		- When you are creating a new _project_, **you have to do this yourself**:
+			1. Use the `npm init` command to create the package.json file
+				- You can leave all the options default, just leave them empty and keep pressing enter
+				- Alternatively you can run `npm init --yes`, it will simply leave everything default
+			2. Install the dependencies for the first time using the `-S` _switch_ with `npm install`
+				- e.g.: `npm install -S koa koa-bodyparser`
+					- This would add something like this to the `package.json` file:
+						```
+						"dependencies": {
+						"koa": "^2.11.0",
+						"koa-bodyparser": "^4.2.1"
+						}
+						```
+				- When you next run `npm install -S <package>`, the given package's _newest version_ will be simply added to the list, or in case of a new version for a _previously listed_ dependency, the _version number_ will be updated
+				- This `-S` is just a short version of the `--save` _switch_
+					- **You can use the alternative `--save-dev` switch to install and save _development dependencies_**
+						- Something that you wouldn't want to deploy, but is necessary for development
+							- E.g. we will use `jest` for testing, and `eslint` for linting during the development phase, but these shouldn't be required to be installed during deployment
+			3. This `package.json` file is also useful to store _scripts_:
+				- Look at the following line: ` "start": "nodemon index.js"`
+				- This lets us simply type `npm start` in the terminal to start our application via _nodemon_
+					- Nodemon is a great tool that restarts the application every time we save a file in the given folder, so we don't actually have to manually stop and restart it after every modification.
+	
 2. The first line is the _shebang_, it tells the script what application is needed to run it.
-3. Lines 4-10 import the module packages we need for our script to work. Koa is a modular framework, on its own it does very little but depends on plugins (middleware) for its functionality.
-4. Lines 11-15 are where we configure the koa _middleware_.
+3. Lines 11-15 import the module packages we need for our script to work. Koa is a modular framework, on its own it does very little but depends on plugins (middleware) for its functionality.
+4. Lines 18-22 are where we configure the koa _middleware_.
 5. We need two global variables in our script, one to store a list of items and the second to store the port number we will be using:
 	1. The `let` keyword defines a _mutable variable_ which can change its value.
 	2. The `const` keyword defines an _immutable variable_. Once a value is assigned it cannot be changed, these are sometime called _constants_.
 6. The main part of the script defines the _routes_ and we will be covering these in more detail as we progress through the lab.
-7. Right at the end (line 161) we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
+7. Right at the end (line 138) we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
 
 Now start the server:
 
@@ -76,7 +102,7 @@ To do this we need to extract some data from the http object `ctx` which is the 
 
 Start the server and access the `/books/1` route. What is displayed in the web browser?
 
-1. Since we have not yet covered how to connect to a database, on line 34 we have defined a JavaScript array which contains 3 indexes, these are numbered 0-2.
+1. Since we have not yet covered how to connect to a database, on line 41 we have defined a JavaScript array which contains 3 indexes, these are numbered 0-2.
 2. Directly underneath this we have defined a route `/books/:index` which contains two **segments**:
 	1. The first matches the text `/books`, this works like all the routes we have seen previously.
 	2. The second, beginning with the colon (`:`) represents a **URL Parameter**. This represents one or more characters.
