@@ -41,6 +41,9 @@ describe('add()', () => {
 			done()
 		}
 	})
+
+	// New test goes HERE!
+
 })
 
 describe('delete()', () => {
