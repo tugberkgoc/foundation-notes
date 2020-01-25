@@ -41,27 +41,6 @@ describe('add()', () => {
 			done()
 		}
 	})
-	
-	// New test goes HERE!
-	test('duplicates should increase qty', async done => {
-		expect.assertions(2)
-		try {
-			// ACT
-			todo.add('bread', 4)
-			todo.add('bread', 2)
-			// ASSERT
-			const count = todo.countItems()
-			expect(count).toBe(1)
-			const data = todo.getAll()
-			const qty = data[0].qty
-			expect(qty).toEqual(6)
-		} catch(err) {
-			done.fail('test failed')
-		} finally {
-			done()
-		}
-	})
-
 })
 
 describe('delete()', () => {
