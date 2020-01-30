@@ -37,26 +37,11 @@ router.get('/anon', ctx => {
 	// anon case
 })
 
-router.get('/books/:index/:index2', ctx => {
+router.get('/books/:index', ctx => {
 	const books = ['The Hobbit', 'Alice in Wonderland', 'The Secret Garden','Animal Farm']
 	const parameters = ctx.params
 	console.log(parameters)
-
-	
-	if (parameters.index > 3 || parameters.index2 > 3) {
-		ctx.body = "Number cannot be greater than 3"
-	}
-	else if (isNaN(parameters.index) || isNaN(parameters.index2)){
-		ctx.body = "A number must be entered"
-	}
-	else if (Number.isInteger(parameters.index)){
-		ctx.body = "A whole number must be entered"
-	}
-	else{
-		const title = books[parameters.index]
-		const title2 = books[parameters.index2]
-		ctx.body = title + title2
-	}
+	ctx.body = title
 })
 
 router.get('/name', ctx => ctx.body = JSON.stringify(ctx.query))
@@ -64,19 +49,7 @@ router.get('/name', ctx => ctx.body = JSON.stringify(ctx.query))
 router.get('/hello/:name', ctx => {
 	let myname = ctx.params.name
 	if(ctx.query.format === 'upper') myname = myname.toUpperCase()
-	else if (ctx.query.format === 'lower') myname = myname.toLowerCase()
-	else if (ctx.query.format === 'reverse'){
-		var array1 = myname.split("")
-		console.log(array1)
-		var array2  = array1.reverse()
-		console.log(array2)
-		var array3 = array1.join("")
-		console.log(array3)
-		ctx.body = `hello ${array3}`
-		//myname = join(Array.reverse(myname.split()))
-	} 
-	// only applies uppercase if formatting query exists
-	//ctx.body = `hello ${myname}`
+	ctx.body = `hello ${myname}`
 })
 
 router.post('/form', ctx => {
