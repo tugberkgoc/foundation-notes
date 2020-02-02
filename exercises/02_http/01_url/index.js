@@ -38,9 +38,10 @@ router.get('/anon', ctx => {
 })
 
 router.get('/books/:index', ctx => {
-	const books = ['The Hobbit', 'Alice in Wonderland', 'The Secret Garden','Animal Farm']
+	const books = ['The Hobbit', 'Alice in Wonderland', 'The Secret Garden']
 	const parameters = ctx.params
 	console.log(parameters)
+	const title = books[parameters.index]
 	ctx.body = title
 })
 
@@ -48,7 +49,10 @@ router.get('/name', ctx => ctx.body = JSON.stringify(ctx.query))
 
 router.get('/hello/:name', ctx => {
 	let myname = ctx.params.name
+
+	// only applies uppercase if formatting query exists
 	if(ctx.query.format === 'upper') myname = myname.toUpperCase()
+	
 	ctx.body = `hello ${myname}`
 })
 
