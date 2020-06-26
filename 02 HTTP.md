@@ -115,7 +115,7 @@ Start the server and access the `/books/1` route. What is displayed in the web b
 4. This index value is used to look up the title of the book in the array, the book title is stored in a constant.
 5. Finally the book title is sent to the web browser.
 
-#### 1.3.1 Core Knowledge
+#### 1.2.1 Core Knowledge
 
 JavaScript objects comprise one or more **property-value pairs**. There is an example below to illustrate this.
 
@@ -153,7 +153,7 @@ delete name.first
 delete name['last name']
 ```
 
-#### 1.3.2 Test Your Understanding
+#### 1.2.2 Test Your Understanding
 
 In this section you will learn about a number of JavaScript functions. In each case you will be provided with a link to the documentation.
 
@@ -163,13 +163,13 @@ In this section you will learn about a number of JavaScript functions. In each c
 	2. Make sure this is triggered by restarting the server and accessing this by passing a second parameter.
 	3. Modify the script to print out both book titles.
 3. Next you need to add some validation to make sure the script does not crash (note that if you are using GoormIDE you will not be able to test it):
-	1. If the index in the URL exceeds to number of books in the array you get an error. Insert an [`if...else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) that sends a suitable message to the browser if the index number in the URL is too high.
-	2. The index must be a number. Use the [`isNaN()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check and send a suitable message to the browser if it is not. if it is, use the [`parseInt()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt) to convert it to a number.
-	3. The number needs to be a whole number (integer). All JavaScript numbers are objects and have a number of useful functions. Use the [`Number.isInteger()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger) to check it is indeed an integer. Send a suitable message to the browser if it is not.
+	1. If the index in the URL exceeds the number of books in the array, you get an error. Insert an [`if...else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) that sends a suitable message to the browser if the index number in the URL is too high.
+	2. The index must be a number. Use the [`isNaN()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check and send a suitable message to the browser if it is not. if it is, use the [`parseFloat()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat) to convert it to a number.
+	3. The number needs to be a whole number (integer). All JavaScript numbers are objects and have a number of useful functions. Use the [`Number.isInteger()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger) to check it is indeed an integer. Send a suitable message to the browser if it is not. You can convert it to an integer using the [`parseInt()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt).
 
 ### 1.3 URL Query Strings
 
-Whilst URL parameters are used to define unique URLS to identify online resources, sometimes we want to be able to pass additional information and this is done through the use of **query strings**.
+Whilst URL parameters are used to define unique URLs to identify online resources, sometimes we want to be able to pass additional information and this is done through the use of **query strings**.
 
 1. Restart the server and access the `/hello/John%20Doe` route.
 	1. Since spaces are not permitted in a URL we have to replace spaces with special codes. This is known as **URL Encoding** and there are specific [codes](https://www.degraeve.com/reference/urlencoding.php) to use.
@@ -177,7 +177,7 @@ Whilst URL parameters are used to define unique URLS to identify online resource
 2. Now change the URL to `/hello/John%20Doe?format=upper`.
 	1. Notice that the same data has been displayed just the format has changed.
 
-Open the `index.js` file. The route is between lines 48-52.
+Open the `index.js` file. The route is between lines 50-57.
 
 1. Notice that the query string(s) are not part of the route.
 2. The query string comprises name-value pairs.
@@ -203,12 +203,11 @@ Headers allow for additional information to be passed:
 
 Make sure the server is still running and use the [Chrome web browser](https://www.google.com/chrome/) to access the root URL `/`.
 
-1. Open the [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) by clicking on the _customise and control Google Chrome tools_ button (the three dots to the extreme right of the address bar).
-2. Choose **More tools** from the menu and then **Developer tools** from the submenu.
-3. Locate the **Network** tab in the Chrome developer tools.
-4. Reload the web page. (Press F5)
-5. You should now see the resource sent in the HTTP response together with some data dealing with response times.
-6. Click on the file name (as shown) to display the HTTP headers.
+1. Open the [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) by clicking on the _Customise and control Chrome_ button (the three dots to the extreme right of the address bar), choosing **More tools** from the menu and then **Developer tools** from the submenu.
+2. Locate the **Network** tab in the Chrome developer tools.
+3. Reload the web page. (Press F5)
+4. You should now see the resource sent in the HTTP response together with some data dealing with response times.
+5. Click on the file name (as shown) to display the HTTP headers.
 
 ![how to show the headers in Chrome](exercises/.images/chrome_02.png)
 
@@ -234,7 +233,7 @@ In addition to the **Response Body** (the information in the web browser window)
 2. The `Date` header is a string representing the date and time the response was sent.
 3. The `ETag` header contains a hash of the contents and is used to see if the content has changed since the last request.
 
-### 1.1 Test Your Knowledge
+#### 1.4.1 Test Your Knowledge
 
 As part of the worksheets you will be given some exercises to carry out to make sure you fully understand the content covered.
 

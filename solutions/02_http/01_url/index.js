@@ -45,14 +45,14 @@ router.get('/books/:index/:index2', ctx => {
 
 	if (isNaN(parameters.index) || isNaN(parameters.index2)) {
 		ctx.status = 400
-		ctx.body = 'Two numbers must be entered'
+		ctx.body = `Indexes must be numbers`
 	} else if (!Number.isInteger(parseFloat(parameters.index))
 			|| !Number.isInteger(parseFloat(parameters.index2))) {
 		ctx.status = 400
-		ctx.body = 'Indexes must be integers'
-	} else if (parameters.index1 > maxIndex || parameters.index2 > maxIndex) {
+		ctx.body = `Indexes must be integers`
+	} else if (parameters.index > maxIndex || parameters.index2 > maxIndex){
 		ctx.status = 400
-		ctx.body = `Neither index cannot be greater than ${maxIndex}`
+		ctx.body = `Neither index can be greater than ${maxIndex}`
 	} else {
 		const title = books[parseInt(parameters.index)]
 		const title2 = books[parseInt(parameters.index2)]
@@ -66,7 +66,12 @@ router.get('/hello/:name', ctx => {
 	let myname = ctx.params.name
 
 	// only applies uppercase if formatting query exists
-	if(ctx.query.format === 'upper') myname = myname.toUpperCase()
+	if (ctx.query.format === 'upper') myname = myname.toUpperCase()
+	if (ctx.query.format === 'upper') myname = myname.toLowerCase()
+	
+	if (ctx.query.reverse === 'true') {
+		myname = myname.split('').reverse().join('')
+	}
 	
 	ctx.body = `hello ${myname}`
 })
