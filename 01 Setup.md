@@ -141,14 +141,46 @@ $ node index.js
 
 Now we have the server up and running so the final task is to view the web page using the web browser. Simply open the Chrome browser and navigate to localhost:8080 where you should see a message. If this works you are ready to start the lab exercises.
 
-## 5 Pushing the Changes to GitHub
+## 5 Using npm and its package.json
+
+**Have a look at your `package.json` file and understand its contents**
+- When you are starting a new _project_, **you have to create this yourself**:
+	1. Use the `npm init` command to create the package.json file
+		- You can leave all the options default, just leave them empty and keep pressing enter
+		- Alternatively you can run `npm init --yes`, it will simply leave everything default
+	2. Install the dependencies for the first time using the `-S` _switch_ with `npm install`
+		- e.g.: `npm install -S koa koa-bodyparser`
+			- This would add something like this to the `package.json` file:
+				```json
+				"dependencies": {
+				"koa": "^2.11.0",
+				"koa-bodyparser": "^4.2.1"
+				}
+				```
+		- When you next run `npm install -S <package>`, the given package's _newest version_ will be simply added to the list, or in case of a new version for a _previously listed_ dependency, the _version number_ will be updated
+		- This `-S` is just a short version of the `--save` _switch_
+			- **You can use the alternative `--save-dev` switch to install and save them as _development dependencies_**
+				- Something that you wouldn't want to deploy, but is necessary for development
+					- E.g. we will use `jest` for testing, and `eslint` for linting during the development phase, but these shouldn't be required to be installed during deployment
+		- You are done with adding the dependencies, now simply use `npm install` to install all of them at once!
+			- If you don't want to install development dependencies, use `npm install --production`
+	3. This `package.json` file is also useful to store _scripts_:
+		- Look at the following line: ` "start": "nodemon index.js"`
+		- This lets us simply type `npm start` in the terminal to start our application via _nodemon_
+			- Nodemon is a great tool that restarts the application every time we save a file in the given folder, so we don't actually have to manually stop and restart it after every modification.
+
+
+
+
+
+## 6 Pushing the Changes to GitHub
 
 As you work through the lab activities two things are likely to happen:
 
 1. You make changes to the code that you want to push to the forked copy of your repository.
 2. You will need to pull any bug fixes from the original repository.
 
-### 5.1 Configuring the Repository
+### 6.1 Configuring the Repository
 
 Before you start interacting with the GitHub server you need to configure the local repository. Open the Bash Shell and run the following commands:
 
@@ -159,7 +191,7 @@ git config user.email 'doej@coventry.ac.uk'
 
 remember to replace the values with you own name and your university email (but without the uni part).
 
-### 5.2 Pushing Changes
+### 6.2 Pushing Changes
 
 **NOTE: You only need to carry out this step when you have make changes to the code! This will normally need to take place each time you complete a "Test Your Understanding" section.**
 
@@ -177,7 +209,7 @@ Now you should click on the **Sync** icon (shown below) to push the new commit u
 
 At this point you should be able to refresh your GitHub repository page to see the changes.
 
-### 5.3 Pulling from Upstream
+### 6.3 Pulling from Upstream
 
 As new materials and resources are added to the original repository (and bugs fixed) you will want to merge these into your forked repository. Before you can do this you will need to add a link to the upstream repository. Open a bash shell:
 
