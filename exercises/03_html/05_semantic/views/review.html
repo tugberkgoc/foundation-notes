@@ -1,28 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Review: The Social Network</title>
-		<meta name="description" content="Review of 'The Social network'">
-		<meta name="author" content="Peter Bradshaw">
-	</head>
-	<body itemscope itemtype="http://schema.org/Review">
-    <h1>Film Reviews</h1>
-    <p><img itemprop="image" src="poster.jpg" alt="Poster for 'The Social Network'" /></p>
-    <div>
-    <h2 itemprop="itemreviewed">The Social Network</h2>
-    <p itemprop="contentRating">12A</p>
-    <p>Courtesy of <span itemprop="sponsor">The Guardian</span></p>
-    <p>by <span itemprop="author">Peter Bradshaw</span></p>
-    <p itemprop="datePublished">2010-10-14</p>
-    <span  itemprop="reviewbody">
-    <p>From the first sentence, the first word, the first nervily in-drawn breath, this compulsively watchable picture announces itself as the unmistakable work of Aaron Sorkin. His whip-smart, mile-a-minute dialogue made The West Wing deeply addictive on TV, and after uncertain works such as Charlie Wilson's War and the strange, small-screen drama Studio 60 on the Sunset Strip – in which Sorkin's distinctive, faintly martyred seriousness was bafflingly applied to the backstage shenanigans of a fictional television comedy – this writer is triumphantly back on form. He's found an almost perfect subject: the creation of the networking website Facebook, and the backstabbing legal row among the various nerds, geeks, brainiacs and maniacs about who gets the credit and the cash.</p>
-    </span>
-    <div itemscope itemtype="http://schema.org/Rating">
-    <p>Overall rating: <span itemprop="ratingvalue">4</span>/5</p>
-    </div>
-    
-    </div>
-	</body>
-</html>
 
+<head>
+    <meta charset="utf-8">
+    <title>Review: The Social Network</title>
+    <meta name="description" content="Review of 'The Social network'">
+    <meta name="author" content="Peter Bradshaw">
+</head>
+<body itemscope itemtype="http://schema.org/Review">
+    <h1>Film Reviews</h1>
+
+    <div itemprop="itemreviewed" itemscope itemtype="https://schema.org/Movie">
+        <img itemprop="image" src="poster.jpg" width="320" alt="Poster for 'The Social Network'"/>
+        <h2 itemprop="name">The Social Network</h2>
+        <p>Rated <span itemprop="contentRating">PG-13</span></p>
+        <p>Directed by <span itemprop="director">David Fincher</span></p>
+        <p>Released on <time itemprop="dateCreated" datetime="2010-10-10">2010 October 1</time></p>
+        <p itemprop="sameAs">
+            <a href="https://www.imdb.com/title/tt1285016/">https://www.imdb.com/title/tt1285016/</a>
+        </p>
+    </div>
+
+    <p> Published on <time itemprop="datePublished" datetime="2010-10-14">2010 October 14</time></p>
+
+    <p itemprop="author" itemscope itemtype="https://schema.org/Person">
+        by <span itemprop="name">Peter Bradshaw</span>
+    </p>
+
+    <p itemprop="description">
+        This is a subjective review of said motion picture, please take it with a grain of salt.
+    </p>
+
+    <p itemprop="reviewBody">
+        From the first sentence, the first word, the first nervily in-drawn breath, this compulsively watchable picture
+        announces itself as the unmistakable work of Aaron Sorkin. His whip-smart, mile-a-minute dialogue made The West
+        Wing deeply addictive on TV, and after uncertain works such as Charlie Wilson's War and the strange,
+        small-screen drama Studio 60 on the Sunset Strip – in which Sorkin's distinctive, faintly martyred seriousness
+        was bafflingly applied to the backstage shenanigans of a fictional television comedy – this writer is
+        triumphantly back on form. He's found an almost perfect subject: the creation of the networking website
+        Facebook, and the backstabbing legal row among the various nerds, geeks, brainiacs and maniacs about
+        who gets the credit and the cash.
+    </p>
+
+    <p itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+        Overall rating: <span itemprop="ratingvalue">4</span> / <span itemprop="bestRating">5</span>
+    </p>
+
+    <p itemprop="publisher" itemscope itemtype="https://schema.org/NewsMediaOrganization">
+        Published by the <span itemprop="name">Filmreviews Association</span>
+    </p>
+    
+    <p itemprop="sponsor" itemscope itemtype="https://schema.org/NewsMediaOrganization">
+        Courtesy of <span itemprop="name">The Guardian</span>
+    </p>
+</body>
+</html>
