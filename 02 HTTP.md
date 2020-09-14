@@ -53,7 +53,7 @@ Study the `index.js` script in the `exercises/02_http/01_url/` directory.
 	3. `koa-bodyparser`
 	4. `koa-static`
 	5. `js2xmlparser`
-	- **You can install all these dependencies by simply running 'npm install' in the terminal.**
+	- **You can install all these dependencies by simply running `npm install` in the terminal.**
 		- This command installs all the documented dependencies from the `package.json` file, which is already preconfigured in this case.
 		- Refer to the `01_Setup.md` document's `Using npm and its package.json` chapter for more information
 
@@ -66,7 +66,7 @@ Study the `index.js` script in the `exercises/02_http/01_url/` directory.
 6. The main part of the script defines the _routes_ and we will be covering these in more detail as we progress through the lab.
 7. Right at the end (line 138) we start the server on the defined port and _export_ the _koa object_ `app`. By exporting it we can import the script into our automated test suite (briefly covered in the previous lab).
 
-Now start the server:
+Now start the server by typing `npm start` into the terminal while in the correct directory and hitting enter:
 
 1. Access the root url, notice that the message **Hello World** is displayed in the browser.
 2. Access the `/anon` url. This should result in the same message being displayed.
@@ -74,7 +74,7 @@ Now start the server:
 
 ### 1.2 URL Parameters
 
-In the HTTP protocol URLs represent resources on the server. Up to this point each URL has matched a different _route_ (defined by an `router.get()` function) but on a real server there might be a database containing many thousands of records that we want to be able to access. For this to work, each record would need a different, unique, URL! Since each record in an SQL database has a unique key (primary key), a simple solution would be to include the primary key in the URL thus creating a different URL for each record.
+In the HTTP protocol URLs represent resources on the server. Up to this point each URL has matched a different _route_ (defined by a `router.get()` function), but on a real server there might be a database containing many thousands of records that we want to be able to access. For this to work, each record would need a different, unique, URL! Since each record in an SQL database has a unique key (primary key), a simple solution would be to include the primary key in the URL thus creating a different URL for each record.
 
 To do this we need to extract some data from the http object `ctx` which is the parameter passed to the _anonymous callback function_. The `ctx` object is a _JavaScript Object_ and so we need to fully understand how these work.
 
@@ -117,8 +117,8 @@ Each value in an object can be extracted using one or two different syntaxes:
 ```javascript
 const firstName = name.first
 const lastName = name['last name']
-const prop = year
-const dobYear = name.dob.[prop]
+const prop = 'year'
+const dobYear = name.dob[prop]
 ```
 
 New properties can be added and removed from an object.
@@ -136,11 +136,11 @@ In this section you will learn about a number of JavaScript functions. In each c
 1. Add a fourth book to the array and make sure you can access this by passing its index in the URL.
 2. We are not restricted to only having two URL segments:
 	1. Modify the route to add a second parameter called `index2`.
-	2. Make sure this is triggered by restarting the server and accessing this by passing a second parameter.
+	2. Make sure this is triggered by restarting the server (which should happen automatically if you used `npm start`, which uses `nodemon`) and accessing this by passing a second parameter.
 	3. Modify the script to print out both book titles.
 3. Next you need to add some validation to make sure the script does not crash (note that if you are using GoormIDE you will not be able to test it):
 	1. If the index in the URL exceeds the number of books in the array, you get an error. Insert an [`if...else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) that sends a suitable message to the browser if the index number in the URL is too high.
-	2. The index must be a number. Use the [`isNaN()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check and send a suitable message to the browser if it is not. if it is, use the [`parseFloat()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat) to convert it to a number.
+	2. The index must be a number. Use the [`isNaN()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check and send a suitable message to the browser if it is not. If it is, use the [`parseFloat()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat) to convert it to a number.
 	3. The number needs to be a whole number (integer). All JavaScript numbers are objects and have a number of useful functions. Use the [`Number.isInteger()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger) to check it is indeed an integer. Send a suitable message to the browser if it is not. You can convert it to an integer using the [`parseInt()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt).
 
 ### 1.3 URL Query Strings
@@ -148,7 +148,7 @@ In this section you will learn about a number of JavaScript functions. In each c
 Whilst URL parameters are used to define unique URLs to identify online resources, sometimes we want to be able to pass additional information and this is done through the use of **query strings**.
 
 1. Restart the server and access the `/hello/John%20Doe` route.
-	1. Since spaces are not permitted in a URL we have to replace spaces with special codes. This is known as **URL Encoding** and there are specific [codes](https://www.degraeve.com/reference/urlencoding.php) to use.
+	1. Since spaces are not permitted in a URL we have to replace spaces with special codes. This is known as **URL Encoding** and there are specific [codes](https://www.degraeve.com/reference/urlencoding.php) to use; however, your browser will probably do this automatically.
 	2. Notice that the message `hello John Doe` is displayed in the browser.
 2. Now change the URL to `/hello/John%20Doe?format=upper`.
 	1. Notice that the same data has been displayed just the format has changed.
@@ -179,7 +179,7 @@ Headers allow for additional information to be passed:
 
 Make sure the server is still running and use the [Chrome web browser](https://www.google.com/chrome/) to access the root URL `/`.
 
-1. Open the [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) by clicking on the _Customise and control Chrome_ button (the three dots to the extreme right of the address bar), choosing **More tools** from the menu and then **Developer tools** from the submenu.
+1. Open the [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) by pressing `ctrl+shift+i` or by clicking on the _Customise and control Chrome_ button (the three dots to the extreme right of the address bar), choosing **More tools** from the menu and then **Developer tools** from the submenu.
 2. Locate the **Network** tab in the Chrome developer tools.
 3. Reload the web page. (Press F5)
 4. You should now see the resource sent in the HTTP response together with some data dealing with response times.
@@ -201,7 +201,7 @@ In the **Request Headers** note that:
 2. Next it specifies the host the request is being sent to.
 3. Then there are multiple request headers. These are always property-value pairs. Lets look at a few of the more interesting ones:
     1. The `User-Agent` header sends information about the browser being used.
-    2. The `Accepts` header tells the server what [MIME](https://goo.gl/W2SWtZ) data types our browser prefers.
+    2. The `Accepts` header tells the server what [MIME data types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) our browser prefers.
 
 In addition to the **Response Body** (the information in the web browser window), the server has returned a **Status Code** (in this case it is `200` meaning `OK`) plus a set of **Response Headers** that provide additional information.
 
@@ -215,13 +215,11 @@ As part of the worksheets you will be given some exercises to carry out to make 
 
 1. Go to the [University website](http://www.coventry.ac.uk) and use the Chrome Developer Tools to examine the request and response headers.
     1. Are there any headers that were missing from the example above?
-    2. [Look up](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) the meaning of all the headers.
+    2. Look up the meaning of all the [headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers).
 
 ## 2 Using the POST Method
 
 Now we have a good understanding of the request-response process used by the HTTP protocol and have learned about the headers we will extend this by examining the use of the HTTP POST method.
-
-Before completing this section in the lab sheet you will need to install the `koa-static` package.
 
 1. Start by accessing the list of names on the `/names` url Make sure you have the Chrome Developer Tools open on the Network tab.:
     1. Notice the browser displays an error message.
@@ -231,12 +229,12 @@ Before completing this section in the lab sheet you will need to install the `ko
     1. Notice that the Request Method has changed to `POST`.
     2. Notice that the Response Code is `201 Created` to indicate that your data has been uploaded and stored.
     3. There is a section called **Form Data** which is the request body and contains the data you submitted using the form. Use the _View Source_ link to display the raw data. This is how your data is sent to the server.
-4. Use the back button to return to the form and use this to add the names of everyone else on your table.
+4. Use the back button to return to the form and use this to add the names of everyone else at your table.
 5. Access the `/names` url which should now respond with the HTTP Status Code `200 OK` and display your names in an HTML table.
 
 ## 3 Meta-Data
 
-The path in the Uniform Resource Locator (URL) represents a _resource_ on the server however sometimes you need to pass _metadata_ to tell the server what you want it to do with this resource. There are two ways to pass metadata in an HTTP request, query strings and request headers. They differ in that anything in the URL is part of a book mark whilst the request headers are not. You need to decide whether this is important before deciding which to use.
+The path in the Uniform Resource Locator (URL) represents a _resource_ on the server; however, sometimes you need to pass _metadata_ to tell the server what you want it to do with this resource. There are two ways to pass metadata in an HTTP request, query strings and request headers. They differ in that anything in the URL is part of a bookmark whilst the request headers are not. You need to decide whether this is important before deciding which to use.
 
 ### 3.1 Query Strings
 
@@ -262,7 +260,7 @@ To complete this section of the lab you need to install the [Modify Headers](htt
 
 ![editing the request headers](exercises/.images/chrome_05.png)
 
-You can also modify the standard request headers. In this example we will change the `Accept` header which defines the prefered format of the response data. The data formats are defined as [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) The default settings look something like:
+You can also modify the standard request headers. In this example we will change the `Accept` header which defines the prefered format of the response data. The data formats are defined as [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types). The default settings look something like:
 
 ```
 text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
@@ -271,7 +269,7 @@ text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;
 This specified that the browser would prefer data in HTML/XML format (0.9 weighting) but will accept certain image formats and everything else. We will be changing this to request our data in specific formats.
 
 1. Still on the `/names` URL, modify the request headers by removing any search terms.
-2. Add a custom `Accept` header which will modify the default and set its value to `text/html` (see the screenshot below). If you refresh the browser you will see that the data is still displayed in an HTML table (because this format has been provided by the server).
+2. Add a custom `Accept` header which will modify the default and set its value to `text/html` (see the screenshot below). If you refresh the browser you will see that the data is still displayed in an HTML table (because this format was used previously as well).
 3. Now try the following MIME types:
     1. `application/json`
     2. `application/xml`

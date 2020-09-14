@@ -73,8 +73,8 @@ router.post('/form', ctx => {
 
 router.get('/names', ctx => {
 	let list = names
-	let search = 'x'
-	const minLength = 3
+	let search = ''
+	const minLength = 1
 
 	if(ctx.query.search && ctx.query.search.length >= minLength) {
 		search = ctx.query.search.toLowerCase()
