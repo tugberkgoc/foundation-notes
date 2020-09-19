@@ -1,0 +1,60 @@
+body {
+    background-color: lightcyan;
+    color: rgba(65, 105, 225, 0.7);
+}
+
+h1 {
+    color: orange;
+}
+
+p {
+    text-indent: 10pt;
+}
+
+ol, ul {
+    border-style: solid;
+    border-width: 1pt;
+    text-indent: 10pt;
+}
+
+li {
+    color: darkgray;
+}
+
+figcaption {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+p.copyright-notice {
+    font-size: 0.8em;
+}
+
+#special {
+    font-size: 0.8em;
+    color: yellowgreen;
+    font-style: italic;
+    border-left: 2px solid black;
+    margin-left: 40px;
+    padding-left: 10px;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+p::first-letter {
+    font-size:8em;
+}
+
+p::first-line {
+    font-weight: bold;
+}
+
+p::before {
+    content: "Note! ";
+}
+
+p::after {
+    content: url(/images/tickmark.png);
+}

@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+    list-style: none;
+    font-size: 16pt;
+    padding: 0px;
+}
+
+nav > ul > li{
+    background-color: green;
+    font-weight: bold;
+    padding: 3pt;
+    float: left;
+}
+
+nav ul li {
+    width: 100pt;
+    color: white;
+}
+
+nav ul li ul {
+    list-style-position: inside;
+    visibility: hidden;
+    position: absolute;
+    border: 2pt solid black;
+	background-color: white;
+    font-weight: normal;
+    color: black;
+    margin-left: -2pt;
+}
+
+nav > ul > li > ul {
+    margin-top: 3pt;
+    border-top: none;
+}
+
+nav ul li:hover > ul {
+    visibility:visible;
+}
+
+ul li ul li ul {
+    margin-top: -20.5pt;
+    margin-left: 100.5pt;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+}
+nav ul li ul a {
+    color: black;
+}

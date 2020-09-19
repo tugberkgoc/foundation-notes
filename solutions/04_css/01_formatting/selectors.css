@@ -17,3 +17,7 @@ h1.alert {
 p#unique {
     font-size: 0.8em;
 }
+
+.underlined {
+    text-decoration: underline;
+}
