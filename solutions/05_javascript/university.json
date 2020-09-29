@@ -1,0 +1,17 @@
+{
+	"year1": {
+		"a101": "something11",
+		"b104": "something12",
+		"c134": "something13"
+	},
+	"year2": {
+		"d201": "something21",
+		"e204": "something22",
+		"f234": "something23"
+	},
+	"year3": {
+		"g301": "something31",
+		"h304": "something32",
+		"i334": "something33"
+	}
+}

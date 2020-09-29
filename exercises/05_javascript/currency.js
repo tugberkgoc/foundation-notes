@@ -2,16 +2,21 @@
 
 'use strict'
 
-const request = require('request')
+const fs = require('fs')
 
-const symbol = 'GBP'
+const symbol = 'EUR'
 
-const printRates = (err, res, body) => {
-	if (err) throw 'could not complete request'
-	const data = JSON.parse(body) // this converts the formatted string into a javascript object
-	console.log(`for each EUR you will get ${data.rates[symbol]} ${symbol} today`)
+const printRates = (err, data) => {
+	if (err) throw err
+	const parsedData = JSON.parse(data) // this converts the formatted string into a javascript object
+	for (const country of parsedData) {
+		if (country.code === symbol) {
+			console.log(`For each GBP you will get ${country.rate} ${symbol} today.`)
+			return
+		}
+	}
 }
 
-const url = 'currency.json'
+const filePath = 'currency.json'
 
-request.get( url, printRates)
+fs.readFile(filePath, printRates)

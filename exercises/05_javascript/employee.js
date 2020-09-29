@@ -7,7 +7,9 @@ const employee = {
 	firstName: 'Colin',
 	'last name': 'Stephen',
 	startYear: 2010,
-	getName: () => `${this.firstName} ${this['last name']}`,
+	getName: function() {
+		return `${this.firstName} ${this["last name"]}`
+	},
 	setName: function(fullname) {
 		console.log(fullname)
 		const words = fullname.toString().split(' ')
@@ -23,3 +25,7 @@ console.log(jsonString)
 
 employee.setName('Micky Mouse')
 console.log(JSON.stringify(employee, null, 2))
+
+// TypeError:
+// const postCode = employee.address.postCode
+// console.log(postCode)

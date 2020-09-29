@@ -13,4 +13,10 @@ request(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${a
 	const data = JSON.parse(body)
 	console.log(`the data variable contains an ${typeof data}`)
 	console.log(data)
+	
+	request(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}`, (err, response, body) => {
+		if(err) console.log(err.message)
+		const data = JSON.parse(body)
+		console.log(data)
+	})
 })
