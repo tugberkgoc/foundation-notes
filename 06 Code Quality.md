@@ -34,11 +34,11 @@ The package manifest includes a `scripts` object which can be used to store your
 
 ```json
 "scripts": {
-    "linter": "./node_modules/.bin/eslint ."
-  }
+	"linter": "./node_modules/.bin/eslint ."
+}
 ```
 
-Don't wory about understanding what a linter is for the moment. Since you have already installed all the module dependencies in the previous section you can run the script using:
+Don't worry about understanding what a linter is for the moment. Since you have already installed all the module dependencies in the previous section you can run the script using:
 
 ```shell
 $ npm run linter
@@ -81,11 +81,11 @@ The object property value shorthand notation is useful if the keys have the same
 
 ```javascript
 module.exports = {
-    List: List
+	List: List
 }
 ```
 
-Now look at the top of the `index.js` file. Lines 18-19 import the module and create an instance of the List prototype. Notice that we are only importing the `List` prototype from the module. This `List` object prototype is then used to create a new object. This object is called `list` and provides access to all the functionality defined in the object prototype. Foe example to add an item we can use:
+Now look at the top of the `index.js` file. Lines 18-19 import the module and create an instance of the List prototype. Notice that we are only importing the `List` prototype from the module. This `List` object prototype is then used to create a new object. This object is called `list` and provides access to all the functionality defined in the object prototype. For example to add an item we can use:
 
 ```javascript
 list.add('bread', 42)
@@ -116,10 +116,10 @@ Locate the `06_code_quality/todo/` directory and study the `index.js` file. You 
 
 You should start by ensuring you have installed `eslint` which is considered the industry standard and that you have a copy of the approved configuration file `.eslintrc.json` in the root directory of your project.
 
-Now navigate to the `06_code_quality/` directory using terminal and run the linter on the `index.js` code in the `todo/` directory:
+Now navigate to the `06_code_quality/todo` directory using terminal and run the linter on the `index.js` script:
 
 ```shell
-$ node_modules/.bin/eslint todo/index.js
+$ node_modules/.bin/eslint index.js
 ```
 
 You will see a list of issues that the linter has flagged in your code. Notice that some of these are flagged as errors (serious) and some as warnings (recommendations). Each message includes:
@@ -133,7 +133,7 @@ The latter can be used to quickly look up the rules in the [comprehensive docume
 Instead of running separate checks on every file, we can specify the directory we want to check and it will automatically scan all the subdirectories. For example to scan all the files in the `modules/` directory we could run:
 
 ```shell
-$ node_modules/.bin/eslint todo/
+$ node_modules/.bin/eslint modules/
 ```
 
 ### 3.1 Test Your Understanding
@@ -144,7 +144,7 @@ $ node_modules/.bin/eslint todo/
 
 ## 4 Documentation
 
-In this third and last topic we will be using the [JSDoc](http://usejsdoc.org) tool to build a detailed code documentation website by extracting special comments inserted into our source code.
+In this topic we will be using the [JSDoc](http://usejsdoc.org) tool to build a detailed code documentation website by extracting special comments inserted into our source code.
 
 The default set of documentation tools provided in JSDoc are not suitable for documenting Koa routes and so we will be using a plugin called [jsdoc-route-plugin](https://www.npmjs.com/package/jsdoc-route-plugin). This should have been installed by the package manifest however you should check that you are using the current version of the `package.json` file and update if needed, rerunning the `npm install` command to ensure all packages are installed. You should also check that you have the latest version of the `jsdoc.conf` configuration file.
 
@@ -162,6 +162,11 @@ If you run this command you should see a new directory called `docs/` which will
 
 You will probably have noticed that only a couple of the functions include complete JSDoc comments and so the documentation website is incomplete. Your task is to use the existing comments for guidance and complete the task of documenting your code. You will find the [JSDoc](http://usejsdoc.org) and [jsdoc-route-plugin](https://www.npmjs.com/package/jsdoc-route-plugin) documentation helpful.
 
+To run `jsdoc` as preconfigured with the `jsdoc.conf` file, including the plugin, simply use:
+```shell
+./node_modules/.bin/jsdoc -c jsdoc.conf
+```
+
 ## 5 Improved Async Code
 
 Since NodeJS has a single thread that handles all incoming requests it is vital that we push long-running tasks into their own threads, typically through the use of _callback functions_. In this section of the lab you will learn about the limitations of callbacks and explore more powerful ways to handle multi-threading.
@@ -170,15 +175,15 @@ Since NodeJS has a single thread that handles all incoming requests it is vital 
 
 Because the code to be run after a callback is run needs to be _inside_ the callback code it is very challenging to build a script that contains several long-running tasks you get into a situation where you nest callbacks inside callbacks (inside callbacks) which makes the code very difficult to write, debug and read and means its very difficult to split into separate functions, a situation commonly known as **Callback Hell**.
 
-Open the file `nestedCallbacks.js` which asks for a _base_ currency code then prints out all the exchange rates against other currencies. Notice that there are four functions defined, three of which include a callback. Our script is designed to capture user input using `stdin` (needing a callback), identify whether a currency code is valid (requiring a second callback) and then getting the currency conversion rates for the specified currency (requiring a third callback).
+Open the file `nestedCallbacks.js` which asks for a _base_ currency code then prints out all the exchange rates against other currencies. Notice that there are four functions defined, each of them including a callback. Our script is designed to capture user input using `stdin` (needing a callback), identify whether a currency code is valid (requiring a second callback) and then getting the currency conversion rates for the specified currency (requiring a third callback).
 
-1. The script starts be calling the `read.question()` function (line 13) which takes a callback function as its second parameter.
+1. The script starts by calling the `read.question()` function (line 13) which takes a callback function as its second parameter.
 2. We want the first `request()` function (line 18) to be run after the initial `read.question()` function has completed.
-    1. To do this it needs to be called from inside the `read.question()` callback function.
+	- To do this it needs to be called from inside the `read.question()` callback function.
 3. The second `request()` function should run after the first one has completed and the data has been processed.
-    1. To do this it needs to be called from inside the callback function of the first `request()` call.
+	- To do this it needs to be called from inside the callback function of the first `request()` call.
 4. The final step is to call the `read.question()` function again (line 38)) which should be run once the second request has completed.
-    1. Therefore this needs to be in the callback function from the second `request()` function.
+	- Therefore this needs to be in the callback function from the second `request()` function.
 
 As you can see, each step has to be nested inside the previous step's callback, creating an ever increasing level of nested code sometime referred to as [Callback Hell](http://callbackhell.com/) or the [Pyramid of Doom](https://en.wikipedia.org/wiki/Pyramid_of_doom_(programming)).
 
@@ -189,21 +194,21 @@ Callbacks are the simplest possible mechanism for asynchronous code in JavaScrip
 The callbacks are already nested 4 deep. You are now going to add some additional functionality and, in doing this, are going to have to make use of additional nested callbacks!
 
 1. The deepest callback is a prompt asking the user for the currency they want to convert into. Add the logic to retrieve the correct exchange rate from the data returned from the previous API call.
-2. Instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency
+2. Instead of printing the exchange rate, ask for the amount to be converted and then return the equivalent in the chosen currency
 3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency. Below is some code to get you started.
 
 You will need to import the `fs` module and use the `fs.readFile()` function which takes a callback!
 
 ```javascript
 fs.readFile('currencies.json', 'utf8', (err, contents) => {
-    if(err) console.log('you need to handle this properly')
-    console.log(contents)
+	if(err) console.log('you need to handle this properly')
+	console.log(contents)
 })
 ```
 
 Even though the script is still simple you are probably already getting in a tangle! Imagine a more complex script with conditions, it would quickly get out of hand and become practically impossible to debug.
 
-Thankfully there are a number of advance features in NodeJS that are designed to flatten out these callbacks and to treat asynchronous code in a more _synchronous_ manner. These care called _Generators_, _Promises_ and _Async Functions_ and are described below. Even though you don't technically _need_ to know these, its worth learning them to keep your code manageable.
+Thankfully there are a number of advanced features in NodeJS that are designed to flatten out these callbacks and to treat asynchronous code in a more _synchronous_ manner. These are called _Generators_, _Promises_ and _Async Functions_ and are described below. Even though you don't technically _need_ to know these, its worth learning them to keep your code manageable.
 
 ## 6 Promises
 
@@ -222,10 +227,10 @@ Promises are created using the `new` keyword. This function is called immediatel
 ```javascript
 const url = 'https://api.exchangeratesapi.io/latest?base=GBP'
 const getData = url => new Promise( (resolve, reject) => {
-  request(url, (err, res, body) => {
-    if (err) reject(new Error('invalid API call'))
-    resolve(body)
-  })
+	request(url, (err, res, body) => {
+		if (err) reject(new Error('invalid API call'))
+		resolve(body)
+	})
 })
 ```
 
@@ -248,7 +253,7 @@ aPromise.then( data => console.log(data))
 aPromise.catch( err => console.error(`error: ${err.message}`) )
 ```
 
-In this example we create a _new Promise_ and store it in a variable. It get executed _immediately_. The second line calls its `then()` method which will get executed if the promise state becomes _fulfilled_ (the API call is successful). The parameter will be assigned the value passed when the `resolve()` function is called in the promise, in this case it will contain the JSON data returned by the API call.
+In this example we create a _new Promise_ and store it in a variable. It gets executed _immediately_. The second line calls its `then()` method which will get executed if the promise state becomes _fulfilled_ (the API call is successful). The parameter will be assigned the value passed when the `resolve()` function is called in the promise, in this case it will contain the JSON data returned by the API call.
 
 If the state of the promise changes to _rejected_, the `catch()` method is called. The parameter will be set to the value passed to the `reject()` function inside the promise. In this example it will contain an `Error` object.
 
@@ -256,41 +261,41 @@ This code can be written in a more concise way by _chaining_ the promise methods
 
 ```javascript
 getData('https://api.exchangeratesapi.io/latest?base=GBP')
-  .then( data => console.log(data))
-  .catch( err => console.error(`error: ${err.message}`))
+	.then( data => console.log(data))
+	.catch( err => console.error(`error: ${err.message}`))
 ```
 
 Because the Promise is executed immediately we don't need to store it in a variable. The `.then()` and `.catch()` methods are simply chained onto the promise. This form is much more compact and allows us to chain multiple promises together to solve more complex tasks.
 
 ### 6.3 Chaining Promises
 
-The real power of promises comes from their ability to be _chained_. This allows the results from a promise to be passed to another promise. All you need to do is pass another promise to the `next()` method.
+The real power of promises comes from their ability to be _chained_. This allows the results from a promise to be passed to another promise. All you need to do is pass another promise to the `then()` method.
 
 ```javascript
 const getData = url => new Promise( (resolve, reject) => {
-  request(url, (err, res, body) => {
-    if (err) reject(new Error('invalid API call'))
-    resolve(body)
-  })
+	request(url, (err, res, body) => {
+		if (err) reject(new Error('invalid API call'))
+		resolve(body)
+	})
 })
 
 const printObject = data => new Promise( resolve => {
-  const indent = 2
-  data = JSON.parse(data)
-  const str = JSON.stringify(data, null, indent)
-  console.log(str)
-  resolve()
+	const indent = 2
+	data = JSON.parse(data)
+	const str = JSON.stringify(data, null, indent)
+	console.log(str)
+	resolve()
 })
 
 const exit = () => new Promise( () => {
-  process.exit()
+	process.exit()
 })
 
 getData('https://api.exchangeratesapi.io/latest?base=GBP')
-  .then( data => printObject(data))
-  .then( () => exit())
-  .catch(err => console.error(`error: ${err.message}`))
-  .then( () => exit())
+	.then( data => printObject(data))
+	.then( () => exit())
+	.catch(err => console.error(`error: ${err.message}`))
+	.then( () => exit())
 ```
 
 Notice that we pass the `printObject` promise to the `then()` method. The data passed back from the `getData` promise is passed to the `printObject` promise.
@@ -303,32 +308,32 @@ If a promise only takes a single parameter and this matches the data passed back
 
 ```javascript
 getData('https://api.exchangeratesapi.io/latest?base=GBP')
-  .then(printObject)
-  .then(exit)
-  .catch(err => console.error(`error: ${err.message}`))
-  .then(exit)
+	.then(printObject)
+	.then(exit)
+	.catch(err => console.error(`error: ${err.message}`))
+	.then(exit)
 ```
 
 There are some situations where you can't simply pass the output from one promise to the input of the next one. Sometimes you need to store data for use further down the promise chain. This can be achieved by storing the data in the `this` object.
 
 ```javascript
 getData('https://api.exchangeratesapi.io/latest?base=GBP')
-  .then( data => this.jsonData = data)
-  .then( () => printObject(this.jsonData))
-  .then(exit)
-  .catch(err => console.error(`error: ${err.message}`))
-  .then(exit)
+	.then( data => this.jsonData = data)
+	.then( () => printObject(this.jsonData))
+	.then(exit)
+	.catch(err => console.error(`error: ${err.message}`))
+	.then(exit)
 ```
 
 In the example above we store the data returned from the `getData` promise in the `this` object. This is then used when we call the `printObject` promise.
 
 ### 6.4 Test Your Knowledge
 
-Run the `promises.js` script. Its functionality should be familiar to the `currency.js` script you worked with in chapter 3.
+Run the `promises.js` script. Its functionality should be familiar to the `currency.js` script you worked with in chapter 5.
 
 Study the code carefully. Notice that it defines 5 promises and chains them together. You are going to extend the functionality by defining some additional promises and adding them to the promise chain.
 
-1. Modify the script to ask for the currency to convert to and display only the one conversion rate.
+1. Modify the script to display only the one conversion rate from the user input.
 2. Instead of printing the exchange rate, ask for the amount to be converted and them return the equivalent in the chosen currency.
 3. The `currencies.json` file contains a map between the currency code and the country name. Load this file into the script using the [`fs`](https://nodejs.org/api/fs.html) module, convert to a JavaScript object using the [`JSON`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) object and use it to display the full name of the chosen currency.
 
@@ -337,8 +342,8 @@ Study the code carefully. Notice that it defines 5 promises and chains them toge
 In the async examples we have seen so far, each async function needs to complete before the next async call is run. The diagram below shows how this looks.
 
 ```
-         1      2      3
-      ───⬤─────⬤─────⬤
+		1      2      3
+	────⬤─────⬤─────⬤
 ```
 
 The program flow is.
@@ -367,7 +372,7 @@ dataArray.forEach( curr => {
 
 In the example above we loop through the `dataArray`, creating a new promise object that we push onto our `promiseArray`.
 
- Once we have an array of promises there are two possible scenarios.
+Once we have an array of promises there are two possible scenarios.
 
 1. We want _all_ the promises in the array to be fulfilled before continuing the promise chain.
 2. We want _one_ of the promises to be fulfilled but we don't care which one.
@@ -378,8 +383,8 @@ In the first scenario we want _all_ the promises to be fulfilled before continui
 
 ```javascript
 Promise.all(itemPromises)
-  .then( results => results.forEach( item => console.log(item)))
-  .catch( err => console.log(`error: ${err.message}`))
+	.then( results => results.forEach( item => console.log(item)))
+	.catch( err => console.log(`error: ${err.message}`))
 ```
 
 When the `Promise.all()` method fulfills it returns an array of results. In the example above we loop through these and print each to the terminal.
@@ -413,52 +418,52 @@ Here is a simple example.
 
 ```javascript
 const getData = url => new Promise( (resolve, reject) => {
-  request(url, (err, res, body) => {
-    if (err) reject(new Error('invalid API call'))
-    resolve(body)
-  })
+	request(url, (err, res, body) => {
+		if (err) reject(new Error('invalid API call'))
+		resolve(body)
+	})
 })
 
 const printObject = data => new Promise( resolve => {
-  console.log(JSON.stringify(JSON.parse(data), null, 2))
-  resolve()
+	console.log(JSON.stringify(JSON.parse(data), null, 2))
+	resolve()
 })
 
 async function main() {
-  try {
-    const data = await getData('https://api.exchangeratesapi.io/latest?base=GBP')
-    await printObject(data)
-    process.exit()
-  } catch (err) {
-    console.log(`error: ${err.message}`)
-    process.exit()
-  }
+	try {
+		const data = await getData('https://api.exchangeratesapi.io/latest?base=GBP')
+		await printObject(data)
+		process.exit()
+	} catch (err) {
+		console.log(`error: ${err.message}`)
+		process.exit()
+	}
 }
 main()
 ```
 
 Async functions are declared using the `async` keyword in the function declaration, all errors are handled using the standard `try-catch` block. Because the main block of code needs to be in an _async function_, this has to be explicitly executed at the end of the script.
 
-The `getData()` function returns a _promise_. it is called using the `await` keyword, this pauses the execution of the `main()` function until `getData()` is either _fulfilled_ or _rejected_. If it is _fulfilled_, the data returned is stored in the `data` variable and control moves to the next line, if it is _rejected_ code execution jumps to the `catch()` block.
+The `getData()` function returns a _promise_. It is called using the `await` keyword, this pauses the execution of the `main()` function until `getData()` is either _fulfilled_ or _rejected_. If it is _fulfilled_, the data returned is stored in the `data` variable and control moves to the next line, if it is _rejected_ code execution jumps to the `catch()` block.
 
 ### 7.2 Simplified Promises
 
 Async functions are implicitly wrapped in a `Promise.resolve()` and any uncaught errors are wrapped in a `Promise.reject()`. This means that an _async function_ can be substituted for a _promise_. let's look at a simple example.
 
 ```javascript
-const printObjectPromise = data => new Promise( (resolve) => {
-  const indent = 2
-  data = JSON.parse(data)
-  const str = JSON.stringify(data, null, indent)
-  console.log(str)
-  resolve()
+const printObjectPromise = data => new Promise( resolve => {
+	const indent = 2
+	data = JSON.parse(data)
+	const str = JSON.stringify(data, null, indent)
+	console.log(str)
+	resolve()
 })
 
 const printObjectAsync = async data => {
-  const indent = 2
-  data = JSON.parse(data)
-  const str = JSON.stringify(data, null, indent)
-  console.log(str)
+	const indent = 2
+	data = JSON.parse(data)
+	const str = JSON.stringify(data, null, indent)
+	console.log(str)
 }
 ```
 

@@ -3,6 +3,7 @@
 
 const request = require('request')
 const readline = require('readline-sync')
+const fs = require('fs')
 
 const baseURL = 'https://api.exchangeratesapi.io/latest'
 
@@ -11,19 +12,22 @@ async function main() {
 		const base = await getInput('enter base currency')
 		await checkValidCurrencyCode(base)
 		const data = await getData(`${baseURL}?base=${base}`)
+		const rates = JSON.parse(data).rates
 		await printObject(data)
 		const to = await getInput('convert to')
+		await checkValidCurrencyCode(to)
 		console.log(to)
+		const amount = await getInput('enter exchange amount')
+		const decoder = await readObjectFromFile('currencies.json')
+		console.log(`${amount} ${decoder[base]} (${base}) is worth ${
+			(rates[to] * amount).toFixed(4)} ${decoder[to]} (${to})`)
 		process.exit()
 	} catch (err) {
 		console.log(`error: ${err.message}`)
 	}
 }
 
-const getInput = prompt => new Promise(resolve => {
-	const response = readline.question(`${prompt}: `)
-	return resolve(response)
-})
+const getInput = async prompt => readline.question(`${prompt}: `)
 
 const checkValidCurrencyCode = code => new Promise( (resolve, reject) => {
 	code = code.trim()
@@ -42,12 +46,22 @@ const getData = url => new Promise( (resolve, reject) => {
 	})
 })
 
-const printObject = data => new Promise( (resolve) => {
+const printObject = async data => {
 	const indent = 2
-	data = JSON.parse(data)
+	data = await JSON.parse(data)
 	const str = JSON.stringify(data, null, indent)
-	console.log(str)
-	resolve()
+	await new Promise( resolve => {
+		console.log(str)
+		resolve()
+	})
+
+}
+
+const readObjectFromFile = fileName => new Promise( (resolve, reject) => {
+	fs.readFile(fileName, 'utf-8', (err, content) => {
+		if (err) reject(new Error(err))
+		return resolve(JSON.parse(content))
+	})
 })
 
 main()
